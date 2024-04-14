@@ -1,0 +1,6 @@
+E:\Proyectos\c++\QuickShop\QuickShop\x64\Debug\QuickShop.vcxproj.AssemblyReference.cache
+E:\Proyectos\c++\QuickShop\QuickShop\x64\Debug\QuickShop.MyForm.resources
+E:\Proyectos\c++\QuickShop\QuickShop\x64\Debug\QuickShop.vcxproj.GenerateResource.cache
+C:\Users\JavierBarillas\Desktop\QuickShop\QuickShop\x64\Debug\QuickShop.vcxproj.AssemblyReference.cache
+C:\Users\JavierBarillas\Desktop\QuickShop\QuickShop\x64\Debug\QuickShop.MyForm.resources
+C:\Users\JavierBarillas\Desktop\QuickShop\QuickShop\x64\Debug\QuickShop.vcxproj.GenerateResource.cache

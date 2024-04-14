@@ -1,0 +1,7 @@
+﻿  MyForm.cpp
+C:\Users\JavierBarillas\Desktop\QuickShop\MyForm.h(337,54): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\JavierBarillas\Desktop\QuickShop\MyForm.cpp(6,33): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
+  .NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
+  Generando código...
+  MyForm.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
+  QuickShop.vcxproj -> C:\Users\JavierBarillas\Desktop\QuickShop\x64\Debug\QuickShop.exe
