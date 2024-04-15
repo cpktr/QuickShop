@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "User.h"
 
 
 namespace QuickShop {
@@ -20,6 +21,17 @@ namespace QuickShop {
 		MyForm(void)
 		{
 			InitializeComponent();
+
+			int screenWidth = Screen::PrimaryScreen->Bounds.Width;
+			int screenHeight = Screen::PrimaryScreen->Bounds.Height;
+			int formWidth = this->Width;
+			int formHeight = this->Height;
+			int posX = (screenWidth - formWidth) / 2;
+			int posY = (screenHeight - formHeight) / 2;
+
+			this->StartPosition = FormStartPosition::Manual;
+			this->Location = System::Drawing::Point(posX, posY);
+
 			//Gradient border
 			Color color1 = Color::FromArgb(0x52, 0xCB, 0xD9);
 			LinearGradientBrush^ gradientBrush = gcnew LinearGradientBrush(
@@ -69,8 +81,8 @@ namespace QuickShop {
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
-	private: char* username;
-	private: char* password;
+	private: Boolean menuOpen;
+	private: Int64 typeLogIn;
 
 
 	protected:
@@ -114,7 +126,6 @@ namespace QuickShop {
 			this->label1->Size = System::Drawing::Size(215, 54);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"QuickShop";
-			this->label1->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
 			// 
 			// label2
 			// 
@@ -127,7 +138,6 @@ namespace QuickShop {
 			this->label2->Size = System::Drawing::Size(47, 13);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Usuario";
-			this->label2->Click += gcnew System::EventHandler(this, &MyForm::label2_Click);
 			// 
 			// label3
 			// 
@@ -181,7 +191,6 @@ namespace QuickShop {
 			this->label4->Size = System::Drawing::Size(178, 13);
 			this->label4->TabIndex = 7;
 			this->label4->Text = L"Inicia Sesión como Administrador";
-			this->label4->Click += gcnew System::EventHandler(this, &MyForm::label4_Click);
 			// 
 			// button1
 			// 
@@ -212,7 +221,7 @@ namespace QuickShop {
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(129, 35);
 			this->button2->TabIndex = 9;
-			this->button2->Text = L"Registrarse";
+			this->button2->Text = L"Cancelar";
 			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			this->button2->MouseEnter += gcnew System::EventHandler(this, &MyForm::button2_HoverIn);
@@ -269,6 +278,7 @@ namespace QuickShop {
 			this->button5->TabIndex = 13;
 			this->button5->Text = L"Operador";
 			this->button5->UseVisualStyleBackColor = false;
+			this->button5->Click += gcnew System::EventHandler(this, &MyForm::button5_Click);
 			// 
 			// MyForm
 			// 
@@ -289,22 +299,45 @@ namespace QuickShop {
 			this->Controls->Add(this->label1);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
+			this->MaximumSize = System::Drawing::Size(517, 531);
 			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->Text = L"Login";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
+
+	public: User^ user = nullptr;
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		String^ email = this->textBox1->Text;
+		String^ password = this->textBox2->Text;
+		//Validación de LOGIN
+		switch (typeLogIn) {
+			case 1:
+				//LOGIN de Administrador
+				if (email != "" || password != "") {
+					if (email == "admin" && password == "123") {
+						MessageBox::Show("Sesión iniciada.", "Success", MessageBoxButtons::OK);
+						return;
+					}
+					else {
+						MessageBox::Show("Usuario o contraseña Incorrectos.", "Error", MessageBoxButtons::OK);
+						return;
+					}
+				}
+				else {
+					MessageBox::Show("Porfavor Ingresa un usuario y contraseña válidos." + email + password, "Error", MessageBoxButtons::OK);
+					return;
+				}
+			case 2:
+				//LOGIN de Operador
+			default:
+				break;
+		}
+		
 	}
 	private: System::Void button1_HoverIn(System::Object^ sender, System::EventArgs^ e) {
 		this->button1->Cursor = Cursors::Hand;
@@ -332,11 +365,34 @@ namespace QuickShop {
 	}
 	
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->button3->Location = System::Drawing::Point(129, 0);
-		this->button4->Location = System::Drawing::Point(0,0);
-		this->button5->Location = System::Drawing::Point(0,35.5);
+		this->menuOpen = !menuOpen;
+		if (menuOpen) {
+			this->button3->Location = System::Drawing::Point(129, 0);
+			this->button3->Text = "X";
+			this->button4->Location = System::Drawing::Point(0, 0);
+			this->button5->Location = System::Drawing::Point(0, 35.5);
+		}
+		else {
+			this->button3->Location = System::Drawing::Point(0, 0);
+			this->button3->Text = L"←";
+			this->button4->Location = System::Drawing::Point(-100, -100);
+			this->button5->Location = System::Drawing::Point(-100, -100);
+		}
 	}
-private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-}
+
+	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->typeLogIn = 1;
+		this->label4->Text = L"Inicia Sesión como Administrador";
+		this->label4->Location = System::Drawing::Point(171, 114);
+	}
+
+	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->typeLogIn = 2;
+		this->label4->Text = L"Inicia Sesión como Operador";
+		this->label4->Location = System::Drawing::Point(180, 114);
+	}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
 };
 }
