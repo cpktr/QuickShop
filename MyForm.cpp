@@ -1,4 +1,5 @@
 #include "MyForm.h"
+#include "Dashboard.h"
 
 
 using namespace System;
@@ -8,8 +9,10 @@ void main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	QuickShop::MyForm form;
+	QuickShop::Dashboard dashboardForm;
+	dashboardForm.ShowDialog();
 	//Application::Run(% form);
-	form.ShowDialog();
+	//form.ShowDialog();
 	User^ user = form.user;
 
 	if (user != nullptr) {
