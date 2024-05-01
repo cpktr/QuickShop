@@ -1,6 +1,7 @@
   QuickShop.Dashboard.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Home.resources - Embedded, ContainedInManifestFile, 
   QuickShop.MyForm.resources - Embedded, ContainedInManifestFile, 
+  QuickShop.Productos.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly QuickShop, Version=0.0.*, Culture=Todos los idiomas (todos los países): 
 	hash=SHA1, flags=PublicKey
@@ -20,6 +21,9 @@ Class QuickShop.clientes: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class QuickShop.Home: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class QuickShop.Productos: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class QuickShop.Dashboard: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit

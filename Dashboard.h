@@ -2,6 +2,7 @@
 
 using namespace std;
 #include "Home.h"
+#include "Productos.h"
 
 namespace QuickShop {
 
@@ -382,8 +383,9 @@ namespace QuickShop {
 	}
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
-private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->AbrirPanel(gcnew QuickShop::Productos);
+	}
 private: System::Void flowLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 }
 	private: System::Void sidebarTimer_ticker(System::Object^ sender, System::EventArgs^ e) {
