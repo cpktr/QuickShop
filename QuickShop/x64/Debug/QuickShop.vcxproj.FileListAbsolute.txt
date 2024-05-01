@@ -8,3 +8,4 @@ E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.vcxproj.AssemblyReference.ca
 E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.MyForm.resources
 E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.vcxproj.GenerateResource.cache
 E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.Dashboard.resources
+E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.Home.resources

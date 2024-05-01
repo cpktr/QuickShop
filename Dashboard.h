@@ -1,5 +1,8 @@
 #pragma once
 
+using namespace std;
+#include "Home.h"
+
 namespace QuickShop {
 
 	using namespace System;
@@ -53,6 +56,9 @@ namespace QuickShop {
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::Panel^ panel_contenedor;
+
+	private: System::Windows::Forms::PictureBox^ pictureBox3;
 
 	private: System::ComponentModel::IContainer^ components;
 
@@ -92,6 +98,8 @@ namespace QuickShop {
 			this->panel7 = (gcnew System::Windows::Forms::Panel());
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->panel_contenedor = (gcnew System::Windows::Forms::Panel());
+			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
 			this->flowLayoutPanel1->SuspendLayout();
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -102,6 +110,8 @@ namespace QuickShop {
 			this->panel5->SuspendLayout();
 			this->panel6->SuspendLayout();
 			this->panel7->SuspendLayout();
+			this->panel_contenedor->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// flowLayoutPanel1
@@ -144,6 +154,7 @@ namespace QuickShop {
 			// 
 			// pictureBox2
 			// 
+			this->pictureBox2->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.Image")));
 			this->pictureBox2->Location = System::Drawing::Point(9, 9);
 			this->pictureBox2->Name = L"pictureBox2";
@@ -152,7 +163,6 @@ namespace QuickShop {
 			this->pictureBox2->TabIndex = 0;
 			this->pictureBox2->TabStop = false;
 			this->pictureBox2->Click += gcnew System::EventHandler(this, &Dashboard::menuButton_click);
-			this->pictureBox2->MouseHover += gcnew System::EventHandler(this, &Dashboard::mouseHover_In);
 			// 
 			// panel2
 			// 
@@ -165,6 +175,7 @@ namespace QuickShop {
 			// button1
 			// 
 			this->button1->BackColor = System::Drawing::Color::Teal;
+			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button1->ForeColor = System::Drawing::Color::White;
 			this->button1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.Image")));
 			this->button1->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -189,6 +200,7 @@ namespace QuickShop {
 			// button3
 			// 
 			this->button3->BackColor = System::Drawing::Color::Teal;
+			this->button3->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button3->ForeColor = System::Drawing::Color::White;
 			this->button3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button3.Image")));
 			this->button3->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -213,6 +225,7 @@ namespace QuickShop {
 			// button2
 			// 
 			this->button2->BackColor = System::Drawing::Color::Teal;
+			this->button2->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button2->ForeColor = System::Drawing::Color::White;
 			this->button2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.Image")));
 			this->button2->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -237,6 +250,7 @@ namespace QuickShop {
 			// button4
 			// 
 			this->button4->BackColor = System::Drawing::Color::Teal;
+			this->button4->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button4->ForeColor = System::Drawing::Color::White;
 			this->button4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button4.Image")));
 			this->button4->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -260,6 +274,7 @@ namespace QuickShop {
 			// button5
 			// 
 			this->button5->BackColor = System::Drawing::Color::Teal;
+			this->button5->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button5->ForeColor = System::Drawing::Color::White;
 			this->button5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button5.Image")));
 			this->button5->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -283,6 +298,7 @@ namespace QuickShop {
 			// button6
 			// 
 			this->button6->BackColor = System::Drawing::Color::Teal;
+			this->button6->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button6->ForeColor = System::Drawing::Color::White;
 			this->button6->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button6.Image")));
 			this->button6->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -300,14 +316,35 @@ namespace QuickShop {
 			this->timer1->Interval = 10;
 			this->timer1->Tick += gcnew System::EventHandler(this, &Dashboard::sidebarTimer_ticker);
 			// 
+			// panel_contenedor
+			// 
+			this->panel_contenedor->Controls->Add(this->pictureBox3);
+			this->panel_contenedor->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->panel_contenedor->Location = System::Drawing::Point(222, 0);
+			this->panel_contenedor->Name = L"panel_contenedor";
+			this->panel_contenedor->Size = System::Drawing::Size(694, 462);
+			this->panel_contenedor->TabIndex = 2;
+			// 
+			// pictureBox3
+			// 
+			this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.Image")));
+			this->pictureBox3->Location = System::Drawing::Point(181, 182);
+			this->pictureBox3->Name = L"pictureBox3";
+			this->pictureBox3->Size = System::Drawing::Size(385, 119);
+			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox3->TabIndex = 0;
+			this->pictureBox3->TabStop = false;
+			// 
 			// Dashboard
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(916, 462);
+			this->Controls->Add(this->panel_contenedor);
 			this->Controls->Add(this->flowLayoutPanel1);
 			this->MaximumSize = System::Drawing::Size(932, 501);
 			this->Name = L"Dashboard";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Dashboard";
 			this->flowLayoutPanel1->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
@@ -319,13 +356,29 @@ namespace QuickShop {
 			this->panel5->ResumeLayout(false);
 			this->panel6->ResumeLayout(false);
 			this->panel7->ResumeLayout(false);
+			this->panel_contenedor->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			this->ResumeLayout(false);
 
 		}
+		
+		template<class T>
+		void AbrirPanel(T formChild) {
+			if (this->panel_contenedor->Controls->Count > 0) {
+				this->panel_contenedor->Controls->RemoveAt(0);
+			}
+			formChild->TopLevel = false;
+			formChild->Dock = DockStyle::Fill;
+			this->panel_contenedor->Controls->Add(formChild);
+			this->panel_contenedor->Tag = formChild;
+			formChild->Show();
+		}
+
 #pragma endregion
 	private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->AbrirPanel(gcnew QuickShop::Home);
 	}
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
