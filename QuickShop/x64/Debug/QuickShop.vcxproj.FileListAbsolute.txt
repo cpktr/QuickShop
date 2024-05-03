@@ -10,3 +10,8 @@ E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.vcxproj.GenerateResource.cac
 E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.Dashboard.resources
 E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.Home.resources
 E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.Productos.resources
+E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.Pagos.resources
+E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.Reportes.resources
+E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.Usuarios.resources
+E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.UserClients.resources
+E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.Compras.resources

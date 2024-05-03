@@ -103,6 +103,8 @@ namespace QuickShop {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ description;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ price;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ stock;
+	private: bool editableData = false;
+	private: System::Windows::Forms::Button^ btn_cancel;
 
 
 
@@ -132,6 +134,7 @@ namespace QuickShop {
 			this->price = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->stock = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->formContainer = (gcnew System::Windows::Forms::Panel());
+			this->btn_cancel = (gcnew System::Windows::Forms::Button());
 			this->btn_saveProduct = (gcnew System::Windows::Forms::Button());
 			this->panel12 = (gcnew System::Windows::Forms::Panel());
 			this->panel13 = (gcnew System::Windows::Forms::Panel());
@@ -234,39 +237,47 @@ namespace QuickShop {
 			// 
 			this->id->HeaderText = L"Código";
 			this->id->Name = L"id";
+			this->id->ReadOnly = true;
 			// 
 			// name
 			// 
 			this->name->HeaderText = L"Nombre";
 			this->name->Name = L"name";
+			this->name->ReadOnly = true;
 			// 
 			// category
 			// 
 			this->category->HeaderText = L"Categoría";
 			this->category->Name = L"category";
+			this->category->ReadOnly = true;
 			// 
 			// brand
 			// 
 			this->brand->HeaderText = L"Marca";
 			this->brand->Name = L"brand";
+			this->brand->ReadOnly = true;
 			// 
 			// description
 			// 
 			this->description->HeaderText = L"Descripción";
 			this->description->Name = L"description";
+			this->description->ReadOnly = true;
 			// 
 			// price
 			// 
 			this->price->HeaderText = L"Precio";
 			this->price->Name = L"price";
+			this->price->ReadOnly = true;
 			// 
 			// stock
 			// 
 			this->stock->HeaderText = L"Cantidad de Stock";
 			this->stock->Name = L"stock";
+			this->stock->ReadOnly = true;
 			// 
 			// formContainer
 			// 
+			this->formContainer->Controls->Add(this->btn_cancel);
 			this->formContainer->Controls->Add(this->btn_saveProduct);
 			this->formContainer->Controls->Add(this->panel12);
 			this->formContainer->Controls->Add(this->panel10);
@@ -280,15 +291,33 @@ namespace QuickShop {
 			this->formContainer->Size = System::Drawing::Size(267, 389);
 			this->formContainer->TabIndex = 2;
 			// 
+			// btn_cancel
+			// 
+			this->btn_cancel->BackColor = System::Drawing::Color::Transparent;
+			this->btn_cancel->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_cancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_cancel->ForeColor = System::Drawing::Color::Teal;
+			this->btn_cancel->Location = System::Drawing::Point(104, 363);
+			this->btn_cancel->Name = L"btn_cancel";
+			this->btn_cancel->Size = System::Drawing::Size(75, 23);
+			this->btn_cancel->TabIndex = 5;
+			this->btn_cancel->Text = L"Cancelar";
+			this->btn_cancel->UseVisualStyleBackColor = false;
+			this->btn_cancel->Visible = false;
+			this->btn_cancel->Click += gcnew System::EventHandler(this, &Productos::btn_cancel_Click);
+			// 
 			// btn_saveProduct
 			// 
+			this->btn_saveProduct->BackColor = System::Drawing::Color::Teal;
 			this->btn_saveProduct->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_saveProduct->Location = System::Drawing::Point(185, 363);
+			this->btn_saveProduct->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_saveProduct->ForeColor = System::Drawing::Color::White;
+			this->btn_saveProduct->Location = System::Drawing::Point(185, 362);
 			this->btn_saveProduct->Name = L"btn_saveProduct";
-			this->btn_saveProduct->Size = System::Drawing::Size(75, 23);
+			this->btn_saveProduct->Size = System::Drawing::Size(75, 25);
 			this->btn_saveProduct->TabIndex = 4;
 			this->btn_saveProduct->Text = L"Guardar";
-			this->btn_saveProduct->UseVisualStyleBackColor = true;
+			this->btn_saveProduct->UseVisualStyleBackColor = false;
 			this->btn_saveProduct->Click += gcnew System::EventHandler(this, &Productos::SaveProduct);
 			// 
 			// panel12
@@ -696,31 +725,81 @@ namespace QuickShop {
 		}
 #pragma endregion
 
+	private: void clearInputs() {
+		this->txt_id->Clear();
+		this->txt_name->Clear();
+		this->txt_brand->Clear();
+		this->txt_category->Clear();
+		this->txt_description->Clear();
+		this->txt_price->Clear();
+		this->txt_stock->Clear();
+	}
+
 	private: System::Void SaveProduct(System::Object^ sender, System::EventArgs^ e) {
-		if (txt_id->Text != "" && txt_name->Text != "" && txt_brand->Text != "" && txt_category->Text != "" && txt_description->Text != ""
-			&& txt_price->Text != "" && txt_stock->Text != "") {
-			this->dataGrid_Products->Rows->Add(txt_id->Text, txt_name->Text, txt_category->Text, txt_brand->Text, txt_description->Text, txt_price->Text, txt_stock->Text);
-			this->txt_id->Text = "";
-			this->txt_name->Text = "";
-			this->txt_brand->Text = "";
-			this->txt_category->Text = "";
-			this->txt_description->Text = "";
-			this->txt_price->Text = "";
-			this->txt_stock->Text = "";
+		try {
+			if (txt_id->Text != "" && txt_name->Text != "" && txt_brand->Text != "" && txt_category->Text != "" && txt_description->Text != ""
+				&& txt_price->Text != "" && txt_stock->Text != "") {
+				if (this->editableData) {
+					DataGridViewRow^ filaSeleccionada = this->dataGrid_Products->SelectedRows[0];
+					filaSeleccionada->Cells[0]->Value = this->txt_id->Text;
+					filaSeleccionada->Cells[1]->Value = this->txt_name->Text;
+					filaSeleccionada->Cells[2]->Value = this->txt_brand->Text;
+					filaSeleccionada->Cells[3]->Value = this->txt_category->Text;
+					filaSeleccionada->Cells[4]->Value = this->txt_description->Text;
+					filaSeleccionada->Cells[5]->Value = this->txt_price->Text;
+					filaSeleccionada->Cells[6]->Value = this->txt_stock->Text;
+					this->editableData = false;
+					this->btn_cancel->Visible = false;
+
+					clearInputs();
+
+					MessageBox::Show("El producto se actualizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				}
+				else {
+						this->dataGrid_Products->Rows->Add(txt_id->Text, txt_name->Text, txt_category->Text, txt_brand->Text, txt_description->Text, txt_price->Text, txt_stock->Text);
+
+						clearInputs();
+
+						MessageBox::Show("El producto se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					}
+				}
+			else {
+				MessageBox::Show("Por favor Ingrese todos los datos.", "Error", MessageBoxButtons::OK);
+			}
 		}
-		else {
-			MessageBox::Show("Por favor Ingrese todos los datos.", "Error", MessageBoxButtons::OK);
+		catch (Exception^ ex) {
+			MessageBox::Show("Error al crear un producto : " + ex->Message, "Error", MessageBoxButtons::OK);
 		}
 	}
 	private: System::Void EditarProducto(System::Object^ sender, System::EventArgs^ e) {
-		DataGridViewRow^ filaSeleccionada = this->dataGrid_Products->SelectedRows[0];
-		this->txt_id->Text = Convert::ToString(filaSeleccionada->Cells[0]->Value);
-		this->txt_name->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
-		this->txt_brand->Text = Convert::ToString(filaSeleccionada->Cells[2]->Value);
-		this->txt_category->Text = Convert::ToString(filaSeleccionada->Cells[3]->Value);
-		this->txt_description->Text = Convert::ToString(filaSeleccionada->Cells[4]->Value);
-		this->txt_price->Text = Convert::ToString(filaSeleccionada->Cells[5]->Value);
-		this->txt_stock->Text = Convert::ToString(filaSeleccionada->Cells[6]->Value);
+		try {
+			DataGridViewRow^ filaSeleccionada = this->dataGrid_Products->SelectedRows[0];
+			this->txt_id->Text = Convert::ToString(filaSeleccionada->Cells[0]->Value);
+			this->txt_name->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
+			this->txt_brand->Text = Convert::ToString(filaSeleccionada->Cells[2]->Value);
+			this->txt_category->Text = Convert::ToString(filaSeleccionada->Cells[3]->Value);
+			this->txt_description->Text = Convert::ToString(filaSeleccionada->Cells[4]->Value);
+			this->txt_price->Text = Convert::ToString(filaSeleccionada->Cells[5]->Value);
+			this->txt_stock->Text = Convert::ToString(filaSeleccionada->Cells[6]->Value);
+			this->editableData = true;
+			this->btn_cancel->Visible = true;
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Error al obtener un producto : " + ex->Message, "Error", MessageBoxButtons::OK);
+		}
+		
 	}
+	private: System::Void btn_cancel_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->txt_id->Text = "";
+		this->txt_name->Text = "";
+		this->txt_brand->Text = "";
+		this->txt_category->Text = "";
+		this->txt_description->Text = "";
+		this->txt_price->Text = "";
+		this->txt_stock->Text = "";
+		this->editableData = false;
+		this->btn_cancel->Visible = false;
+	}
+
 };
 }

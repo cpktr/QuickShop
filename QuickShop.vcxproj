@@ -120,29 +120,51 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="clientes.cpp" />
+    <ClCompile Include="Compras.cpp" />
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="Home.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="MyUserControl.cpp" />
+    <ClCompile Include="Pagos.cpp" />
     <ClCompile Include="Productos.cpp" />
+    <ClCompile Include="Reportes.cpp" />
+    <ClCompile Include="UserClients.cpp" />
+    <ClCompile Include="Usuarios.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Compras.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Dashboard.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Home.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Pagos.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Productos.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Reportes.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="User.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="UserClients.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Usuarios.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Compras.resx">
+      <DependentUpon>Compras.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.h</DependentUpon>
     </EmbeddedResource>
@@ -152,8 +174,20 @@
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pagos.resx">
+      <DependentUpon>Pagos.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Productos.resx">
       <DependentUpon>Productos.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes.resx">
+      <DependentUpon>Reportes.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserClients.resx">
+      <DependentUpon>UserClients.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Usuarios.resx">
+      <DependentUpon>Usuarios.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
