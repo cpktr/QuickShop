@@ -310,11 +310,12 @@ namespace QuickShop {
 			// 
 			this->btn_saveProduct->BackColor = System::Drawing::Color::Teal;
 			this->btn_saveProduct->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_saveProduct->FlatAppearance->BorderSize = 0;
 			this->btn_saveProduct->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btn_saveProduct->ForeColor = System::Drawing::Color::White;
-			this->btn_saveProduct->Location = System::Drawing::Point(185, 362);
+			this->btn_saveProduct->Location = System::Drawing::Point(185, 363);
 			this->btn_saveProduct->Name = L"btn_saveProduct";
-			this->btn_saveProduct->Size = System::Drawing::Size(75, 25);
+			this->btn_saveProduct->Size = System::Drawing::Size(75, 23);
 			this->btn_saveProduct->TabIndex = 4;
 			this->btn_saveProduct->Text = L"Guardar";
 			this->btn_saveProduct->UseVisualStyleBackColor = false;
