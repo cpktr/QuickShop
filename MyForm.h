@@ -1,5 +1,8 @@
 ﻿#pragma once
+#include <fstream>
+#include <string>
 #include "User.h"
+
 
 
 namespace QuickShop {
@@ -11,6 +14,8 @@ namespace QuickShop {
 	using namespace System::Data;
 	using namespace System::Drawing::Drawing2D;
 	using namespace System::Drawing;
+	using namespace System::IO;
+	using namespace std;
 
 	/// <summary>
 	/// Resumen de MyForm
@@ -21,6 +26,30 @@ namespace QuickShop {
 		MyForm(void)
 		{
 			InitializeComponent();
+
+			ifstream usuaa("users.csv");
+
+			if (!usuaa.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				MessageBox::Show("Archivo abierto");
+				string line; 
+				bool hasEmptyRow = false;
+				// Es necesario uar un bucle para tener una por una 
+				String^ message = "CSV File Content:\n";
+				while (getline(usuaa,line)) {
+
+					if (line.find_first_not_of(" \t\r\n") != string::npos) {
+						message += gcnew String(line.c_str()) + "\n";
+					}
+					else {
+						hasEmptyRow = true;
+					}
+				}
+				usuaa.close();
+				MessageBox::Show(message, "CSV File Content", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
 
 			int screenWidth = Screen::PrimaryScreen->Bounds.Width;
 			int screenHeight = Screen::PrimaryScreen->Bounds.Height;

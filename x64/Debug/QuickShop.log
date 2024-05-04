@@ -1,0 +1,4 @@
+﻿  MyForm.cpp
+C:\Users\50257\Desktop\nuevo proyecto\QuickShop\MyForm.h(402,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  Compras.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
+  QuickShop.vcxproj -> C:\Users\50257\Desktop\nuevo proyecto\QuickShop\x64\Debug\QuickShop.exe

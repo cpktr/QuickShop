@@ -5,14 +5,14 @@
 using namespace System;
 using namespace System::Windows::Forms;
 [STAThread]
-void main(array<String^>^ args) {
+void main() {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	QuickShop::MyForm form;
 	QuickShop::Dashboard dashboardForm;
-	dashboardForm.ShowDialog();
+	//dashboardForm.ShowDialog();
 	//Application::Run(% form);
-	//form.ShowDialog();
+	form.ShowDialog();
 	User^ user = form.user;
 
 	if (user != nullptr) {
