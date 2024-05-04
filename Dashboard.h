@@ -109,11 +109,11 @@ namespace QuickShop {
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->panel8 = (gcnew System::Windows::Forms::Panel());
 			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->panel9 = (gcnew System::Windows::Forms::Panel());
+			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->panel_contenedor = (gcnew System::Windows::Forms::Panel());
 			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
-			this->panel9 = (gcnew System::Windows::Forms::Panel());
-			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->flowLayoutPanel1->SuspendLayout();
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -125,9 +125,9 @@ namespace QuickShop {
 			this->panel6->SuspendLayout();
 			this->panel7->SuspendLayout();
 			this->panel8->SuspendLayout();
+			this->panel9->SuspendLayout();
 			this->panel_contenedor->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
-			this->panel9->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// flowLayoutPanel1
@@ -357,30 +357,6 @@ namespace QuickShop {
 			this->button7->UseVisualStyleBackColor = false;
 			this->button7->Click += gcnew System::EventHandler(this, &Dashboard::button7_Click);
 			// 
-			// timer1
-			// 
-			this->timer1->Interval = 10;
-			this->timer1->Tick += gcnew System::EventHandler(this, &Dashboard::sidebarTimer_ticker);
-			// 
-			// panel_contenedor
-			// 
-			this->panel_contenedor->Controls->Add(this->pictureBox3);
-			this->panel_contenedor->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel_contenedor->Location = System::Drawing::Point(222, 0);
-			this->panel_contenedor->Name = L"panel_contenedor";
-			this->panel_contenedor->Size = System::Drawing::Size(694, 462);
-			this->panel_contenedor->TabIndex = 2;
-			// 
-			// pictureBox3
-			// 
-			this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.Image")));
-			this->pictureBox3->Location = System::Drawing::Point(181, 182);
-			this->pictureBox3->Name = L"pictureBox3";
-			this->pictureBox3->Size = System::Drawing::Size(385, 119);
-			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox3->TabIndex = 0;
-			this->pictureBox3->TabStop = false;
-			// 
 			// panel9
 			// 
 			this->panel9->Controls->Add(this->button8);
@@ -407,6 +383,30 @@ namespace QuickShop {
 			this->button8->UseVisualStyleBackColor = false;
 			this->button8->Click += gcnew System::EventHandler(this, &Dashboard::button8_Click);
 			// 
+			// timer1
+			// 
+			this->timer1->Interval = 10;
+			this->timer1->Tick += gcnew System::EventHandler(this, &Dashboard::sidebarTimer_ticker);
+			// 
+			// panel_contenedor
+			// 
+			this->panel_contenedor->Controls->Add(this->pictureBox3);
+			this->panel_contenedor->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->panel_contenedor->Location = System::Drawing::Point(222, 0);
+			this->panel_contenedor->Name = L"panel_contenedor";
+			this->panel_contenedor->Size = System::Drawing::Size(694, 462);
+			this->panel_contenedor->TabIndex = 2;
+			// 
+			// pictureBox3
+			// 
+			this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.Image")));
+			this->pictureBox3->Location = System::Drawing::Point(181, 182);
+			this->pictureBox3->Name = L"pictureBox3";
+			this->pictureBox3->Size = System::Drawing::Size(385, 119);
+			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox3->TabIndex = 0;
+			this->pictureBox3->TabStop = false;
+			// 
 			// Dashboard
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -429,9 +429,9 @@ namespace QuickShop {
 			this->panel6->ResumeLayout(false);
 			this->panel7->ResumeLayout(false);
 			this->panel8->ResumeLayout(false);
+			this->panel9->ResumeLayout(false);
 			this->panel_contenedor->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
-			this->panel9->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -460,8 +460,8 @@ namespace QuickShop {
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->AbrirPanel(gcnew QuickShop::Productos);
 	}
-private: System::Void flowLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-}
+	private: System::Void flowLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+	}
 	private: System::Void sidebarTimer_ticker(System::Object^ sender, System::EventArgs^ e) {
 		if (sidebarExpand) {
 			this->flowLayoutPanel1->Width -= 10;
