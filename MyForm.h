@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include "User.h"
+#include "Persona.h"
+#include "Cstomer.h"
 
 
 
@@ -22,6 +24,7 @@ namespace QuickShop {
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
+	private: Cstomer persona1;
 	public:
 		MyForm(void)
 		{
@@ -36,18 +39,20 @@ namespace QuickShop {
 				MessageBox::Show("Archivo abierto");
 				string line; 
 				bool hasEmptyRow = false;
-				// Es necesario uar un bucle para tener una por una 
+				// Es necesario usar un bucle para tener una por una 
 				String^ message = "CSV File Content:\n";
 				while (getline(usuaa,line)) {
 
 					if (line.find_first_not_of(" \t\r\n") != string::npos) {
 						message += gcnew String(line.c_str()) + "\n";
+
 					}
 					else {
 						hasEmptyRow = true;
 					}
 				}
 				usuaa.close();
+
 				MessageBox::Show(message, "CSV File Content", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 
@@ -112,6 +117,7 @@ namespace QuickShop {
 	private: System::Windows::Forms::Button^ button5;
 	private: Boolean menuOpen;
 	private: Int64 typeLogIn;
+	
 
 
 	protected:

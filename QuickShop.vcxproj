@@ -121,11 +121,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Compras.cpp" />
+    <ClCompile Include="Cstomer.cpp" />
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="Home.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="MyUserControl.cpp" />
     <ClCompile Include="Pagos.cpp" />
+    <ClCompile Include="Persona.cpp" />
     <ClCompile Include="Productos.cpp" />
     <ClCompile Include="Reportes.cpp" />
     <ClCompile Include="UserClients.cpp" />
@@ -135,6 +137,8 @@
     <ClInclude Include="Compras.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Cstomer.h" />
+    <ClInclude Include="Cx.h" />
     <ClInclude Include="Dashboard.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -144,6 +148,7 @@
     <ClInclude Include="Pagos.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Persona.h" />
     <ClInclude Include="Productos.h">
       <FileType>CppForm</FileType>
     </ClInclude>
