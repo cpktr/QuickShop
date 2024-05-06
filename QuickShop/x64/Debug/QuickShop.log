@@ -1,6 +1,4 @@
-﻿  Cstomer.cpp
-  MyForm.cpp
-C:\Users\JavierBarillas\source\repos\QuickShop\MyForm.h(407,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-  Generando código...
+﻿  MyForm.cpp
+C:\Users\JavierBarillas\source\repos\QuickShop\MyForm.h(410,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
   Compras.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
   QuickShop.vcxproj -> C:\Users\JavierBarillas\source\repos\QuickShop\x64\Debug\QuickShop.exe

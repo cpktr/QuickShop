@@ -36,7 +36,7 @@ namespace QuickShop {
 				MessageBox::Show("Error al abrir el archivo");
 			}
 			else {
-				MessageBox::Show("Archivo abierto");
+				cout << "Archivo abierto" << endl;
 				string line; 
 				bool hasEmptyRow = false;
 				// Es necesario usar un bucle para tener una por una 
@@ -44,8 +44,10 @@ namespace QuickShop {
 				while (getline(usuaa,line)) {
 
 					if (line.find_first_not_of(" \t\r\n") != string::npos) {
+						if (line.find(';')) {
+							MessageBox::Show("Archivo ;");
+						}
 						message += gcnew String(line.c_str()) + "\n";
-
 					}
 					else {
 						hasEmptyRow = true;
