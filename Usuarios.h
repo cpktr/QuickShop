@@ -110,6 +110,7 @@ namespace QuickShop {
 		{
 			this->titlePage = (gcnew System::Windows::Forms::Label());
 			this->formContainer = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->btn_saveUser = (gcnew System::Windows::Forms::Button());
 			this->panel10 = (gcnew System::Windows::Forms::Panel());
 			this->txt_password = (gcnew System::Windows::Forms::TextBox());
@@ -127,6 +128,7 @@ namespace QuickShop {
 			this->txt_cui = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->panel5 = (gcnew System::Windows::Forms::Panel());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->txt_user = (gcnew System::Windows::Forms::TextBox());
@@ -151,8 +153,6 @@ namespace QuickShop {
 			this->phoneNumber = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->email = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->address = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->formContainer->SuspendLayout();
 			this->panel10->SuspendLayout();
 			this->panel9->SuspendLayout();
@@ -196,6 +196,19 @@ namespace QuickShop {
 			this->formContainer->Name = L"formContainer";
 			this->formContainer->Size = System::Drawing::Size(267, 389);
 			this->formContainer->TabIndex = 1;
+			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::Color::Transparent;
+			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->ForeColor = System::Drawing::Color::Teal;
+			this->button1->Location = System::Drawing::Point(104, 363);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 5;
+			this->button1->Text = L"Cancelar";
+			this->button1->UseVisualStyleBackColor = false;
 			// 
 			// btn_saveUser
 			// 
@@ -345,6 +358,15 @@ namespace QuickShop {
 			this->panel5->Name = L"panel5";
 			this->panel5->Size = System::Drawing::Size(261, 30);
 			this->panel5->TabIndex = 2;
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Operador", L"Administrador" });
+			this->comboBox1->Location = System::Drawing::Point(158, 4);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(100, 21);
+			this->comboBox1->TabIndex = 1;
 			// 
 			// label5
 			// 
@@ -532,28 +554,6 @@ namespace QuickShop {
 			this->address->HeaderText = L"Dirección Domiciliar";
 			this->address->Name = L"address";
 			this->address->ReadOnly = true;
-			// 
-			// button1
-			// 
-			this->button1->BackColor = System::Drawing::Color::Transparent;
-			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button1->ForeColor = System::Drawing::Color::Teal;
-			this->button1->Location = System::Drawing::Point(104, 363);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 5;
-			this->button1->Text = L"Cancelar";
-			this->button1->UseVisualStyleBackColor = false;
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Operador", L"Administrador" });
-			this->comboBox1->Location = System::Drawing::Point(158, 4);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(100, 21);
-			this->comboBox1->TabIndex = 1;
 			// 
 			// Usuarios
 			// 

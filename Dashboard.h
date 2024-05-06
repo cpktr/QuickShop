@@ -414,7 +414,7 @@ namespace QuickShop {
 			this->ClientSize = System::Drawing::Size(916, 462);
 			this->Controls->Add(this->panel_contenedor);
 			this->Controls->Add(this->flowLayoutPanel1);
-			this->MaximumSize = System::Drawing::Size(932, 501);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"Dashboard";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Dashboard";

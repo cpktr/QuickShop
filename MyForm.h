@@ -5,6 +5,7 @@
 #include "User.h"
 #include "Persona.h"
 #include "Cstomer.h"
+#include "Dashboard.h"
 
 namespace QuickShop {
 
@@ -26,6 +27,7 @@ namespace QuickShop {
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	private: Cstomer dataUsers;
+	private: System::Windows::Forms::Panel^ panelContainerFirst;
 	private: List<Cstomer^>^ usersPlatform = gcnew List<Cstomer^>();
 	public:
 		MyForm(void)
@@ -38,26 +40,6 @@ namespace QuickShop {
 				MessageBox::Show("Error al abrir el archivo");
 			}
 			else {
-				/*cout << "Archivo abierto" << endl;
-				string line; 
-				bool hasEmptyRow = false;
-				// Es necesario usar un bucle para tener una por una 
-				String^ message = "CSV File Content:\n";
-				while (getline(usuaa,line)) {
-
-					if (line.find_first_not_of(" \t\r\n") != string::npos) {
-						if (line.find(';')) {
-							MessageBox::Show("Archivo ;");
-						}
-						message += gcnew String(line.c_str()) + "\n";
-					}
-					else {
-						hasEmptyRow = true;
-					}
-				}
-				usuaa.close();
-
-				MessageBox::Show(message, "CSV File Content", MessageBoxButtons::OK, MessageBoxIcon::Information);*/
 				string line;
 				while (getline(usuaa, line)) {
 					string id;
@@ -180,6 +162,8 @@ namespace QuickShop {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->panelContainerFirst = (gcnew System::Windows::Forms::Panel());
+			this->panelContainerFirst->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -188,7 +172,7 @@ namespace QuickShop {
 			this->label1->BackColor = System::Drawing::Color::Transparent;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 30));
 			this->label1->ForeColor = System::Drawing::Color::Teal;
-			this->label1->Location = System::Drawing::Point(155, 49);
+			this->label1->Location = System::Drawing::Point(154, 48);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(215, 54);
 			this->label1->TabIndex = 0;
@@ -200,7 +184,7 @@ namespace QuickShop {
 			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F));
 			this->label2->ForeColor = System::Drawing::Color::Teal;
-			this->label2->Location = System::Drawing::Point(106, 183);
+			this->label2->Location = System::Drawing::Point(106, 185);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(47, 13);
 			this->label2->TabIndex = 1;
@@ -212,7 +196,7 @@ namespace QuickShop {
 			this->label3->BackColor = System::Drawing::Color::Transparent;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F));
 			this->label3->ForeColor = System::Drawing::Color::Teal;
-			this->label3->Location = System::Drawing::Point(106, 244);
+			this->label3->Location = System::Drawing::Point(106, 240);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(66, 13);
 			this->label3->TabIndex = 2;
@@ -223,7 +207,7 @@ namespace QuickShop {
 			this->textBox1->BackColor = System::Drawing::SystemColors::Control;
 			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->textBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.25F));
-			this->textBox1->Location = System::Drawing::Point(109, 199);
+			this->textBox1->Location = System::Drawing::Point(109, 201);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(287, 19);
 			this->textBox1->TabIndex = 3;
@@ -231,7 +215,7 @@ namespace QuickShop {
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::Teal;
-			this->panel1->Location = System::Drawing::Point(109, 281);
+			this->panel1->Location = System::Drawing::Point(109, 277);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(287, 2);
 			this->panel1->TabIndex = 6;
@@ -241,7 +225,7 @@ namespace QuickShop {
 			this->textBox2->BackColor = System::Drawing::SystemColors::Control;
 			this->textBox2->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->textBox2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.25F));
-			this->textBox2->Location = System::Drawing::Point(109, 260);
+			this->textBox2->Location = System::Drawing::Point(109, 256);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->PasswordChar = '*';
 			this->textBox2->Size = System::Drawing::Size(287, 19);
@@ -253,7 +237,7 @@ namespace QuickShop {
 			this->label4->BackColor = System::Drawing::Color::Transparent;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8));
 			this->label4->ForeColor = System::Drawing::Color::DarkGray;
-			this->label4->Location = System::Drawing::Point(171, 114);
+			this->label4->Location = System::Drawing::Point(169, 112);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(178, 13);
 			this->label4->TabIndex = 7;
@@ -267,7 +251,7 @@ namespace QuickShop {
 			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.25F));
 			this->button1->ForeColor = System::Drawing::Color::White;
-			this->button1->Location = System::Drawing::Point(267, 320);
+			this->button1->Location = System::Drawing::Point(267, 316);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(129, 35);
 			this->button1->TabIndex = 8;
@@ -284,7 +268,7 @@ namespace QuickShop {
 			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.25F));
 			this->button2->ForeColor = System::Drawing::Color::Teal;
-			this->button2->Location = System::Drawing::Point(109, 320);
+			this->button2->Location = System::Drawing::Point(109, 316);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(129, 35);
 			this->button2->TabIndex = 9;
@@ -297,7 +281,7 @@ namespace QuickShop {
 			// panel2
 			// 
 			this->panel2->BackColor = System::Drawing::Color::Teal;
-			this->panel2->Location = System::Drawing::Point(109, 220);
+			this->panel2->Location = System::Drawing::Point(109, 222);
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(287, 2);
 			this->panel2->TabIndex = 10;
@@ -347,35 +331,61 @@ namespace QuickShop {
 			this->button5->UseVisualStyleBackColor = false;
 			this->button5->Click += gcnew System::EventHandler(this, &MyForm::button5_Click);
 			// 
+			// panelContainerFirst
+			// 
+			this->panelContainerFirst->Controls->Add(this->button3);
+			this->panelContainerFirst->Controls->Add(this->button4);
+			this->panelContainerFirst->Controls->Add(this->button5);
+			this->panelContainerFirst->Controls->Add(this->label1);
+			this->panelContainerFirst->Controls->Add(this->label4);
+			this->panelContainerFirst->Controls->Add(this->label2);
+			this->panelContainerFirst->Controls->Add(this->button2);
+			this->panelContainerFirst->Controls->Add(this->panel2);
+			this->panelContainerFirst->Controls->Add(this->button1);
+			this->panelContainerFirst->Controls->Add(this->panel1);
+			this->panelContainerFirst->Controls->Add(this->textBox1);
+			this->panelContainerFirst->Controls->Add(this->textBox2);
+			this->panelContainerFirst->Controls->Add(this->label3);
+			this->panelContainerFirst->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->panelContainerFirst->Location = System::Drawing::Point(0, 0);
+			this->panelContainerFirst->Name = L"panelContainerFirst";
+			this->panelContainerFirst->Size = System::Drawing::Size(485, 453);
+			this->panelContainerFirst->TabIndex = 14;
+			this->panelContainerFirst->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panelContainerFirst_Paint);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
-			this->ClientSize = System::Drawing::Size(501, 492);
-			this->Controls->Add(this->button5);
-			this->Controls->Add(this->button4);
-			this->Controls->Add(this->button3);
-			this->Controls->Add(this->panel2);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->label4);
-			this->Controls->Add(this->panel1);
-			this->Controls->Add(this->textBox2);
-			this->Controls->Add(this->textBox1);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
+			this->AutoSize = true;
+			this->ClientSize = System::Drawing::Size(485, 453);
+			this->Controls->Add(this->panelContainerFirst);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MaximizeBox = false;
-			this->MaximumSize = System::Drawing::Size(517, 531);
 			this->Name = L"MyForm";
-			this->Text = L"Login";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"QuickShop";
+			this->panelContainerFirst->ResumeLayout(false);
+			this->panelContainerFirst->PerformLayout();
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
+	template<class T>
+	void CambiarPanel(T formChild) {
+		if (this->panelContainerFirst->Controls->Count > 0) {
+			this->panelContainerFirst->Controls->RemoveAt(0);
+			this->panelContainerFirst->Controls->Clear();
+			formChild->TopLevel = false;
+			formChild->Dock = DockStyle::Fill;
+			this->panelContainerFirst->Controls->Add(formChild);
+			this->panelContainerFirst->Tag = formChild;
+			this->Size = System::Drawing::Size(916, 462);
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			formChild->Show();
+		}
+		
+	}
 	private: bool LoginLogicAdmin(String^ email, String^ password) {
 		for each (Cstomer ^ user in usersPlatform)
 		{
@@ -415,6 +425,7 @@ namespace QuickShop {
 			if (typeLogIn == 1) {//LOGIN ADMINISTRADOR
 				if (this->LoginLogicAdmin(email, password)) {
 					MessageBox::Show("Inicio de sesión exitoso", "¡Bienvenido!", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					this->CambiarPanel(gcnew QuickShop::Dashboard);
 				}
 				else {
 					MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -423,6 +434,7 @@ namespace QuickShop {
 			else if (typeLogIn == 2) {//LOGIN OPERADOR
 				if (this->LoginLogicOperator(email, password)) {
 					MessageBox::Show("Inicio de sesión exitoso", "¡Bienvenido!", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					this->CambiarPanel(gcnew QuickShop::Dashboard);
 				}
 				else {
 					MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -482,6 +494,10 @@ namespace QuickShop {
 		this->label4->Location = System::Drawing::Point(171, 114);
 		this->textBox1->Clear();
 		this->textBox2->Clear();
+		this->button3->Location = System::Drawing::Point(0, 0);
+		this->button3->Text = L"←";
+		this->button4->Location = System::Drawing::Point(-100, -100);
+		this->button5->Location = System::Drawing::Point(-100, -100);
 	}
 
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -490,9 +506,15 @@ namespace QuickShop {
 		this->label4->Location = System::Drawing::Point(180, 114);
 		this->textBox1->Clear();
 		this->textBox2->Clear();
+		this->button3->Location = System::Drawing::Point(0, 0);
+		this->button3->Text = L"←";
+		this->button4->Location = System::Drawing::Point(-100, -100);
+		this->button5->Location = System::Drawing::Point(-100, -100);
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
+private: System::Void panelContainerFirst_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
 };
 }
