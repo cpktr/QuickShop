@@ -18,14 +18,21 @@ ref class Cstomer :
     public Persona
 {
 	private:
+		String^ id_customer;
 		String^ username;
 		String^ type;
 		String^ cui;
 
 	public:
-		Cstomer() {};
-		Cstomer(String^ username, String^ type, String^ cui, String^ name, String^ lastname, String^ address, String^ phonenumb, String^ email, String^ password)
+		Cstomer() {
+			this->id_customer = "0";
+			this->username = "";
+			this->type = "type";
+			this->cui = "cui";
+		};
+		Cstomer(String^ id, String^ username, String^ type, String^ cui, String^ name, String^ lastname, String^ address, String^ phonenumb, String^ email, String^ password)
 			: Persona(name, lastname, address, phonenumb, email, password) {
+			this->id_customer = id;
 			this->username = username;
 			this->type = type;
 			this->cui = cui;
@@ -34,5 +41,16 @@ ref class Cstomer :
 		Cstomer^ get_usuario() {
 			return this;
 		}
+
+		String^ getUsername() {
+			return username;
+		}
+		String^ getPassword() {
+			return password;
+		}
+		String^ getType() {
+			return type;
+		}
+
 };
 

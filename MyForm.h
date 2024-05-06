@@ -1,11 +1,10 @@
 ﻿#pragma once
 #include <fstream>
 #include <string>
+#include <sstream>
 #include "User.h"
 #include "Persona.h"
 #include "Cstomer.h"
-
-
 
 namespace QuickShop {
 
@@ -16,6 +15,8 @@ namespace QuickShop {
 	using namespace System::Data;
 	using namespace System::Drawing::Drawing2D;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
+	using namespace System::Runtime::InteropServices;
 	using namespace System::IO;
 	using namespace std;
 
@@ -24,7 +25,8 @@ namespace QuickShop {
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
-	private: Cstomer persona1;
+	private: Cstomer dataUsers;
+	private: List<Cstomer^>^ usersPlatform = gcnew List<Cstomer^>();
 	public:
 		MyForm(void)
 		{
@@ -36,7 +38,7 @@ namespace QuickShop {
 				MessageBox::Show("Error al abrir el archivo");
 			}
 			else {
-				cout << "Archivo abierto" << endl;
+				/*cout << "Archivo abierto" << endl;
 				string line; 
 				bool hasEmptyRow = false;
 				// Es necesario usar un bucle para tener una por una 
@@ -55,7 +57,35 @@ namespace QuickShop {
 				}
 				usuaa.close();
 
-				MessageBox::Show(message, "CSV File Content", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				MessageBox::Show(message, "CSV File Content", MessageBoxButtons::OK, MessageBoxIcon::Information);*/
+				string line;
+				while (getline(usuaa, line)) {
+					string id;
+					string username;
+					string type;
+					string cui;
+					string name; 
+					string lastname; 
+					string address; 
+					string phonenumb; 
+					string email; 
+					string password;
+
+					stringstream ss(line);
+					getline(ss, (id), ';');
+					getline(ss, (name), ';');
+					getline(ss, (lastname), ';');
+					getline(ss, (username), ';');
+					getline(ss, (type), ';');
+					getline(ss, (address), ';');
+					getline(ss, (cui), ';');
+					getline(ss, (phonenumb), ';');
+					getline(ss, (email), ';');
+					getline(ss, (password), ';');
+
+					usersPlatform->Add(gcnew Cstomer(gcnew String(id.c_str()), gcnew String(username.c_str()), gcnew String(type.c_str()), gcnew String(cui.c_str()), gcnew String(name.c_str()), gcnew String(lastname.c_str()), gcnew String(address.c_str()), gcnew String(phonenumb.c_str()), gcnew String(email.c_str()), gcnew String(password.c_str())));
+					
+				}		
 			}
 
 			int screenWidth = Screen::PrimaryScreen->Bounds.Width;
@@ -118,7 +148,7 @@ namespace QuickShop {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: Boolean menuOpen;
-	private: Int64 typeLogIn;
+	private: int typeLogIn = 1;
 	
 
 
@@ -346,36 +376,65 @@ namespace QuickShop {
 
 		}
 #pragma endregion
-
+	private: bool LoginLogicAdmin(String^ email, String^ password) {
+		for each (Cstomer ^ user in usersPlatform)
+		{
+			if (user->getUsername() == email && user->getPassword() == password)
+			{
+				if (user->getType() == "administrador") {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
+		return false;
+	}
+	private: bool LoginLogicOperator(String^ email, String^ password) {
+		for each (Cstomer ^ user in usersPlatform)
+		{
+			if (user->getUsername() == email && user->getPassword() == password)
+			{
+				if (user->getType() == "operador") {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
+		return false;
+	}
 	public: User^ user = nullptr;
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ email = this->textBox1->Text;
 		String^ password = this->textBox2->Text;
 		//Validación de LOGIN
-		switch (typeLogIn) {
-			case 1:
-				//LOGIN de Administrador
-				if (email != "" || password != "") {
-					if (email == "admin" && password == "123") {
-						MessageBox::Show("Sesión iniciada.", "Success", MessageBoxButtons::OK);
-						return;
-					}
-					else {
-						MessageBox::Show("Usuario o contraseña Incorrectos.", "Error", MessageBoxButtons::OK);
-						return;
-					}
+		if (email != "" || password != "") {
+			if (typeLogIn == 1) {//LOGIN ADMINISTRADOR
+				if (this->LoginLogicAdmin(email, password)) {
+					MessageBox::Show("Inicio de sesión exitoso", "¡Bienvenido!", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				}
 				else {
-					MessageBox::Show("Porfavor Ingresa un usuario y contraseña válidos." + email + password, "Error", MessageBoxButtons::OK);
-					return;
+					MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				}
-			case 2:
-				//LOGIN de Operador
-			default:
-				break;
+			}
+			else if (typeLogIn == 2) {//LOGIN OPERADOR
+				if (this->LoginLogicOperator(email, password)) {
+					MessageBox::Show("Inicio de sesión exitoso", "¡Bienvenido!", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				}
+				else {
+					MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				}
+			}
+			else {
+				return;
+			}
 		}
 		
 	}
+
 	private: System::Void button1_HoverIn(System::Object^ sender, System::EventArgs^ e) {
 		this->button1->Cursor = Cursors::Hand;
 		this->button1->BackColor = System::Drawing::Color::Transparent;
@@ -421,12 +480,16 @@ namespace QuickShop {
 		this->typeLogIn = 1;
 		this->label4->Text = L"Inicia Sesión como Administrador";
 		this->label4->Location = System::Drawing::Point(171, 114);
+		this->textBox1->Clear();
+		this->textBox2->Clear();
 	}
 
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->typeLogIn = 2;
 		this->label4->Text = L"Inicia Sesión como Operador";
 		this->label4->Location = System::Drawing::Point(180, 114);
+		this->textBox1->Clear();
+		this->textBox2->Clear();
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();

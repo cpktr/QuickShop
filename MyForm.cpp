@@ -5,7 +5,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 [STAThread]
-void main() {
+void main(cli::array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	QuickShop::MyForm form;

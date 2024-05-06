@@ -1,37 +1,40 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\",
+  "WorkspaceRootPath": "E:\\Proyectos\\Proyecto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Cstomer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Cstomer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Cstomer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Persona.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Persona.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Usuarios.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.39.33519\\INCLUDE\\EXCEPTION||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Usuarios.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Usuarios.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Dashboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Dashboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Dashboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Dashboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Dashboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Dashboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\UserClients.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\UserClients.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:UserClients.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
     }
   ],
@@ -42,7 +45,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,50 +53,61 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MyForm.cpp",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\MyForm.cpp",
+              "RelativeDocumentMoniker": "MyForm.cpp",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\MyForm.cpp",
+              "RelativeToolTip": "MyForm.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-06T18:45:13.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "exception",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\exception",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\exception",
+              "ViewState": "AQIAAA0BAAAAAAAAAAAswCIBAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-06T18:42:00.103Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Cstomer.h",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Cstomer.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Cstomer.h",
               "RelativeDocumentMoniker": "Cstomer.h",
-              "ToolTip": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Cstomer.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Cstomer.h",
               "RelativeToolTip": "Cstomer.h",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABkAAAAPAAAA",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAADMAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-05T17:33:55.815Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Persona.h",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Persona.h",
-              "RelativeDocumentMoniker": "Persona.h",
-              "ToolTip": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Persona.h",
-              "RelativeToolTip": "Persona.h",
-              "ViewState": "AQIAACQAAAAAAAAAAAAAAA8AAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-05T16:02:23.126Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MyForm.h",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\MyForm.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\MyForm.h",
               "RelativeDocumentMoniker": "MyForm.h",
-              "ToolTip": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\MyForm.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\MyForm.h",
               "RelativeToolTip": "MyForm.h",
-              "ViewState": "AQIAACYAAAAAAAAAAAAAADgAAAAAAAAA",
+              "ViewState": "AQIAAJYBAAAAAAAAAAAAAK8BAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-05T15:53:17.662Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "MyForm.h [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\MyForm.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\MyForm.h",
               "RelativeDocumentMoniker": "MyForm.h",
-              "ToolTip": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\MyForm.h [Dise\u00F1o]",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\MyForm.h [Dise\u00F1o]",
               "RelativeToolTip": "MyForm.h [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-05T15:52:09.423Z",
@@ -101,33 +115,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Usuarios.h [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Usuarios.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Usuarios.h",
               "RelativeDocumentMoniker": "Usuarios.h",
               "ToolTip": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Usuarios.h [Dise\u00F1o]",
-              "RelativeToolTip": "Usuarios.h [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-03T23:01:05.488Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2024-05-03T23:01:05.488Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "UserClients.h [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\UserClients.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\UserClients.h",
               "RelativeDocumentMoniker": "UserClients.h",
               "ToolTip": "E:\\Proyectos\\Proyecto\\UserClients.h [Dise\u00F1o]",
+              "RelativeToolTip": "UserClients.h [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-03T22:53:29.11Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Dashboard.h",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Dashboard.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Dashboard.h",
               "RelativeDocumentMoniker": "Dashboard.h",
-              "ToolTip": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Dashboard.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Dashboard.h",
               "RelativeToolTip": "Dashboard.h",
               "ViewState": "AQIAAOoBAAAAAAAAAAAAAPoBAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -135,11 +148,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Dashboard.h [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\source\\repos\\QuickShop\\Dashboard.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Dashboard.h",
               "RelativeDocumentMoniker": "Dashboard.h",
               "ToolTip": "E:\\Proyectos\\Proyecto\\Dashboard.h [Dise\u00F1o]",
+              "RelativeToolTip": "Dashboard.h [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-04-15T23:10:14.829Z"
             }

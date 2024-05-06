@@ -24,7 +24,12 @@ ref class Persona
 
 	public: 
 		Persona() {
-
+			this->name = "name";
+			this->lastName = "lastname";
+			this->address = "address";
+			this->phoneNum = "phonenumb";
+			this->email = "email";
+			this->password = "password";
 		}
 		Persona(String^ name, String^ lastname, String^ address, String^ phonenumb, String^ email, String^ password) {
 			try
