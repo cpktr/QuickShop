@@ -361,7 +361,6 @@ namespace QuickShop {
 			this->Controls->Add(this->panelContainerFirst);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->MaximizeBox = false;
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"QuickShop";
@@ -378,9 +377,9 @@ namespace QuickShop {
 			this->panelContainerFirst->Controls->Clear();
 			formChild->TopLevel = false;
 			formChild->Dock = DockStyle::Fill;
+			QuickShop::Dashboard dashboardForm;
 			this->panelContainerFirst->Controls->Add(formChild);
 			this->panelContainerFirst->Tag = formChild;
-			this->Size = System::Drawing::Size(916, 462);
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			formChild->Show();
 		}

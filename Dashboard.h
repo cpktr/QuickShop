@@ -69,6 +69,7 @@ namespace QuickShop {
 	private: System::Windows::Forms::Button^ button7;
 	private: System::Windows::Forms::Panel^ panel9;
 	private: System::Windows::Forms::Button^ button8;
+	private: System::Windows::Forms::Panel^ fatherPanelDashboard;
 
 	private: System::ComponentModel::IContainer^ components;
 
@@ -114,6 +115,7 @@ namespace QuickShop {
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->panel_contenedor = (gcnew System::Windows::Forms::Panel());
 			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
+			this->fatherPanelDashboard = (gcnew System::Windows::Forms::Panel());
 			this->flowLayoutPanel1->SuspendLayout();
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -128,6 +130,7 @@ namespace QuickShop {
 			this->panel9->SuspendLayout();
 			this->panel_contenedor->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
+			this->fatherPanelDashboard->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// flowLayoutPanel1
@@ -407,14 +410,23 @@ namespace QuickShop {
 			this->pictureBox3->TabIndex = 0;
 			this->pictureBox3->TabStop = false;
 			// 
+			// fatherPanelDashboard
+			// 
+			this->fatherPanelDashboard->Controls->Add(this->panel_contenedor);
+			this->fatherPanelDashboard->Controls->Add(this->flowLayoutPanel1);
+			this->fatherPanelDashboard->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->fatherPanelDashboard->Location = System::Drawing::Point(0, 0);
+			this->fatherPanelDashboard->Name = L"fatherPanelDashboard";
+			this->fatherPanelDashboard->Size = System::Drawing::Size(916, 462);
+			this->fatherPanelDashboard->TabIndex = 1;
+			// 
 			// Dashboard
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->AutoScroll = true;
 			this->ClientSize = System::Drawing::Size(916, 462);
-			this->Controls->Add(this->panel_contenedor);
-			this->Controls->Add(this->flowLayoutPanel1);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Controls->Add(this->fatherPanelDashboard);
 			this->Name = L"Dashboard";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Dashboard";
@@ -432,6 +444,7 @@ namespace QuickShop {
 			this->panel9->ResumeLayout(false);
 			this->panel_contenedor->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
+			this->fatherPanelDashboard->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}

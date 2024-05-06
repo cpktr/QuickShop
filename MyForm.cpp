@@ -10,9 +10,9 @@ void main(cli::array<String^>^ args) {
 	Application::SetCompatibleTextRenderingDefault(false);
 	QuickShop::MyForm form;
 	QuickShop::Dashboard dashboardForm;
-	//dashboardForm.ShowDialog();
+	dashboardForm.ShowDialog();
 	//Application::Run(% form);
-	form.ShowDialog();
+	//form.ShowDialog();
 	User^ user = form.user;
 
 	if (user != nullptr) {
