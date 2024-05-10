@@ -1,4 +1,8 @@
 #pragma once
+#include <fstream>
+#include <string>
+#include <sstream>
+#include "Cstomer.h"
 
 namespace QuickShop {
 
@@ -7,13 +11,23 @@ namespace QuickShop {
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
+	using namespace System::Drawing::Drawing2D;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
+	using namespace System::Runtime::InteropServices;
+	using namespace System::IO;
+	using namespace std;
 
 	/// <summary>
 	/// Resumen de Usuarios
 	/// </summary>
 	public ref class Usuarios : public System::Windows::Forms::Form
 	{
+	private: List<Cstomer^>^ usersPlatform = gcnew List<Cstomer^>();
+	private: cli::array<Cstomer^>^ localData = gcnew cli::array<Cstomer^>(10);
+	private: System::Windows::Forms::DataGridView^ dgv_table;
+
+	private: cli::array<int^>^ numeros = gcnew cli::array<int^>(10);
 	public:
 		Usuarios(void)
 		{
@@ -21,6 +35,63 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			for (int i = 0; i < numeros->Length; i++) {
+				numeros[i] = i;
+			}
+			/*this->dataGridView1->Columns->Add("C1", "Header 1");
+			this->dataGridView1->Columns->Add("C2", "Header 2");
+			this->dataGridView1->Rows->Add("1", "2");
+			for (int i = 0; i < numeros->Length; i++) {
+				this->dataGridView1->Rows->Add(numeros[i]);
+			}*/
+			
+
+
+			ifstream usuaa("users.csv");
+
+			if (!usuaa.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				while (getline(usuaa, line)) {
+					Cstomer^ newUser = gcnew Cstomer();
+					string id;
+					string username;
+					string type;
+					string cui;
+					string name;
+					string lastname;
+					string address;
+					string phonenumb;
+					string email;
+					string password;
+
+					stringstream ss(line);
+					getline(ss, id, ';');
+					getline(ss, name, ';');
+					getline(ss, lastname, ';');
+					getline(ss, username, ';');
+					getline(ss, type, ';');
+					getline(ss, address, ';');
+					getline(ss, cui, ';');
+					getline(ss, phonenumb, ';');
+					getline(ss, email, ';');
+					getline(ss, password, ';');
+					newUser->id_customer = gcnew String(id.c_str());
+					newUser->name = gcnew String(name.c_str());
+					newUser->lastName = gcnew String(lastname.c_str());
+					newUser->username = gcnew String(username.c_str());
+					newUser->cui = gcnew String(cui.c_str());
+					newUser->phoneNum = gcnew String(phonenumb.c_str());
+					newUser->email = gcnew String(email.c_str());
+					newUser->address = gcnew String(address.c_str());
+					localData[limit] = newUser;
+					this->dgv_table->Rows->Add(localData[limit]->id_customer, localData[limit]->name, localData[limit]->lastName, localData[limit]->username, localData[limit]->type, localData[limit]->cui, localData[limit]->phoneNum, localData[limit]->email, localData[limit]->address);
+					limit++;
+				}
+			}
 		}
 
 	protected:
@@ -38,16 +109,16 @@ namespace QuickShop {
 	private: System::Windows::Forms::Panel^ formContainer;
 
 	private: System::Windows::Forms::Panel^ panel_table;
-	private: System::Windows::Forms::DataGridView^ dgv_table;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ id;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ name;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ lastName;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ user;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ typeUser;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ cui;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ phoneNumber;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ email;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
+	
+
+
+
+
+
+
+
+
+
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ txt_id;
@@ -91,6 +162,24 @@ namespace QuickShop {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::ComboBox^ comboBox1;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ id_customer;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ name;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ lastName;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ user;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ typeUser;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ cui;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ phoneNum;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ email;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
+
+
+
+
+
+
+
+
+
 
 
 	protected:
@@ -144,13 +233,13 @@ namespace QuickShop {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel_table = (gcnew System::Windows::Forms::Panel());
 			this->dgv_table = (gcnew System::Windows::Forms::DataGridView());
-			this->id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->id_customer = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->name = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->lastName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->user = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->typeUser = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->cui = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->phoneNumber = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->phoneNum = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->email = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->address = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->formContainer->SuspendLayout();
@@ -490,8 +579,8 @@ namespace QuickShop {
 			this->dgv_table->AllowUserToAddRows = false;
 			this->dgv_table->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgv_table->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(9) {
-				this->id, this->name,
-					this->lastName, this->user, this->typeUser, this->cui, this->phoneNumber, this->email, this->address
+				this->id_customer,
+					this->name, this->lastName, this->user, this->typeUser, this->cui, this->phoneNum, this->email, this->address
 			});
 			this->dgv_table->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->dgv_table->Location = System::Drawing::Point(0, 0);
@@ -501,11 +590,11 @@ namespace QuickShop {
 			this->dgv_table->Size = System::Drawing::Size(389, 389);
 			this->dgv_table->TabIndex = 0;
 			// 
-			// id
+			// id_customer
 			// 
-			this->id->HeaderText = L"ID";
-			this->id->Name = L"id";
-			this->id->ReadOnly = true;
+			this->id_customer->HeaderText = L"ID";
+			this->id_customer->Name = L"id_customer";
+			this->id_customer->ReadOnly = true;
 			// 
 			// name
 			// 
@@ -537,11 +626,11 @@ namespace QuickShop {
 			this->cui->Name = L"cui";
 			this->cui->ReadOnly = true;
 			// 
-			// phoneNumber
+			// phoneNum
 			// 
-			this->phoneNumber->HeaderText = L"Número de Teléfono";
-			this->phoneNumber->Name = L"phoneNumber";
-			this->phoneNumber->ReadOnly = true;
+			this->phoneNum->HeaderText = L"Número de Teléfono";
+			this->phoneNum->Name = L"phoneNum";
+			this->phoneNum->ReadOnly = true;
 			// 
 			// email
 			// 

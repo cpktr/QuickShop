@@ -17,14 +17,14 @@ using namespace std;
 ref class Cstomer :
     public Persona
 {
-	private:
+	public:
 		String^ id_customer;
 		String^ username;
 		String^ type;
 		String^ cui;
 
 	public:
-		Cstomer() {
+		Cstomer(): Persona() {
 			this->id_customer = "0";
 			this->username = "";
 			this->type = "type";

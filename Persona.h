@@ -14,7 +14,7 @@ using namespace std;
 
 ref class Persona
 {
-	protected:
+	public:
 		String^ name;
 		String^ lastName;
 		String^ address;
