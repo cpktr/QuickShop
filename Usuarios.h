@@ -24,7 +24,7 @@ namespace QuickShop {
 	public ref class Usuarios : public System::Windows::Forms::Form
 	{
 	private: List<Cstomer^>^ usersPlatform = gcnew List<Cstomer^>();
-	private: cli::array<Cstomer^>^ localData = gcnew cli::array<Cstomer^>(10);
+	private: cli::array<Cstomer^>^ localData = gcnew cli::array<Cstomer^>(100);
 	private: System::Windows::Forms::DataGridView^ dgv_table;
 	private: bool editableData;
 	private: cli::array<int^>^ numeros = gcnew cli::array<int^>(10);
@@ -35,65 +35,7 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
-			this->editableData = 1;
-			for (int i = 0; i < numeros->Length; i++) {
-				numeros[i] = i;
-			}
-			/*this->dataGridView1->Columns->Add("C1", "Header 1");
-			this->dataGridView1->Columns->Add("C2", "Header 2");
-			this->dataGridView1->Rows->Add("1", "2");
-			for (int i = 0; i < numeros->Length; i++) {
-				this->dataGridView1->Rows->Add(numeros[i]);
-			}*/
-			
-
-
-			ifstream usuaa("users.csv");
-
-			if (!usuaa.is_open()) {
-				MessageBox::Show("Error al abrir el archivo");
-			}
-			else {
-				string line;
-				int limit = 0;
-				while (getline(usuaa, line)) {
-					Cstomer^ newUser = gcnew Cstomer();
-					string id;
-					string username;
-					string type;
-					string cui;
-					string name;
-					string lastname;
-					string address;
-					string phonenumb;
-					string email;
-					string password;
-
-					stringstream ss(line);
-					getline(ss, id, ';');
-					getline(ss, name, ';');
-					getline(ss, lastname, ';');
-					getline(ss, username, ';');
-					getline(ss, type, ';');
-					getline(ss, address, ';');
-					getline(ss, cui, ';');
-					getline(ss, phonenumb, ';');
-					getline(ss, email, ';');
-					getline(ss, password, ';');
-					newUser->id_customer = gcnew String(id.c_str());
-					newUser->name = gcnew String(name.c_str());
-					newUser->lastName = gcnew String(lastname.c_str());
-					newUser->username = gcnew String(username.c_str());
-					newUser->type = gcnew String(type.c_str());
-					newUser->cui = gcnew String(cui.c_str());
-					newUser->phoneNum = gcnew String(phonenumb.c_str());
-					newUser->email = gcnew String(email.c_str());
-					newUser->address = gcnew String(address.c_str());
-					localData[limit] = newUser;
-					this->dgv_table->Rows->Add(localData[limit]->id_customer, localData[limit]->name, localData[limit]->lastName, localData[limit]->username, localData[limit]->type, localData[limit]->cui, localData[limit]->phoneNum, localData[limit]->email, localData[limit]->address);
-					limit++;
-				}
-			}
+			this->getUsersdata();
 		}
 
 	protected:
@@ -112,15 +54,6 @@ namespace QuickShop {
 
 	private: System::Windows::Forms::Panel^ panel_table;
 	
-
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ txt_id;
@@ -199,6 +132,68 @@ namespace QuickShop {
 		/// Método necesario para admitir el Diseñador. No se puede modificar
 		/// el contenido de este método con el editor de código.
 		/// </summary>
+		void getUsersdata() {
+			this->editableData = 1;
+			for (int i = 0; i < numeros->Length; i++) {
+				numeros[i] = i;
+			}
+			/*this->dataGridView1->Columns->Add("C1", "Header 1");
+			this->dataGridView1->Columns->Add("C2", "Header 2");
+			this->dataGridView1->Rows->Add("1", "2");
+			for (int i = 0; i < numeros->Length; i++) {
+				this->dataGridView1->Rows->Add(numeros[i]);
+			}*/
+
+
+
+			ifstream usuaa("users.csv");
+
+			if (!usuaa.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				while (getline(usuaa, line)) {
+					Cstomer^ newUser = gcnew Cstomer();
+					string id;
+					string username;
+					string type;
+					string cui;
+					string name;
+					string lastname;
+					string address;
+					string phonenumb;
+					string email;
+					string password;
+
+					stringstream ss(line);
+					getline(ss, id, ',');
+					getline(ss, name, ',');
+					getline(ss, lastname, ',');
+					getline(ss, username, ',');
+					getline(ss, type, ',');
+					getline(ss, address, ',');
+					getline(ss, cui, ',');
+					getline(ss, phonenumb, ',');
+					getline(ss, email, ',');
+					getline(ss, password, ',');
+					newUser->id_customer = gcnew String(id.c_str());
+					newUser->name = gcnew String(name.c_str());
+					newUser->lastName = gcnew String(lastname.c_str());
+					newUser->username = gcnew String(username.c_str());
+					newUser->type = gcnew String(type.c_str());
+					newUser->cui = gcnew String(cui.c_str());
+					newUser->phoneNum = gcnew String(phonenumb.c_str());
+					newUser->email = gcnew String(email.c_str());
+					newUser->address = gcnew String(address.c_str());
+					localData[limit] = newUser;
+					this->dgv_table->Rows->Add(localData[limit]->id_customer, localData[limit]->name, localData[limit]->lastName, localData[limit]->username, localData[limit]->type, localData[limit]->cui, localData[limit]->phoneNum, localData[limit]->email, localData[limit]->address);
+					limit++;
+				}
+			}
+
+		}
 		void InitializeComponent(void)
 		{
 			this->titlePage = (gcnew System::Windows::Forms::Label());
@@ -318,6 +313,7 @@ namespace QuickShop {
 			this->btn_saveUser->TabIndex = 4;
 			this->btn_saveUser->Text = L"Guardar";
 			this->btn_saveUser->UseVisualStyleBackColor = false;
+			this->btn_saveUser->Click += gcnew System::EventHandler(this, &Usuarios::btn_saveUser_Click);
 			// 
 			// panel10
 			// 
@@ -702,6 +698,18 @@ namespace QuickShop {
 		this->txt_email->Clear();
 		this->txt_address->Clear();
 	}
+	private: bool CamposNoVacios()
+	{
+		return !(String::IsNullOrEmpty(this->txt_id->Text) ||
+			String::IsNullOrEmpty(this->txt_name->Text) ||
+			String::IsNullOrEmpty(this->txt_lastName->Text) ||
+			String::IsNullOrEmpty(this->txt_user->Text) ||
+			String::IsNullOrEmpty(this->cmb_type->Text) ||
+			String::IsNullOrEmpty(this->txt_cui->Text) ||
+			String::IsNullOrEmpty(this->txt_phoneNumber->Text) ||
+			String::IsNullOrEmpty(this->txt_email->Text) ||
+			String::IsNullOrEmpty(this->txt_address->Text));
+	}
 	private: System::Void editRowSelected(System::Object^ sender, System::EventArgs^ e) {
 		try {
 			DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
@@ -725,6 +733,49 @@ namespace QuickShop {
 		this->clearTxt();
 		this->editableData = false;
 		this->btn_cancel->Visible = false;
+	}
+	private: System::Void btn_saveUser_Click(System::Object^ sender, System::EventArgs^ e) {
+		Cstomer^ newUser = gcnew Cstomer();
+		int indice = -1;
+		for (int i = 0; i < localData->Length; i++) {
+			if (localData[i] == nullptr) {
+				indice = i;
+				break;
+			}
+		}
+
+		if (indice != -1) {
+			if (CamposNoVacios()) {
+				newUser->id_customer = gcnew String(this->txt_id->Text);
+				newUser->name = gcnew String(this->txt_name->Text);
+				newUser->lastName = gcnew String(this->txt_lastName->Text);
+				newUser->username = gcnew String(this->txt_user->Text);
+				newUser->type = gcnew String(this->cmb_type->Text);
+				newUser->cui = gcnew String(this->txt_cui->Text);
+				newUser->phoneNum = gcnew String(this->txt_phoneNumber->Text);
+				newUser->email = gcnew String(this->txt_email->Text);
+				newUser->address = gcnew String(this->txt_address->Text);
+				this->localData[indice] = newUser;//Guardar en el array
+				this->dgv_table->Rows->Add(localData[indice]->id_customer, localData[indice]->name, localData[indice]->lastName, localData[indice]->username, localData[indice]->type, localData[indice]->cui, localData[indice]->phoneNum, localData[indice]->email, localData[indice]->address);
+				ofstream myfile;
+				myfile.open("users.csv");
+				for (int i = 0; i < localData->Length; i++) {
+					if (localData[i] != nullptr) {
+						myfile << "2,Jorge,Ozuna,jozuna77,administrador,Belice,1234570000000,12345678,ozunaj@gmail.com,123\n";
+					}
+				}
+				
+				myfile << "2,Jorge,Ozuna,jozuna77,administrador,Belice,1234570000000,12345678,ozunaj@gmail.com,123\n";
+
+			}
+			else {
+				MessageBox::Show("Por favor, completa todos los campos antes de agregar un nuevo usuario.", "Error", MessageBoxButtons::OK);
+			}
+			
+		}
+		else {
+			MessageBox::Show("No hay espacio disponible para agregar más clientes.");
+		}
 	}
 };
 }

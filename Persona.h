@@ -44,9 +44,7 @@ ref class Persona
 				this->password = password;
 
 			}
-			else {
-				throw ;
-			}
+			
 			
 				//si el dato es diferente de vacio entonces continua
 			}
