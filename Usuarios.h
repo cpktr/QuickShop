@@ -26,7 +26,7 @@ namespace QuickShop {
 	private: List<Cstomer^>^ usersPlatform = gcnew List<Cstomer^>();
 	private: cli::array<Cstomer^>^ localData = gcnew cli::array<Cstomer^>(10);
 	private: System::Windows::Forms::DataGridView^ dgv_table;
-
+	private: bool editableData;
 	private: cli::array<int^>^ numeros = gcnew cli::array<int^>(10);
 	public:
 		Usuarios(void)
@@ -35,6 +35,7 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->editableData = 1;
 			for (int i = 0; i < numeros->Length; i++) {
 				numeros[i] = i;
 			}
@@ -83,6 +84,7 @@ namespace QuickShop {
 					newUser->name = gcnew String(name.c_str());
 					newUser->lastName = gcnew String(lastname.c_str());
 					newUser->username = gcnew String(username.c_str());
+					newUser->type = gcnew String(type.c_str());
 					newUser->cui = gcnew String(cui.c_str());
 					newUser->phoneNum = gcnew String(phonenumb.c_str());
 					newUser->email = gcnew String(email.c_str());
@@ -160,17 +162,19 @@ namespace QuickShop {
 	private: System::Windows::Forms::TextBox^ txt_name;
 
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ id_customer;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ name;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ lastName;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ user;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ typeUser;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ cui;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ phoneNum;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ email;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
+	private: System::Windows::Forms::Button^ btn_cancel;
+
+	private: System::Windows::Forms::ComboBox^ cmb_type;
+
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ id_customer;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ name;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ lastName;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ user;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ typeUser;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ cui;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ phoneNum;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ email;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 
 
 
@@ -199,7 +203,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 		{
 			this->titlePage = (gcnew System::Windows::Forms::Label());
 			this->formContainer = (gcnew System::Windows::Forms::Panel());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btn_cancel = (gcnew System::Windows::Forms::Button());
 			this->btn_saveUser = (gcnew System::Windows::Forms::Button());
 			this->panel10 = (gcnew System::Windows::Forms::Panel());
 			this->txt_password = (gcnew System::Windows::Forms::TextBox());
@@ -217,7 +221,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 			this->txt_cui = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->panel5 = (gcnew System::Windows::Forms::Panel());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->cmb_type = (gcnew System::Windows::Forms::ComboBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->txt_user = (gcnew System::Windows::Forms::TextBox());
@@ -269,7 +273,7 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 			// 
 			// formContainer
 			// 
-			this->formContainer->Controls->Add(this->button1);
+			this->formContainer->Controls->Add(this->btn_cancel);
 			this->formContainer->Controls->Add(this->btn_saveUser);
 			this->formContainer->Controls->Add(this->panel10);
 			this->formContainer->Controls->Add(this->panel9);
@@ -286,18 +290,20 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 			this->formContainer->Size = System::Drawing::Size(267, 389);
 			this->formContainer->TabIndex = 1;
 			// 
-			// button1
+			// btn_cancel
 			// 
-			this->button1->BackColor = System::Drawing::Color::Transparent;
-			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button1->ForeColor = System::Drawing::Color::Teal;
-			this->button1->Location = System::Drawing::Point(104, 363);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 5;
-			this->button1->Text = L"Cancelar";
-			this->button1->UseVisualStyleBackColor = false;
+			this->btn_cancel->BackColor = System::Drawing::Color::Transparent;
+			this->btn_cancel->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_cancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_cancel->ForeColor = System::Drawing::Color::Teal;
+			this->btn_cancel->Location = System::Drawing::Point(104, 363);
+			this->btn_cancel->Name = L"btn_cancel";
+			this->btn_cancel->Size = System::Drawing::Size(75, 23);
+			this->btn_cancel->TabIndex = 5;
+			this->btn_cancel->Text = L"Cancelar";
+			this->btn_cancel->UseVisualStyleBackColor = false;
+			this->btn_cancel->Visible = false;
+			this->btn_cancel->Click += gcnew System::EventHandler(this, &Usuarios::btn_cancel_Click);
 			// 
 			// btn_saveUser
 			// 
@@ -441,21 +447,21 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 			// 
 			// panel5
 			// 
-			this->panel5->Controls->Add(this->comboBox1);
+			this->panel5->Controls->Add(this->cmb_type);
 			this->panel5->Controls->Add(this->label5);
 			this->panel5->Location = System::Drawing::Point(3, 147);
 			this->panel5->Name = L"panel5";
 			this->panel5->Size = System::Drawing::Size(261, 30);
 			this->panel5->TabIndex = 2;
 			// 
-			// comboBox1
+			// cmb_type
 			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Operador", L"Administrador" });
-			this->comboBox1->Location = System::Drawing::Point(158, 4);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(100, 21);
-			this->comboBox1->TabIndex = 1;
+			this->cmb_type->FormattingEnabled = true;
+			this->cmb_type->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Operador", L"Administrador" });
+			this->cmb_type->Location = System::Drawing::Point(158, 4);
+			this->cmb_type->Name = L"cmb_type";
+			this->cmb_type->Size = System::Drawing::Size(100, 21);
+			this->cmb_type->TabIndex = 1;
 			// 
 			// label5
 			// 
@@ -587,8 +593,10 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 			this->dgv_table->Name = L"dgv_table";
 			this->dgv_table->ReadOnly = true;
 			this->dgv_table->RowHeadersVisible = false;
+			this->dgv_table->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dgv_table->Size = System::Drawing::Size(389, 389);
 			this->dgv_table->TabIndex = 0;
+			this->dgv_table->DoubleClick += gcnew System::EventHandler(this, &Usuarios::editRowSelected);
 			// 
 			// id_customer
 			// 
@@ -683,5 +691,40 @@ private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 
 		}
 #pragma endregion
-	};
+	private: void clearTxt() {
+		this->txt_id->Clear();
+		this->txt_name->Clear();
+		this->txt_lastName->Clear();
+		this->txt_user->Clear();
+		this->cmb_type->Text = "";
+		this->txt_cui->Clear();
+		this->txt_phoneNumber->Clear();
+		this->txt_email->Clear();
+		this->txt_address->Clear();
+	}
+	private: System::Void editRowSelected(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
+			this->txt_id->Text = Convert::ToString(filaSeleccionada->Cells[0]->Value);
+			this->txt_name->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
+			this->txt_lastName->Text = Convert::ToString(filaSeleccionada->Cells[2]->Value);
+			this->txt_user->Text = Convert::ToString(filaSeleccionada->Cells[3]->Value);
+			this->cmb_type->Text = Convert::ToString(filaSeleccionada->Cells[4]->Value);
+			this->txt_cui->Text = Convert::ToString(filaSeleccionada->Cells[5]->Value);
+			this->txt_phoneNumber->Text = Convert::ToString(filaSeleccionada->Cells[6]->Value);
+			this->txt_email->Text = Convert::ToString(filaSeleccionada->Cells[7]->Value);
+			this->txt_address->Text = Convert::ToString(filaSeleccionada->Cells[8]->Value);
+			this->editableData = true;
+			this->btn_cancel->Visible = true;
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Error al obtener un producto : " + ex->Message, "Error", MessageBoxButtons::OK);
+		}
+	}
+	private: System::Void btn_cancel_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->clearTxt();
+		this->editableData = false;
+		this->btn_cancel->Visible = false;
+	}
+};
 }
