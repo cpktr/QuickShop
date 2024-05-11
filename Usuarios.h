@@ -718,7 +718,6 @@ namespace QuickShop {
 			String::IsNullOrEmpty(this->txt_password->Text));
 	}
 	private: System::Void editRowSelected(System::Object^ sender, System::EventArgs^ e) {
-		try {
 			DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
 			this->txt_id->Text = Convert::ToString(filaSeleccionada->Cells[0]->Value);
 			this->txt_name->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
@@ -738,10 +737,6 @@ namespace QuickShop {
 			this->editableData = true;
 			this->btn_cancel->Visible = true;
 			this->txt_id->ReadOnly = true;
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show("Error al obtener un producto : " + ex->Message, "Error", MessageBoxButtons::OK);
-		}
 	}
 	private: System::Void btn_cancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->clearTxt();
@@ -751,30 +746,31 @@ namespace QuickShop {
 	}
 
 	private: bool validateExistData() {
+		String^ newId = gcnew String(this->txt_id->Text);
+		String^ newEmail = gcnew String(this->txt_email->Text);
+		String^ newCui = gcnew String(this->txt_cui->Text);
+
 		for (int i = 0; i < localData->Length; i++) {
-			if (this->editableData == false && this->txt_id->Text == localData[i]->id_customer) {
-				MessageBox::Show("Ya existe un ID con este valor.", "Error", MessageBoxButtons::OK);
-				return false;
+			if (localData[i] != nullptr) {
+				if (!editableData && localData[i]->id_customer == newId) {
+					MessageBox::Show("El ID del usuario ya existe en registros anteriores", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false; // El id_customer ya existe en otro registro, no se puede agregar
+				}
+				if (localData[i]->email == newEmail && localData[i]->id_customer != newId) {
+					MessageBox::Show("El correo electrónico ya está en uso", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false; // El email ya existe en otro registro, no se puede agregar
+				}
+				if (localData[i]->cui == newCui && localData[i]->id_customer != newId) {
+					MessageBox::Show("El número de CUI o Pasaporte ya está en uso", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false;
+				}
 			}
-			if (this->txt_user->Text == localData[i]->username) {
-				MessageBox::Show("Ya existe un Usuario con este valor.", "Error", MessageBoxButtons::OK);
-				return false;
-			}
-			if (this->txt_cui->Text == localData[i]->cui) {
-				MessageBox::Show("Ya existe un CUI / Passaporte con este valor.", "Error", MessageBoxButtons::OK);
-				return false;
-			}
-			if (this->txt_email->Text == localData[i]->email) {
-				MessageBox::Show("Ya existe un Email con este valor.", "Error", MessageBoxButtons::OK);
-				return false;
-			}
-			return true;
 		}
+		return true;
 	}
 	private: System::Void btn_saveUser_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->editableData) {
 			if (validateExistData()) {
-				this->txt_id->Enabled = false;
 				DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
 				for (int i = 0; i < localData->Length; i++) {
 					if (filaSeleccionada->Cells[0]->Value == localData[i]->id_customer) {
@@ -805,9 +801,9 @@ namespace QuickShop {
 						writer->Close();
 						this->getUsersdata();
 						this->clearTxt();
-						this->txt_id->ReadOnly = false;
 						this->editableData = false;
 						this->btn_cancel->Visible = false;
+						this->txt_id->ReadOnly = false;
 						MessageBox::Show("El usuario se actualizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 						break;
 					}
@@ -815,7 +811,6 @@ namespace QuickShop {
 			}
 		}
 		else {
-			this->txt_id->ReadOnly = false;
 			Cstomer^ newUser = gcnew Cstomer();
 			int indice = -1;
 			for (int i = 0; i < localData->Length; i++) {
@@ -857,44 +852,51 @@ namespace QuickShop {
 
 						}
 						writer->Close();
+						this->getUsersdata();
 						this->clearTxt();
 						MessageBox::Show("El usuario se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 					}
 
 				}
 				else {
-					MessageBox::Show("Por favor, completa todos los campos antes de agregar un nuevo usuario.", "Error", MessageBoxButtons::OK);
+					MessageBox::Show("Por favor, completa todos los campos antes de agregar un nuevo usuario.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				}
 
 			}
 			else {
-				MessageBox::Show("No hay espacio disponible para agregar más clientes.");
+				MessageBox::Show("No hay espacio disponible para agregar más clientes.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
 		}
 	}
 	private: System::Void deleteRowUser(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::Delete) {
 			DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
-			MessageBox::Show("¿Estás seguro de querer eliminar estos datos?", "Eliminar Usuario", MessageBoxButtons::OKCancel);
-			//this->dgv_table->Rows->Remove(filaSeleccionada);
-			cli::array<Cstomer^>^ nuevoLocalData = gcnew cli::array<Cstomer^>(localData->Length - 1);
-			int nuevoIndice = 0;
-			for (int i = 0; i < localData->Length; i++) {
-				if (localData[i]->id_customer != filaSeleccionada->Cells[0]->Value->ToString()) {
-					nuevoLocalData[nuevoIndice++] = localData[i];
-				}
-			}
-			localData = nuevoLocalData;
+			System::Windows::Forms::DialogResult result = MessageBox::Show("¿Estás seguro de querer eliminar estos datos?", "Eliminar Usuario", MessageBoxButtons::OKCancel, MessageBoxIcon::Warning);
+			if (result == System::Windows::Forms::DialogResult::OK) {
+				MessageBox::Show("Aceptado");
+				cli::array<Cstomer^>^ nuevoLocalData = gcnew cli::array<Cstomer^>(localData->Length);
 
-			StreamWriter^ writer = gcnew StreamWriter("users.csv");
-			for (int i = 0; i < localData->Length; i++) {
-				if (localData[i] != nullptr) {
-					String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
-						localData[i]->id_customer, localData[i]->name, localData[i]->lastName,
-						localData[i]->username, localData[i]->type, localData[i]->cui,
-						localData[i]->phoneNum, localData[i]->email, localData[i]->address, localData[i]->password);
-					writer->WriteLine(message);
+				for (int i = 0; i < localData->Length; i++) {
+					if (localData[i] != nullptr) {
+						if (localData[i]->id_customer != filaSeleccionada->Cells[0]->Value->ToString()) {
+							nuevoLocalData[i] = localData[i];
+						}
+					}
 				}
+				localData = nuevoLocalData;
+				StreamWriter^ writer = gcnew StreamWriter("users.csv");
+				for (int i = 0; i < nuevoLocalData->Length; i++) {
+					if (nuevoLocalData[i] != nullptr) {
+						String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
+							nuevoLocalData[i]->id_customer, nuevoLocalData[i]->name, nuevoLocalData[i]->lastName,
+							nuevoLocalData[i]->username, nuevoLocalData[i]->type, nuevoLocalData[i]->cui,
+							nuevoLocalData[i]->phoneNum, nuevoLocalData[i]->email, nuevoLocalData[i]->address, nuevoLocalData[i]->password);
+						writer->WriteLine(message);
+					}
+				}
+				writer->Close();
+				this->getUsersdata();
+				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 		}
 	}
