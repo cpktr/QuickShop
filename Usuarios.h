@@ -133,7 +133,8 @@ namespace QuickShop {
 		/// el contenido de este método con el editor de código.
 		/// </summary>
 		void getUsersdata() {
-			this->editableData = 1;
+			this->dgv_table->Rows->Clear();
+			this->editableData = false;
 			for (int i = 0; i < numeros->Length; i++) {
 				numeros[i] = i;
 			}
@@ -173,10 +174,10 @@ namespace QuickShop {
 					getline(ss, lastname, ',');
 					getline(ss, username, ',');
 					getline(ss, type, ',');
-					getline(ss, address, ',');
 					getline(ss, cui, ',');
 					getline(ss, phonenumb, ',');
 					getline(ss, email, ',');
+					getline(ss, address, ',');
 					getline(ss, password, ',');
 					newUser->id_customer = gcnew String(id.c_str());
 					newUser->name = gcnew String(name.c_str());
@@ -187,6 +188,8 @@ namespace QuickShop {
 					newUser->phoneNum = gcnew String(phonenumb.c_str());
 					newUser->email = gcnew String(email.c_str());
 					newUser->address = gcnew String(address.c_str());
+					newUser->password = gcnew String(password.c_str());
+
 					localData[limit] = newUser;
 					this->dgv_table->Rows->Add(localData[limit]->id_customer, localData[limit]->name, localData[limit]->lastName, localData[limit]->username, localData[limit]->type, localData[limit]->cui, localData[limit]->phoneNum, localData[limit]->email, localData[limit]->address);
 					limit++;
@@ -579,6 +582,7 @@ namespace QuickShop {
 			// dgv_table
 			// 
 			this->dgv_table->AllowUserToAddRows = false;
+			this->dgv_table->AllowUserToDeleteRows = false;
 			this->dgv_table->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgv_table->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(9) {
 				this->id_customer,
@@ -593,6 +597,7 @@ namespace QuickShop {
 			this->dgv_table->Size = System::Drawing::Size(389, 389);
 			this->dgv_table->TabIndex = 0;
 			this->dgv_table->DoubleClick += gcnew System::EventHandler(this, &Usuarios::editRowSelected);
+			this->dgv_table->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Usuarios::deleteRowUser);
 			// 
 			// id_customer
 			// 
@@ -697,6 +702,7 @@ namespace QuickShop {
 		this->txt_phoneNumber->Clear();
 		this->txt_email->Clear();
 		this->txt_address->Clear();
+		this->txt_password->Clear();
 	}
 	private: bool CamposNoVacios()
 	{
@@ -708,7 +714,8 @@ namespace QuickShop {
 			String::IsNullOrEmpty(this->txt_cui->Text) ||
 			String::IsNullOrEmpty(this->txt_phoneNumber->Text) ||
 			String::IsNullOrEmpty(this->txt_email->Text) ||
-			String::IsNullOrEmpty(this->txt_address->Text));
+			String::IsNullOrEmpty(this->txt_address->Text)||
+			String::IsNullOrEmpty(this->txt_password->Text));
 	}
 	private: System::Void editRowSelected(System::Object^ sender, System::EventArgs^ e) {
 		try {
@@ -722,8 +729,15 @@ namespace QuickShop {
 			this->txt_phoneNumber->Text = Convert::ToString(filaSeleccionada->Cells[6]->Value);
 			this->txt_email->Text = Convert::ToString(filaSeleccionada->Cells[7]->Value);
 			this->txt_address->Text = Convert::ToString(filaSeleccionada->Cells[8]->Value);
+			for (int i = 0; i < localData->Length; i++) {
+				if (filaSeleccionada->Cells[0]->Value == localData[i]->id_customer) {
+					this->txt_password->Text = Convert::ToString(localData[i]->password);
+					break;
+				}
+			}
 			this->editableData = true;
 			this->btn_cancel->Visible = true;
+			this->txt_id->ReadOnly = true;
 		}
 		catch (Exception^ ex) {
 			MessageBox::Show("Error al obtener un producto : " + ex->Message, "Error", MessageBoxButtons::OK);
@@ -733,48 +747,155 @@ namespace QuickShop {
 		this->clearTxt();
 		this->editableData = false;
 		this->btn_cancel->Visible = false;
+		this->txt_id->ReadOnly = false;
+	}
+
+	private: bool validateExistData() {
+		for (int i = 0; i < localData->Length; i++) {
+			if (this->editableData == false && this->txt_id->Text == localData[i]->id_customer) {
+				MessageBox::Show("Ya existe un ID con este valor.", "Error", MessageBoxButtons::OK);
+				return false;
+			}
+			if (this->txt_user->Text == localData[i]->username) {
+				MessageBox::Show("Ya existe un Usuario con este valor.", "Error", MessageBoxButtons::OK);
+				return false;
+			}
+			if (this->txt_cui->Text == localData[i]->cui) {
+				MessageBox::Show("Ya existe un CUI / Passaporte con este valor.", "Error", MessageBoxButtons::OK);
+				return false;
+			}
+			if (this->txt_email->Text == localData[i]->email) {
+				MessageBox::Show("Ya existe un Email con este valor.", "Error", MessageBoxButtons::OK);
+				return false;
+			}
+			return true;
+		}
 	}
 	private: System::Void btn_saveUser_Click(System::Object^ sender, System::EventArgs^ e) {
-		Cstomer^ newUser = gcnew Cstomer();
-		int indice = -1;
-		for (int i = 0; i < localData->Length; i++) {
-			if (localData[i] == nullptr) {
-				indice = i;
-				break;
-			}
-		}
-
-		if (indice != -1) {
-			if (CamposNoVacios()) {
-				newUser->id_customer = gcnew String(this->txt_id->Text);
-				newUser->name = gcnew String(this->txt_name->Text);
-				newUser->lastName = gcnew String(this->txt_lastName->Text);
-				newUser->username = gcnew String(this->txt_user->Text);
-				newUser->type = gcnew String(this->cmb_type->Text);
-				newUser->cui = gcnew String(this->txt_cui->Text);
-				newUser->phoneNum = gcnew String(this->txt_phoneNumber->Text);
-				newUser->email = gcnew String(this->txt_email->Text);
-				newUser->address = gcnew String(this->txt_address->Text);
-				this->localData[indice] = newUser;//Guardar en el array
-				this->dgv_table->Rows->Add(localData[indice]->id_customer, localData[indice]->name, localData[indice]->lastName, localData[indice]->username, localData[indice]->type, localData[indice]->cui, localData[indice]->phoneNum, localData[indice]->email, localData[indice]->address);
-				ofstream myfile;
-				myfile.open("users.csv");
+		if (this->editableData) {
+			if (validateExistData()) {
+				this->txt_id->Enabled = false;
+				DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
 				for (int i = 0; i < localData->Length; i++) {
-					if (localData[i] != nullptr) {
-						myfile << "2,Jorge,Ozuna,jozuna77,administrador,Belice,1234570000000,12345678,ozunaj@gmail.com,123\n";
+					if (filaSeleccionada->Cells[0]->Value == localData[i]->id_customer) {
+						Cstomer^ newUser = gcnew Cstomer();
+						newUser->id_customer = gcnew String(filaSeleccionada->Cells[0]->Value->ToString());
+						newUser->name = gcnew String(this->txt_name->Text);
+						newUser->lastName = gcnew String(this->txt_lastName->Text);
+						newUser->username = gcnew String(this->txt_user->Text);
+						newUser->type = gcnew String(this->cmb_type->Text);
+						newUser->cui = gcnew String(this->txt_cui->Text);
+						newUser->phoneNum = gcnew String(this->txt_phoneNumber->Text);
+						newUser->email = gcnew String(this->txt_email->Text);
+						newUser->address = gcnew String(this->txt_address->Text);
+						newUser->password = gcnew String(this->txt_password->Text);
+						this->localData[i] = newUser;
+
+						StreamWriter^ writer = gcnew StreamWriter("users.csv");
+						for (int i = 0; i < localData->Length; i++) {
+
+								if (localData[i] != nullptr) {
+									String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
+										localData[i]->id_customer, localData[i]->name, localData[i]->lastName,
+										localData[i]->username, localData[i]->type, localData[i]->cui,
+										localData[i]->phoneNum, localData[i]->email, localData[i]->address, localData[i]->password);
+									writer->WriteLine(message);
+								}
+						}
+						writer->Close();
+						this->getUsersdata();
+						this->clearTxt();
+						this->txt_id->ReadOnly = false;
+						this->editableData = false;
+						this->btn_cancel->Visible = false;
+						MessageBox::Show("El usuario se actualizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+						break;
 					}
 				}
-				
-				myfile << "2,Jorge,Ozuna,jozuna77,administrador,Belice,1234570000000,12345678,ozunaj@gmail.com,123\n";
+			}
+		}
+		else {
+			this->txt_id->ReadOnly = false;
+			Cstomer^ newUser = gcnew Cstomer();
+			int indice = -1;
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[i] == nullptr) {
+					indice = i;
+					break;
+				}
+			}
+			if (indice != -1) {
+				if (CamposNoVacios()) {
+					if (validateExistData()) {
+						newUser->id_customer = gcnew String(this->txt_id->Text);
+						newUser->name = gcnew String(this->txt_name->Text);
+						newUser->lastName = gcnew String(this->txt_lastName->Text);
+						newUser->username = gcnew String(this->txt_user->Text);
+						newUser->type = gcnew String(this->cmb_type->Text);
+						newUser->cui = gcnew String(this->txt_cui->Text);
+						newUser->phoneNum = gcnew String(this->txt_phoneNumber->Text);
+						newUser->email = gcnew String(this->txt_email->Text);
+						newUser->address = gcnew String(this->txt_address->Text);
+						newUser->password = gcnew String(this->txt_password->Text);
+						this->localData[indice] = newUser;//Guardar en el array
+						this->dgv_table->Rows->Add(localData[indice]->id_customer, localData[indice]->name, localData[indice]->lastName,
+							localData[indice]->username, localData[indice]->type, localData[indice]->cui, 
+							localData[indice]->phoneNum, localData[indice]->email, localData[indice]->address);
+						//ofstream myfile;
+						StreamWriter^ writer = gcnew StreamWriter("users.csv");
+						//writer->WriteLine("id_customer,name,lastName,username,type,cui,phoneNum,email,address");
+						//myfile.open("users.csv");
+						for (int i = 0; i < localData->Length; i++) {
+
+								if (localData[i] != nullptr) {
+									String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
+										localData[i]->id_customer, localData[i]->name, localData[i]->lastName,
+										localData[i]->username, localData[i]->type, localData[i]->cui,
+										localData[i]->phoneNum, localData[i]->email, localData[i]->address, localData[i]->password);
+									writer->WriteLine(message);
+								}
+
+						}
+						writer->Close();
+						this->clearTxt();
+						MessageBox::Show("El usuario se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					}
+
+				}
+				else {
+					MessageBox::Show("Por favor, completa todos los campos antes de agregar un nuevo usuario.", "Error", MessageBoxButtons::OK);
+				}
 
 			}
 			else {
-				MessageBox::Show("Por favor, completa todos los campos antes de agregar un nuevo usuario.", "Error", MessageBoxButtons::OK);
+				MessageBox::Show("No hay espacio disponible para agregar más clientes.");
 			}
-			
 		}
-		else {
-			MessageBox::Show("No hay espacio disponible para agregar más clientes.");
+	}
+	private: System::Void deleteRowUser(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+		if (e->KeyCode == Keys::Delete) {
+			DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
+			MessageBox::Show("¿Estás seguro de querer eliminar estos datos?", "Eliminar Usuario", MessageBoxButtons::OKCancel);
+			//this->dgv_table->Rows->Remove(filaSeleccionada);
+			cli::array<Cstomer^>^ nuevoLocalData = gcnew cli::array<Cstomer^>(localData->Length - 1);
+			int nuevoIndice = 0;
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[i]->id_customer != filaSeleccionada->Cells[0]->Value->ToString()) {
+					nuevoLocalData[nuevoIndice++] = localData[i];
+				}
+			}
+			localData = nuevoLocalData;
+
+			StreamWriter^ writer = gcnew StreamWriter("users.csv");
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[i] != nullptr) {
+					String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
+						localData[i]->id_customer, localData[i]->name, localData[i]->lastName,
+						localData[i]->username, localData[i]->type, localData[i]->cui,
+						localData[i]->phoneNum, localData[i]->email, localData[i]->address, localData[i]->password);
+					writer->WriteLine(message);
+				}
+			}
 		}
 	}
 };
