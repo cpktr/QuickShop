@@ -1,10 +1,11 @@
 ﻿  Dashboard.cpp
+C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Productos.h(64,32): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
   MyForm.cpp
-E:\Proyectos\Proyecto\MyForm.h(480,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-  (compilando archivo de origen "MyForm.cpp")
-  
-E:\Proyectos\Proyecto\MyForm.cpp(8,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
-  Reportes.cpp
+C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Productos.h(64,32): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\MyForm.h(480,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\MyForm.cpp(8,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
+  Productos.cpp
+C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Productos.h(64,32): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
   Generando código...
-  Compras.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
-  QuickShop.vcxproj -> E:\Proyectos\Proyecto\x64\Debug\QuickShop.exe
+  Clients.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
+  QuickShop.vcxproj -> C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\x64\Debug\QuickShop.exe

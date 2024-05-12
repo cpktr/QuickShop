@@ -130,6 +130,7 @@
     <ClCompile Include="Pagos.cpp" />
     <ClCompile Include="PanelAdmin.cpp" />
     <ClCompile Include="Persona.cpp" />
+    <ClCompile Include="Product.cpp" />
     <ClCompile Include="Productos.cpp" />
     <ClCompile Include="Reportes.cpp" />
     <ClCompile Include="UserClients.cpp" />
@@ -152,6 +153,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Persona.h" />
+    <ClInclude Include="Product.h" />
     <ClInclude Include="Productos.h">
       <FileType>CppForm</FileType>
     </ClInclude>

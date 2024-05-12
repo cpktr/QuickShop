@@ -873,7 +873,6 @@ namespace QuickShop {
 			DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
 			System::Windows::Forms::DialogResult result = MessageBox::Show("¿Estás seguro de querer eliminar estos datos?", "Eliminar Usuario", MessageBoxButtons::OKCancel, MessageBoxIcon::Warning);
 			if (result == System::Windows::Forms::DialogResult::OK) {
-				MessageBox::Show("Aceptado");
 				cli::array<Cstomer^>^ nuevoLocalData = gcnew cli::array<Cstomer^>(localData->Length);
 
 				for (int i = 0; i < localData->Length; i++) {

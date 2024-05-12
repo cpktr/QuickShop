@@ -147,10 +147,11 @@ namespace QuickShop {
 			this->flowLayoutPanel1->Controls->Add(this->panel9);
 			this->flowLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Left;
 			this->flowLayoutPanel1->Location = System::Drawing::Point(0, 0);
-			this->flowLayoutPanel1->MaximumSize = System::Drawing::Size(222, 462);
-			this->flowLayoutPanel1->MinimumSize = System::Drawing::Size(50, 462);
+			this->flowLayoutPanel1->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->flowLayoutPanel1->MaximumSize = System::Drawing::Size(592, 1102);
+			this->flowLayoutPanel1->MinimumSize = System::Drawing::Size(133, 1102);
 			this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
-			this->flowLayoutPanel1->Size = System::Drawing::Size(222, 462);
+			this->flowLayoutPanel1->Size = System::Drawing::Size(592, 1102);
 			this->flowLayoutPanel1->TabIndex = 1;
 			this->flowLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Dashboard::flowLayoutPanel1_Paint);
 			// 
@@ -158,17 +159,19 @@ namespace QuickShop {
 			// 
 			this->panel1->Controls->Add(this->pictureBox1);
 			this->panel1->Controls->Add(this->pictureBox2);
-			this->panel1->Location = System::Drawing::Point(3, 3);
+			this->panel1->Location = System::Drawing::Point(8, 7);
+			this->panel1->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(219, 55);
+			this->panel1->Size = System::Drawing::Size(584, 131);
 			this->panel1->TabIndex = 0;
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(55, 9);
+			this->pictureBox1->Location = System::Drawing::Point(147, 21);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(139, 31);
+			this->pictureBox1->Size = System::Drawing::Size(371, 74);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox1->TabIndex = 1;
 			this->pictureBox1->TabStop = false;
@@ -177,9 +180,10 @@ namespace QuickShop {
 			// 
 			this->pictureBox2->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.Image")));
-			this->pictureBox2->Location = System::Drawing::Point(9, 9);
+			this->pictureBox2->Location = System::Drawing::Point(24, 21);
+			this->pictureBox2->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(21, 31);
+			this->pictureBox2->Size = System::Drawing::Size(56, 74);
 			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox2->TabIndex = 0;
 			this->pictureBox2->TabStop = false;
@@ -188,9 +192,10 @@ namespace QuickShop {
 			// panel2
 			// 
 			this->panel2->Controls->Add(this->button1);
-			this->panel2->Location = System::Drawing::Point(3, 64);
+			this->panel2->Location = System::Drawing::Point(8, 152);
+			this->panel2->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(219, 36);
+			this->panel2->Size = System::Drawing::Size(584, 86);
 			this->panel2->TabIndex = 1;
 			// 
 			// button1
@@ -200,10 +205,11 @@ namespace QuickShop {
 			this->button1->ForeColor = System::Drawing::Color::White;
 			this->button1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.Image")));
 			this->button1->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button1->Location = System::Drawing::Point(-12, -8);
+			this->button1->Location = System::Drawing::Point(-32, -19);
+			this->button1->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->button1->Name = L"button1";
-			this->button1->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
-			this->button1->Size = System::Drawing::Size(241, 54);
+			this->button1->Padding = System::Windows::Forms::Padding(53, 0, 0, 0);
+			this->button1->Size = System::Drawing::Size(643, 129);
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"                           Home";
 			this->button1->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -213,9 +219,10 @@ namespace QuickShop {
 			// panel4
 			// 
 			this->panel4->Controls->Add(this->button3);
-			this->panel4->Location = System::Drawing::Point(3, 106);
+			this->panel4->Location = System::Drawing::Point(8, 252);
+			this->panel4->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel4->Name = L"panel4";
-			this->panel4->Size = System::Drawing::Size(219, 36);
+			this->panel4->Size = System::Drawing::Size(584, 86);
 			this->panel4->TabIndex = 3;
 			// 
 			// button3
@@ -225,10 +232,11 @@ namespace QuickShop {
 			this->button3->ForeColor = System::Drawing::Color::White;
 			this->button3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button3.Image")));
 			this->button3->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button3->Location = System::Drawing::Point(-12, -8);
+			this->button3->Location = System::Drawing::Point(-32, -19);
+			this->button3->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->button3->Name = L"button3";
-			this->button3->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
-			this->button3->Size = System::Drawing::Size(241, 54);
+			this->button3->Padding = System::Windows::Forms::Padding(53, 0, 0, 0);
+			this->button3->Size = System::Drawing::Size(643, 129);
 			this->button3->TabIndex = 2;
 			this->button3->Text = L"                          Clientes";
 			this->button3->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -238,9 +246,10 @@ namespace QuickShop {
 			// panel3
 			// 
 			this->panel3->Controls->Add(this->button2);
-			this->panel3->Location = System::Drawing::Point(3, 148);
+			this->panel3->Location = System::Drawing::Point(8, 352);
+			this->panel3->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(219, 36);
+			this->panel3->Size = System::Drawing::Size(584, 86);
 			this->panel3->TabIndex = 3;
 			// 
 			// button2
@@ -250,10 +259,11 @@ namespace QuickShop {
 			this->button2->ForeColor = System::Drawing::Color::White;
 			this->button2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.Image")));
 			this->button2->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button2->Location = System::Drawing::Point(-12, -8);
+			this->button2->Location = System::Drawing::Point(-32, -19);
+			this->button2->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->button2->Name = L"button2";
-			this->button2->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
-			this->button2->Size = System::Drawing::Size(241, 54);
+			this->button2->Padding = System::Windows::Forms::Padding(53, 0, 0, 0);
+			this->button2->Size = System::Drawing::Size(643, 129);
 			this->button2->TabIndex = 2;
 			this->button2->Text = L"                         Productos";
 			this->button2->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -263,9 +273,10 @@ namespace QuickShop {
 			// panel5
 			// 
 			this->panel5->Controls->Add(this->button4);
-			this->panel5->Location = System::Drawing::Point(3, 190);
+			this->panel5->Location = System::Drawing::Point(8, 452);
+			this->panel5->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel5->Name = L"panel5";
-			this->panel5->Size = System::Drawing::Size(219, 36);
+			this->panel5->Size = System::Drawing::Size(584, 86);
 			this->panel5->TabIndex = 4;
 			// 
 			// button4
@@ -275,10 +286,11 @@ namespace QuickShop {
 			this->button4->ForeColor = System::Drawing::Color::White;
 			this->button4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button4.Image")));
 			this->button4->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button4->Location = System::Drawing::Point(-12, -8);
+			this->button4->Location = System::Drawing::Point(-32, -19);
+			this->button4->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->button4->Name = L"button4";
-			this->button4->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
-			this->button4->Size = System::Drawing::Size(241, 54);
+			this->button4->Padding = System::Windows::Forms::Padding(53, 0, 0, 0);
+			this->button4->Size = System::Drawing::Size(643, 129);
 			this->button4->TabIndex = 2;
 			this->button4->Text = L"                           Pagos";
 			this->button4->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -288,9 +300,10 @@ namespace QuickShop {
 			// panel6
 			// 
 			this->panel6->Controls->Add(this->button5);
-			this->panel6->Location = System::Drawing::Point(3, 232);
+			this->panel6->Location = System::Drawing::Point(8, 552);
+			this->panel6->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel6->Name = L"panel6";
-			this->panel6->Size = System::Drawing::Size(219, 36);
+			this->panel6->Size = System::Drawing::Size(584, 86);
 			this->panel6->TabIndex = 5;
 			// 
 			// button5
@@ -300,10 +313,11 @@ namespace QuickShop {
 			this->button5->ForeColor = System::Drawing::Color::White;
 			this->button5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button5.Image")));
 			this->button5->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button5->Location = System::Drawing::Point(-12, -8);
+			this->button5->Location = System::Drawing::Point(-32, -19);
+			this->button5->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->button5->Name = L"button5";
-			this->button5->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
-			this->button5->Size = System::Drawing::Size(241, 54);
+			this->button5->Padding = System::Windows::Forms::Padding(53, 0, 0, 0);
+			this->button5->Size = System::Drawing::Size(643, 129);
 			this->button5->TabIndex = 2;
 			this->button5->Text = L"                          Usuarios";
 			this->button5->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -313,9 +327,10 @@ namespace QuickShop {
 			// panel7
 			// 
 			this->panel7->Controls->Add(this->button6);
-			this->panel7->Location = System::Drawing::Point(3, 274);
+			this->panel7->Location = System::Drawing::Point(8, 652);
+			this->panel7->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel7->Name = L"panel7";
-			this->panel7->Size = System::Drawing::Size(219, 36);
+			this->panel7->Size = System::Drawing::Size(584, 86);
 			this->panel7->TabIndex = 6;
 			// 
 			// button6
@@ -325,10 +340,11 @@ namespace QuickShop {
 			this->button6->ForeColor = System::Drawing::Color::White;
 			this->button6->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button6.Image")));
 			this->button6->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button6->Location = System::Drawing::Point(-12, -8);
+			this->button6->Location = System::Drawing::Point(-32, -19);
+			this->button6->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->button6->Name = L"button6";
-			this->button6->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
-			this->button6->Size = System::Drawing::Size(241, 54);
+			this->button6->Padding = System::Windows::Forms::Padding(53, 0, 0, 0);
+			this->button6->Size = System::Drawing::Size(643, 129);
 			this->button6->TabIndex = 2;
 			this->button6->Text = L"                          Reportes";
 			this->button6->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -338,9 +354,10 @@ namespace QuickShop {
 			// panel8
 			// 
 			this->panel8->Controls->Add(this->button7);
-			this->panel8->Location = System::Drawing::Point(3, 316);
+			this->panel8->Location = System::Drawing::Point(8, 752);
+			this->panel8->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel8->Name = L"panel8";
-			this->panel8->Size = System::Drawing::Size(219, 36);
+			this->panel8->Size = System::Drawing::Size(584, 86);
 			this->panel8->TabIndex = 7;
 			// 
 			// button7
@@ -350,10 +367,11 @@ namespace QuickShop {
 			this->button7->ForeColor = System::Drawing::Color::White;
 			this->button7->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button7.Image")));
 			this->button7->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button7->Location = System::Drawing::Point(-12, -8);
+			this->button7->Location = System::Drawing::Point(-32, -19);
+			this->button7->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->button7->Name = L"button7";
-			this->button7->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
-			this->button7->Size = System::Drawing::Size(241, 54);
+			this->button7->Padding = System::Windows::Forms::Padding(53, 0, 0, 0);
+			this->button7->Size = System::Drawing::Size(643, 129);
 			this->button7->TabIndex = 2;
 			this->button7->Text = L"                          Compras";
 			this->button7->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -364,9 +382,10 @@ namespace QuickShop {
 			// 
 			this->panel9->Controls->Add(this->button8);
 			this->panel9->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->panel9->Location = System::Drawing::Point(3, 358);
+			this->panel9->Location = System::Drawing::Point(8, 852);
+			this->panel9->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel9->Name = L"panel9";
-			this->panel9->Size = System::Drawing::Size(219, 36);
+			this->panel9->Size = System::Drawing::Size(584, 86);
 			this->panel9->TabIndex = 8;
 			// 
 			// button8
@@ -376,10 +395,11 @@ namespace QuickShop {
 			this->button8->ForeColor = System::Drawing::Color::White;
 			this->button8->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button8.Image")));
 			this->button8->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button8->Location = System::Drawing::Point(-12, -8);
+			this->button8->Location = System::Drawing::Point(-32, -19);
+			this->button8->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->button8->Name = L"button8";
-			this->button8->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
-			this->button8->Size = System::Drawing::Size(241, 54);
+			this->button8->Padding = System::Windows::Forms::Padding(53, 0, 0, 0);
+			this->button8->Size = System::Drawing::Size(643, 129);
 			this->button8->TabIndex = 2;
 			this->button8->Text = L"                             Salir";
 			this->button8->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -395,17 +415,19 @@ namespace QuickShop {
 			// 
 			this->panel_contenedor->Controls->Add(this->pictureBox3);
 			this->panel_contenedor->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel_contenedor->Location = System::Drawing::Point(222, 0);
+			this->panel_contenedor->Location = System::Drawing::Point(592, 0);
+			this->panel_contenedor->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel_contenedor->Name = L"panel_contenedor";
-			this->panel_contenedor->Size = System::Drawing::Size(694, 462);
+			this->panel_contenedor->Size = System::Drawing::Size(1851, 1102);
 			this->panel_contenedor->TabIndex = 2;
 			// 
 			// pictureBox3
 			// 
 			this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.Image")));
-			this->pictureBox3->Location = System::Drawing::Point(181, 182);
+			this->pictureBox3->Location = System::Drawing::Point(483, 434);
+			this->pictureBox3->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->pictureBox3->Name = L"pictureBox3";
-			this->pictureBox3->Size = System::Drawing::Size(385, 119);
+			this->pictureBox3->Size = System::Drawing::Size(1080, 266);
 			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox3->TabIndex = 0;
 			this->pictureBox3->TabStop = false;
@@ -416,17 +438,19 @@ namespace QuickShop {
 			this->fatherPanelDashboard->Controls->Add(this->flowLayoutPanel1);
 			this->fatherPanelDashboard->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->fatherPanelDashboard->Location = System::Drawing::Point(0, 0);
+			this->fatherPanelDashboard->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->fatherPanelDashboard->Name = L"fatherPanelDashboard";
-			this->fatherPanelDashboard->Size = System::Drawing::Size(916, 462);
+			this->fatherPanelDashboard->Size = System::Drawing::Size(2443, 1102);
 			this->fatherPanelDashboard->TabIndex = 1;
 			// 
 			// Dashboard
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(16, 31);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
-			this->ClientSize = System::Drawing::Size(916, 462);
+			this->ClientSize = System::Drawing::Size(2443, 1102);
 			this->Controls->Add(this->fatherPanelDashboard);
+			this->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->Name = L"Dashboard";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Dashboard";

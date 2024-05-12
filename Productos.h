@@ -1,5 +1,8 @@
 #pragma once
-
+#include <fstream>
+#include <string>
+#include <sstream>
+#include "Product.h"
 namespace QuickShop {
 
 	using namespace System;
@@ -7,17 +10,66 @@ namespace QuickShop {
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
+	using namespace System::Drawing::Drawing2D;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
+	using namespace System::Runtime::InteropServices;
+	using namespace System::IO;
+	using namespace std;
 
 	/// <summary>
 	/// Resumen de Productos
 	/// </summary>
 	public ref class Productos : public System::Windows::Forms::Form
 	{
+	private: cli::array<Product^>^ localData = gcnew cli::array<Product^>(100);
+	private: bool editableData;
+	
 	public:
 		Productos(void)
 		{
 			InitializeComponent();
+			ifstream products("product.csv");
+
+			if (!products.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				while (getline(products, line)) {
+					Product^ newUser = gcnew Product();
+					string id;
+					string name;
+					string catego;
+					string brand;
+					string descrip;
+					string price;
+					string stock;
+					
+
+					stringstream ss(line);
+					getline(ss, id, ',');
+					getline(ss, name, ',');
+					getline(ss, catego, ',');
+					getline(ss, brand, ',');
+					getline(ss, descrip, ',');
+					getline(ss, price, ',');
+					getline(ss, stock, ',');
+					newUser->id_product = std::stoi(id); ;
+					newUser->name = gcnew String(name.c_str());
+					newUser->catego = gcnew String(catego.c_str());
+					newUser->brand = gcnew String(brand.c_str());
+					newUser->descrip = gcnew String(descrip.c_str());
+					newUser->price = std::stof(price);
+					newUser->stock = std::stoi(stock);
+					
+
+					localData[limit] = newUser;
+					this->dataGrid_Products->Rows->Add(localData[limit]->id_product, localData[limit]->name, localData[limit]->catego, localData[limit]->brand, localData[limit]->descrip, localData[limit]->price, localData[limit]->stock);
+					limit++;
+				}
+			}
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -103,7 +155,6 @@ namespace QuickShop {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ description;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ price;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ stock;
-	private: bool editableData = false;
 	private: System::Windows::Forms::Button^ btn_cancel;
 
 
