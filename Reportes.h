@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 #include "Cstomer.h"
+#include "Clients.h"
+#include "Product.h"
 
 namespace QuickShop {
 
@@ -24,6 +26,8 @@ namespace QuickShop {
 	public ref class Reportes : public System::Windows::Forms::Form
 	{
 	private: cli::array<Cstomer^>^ localData = gcnew cli::array<Cstomer^>(100);
+	private: cli::array<Clients^>^ localDataClient = gcnew cli::array<Clients^>(100);
+	private: cli::array<Product^>^ localDataProducts = gcnew cli::array<Product^>(100);
 	public:
 		Reportes(void)
 		{
@@ -147,6 +151,7 @@ namespace QuickShop {
 			this->btn_inventary->TabIndex = 4;
 			this->btn_inventary->Text = L"Inventario";
 			this->btn_inventary->UseVisualStyleBackColor = true;
+			this->btn_inventary->Click += gcnew System::EventHandler(this, &Reportes::btn_inventary_Click);
 			// 
 			// btn_payments
 			// 
@@ -187,6 +192,7 @@ namespace QuickShop {
 			this->btn_clients->TabIndex = 0;
 			this->btn_clients->Text = L"Clientes";
 			this->btn_clients->UseVisualStyleBackColor = true;
+			this->btn_clients->Click += gcnew System::EventHandler(this, &Reportes::btn_clients_Click);
 			// 
 			// panel_table
 			// 
@@ -230,6 +236,7 @@ namespace QuickShop {
 #pragma endregion
 	private: System::Void showUsersReport(System::Object^ sender, System::EventArgs^ e) {
 		this->dgv_report->Rows->Clear();
+		this->dgv_report->Columns->Clear();
 		this->dgv_report->Columns->Add("id_customer", "ID");
 		this->dgv_report->Columns->Add("name", "Nombre");
 		this->dgv_report->Columns->Add("lastName", "Apellido");
@@ -286,6 +293,124 @@ namespace QuickShop {
 				localData[limit] = newUser;
 				this->dgv_report->Rows->Add(localData[limit]->id_customer, localData[limit]->name, localData[limit]->lastName, localData[limit]->username, localData[limit]->type, localData[limit]->cui, localData[limit]->phoneNum, localData[limit]->email, localData[limit]->address);
 				limit++;
+			}
+		}
+	}
+	private: System::Void btn_clients_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->dgv_report->Rows->Clear();
+		this->dgv_report->Columns->Clear();
+		this->dgv_report->Columns->Add("code", "ID");
+		this->dgv_report->Columns->Add("name", "Nombre");
+		this->dgv_report->Columns->Add("lastName", "Apellido");
+		this->dgv_report->Columns->Add("phoneNum", "Número de Teléfono");
+		this->dgv_report->Columns->Add("email", "Correo Electrónico");
+		this->dgv_report->Columns->Add("address", "Dirección Domiciliar");
+
+		ifstream usuaa("clients.csv");
+
+		if (!usuaa.is_open()) {
+			MessageBox::Show("Error al abrir el archivo");
+		}
+		else {
+			string line;
+			int limit = 0;
+			while (getline(usuaa, line)) {
+				try {
+					Clients^ newUser = gcnew Clients();
+					string id;
+					string name;
+					string lastname;
+					string address;
+					string phonenumb;
+					string email;
+					string password;
+
+					stringstream ss(line);
+					getline(ss, id, ',');
+					getline(ss, name, ',');
+					getline(ss, lastname, ',');
+					getline(ss, phonenumb, ',');
+					getline(ss, email, ',');
+					getline(ss, address, ',');
+					getline(ss, password, ',');
+					newUser->code = std::stoi(id);;
+					newUser->name = gcnew String(name.c_str());
+					newUser->lastName = gcnew String(lastname.c_str());
+					newUser->phoneNum = gcnew String(phonenumb.c_str());
+					newUser->email = gcnew String(email.c_str());
+					newUser->address = gcnew String(address.c_str());
+					newUser->password = gcnew String(password.c_str());
+
+					localDataClient[limit] = newUser;
+					this->dgv_report->Rows->Add(localDataClient[limit]->code, localDataClient[limit]->name, localDataClient[limit]->lastName, localDataClient[limit]->address, localDataClient[limit]->phoneNum, localDataClient[limit]->email);
+					limit++;
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+		}
+	}
+	private: System::Void btn_inventary_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->dgv_report->Rows->Clear();
+		this->dgv_report->Columns->Clear();
+		this->dgv_report->Columns->Add("id_product", "Código");
+		this->dgv_report->Columns->Add("name", "Nombre");
+		this->dgv_report->Columns->Add("category", "Categoría");
+		this->dgv_report->Columns->Add("brand", "Marca");
+		this->dgv_report->Columns->Add("description", "Descripción");
+		this->dgv_report->Columns->Add("price", "Precio");
+		this->dgv_report->Columns->Add("stock", "Cantidad de Stock");
+		ifstream products("product.csv");
+
+		if (!products.is_open()) {
+			MessageBox::Show("Error al abrir el archivo");
+		}
+		else {
+			string line;
+			int limit = 0;
+			try {
+				while (getline(products, line)) {
+					Product^ newUser = gcnew Product();
+					string id;
+					string name;
+					string catego;
+					string brand;
+					string descrip;
+					string price;
+					string stock;
+
+
+					stringstream ss(line);
+					getline(ss, id, ',');
+					getline(ss, name, ',');
+					getline(ss, catego, ',');
+					getline(ss, brand, ',');
+					getline(ss, descrip, ',');
+					getline(ss, price, ',');
+					getline(ss, stock, ',');
+					newUser->id_product = std::stoi(id);
+					newUser->name = gcnew String(name.c_str());
+					newUser->catego = gcnew String(catego.c_str());
+					newUser->brand = gcnew String(brand.c_str());
+					newUser->descrip = gcnew String(descrip.c_str());
+					newUser->price = std::stof(price);
+					newUser->stock = std::stoi(stock);
+
+
+					localDataProducts[limit] = newUser;
+					this->dgv_report->Rows->Add(localDataProducts[limit]->id_product, localDataProducts[limit]->name, localDataProducts[limit]->catego, localDataProducts[limit]->brand, localDataProducts[limit]->descrip, localDataProducts[limit]->price, localDataProducts[limit]->stock);
+					limit++;
+				}
+			}
+			catch (const std::exception& e) {
+				std::cerr << "Excepción capturada: " << e.what() << std::endl;
+			}
+			catch (...) {
+				std::cerr << "Excepción desconocida capturada" << std::endl;
 			}
 		}
 	}
