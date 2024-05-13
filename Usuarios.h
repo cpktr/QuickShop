@@ -895,6 +895,7 @@ namespace QuickShop {
 				}
 				writer->Close();
 				this->getUsersdata();
+				this->clearTxt();
 				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 		}

@@ -29,50 +29,10 @@ namespace QuickShop {
 		Productos(void)
 		{
 			InitializeComponent();
-			ifstream products("product.csv");
-
-			if (!products.is_open()) {
-				MessageBox::Show("Error al abrir el archivo");
-			}
-			else {
-				string line;
-				int limit = 0;
-				while (getline(products, line)) {
-					Product^ newUser = gcnew Product();
-					string id;
-					string name;
-					string catego;
-					string brand;
-					string descrip;
-					string price;
-					string stock;
-					
-
-					stringstream ss(line);
-					getline(ss, id, ',');
-					getline(ss, name, ',');
-					getline(ss, catego, ',');
-					getline(ss, brand, ',');
-					getline(ss, descrip, ',');
-					getline(ss, price, ',');
-					getline(ss, stock, ',');
-					newUser->id_product = std::stoi(id); ;
-					newUser->name = gcnew String(name.c_str());
-					newUser->catego = gcnew String(catego.c_str());
-					newUser->brand = gcnew String(brand.c_str());
-					newUser->descrip = gcnew String(descrip.c_str());
-					newUser->price = std::stof(price);
-					newUser->stock = std::stoi(stock);
-					
-
-					localData[limit] = newUser;
-					this->dataGrid_Products->Rows->Add(localData[limit]->id_product, localData[limit]->name, localData[limit]->catego, localData[limit]->brand, localData[limit]->descrip, localData[limit]->price, localData[limit]->stock);
-					limit++;
-				}
-			}
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->getDataProducts();
 		}
 
 	protected:
@@ -172,6 +132,58 @@ namespace QuickShop {
 		/// Método necesario para admitir el Diseñador. No se puede modificar
 		/// el contenido de este método con el editor de código.
 		/// </summary>
+		void getDataProducts() {
+			this->dataGrid_Products->Rows->Clear();
+			ifstream products("product.csv");
+
+			if (!products.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				try {
+					while (getline(products, line)) {
+						Product^ newUser = gcnew Product();
+						string id;
+						string name;
+						string catego;
+						string brand;
+						string descrip;
+						string price;
+						string stock;
+
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, name, ',');
+						getline(ss, catego, ',');
+						getline(ss, brand, ',');
+						getline(ss, descrip, ',');
+						getline(ss, price, ',');
+						getline(ss, stock, ',');
+						newUser->id_product = std::stoi(id);
+						newUser->name = gcnew String(name.c_str());
+						newUser->catego = gcnew String(catego.c_str());
+						newUser->brand = gcnew String(brand.c_str());
+						newUser->descrip = gcnew String(descrip.c_str());
+						newUser->price = std::stof(price);
+						newUser->stock = std::stoi(stock);
+
+
+						localData[limit] = newUser;
+						this->dataGrid_Products->Rows->Add(localData[limit]->id_product, localData[limit]->name, localData[limit]->catego, localData[limit]->brand, localData[limit]->descrip, localData[limit]->price, localData[limit]->stock);
+						limit++;
+					}
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+		}
 		void InitializeComponent(void)
 		{
 			this->titlePage = (gcnew System::Windows::Forms::Label());
@@ -269,6 +281,7 @@ namespace QuickShop {
 			// dataGrid_Products
 			// 
 			this->dataGrid_Products->AllowUserToAddRows = false;
+			this->dataGrid_Products->AllowUserToDeleteRows = false;
 			this->dataGrid_Products->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGrid_Products->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
 				this->id,
@@ -283,6 +296,7 @@ namespace QuickShop {
 			this->dataGrid_Products->Size = System::Drawing::Size(389, 389);
 			this->dataGrid_Products->TabIndex = 0;
 			this->dataGrid_Products->DoubleClick += gcnew System::EventHandler(this, &Productos::EditarProducto);
+			this->dataGrid_Products->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Productos::deleteRowProduct);
 			// 
 			// id
 			// 
@@ -787,45 +801,153 @@ namespace QuickShop {
 		this->txt_stock->Clear();
 	}
 
-	private: System::Void SaveProduct(System::Object^ sender, System::EventArgs^ e) {
-		try {
-			if (txt_id->Text != "" && txt_name->Text != "" && txt_brand->Text != "" && txt_category->Text != "" && txt_description->Text != ""
-				&& txt_price->Text != "" && txt_stock->Text != "") {
-				if (this->editableData) {
-					DataGridViewRow^ filaSeleccionada = this->dataGrid_Products->SelectedRows[0];
-					filaSeleccionada->Cells[0]->Value = this->txt_id->Text;
-					filaSeleccionada->Cells[1]->Value = this->txt_name->Text;
-					filaSeleccionada->Cells[2]->Value = this->txt_brand->Text;
-					filaSeleccionada->Cells[3]->Value = this->txt_category->Text;
-					filaSeleccionada->Cells[4]->Value = this->txt_description->Text;
-					filaSeleccionada->Cells[5]->Value = this->txt_price->Text;
-					filaSeleccionada->Cells[6]->Value = this->txt_stock->Text;
-					this->editableData = false;
-					this->btn_cancel->Visible = false;
+	private: bool CamposNoVacios(){
+		return !(String::IsNullOrEmpty(this->txt_id->Text) ||
+				String::IsNullOrEmpty(this->txt_name->Text) ||
+				String::IsNullOrEmpty(this->txt_category->Text) ||
+				String::IsNullOrEmpty(this->txt_brand->Text) ||
+				String::IsNullOrEmpty(this->txt_description->Text) ||
+				String::IsNullOrEmpty(this->txt_price->Text) ||
+				String::IsNullOrEmpty(this->txt_stock->Text));
+	}
+	private: bool validateExistData() {
+		String^ newId = gcnew String(this->txt_id->Text);
+		String^ newPrice = gcnew String(this->txt_price->Text);
+		String^ newStock = gcnew String(this->txt_stock->Text);
 
-					clearInputs();
 
-					MessageBox::Show("El producto se actualizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		for (int i = 0; i < localData->Length; i++) {
+			if (localData[i] != nullptr) {
+				if (!editableData && localData[i]->id_product.ToString() == newId) {
+					MessageBox::Show("El ID del producto ya existe en registros anteriores", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false;
 				}
-				else {
-						this->dataGrid_Products->Rows->Add(txt_id->Text, txt_name->Text, txt_category->Text, txt_brand->Text, txt_description->Text, txt_price->Text, txt_stock->Text);
-
-						clearInputs();
-
-						MessageBox::Show("El producto se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
-					}
+				if (System::Convert::ToInt32(newStock) < 0) {
+					MessageBox::Show("El stock no puede ser negativo", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false;
 				}
-			else {
-				MessageBox::Show("Por favor Ingrese todos los datos.", "Error", MessageBoxButtons::OK);
+				if (System::Convert::ToSingle(newPrice) < 0) {
+					MessageBox::Show("El precio no puede ser negativo", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false;
+				}
 			}
 		}
-		catch (Exception^ ex) {
-			MessageBox::Show("Error al crear un producto : " + ex->Message, "Error", MessageBoxButtons::OK);
+		return true;
+	}
+	private: System::Void SaveProduct(System::Object^ sender, System::EventArgs^ e) {
+		if (this->editableData) {
+			if (validateExistData()) {
+				if (CamposNoVacios()) {
+					DataGridViewRow^ filaSeleccionada = this->dataGrid_Products->SelectedRows[0];
+					for (int i = 0; i < localData->Length; i++) {
+						if (localData[i] != nullptr) {
+							if (filaSeleccionada->Cells[0]->Value->ToString() == localData[i]->id_product.ToString()) {
+								Product^ newProduct = gcnew Product();
+								System::String^ strId = this->txt_id->Text;
+								System::String^ strStock = this->txt_stock->Text;
+								System::String^ strPrice = this->txt_price->Text;
+								float price = System::Convert::ToSingle(strPrice);
+								int id = System::Convert::ToInt32(strId);
+								int stock = System::Convert::ToInt32(strStock);
+								newProduct->id_product = id;
+								newProduct->name = gcnew String(this->txt_name->Text);
+								newProduct->catego = gcnew String(this->txt_category->Text);
+								newProduct->brand = gcnew String(this->txt_brand->Text);
+								newProduct->descrip = gcnew String(this->txt_description->Text);
+								newProduct->price = price;
+								newProduct->stock = stock;
+								this->localData[i] = newProduct;
+								StreamWriter^ writer = gcnew StreamWriter("product.csv");
+								for (int i = 0; i < localData->Length; i++) {
+
+									if (localData[i] != nullptr) {
+										String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+											localData[i]->id_product, localData[i]->name, localData[i]->catego,
+											localData[i]->brand, localData[i]->descrip, localData[i]->price,
+											localData[i]->stock);
+										writer->WriteLine(message);
+									}
+								}
+								writer->Close();
+								this->clearInputs();
+								this->getDataProducts();
+								this->txt_id->ReadOnly = false;
+								this->editableData = false;
+								this->btn_cancel->Visible = false;
+								MessageBox::Show("El producto se actualizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+								break;
+							}
+						}
+					}
+				}
+			}
 		}
+		else {
+			Product^ newProduct = gcnew Product();
+			int indice = -1;
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[i] == nullptr) {
+					indice = i;
+					break;
+				}
+			}
+			if (indice != -1) {
+				if (CamposNoVacios()) {
+					if (validateExistData()) {
+						try {
+							System::String^ strId = this->txt_id->Text;
+							System::String^ strStock = this->txt_stock->Text;
+							System::String^ strPrice = this->txt_price->Text;
+							float price = System::Convert::ToSingle(strPrice);
+							int id = System::Convert::ToInt32(strId);
+							int stock = System::Convert::ToInt32(strStock);
+							newProduct->id_product = id;
+							newProduct->name = gcnew String(this->txt_name->Text);
+							newProduct->catego = gcnew String(this->txt_category->Text);
+							newProduct->brand = gcnew String(this->txt_brand->Text);
+							newProduct->descrip = gcnew String(this->txt_description->Text);
+							newProduct->price = price;
+							newProduct->stock = stock;
+							this->localData[indice] = newProduct;
+
+							StreamWriter^ writer = gcnew StreamWriter("product.csv");
+							for (int i = 0; i < localData->Length; i++) {
+
+								if (localData[i] != nullptr) {
+									String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+										localData[i]->id_product, localData[i]->name, localData[i]->catego,
+										localData[i]->brand, localData[i]->descrip, localData[i]->price,
+										localData[i]->stock);
+									writer->WriteLine(message);
+								}
+							}
+
+							writer->Close();
+							this->clearInputs();
+							this->getDataProducts();
+							MessageBox::Show("El producto se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+						}
+						catch (const std::exception& e) {
+							std::cerr << "Excepción capturada: " << e.what() << std::endl;
+						}
+						catch (...) {
+							std::cerr << "Excepción desconocida capturada" << std::endl;
+						}
+					}
+				}
+				else {
+					MessageBox::Show("Por favor, completa todos los campos antes de agregar un nuevo usuario.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				}
+			}
+			else {
+				MessageBox::Show("No hay espacio disponible para agregar más productos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
+		}			
 	}
 	private: System::Void EditarProducto(System::Object^ sender, System::EventArgs^ e) {
 		try {
 			DataGridViewRow^ filaSeleccionada = this->dataGrid_Products->SelectedRows[0];
+			this->txt_id->ReadOnly = true;
 			this->txt_id->Text = Convert::ToString(filaSeleccionada->Cells[0]->Value);
 			this->txt_name->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
 			this->txt_brand->Text = Convert::ToString(filaSeleccionada->Cells[2]->Value);
@@ -842,16 +964,43 @@ namespace QuickShop {
 		
 	}
 	private: System::Void btn_cancel_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->txt_id->Text = "";
-		this->txt_name->Text = "";
-		this->txt_brand->Text = "";
-		this->txt_category->Text = "";
-		this->txt_description->Text = "";
-		this->txt_price->Text = "";
-		this->txt_stock->Text = "";
+		this->clearInputs();
+		this->txt_id->ReadOnly = false;
 		this->editableData = false;
 		this->btn_cancel->Visible = false;
 	}
 
+	private: System::Void deleteRowProduct(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+		if (e->KeyCode == Keys::Delete) {
+			DataGridViewRow^ filaSeleccionada = this->dataGrid_Products->SelectedRows[0];
+			System::Windows::Forms::DialogResult result = MessageBox::Show("¿Estás seguro de querer eliminar estos datos?", "Eliminar Usuario", MessageBoxButtons::OKCancel, MessageBoxIcon::Warning);
+			if (result == System::Windows::Forms::DialogResult::OK) {
+				cli::array<Product^>^ nuevoLocalData = gcnew cli::array<Product^>(localData->Length);
+				for (int i = 0; i < localData->Length; i++) {
+					if (localData[i] != nullptr) {
+						if (localData[i]->id_product.ToString() != filaSeleccionada->Cells[0]->Value->ToString()) {
+							nuevoLocalData[i] = localData[i];
+						}
+					}
+				}
+				localData = nuevoLocalData;
+				StreamWriter^ writer = gcnew StreamWriter("product.csv");
+				for (int i = 0; i < localData->Length; i++) {
+
+					if (localData[i] != nullptr) {
+						String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+							localData[i]->id_product, localData[i]->name, localData[i]->catego,
+							localData[i]->brand, localData[i]->descrip, localData[i]->price,
+							localData[i]->stock);
+						writer->WriteLine(message);
+					}
+				}
+				writer->Close();
+				this->getDataProducts();
+				this->clearInputs();
+				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+		}
+	}
 };
 }
