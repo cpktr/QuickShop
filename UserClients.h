@@ -1,4 +1,8 @@
 #pragma once
+#include <fstream>
+#include <string>
+#include <sstream>
+#include "Clients.h"
 
 namespace QuickShop {
 
@@ -7,13 +11,20 @@ namespace QuickShop {
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
+	using namespace System::Drawing::Drawing2D;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
+	using namespace System::Runtime::InteropServices;
+	using namespace System::IO;
+	using namespace std;
 
 	/// <summary>
 	/// Resumen de UserClients
 	/// </summary>
 	public ref class UserClients : public System::Windows::Forms::Form
 	{
+	private: cli::array<Clients^>^ localData = gcnew cli::array<Clients^>(100);
+	private: bool editableData;
 	public:
 		UserClients(void)
 		{
@@ -21,6 +32,7 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->getUsersdata();
 		}
 
 	protected:
@@ -63,7 +75,8 @@ namespace QuickShop {
 
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Panel^ panel3;
-	private: System::Windows::Forms::TextBox^ txt_lastaName;
+	private: System::Windows::Forms::TextBox^ txt_lastName;
+
 
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Panel^ panel2;
@@ -71,11 +84,13 @@ namespace QuickShop {
 
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Panel^ panel7;
-	private: System::Windows::Forms::TextBox^ txtPassword;
+	private: System::Windows::Forms::TextBox^ txt_password;
+
 
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::Button^ btn_saveClient;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ btn_cancel;
+
 
 
 
@@ -94,13 +109,66 @@ namespace QuickShop {
 		/// Método necesario para admitir el Diseñador. No se puede modificar
 		/// el contenido de este método con el editor de código.
 		/// </summary>
+		void getUsersdata() {
+			this->dgv_table->Rows->Clear();
+			this->editableData = false;
+
+			ifstream usuaa("clients.csv");
+
+			if (!usuaa.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				while (getline(usuaa, line)) {
+					try {
+						Clients^ newUser = gcnew Clients();
+						string id;
+						string name;
+						string lastname;
+						string address;
+						string phonenumb;
+						string email;
+						string password;
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, name, ',');
+						getline(ss, lastname, ',');
+						getline(ss, phonenumb, ',');
+						getline(ss, email, ',');
+						getline(ss, address, ',');
+						getline(ss, password, ',');
+						newUser->code = std::stoi(id);;
+						newUser->name = gcnew String(name.c_str());
+						newUser->lastName = gcnew String(lastname.c_str());
+						newUser->phoneNum = gcnew String(phonenumb.c_str());
+						newUser->email = gcnew String(email.c_str());
+						newUser->address = gcnew String(address.c_str());
+						newUser->password = gcnew String(password.c_str());
+
+						localData[limit] = newUser;
+						this->dgv_table->Rows->Add(localData[limit]->code, localData[limit]->name, localData[limit]->lastName, localData[limit]->address, localData[limit]->phoneNum, localData[limit]->email);
+						limit++;
+					}
+					catch (const std::exception& e) {
+						std::cerr << "Excepción capturada: " << e.what() << std::endl;
+					}
+					catch (...) {
+						std::cerr << "Excepción desconocida capturada" << std::endl;
+					}
+				}
+			}
+		}
 		void InitializeComponent(void)
 		{
 			this->titlePage = (gcnew System::Windows::Forms::Label());
 			this->formContainer = (gcnew System::Windows::Forms::Panel());
+			this->btn_cancel = (gcnew System::Windows::Forms::Button());
 			this->btn_saveClient = (gcnew System::Windows::Forms::Button());
 			this->panel7 = (gcnew System::Windows::Forms::Panel());
-			this->txtPassword = (gcnew System::Windows::Forms::TextBox());
+			this->txt_password = (gcnew System::Windows::Forms::TextBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->panel6 = (gcnew System::Windows::Forms::Panel());
 			this->txt_email = (gcnew System::Windows::Forms::TextBox());
@@ -112,7 +180,7 @@ namespace QuickShop {
 			this->txt_address = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
-			this->txt_lastaName = (gcnew System::Windows::Forms::TextBox());
+			this->txt_lastName = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->txt_name = (gcnew System::Windows::Forms::TextBox());
@@ -128,7 +196,6 @@ namespace QuickShop {
 			this->address = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->phoneNumber = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->email = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->formContainer->SuspendLayout();
 			this->panel7->SuspendLayout();
 			this->panel6->SuspendLayout();
@@ -153,7 +220,7 @@ namespace QuickShop {
 			// 
 			// formContainer
 			// 
-			this->formContainer->Controls->Add(this->button1);
+			this->formContainer->Controls->Add(this->btn_cancel);
 			this->formContainer->Controls->Add(this->btn_saveClient);
 			this->formContainer->Controls->Add(this->panel7);
 			this->formContainer->Controls->Add(this->panel6);
@@ -166,6 +233,21 @@ namespace QuickShop {
 			this->formContainer->Name = L"formContainer";
 			this->formContainer->Size = System::Drawing::Size(267, 389);
 			this->formContainer->TabIndex = 1;
+			// 
+			// btn_cancel
+			// 
+			this->btn_cancel->BackColor = System::Drawing::Color::Transparent;
+			this->btn_cancel->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_cancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_cancel->ForeColor = System::Drawing::Color::Teal;
+			this->btn_cancel->Location = System::Drawing::Point(104, 363);
+			this->btn_cancel->Name = L"btn_cancel";
+			this->btn_cancel->Size = System::Drawing::Size(75, 23);
+			this->btn_cancel->TabIndex = 5;
+			this->btn_cancel->Text = L"Cancelar";
+			this->btn_cancel->UseVisualStyleBackColor = false;
+			this->btn_cancel->Visible = false;
+			this->btn_cancel->Click += gcnew System::EventHandler(this, &UserClients::btn_cancel_Click);
 			// 
 			// btn_saveClient
 			// 
@@ -180,23 +262,24 @@ namespace QuickShop {
 			this->btn_saveClient->TabIndex = 4;
 			this->btn_saveClient->Text = L"Guardar";
 			this->btn_saveClient->UseVisualStyleBackColor = false;
+			this->btn_saveClient->Click += gcnew System::EventHandler(this, &UserClients::btn_saveClient_Click);
 			// 
 			// panel7
 			// 
-			this->panel7->Controls->Add(this->txtPassword);
+			this->panel7->Controls->Add(this->txt_password);
 			this->panel7->Controls->Add(this->label7);
 			this->panel7->Location = System::Drawing::Point(3, 219);
 			this->panel7->Name = L"panel7";
 			this->panel7->Size = System::Drawing::Size(261, 30);
 			this->panel7->TabIndex = 3;
 			// 
-			// txtPassword
+			// txt_password
 			// 
-			this->txtPassword->Location = System::Drawing::Point(158, 4);
-			this->txtPassword->Name = L"txtPassword";
-			this->txtPassword->PasswordChar = '*';
-			this->txtPassword->Size = System::Drawing::Size(100, 20);
-			this->txtPassword->TabIndex = 1;
+			this->txt_password->Location = System::Drawing::Point(158, 4);
+			this->txt_password->Name = L"txt_password";
+			this->txt_password->PasswordChar = '*';
+			this->txt_password->Size = System::Drawing::Size(100, 20);
+			this->txt_password->TabIndex = 1;
 			// 
 			// label7
 			// 
@@ -284,19 +367,19 @@ namespace QuickShop {
 			// 
 			// panel3
 			// 
-			this->panel3->Controls->Add(this->txt_lastaName);
+			this->panel3->Controls->Add(this->txt_lastName);
 			this->panel3->Controls->Add(this->label3);
 			this->panel3->Location = System::Drawing::Point(3, 75);
 			this->panel3->Name = L"panel3";
 			this->panel3->Size = System::Drawing::Size(261, 30);
 			this->panel3->TabIndex = 2;
 			// 
-			// txt_lastaName
+			// txt_lastName
 			// 
-			this->txt_lastaName->Location = System::Drawing::Point(158, 4);
-			this->txt_lastaName->Name = L"txt_lastaName";
-			this->txt_lastaName->Size = System::Drawing::Size(100, 20);
-			this->txt_lastaName->TabIndex = 1;
+			this->txt_lastName->Location = System::Drawing::Point(158, 4);
+			this->txt_lastName->Name = L"txt_lastName";
+			this->txt_lastName->Size = System::Drawing::Size(100, 20);
+			this->txt_lastName->TabIndex = 1;
 			// 
 			// label3
 			// 
@@ -378,8 +461,11 @@ namespace QuickShop {
 			this->dgv_table->Name = L"dgv_table";
 			this->dgv_table->ReadOnly = true;
 			this->dgv_table->RowHeadersVisible = false;
+			this->dgv_table->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dgv_table->Size = System::Drawing::Size(389, 389);
 			this->dgv_table->TabIndex = 0;
+			this->dgv_table->DoubleClick += gcnew System::EventHandler(this, &UserClients::EditarCliente);
+			this->dgv_table->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &UserClients::deleteRowClient);
 			// 
 			// id
 			// 
@@ -417,19 +503,6 @@ namespace QuickShop {
 			this->email->Name = L"email";
 			this->email->ReadOnly = true;
 			// 
-			// button1
-			// 
-			this->button1->BackColor = System::Drawing::Color::Transparent;
-			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button1->ForeColor = System::Drawing::Color::Teal;
-			this->button1->Location = System::Drawing::Point(104, 363);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 5;
-			this->button1->Text = L"Cancelar";
-			this->button1->UseVisualStyleBackColor = false;
-			// 
 			// UserClients
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -463,5 +536,187 @@ namespace QuickShop {
 
 		}
 #pragma endregion
-	};
+	private: void clearTxt() {
+		this->txt_id->Clear();
+		this->txt_name->Clear();
+		this->txt_lastName->Clear();
+		this->txt_phoneNumber->Clear();
+		this->txt_email->Clear();
+		this->txt_address->Clear();
+		this->txt_password->Clear();
+	}
+	private: bool CamposNoVacios()
+	{
+		return !(String::IsNullOrEmpty(this->txt_id->Text) ||
+			String::IsNullOrEmpty(this->txt_name->Text) ||
+			String::IsNullOrEmpty(this->txt_phoneNumber->Text) ||
+			String::IsNullOrEmpty(this->txt_email->Text) ||
+			String::IsNullOrEmpty(this->txt_address->Text) ||
+			String::IsNullOrEmpty(this->txt_password->Text));
+	}
+	private: bool validateExistData() {
+		String^ newId = gcnew String(this->txt_id->Text);
+		String^ newEmail = gcnew String(this->txt_email->Text);
+
+		for (int i = 0; i < localData->Length; i++) {
+			if (localData[i] != nullptr) {
+				if (!editableData && localData[i]->code.ToString() == newId) {
+					MessageBox::Show("El ID del usuario ya existe en registros anteriores", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false; // El id_customer ya existe en otro registro, no se puede agregar
+				}
+				if (localData[i]->email == newEmail && localData[i]->code.ToString() != newId) {
+					MessageBox::Show("El correo electrónico ya está en uso", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false; // El email ya existe en otro registro, no se puede agregar
+				}
+			}
+		}
+		return true;
+	}
+	private: System::Void btn_saveClient_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->editableData) {
+			if (validateExistData()) {
+				DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
+				for (int i = 0; i < localData->Length; i++) {
+					if (filaSeleccionada->Cells[0]->Value->ToString() == localData[i]->code.ToString()) {
+						Clients^ newUser = gcnew Clients();
+						System::String^ strId = filaSeleccionada->Cells[0]->Value->ToString();
+						int id = System::Convert::ToInt32(strId);
+						newUser->code = id;
+						newUser->name = gcnew String(this->txt_name->Text);
+						newUser->lastName = gcnew String(this->txt_lastName->Text);
+						newUser->phoneNum = gcnew String(this->txt_phoneNumber->Text);
+						newUser->email = gcnew String(this->txt_email->Text);
+						newUser->address = gcnew String(this->txt_address->Text);
+						newUser->password = gcnew String(this->txt_password->Text);
+						this->localData[i] = newUser;
+
+						StreamWriter^ writer = gcnew StreamWriter("clients.csv");
+						for (int i = 0; i < localData->Length; i++) {
+
+							if (localData[i] != nullptr) {
+								String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+									localData[i]->code, localData[i]->name, localData[i]->lastName,
+									localData[i]->phoneNum, localData[i]->email, localData[i]->address, localData[i]->password);
+								writer->WriteLine(message);
+							}
+
+						}
+						writer->Close();
+						this->getUsersdata();
+						this->clearTxt();
+						this->editableData = false;
+						this->btn_cancel->Visible = false;
+						this->txt_id->ReadOnly = false;
+						MessageBox::Show("El cliente se actualizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+						break;
+					}
+				}
+			}
+		}
+		else {
+			Clients^ newUser = gcnew Clients();
+			int indice = -1;
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[i] == nullptr) {
+					indice = i;
+					break;
+				}
+			}
+			if (indice != -1) {
+				if (CamposNoVacios()) {
+					System::String^ strId = this->txt_id->Text;
+					int id = System::Convert::ToInt32(strId);
+					newUser->code = id;
+					newUser->name = gcnew String(this->txt_name->Text);
+					newUser->lastName = gcnew String(this->txt_lastName->Text);
+					newUser->phoneNum = gcnew String(this->txt_phoneNumber->Text);
+					newUser->email = gcnew String(this->txt_email->Text);
+					newUser->address = gcnew String(this->txt_address->Text);
+					newUser->password = gcnew String(this->txt_password->Text);
+
+					this->localData[indice] = newUser;
+					StreamWriter^ writer = gcnew StreamWriter("clients.csv");
+					for (int i = 0; i < localData->Length; i++) {
+
+						if (localData[i] != nullptr) {
+							String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+								localData[i]->code, localData[i]->name, localData[i]->lastName,
+								localData[i]->phoneNum, localData[i]->email, localData[i]->address, localData[i]->password);
+							writer->WriteLine(message);
+						}
+
+					}
+					writer->Close();
+					this->getUsersdata();
+					this->clearTxt();
+					MessageBox::Show("El usuario se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				}
+				else {
+					MessageBox::Show("Por favor, completa todos los campos antes de agregar un nuevo usuario.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				}
+			}
+			else {
+				MessageBox::Show("No hay espacio disponible para agregar más clientes.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
+		}
+	}
+	private: System::Void btn_cancel_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->clearTxt();
+		this->txt_id->ReadOnly = false;
+		this->editableData = false;
+		this->btn_cancel->Visible = false;
+	}
+	private: System::Void EditarCliente(System::Object^ sender, System::EventArgs^ e) {
+		DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
+		this->txt_id->Text = Convert::ToString(filaSeleccionada->Cells[0]->Value);
+		this->txt_name->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
+		this->txt_lastName->Text = Convert::ToString(filaSeleccionada->Cells[2]->Value);
+		this->txt_address->Text = Convert::ToString(filaSeleccionada->Cells[3]->Value);
+		this->txt_phoneNumber->Text = Convert::ToString(filaSeleccionada->Cells[4]->Value);
+		this->txt_email->Text = Convert::ToString(filaSeleccionada->Cells[5]->Value);
+		
+		for (int i = 0; i < localData->Length; i++) {
+			if (filaSeleccionada->Cells[0]->Value->ToString() == localData[i]->code.ToString()) {
+				this->txt_password->Text = Convert::ToString(localData[i]->password);
+				break;
+			}
+		}
+		this->editableData = true;
+		this->btn_cancel->Visible = true;
+		this->txt_id->ReadOnly = true;
+	}
+	private: System::Void deleteRowClient(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+		if (e->KeyCode == Keys::Delete) {
+			DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
+			System::Windows::Forms::DialogResult result = MessageBox::Show("¿Estás seguro de querer eliminar estos datos?", "Eliminar Usuario", MessageBoxButtons::OKCancel, MessageBoxIcon::Warning);
+			if (result == System::Windows::Forms::DialogResult::OK) {
+				cli::array<Clients^>^ nuevoLocalData = gcnew cli::array<Clients^>(localData->Length);
+
+				for (int i = 0; i < localData->Length; i++) {
+					if (localData[i] != nullptr) {
+						if (localData[i]->code.ToString() != filaSeleccionada->Cells[0]->Value->ToString()) {
+							nuevoLocalData[i] = localData[i];
+						}
+					}
+				}
+				localData = nuevoLocalData;
+				StreamWriter^ writer = gcnew StreamWriter("clients.csv");
+				for (int i = 0; i < localData->Length; i++) {
+
+					if (localData[i] != nullptr) {
+						String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+							localData[i]->code, localData[i]->name, localData[i]->lastName,
+							localData[i]->phoneNum, localData[i]->email, localData[i]->address, localData[i]->password);
+						writer->WriteLine(message);
+					}
+
+				}
+				writer->Close();
+				this->getUsersdata();
+				this->clearTxt();
+				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+		}
+	}
+};
 }

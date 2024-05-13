@@ -135,17 +135,6 @@ namespace QuickShop {
 		void getUsersdata() {
 			this->dgv_table->Rows->Clear();
 			this->editableData = false;
-			for (int i = 0; i < numeros->Length; i++) {
-				numeros[i] = i;
-			}
-			/*this->dataGridView1->Columns->Add("C1", "Header 1");
-			this->dataGridView1->Columns->Add("C2", "Header 2");
-			this->dataGridView1->Rows->Add("1", "2");
-			for (int i = 0; i < numeros->Length; i++) {
-				this->dataGridView1->Rows->Add(numeros[i]);
-			}*/
-
-
 
 			ifstream usuaa("users.csv");
 
