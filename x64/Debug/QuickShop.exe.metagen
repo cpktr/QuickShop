@@ -43,25 +43,25 @@ Class QuickShop.Usuarios: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
 Class QuickShop.UserClients: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-Class QuickShop.Dashboard: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-  :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-  Fields:
-    Boolean sidebarExpand : Public
 Class User: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, System.String, Boolean, Boolean, Boolean): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     System.String name : Public
     System.String email : Public
     Boolean operador : Public
     Boolean admin : Public
     Boolean user : Public
+Class QuickShop.Dashboard: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(User): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Boolean sidebarExpand : Public
 Class QuickShop.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     User userLogin : Public
-    Int32 variableInt : Public
 Class QuickShop.MyUserControl: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

@@ -8,6 +8,7 @@ using namespace std;
 #include "Usuarios.h"
 #include "UserClients.h"
 #include "Compras.h"
+#include "User.h"
 
 namespace QuickShop {
 
@@ -23,6 +24,7 @@ namespace QuickShop {
 	/// </summary>
 	public ref class Dashboard : public System::Windows::Forms::Form
 	{
+	private: User^ userSess;
 	public:
 		bool sidebarExpand;
 		Dashboard(void)
@@ -31,6 +33,11 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+		}
+		Dashboard(User^ userSession) {
+			this->userSess = userSession;
+			MessageBox::Show("Hola");
+			InitializeComponent();
 		}
 
 	protected:

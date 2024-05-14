@@ -407,9 +407,7 @@ namespace QuickShop {
 				if (localData[i] != nullptr) {
 					if (localData[i]->username == email && localData[i]->password == password) {
 						if (localData[i]->type == "Administrador") {
-							userLogin->name = localData[i]->name->ToString();
-							userLogin->email = localData[i]->email->ToString();
-							userLogin->admin = true;
+							userLogin = gcnew User(localData[i]->name->ToString(), localData[i]->email->ToString(), true, false, false);
 							return true;
 						}
 					}
@@ -422,49 +420,54 @@ namespace QuickShop {
 		}
 	}
 	private: bool LoginLogicOperator(String^ email, String^ password) {
-		for each (Cstomer ^ user in usersPlatform)
-		{
-			if (user->getUsername() == email && user->getPassword() == password)
-			{
-				if (user->getType() == "Operador") {
-					return true;
-				}
-				else {
-					return false;
+		try {
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[i] != nullptr) {
+					if (localData[i]->username == email && localData[i]->password == password) {
+						if (localData[i]->type == "Operador") {
+							userLogin = gcnew User(localData[i]->name->ToString(), localData[i]->email->ToString(), false, true, false);
+							return true;
+						}
+					}
 				}
 			}
+			return false;
 		}
-		return false;
+		catch (...) {
+			std::cerr << "Excepción desconocida capturada" << std::endl;
+		}
 	}
-	public: int variableInt = 0;
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ email = this->textBox1->Text;
 		String^ password = this->textBox2->Text;
 		//Validación de LOGIN
-		if (email != "" || password != "") {
-			if (typeLogIn == 1) {//LOGIN ADMINISTRADOR
-				if (this->LoginLogicAdmin(email, password)) {
-					this->variableInt = 10;
-					MessageBox::Show("Inicio de sesión exitoso", "¡Bienvenido!", MessageBoxButtons::OK, MessageBoxIcon::Information);
-					//this->Hide();
-					//this->CambiarPanel(gcnew QuickShop::Dashboard);
+		try {
+			if (email != "" || password != "") {
+				if (typeLogIn == 1) {//LOGIN ADMINISTRADOR
+					if (this->LoginLogicAdmin(email, password)) {
+						MessageBox::Show("Inicio de sesión exitoso", "¡Bienvenido!", MessageBoxButtons::OK, MessageBoxIcon::Information);
+						this->Close();
+					}
+					else {
+						MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					}
+				}
+				else if (typeLogIn == 2) {//LOGIN OPERADOR
+					if (this->LoginLogicOperator(email, password)) {
+						MessageBox::Show("Inicio de sesión exitoso", "¡Bienvenido!", MessageBoxButtons::OK, MessageBoxIcon::Information);
+						this->CambiarPanel(gcnew QuickShop::Dashboard);
+					}
+					else {
+						MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					}
 				}
 				else {
-					MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return;
 				}
 			}
-			else if (typeLogIn == 2) {//LOGIN OPERADOR
-				if (this->LoginLogicOperator(email, password)) {
-					MessageBox::Show("Inicio de sesión exitoso", "¡Bienvenido!", MessageBoxButtons::OK, MessageBoxIcon::Information);
-					this->CambiarPanel(gcnew QuickShop::Dashboard);
-				}
-				else {
-					MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				}
-			}
-			else {
-				return;
-			}
+		}
+		catch (...) {
+			std::cerr << "Excepción desconocida capturada" << std::endl;
 		}
 		
 	}
