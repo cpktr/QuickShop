@@ -70,6 +70,7 @@ namespace QuickShop {
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Panel^ panel_contenedor;
+	private: System::Windows::Forms::Label^ sessionEmailLabel;
 
 	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private: System::Windows::Forms::Panel^ panel8;
@@ -97,6 +98,7 @@ namespace QuickShop {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->sessionEmailLabel = (gcnew System::Windows::Forms::Label());
 			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Dashboard::typeid));
 			this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
@@ -179,6 +181,7 @@ namespace QuickShop {
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox1->TabIndex = 1;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Visible = false;
 			// 
 			// pictureBox2
 			// 
@@ -191,6 +194,16 @@ namespace QuickShop {
 			this->pictureBox2->TabIndex = 0;
 			this->pictureBox2->TabStop = false;
 			this->pictureBox2->Click += gcnew System::EventHandler(this, &Dashboard::menuButton_click);
+			//
+			// sessionEmailLabel
+			// 
+			this->sessionEmailLabel->AutoSize = true;
+			this->sessionEmailLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20));
+			this->sessionEmailLabel-> Location = System::Drawing::Point(55, 9);
+			this->sessionEmailLabel->Name = L"titlePage";
+			this->sessionEmailLabel->Size = System::Drawing::Size(139, 31);
+			this->sessionEmailLabel->TabIndex = 0;
+			this->sessionEmailLabel->Text = L"Email";
 			// 
 			// panel2
 			// 
