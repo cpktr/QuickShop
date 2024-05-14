@@ -4,10 +4,9 @@ using namespace System;
 
 public ref class User {
 	public:
-		int id;
 		String^ name;
-		String^ phone;
 		String^ email;
-		String^ rol;
-		String^ password;
+		bool operador = false;
+		bool admin = false;
+		bool user = false;
 };

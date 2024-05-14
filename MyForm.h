@@ -29,6 +29,7 @@ namespace QuickShop {
 	private: Cstomer dataUsers;
 	private: System::Windows::Forms::Panel^ panelContainerFirst;
 	private: List<Cstomer^>^ usersPlatform = gcnew List<Cstomer^>();
+	private: cli::array<Cstomer^>^ localData = gcnew cli::array<Cstomer^>(100);
 	public:
 		MyForm(void)
 		{
@@ -41,30 +42,43 @@ namespace QuickShop {
 			}
 			else {
 				string line;
+				int limit = 0;
 				while (getline(usuaa, line)) {
+					Cstomer^ newUser = gcnew Cstomer();
 					string id;
 					string username;
 					string type;
 					string cui;
-					string name; 
-					string lastname; 
-					string address; 
-					string phonenumb; 
-					string email; 
+					string name;
+					string lastname;
+					string address;
+					string phonenumb;
+					string email;
 					string password;
 
 					stringstream ss(line);
-					getline(ss, (id), ';');
-					getline(ss, (name), ';');
-					getline(ss, (lastname), ';');
-					getline(ss, (username), ';');
-					getline(ss, (type), ';');
-					getline(ss, (address), ';');
-					getline(ss, (cui), ';');
-					getline(ss, (phonenumb), ';');
-					getline(ss, (email), ';');
-					getline(ss, (password), ';');
-
+					getline(ss, id, ',');
+					getline(ss, name, ',');
+					getline(ss, lastname, ',');
+					getline(ss, username, ',');
+					getline(ss, type, ',');
+					getline(ss, cui, ',');
+					getline(ss, phonenumb, ',');
+					getline(ss, email, ',');
+					getline(ss, address, ',');
+					getline(ss, password, ',');
+					newUser->id_customer = gcnew String(id.c_str());
+					newUser->name = gcnew String(name.c_str());
+					newUser->lastName = gcnew String(lastname.c_str());
+					newUser->username = gcnew String(username.c_str());
+					newUser->type = gcnew String(type.c_str());
+					newUser->cui = gcnew String(cui.c_str());
+					newUser->phoneNum = gcnew String(phonenumb.c_str());
+					newUser->email = gcnew String(email.c_str());
+					newUser->address = gcnew String(address.c_str());
+					newUser->password = gcnew String(password.c_str());
+					localData[limit] = newUser;
+					limit++;
 					usersPlatform->Add(gcnew Cstomer(gcnew String(id.c_str()), gcnew String(username.c_str()), gcnew String(type.c_str()), gcnew String(cui.c_str()), gcnew String(name.c_str()), gcnew String(lastname.c_str()), gcnew String(address.c_str()), gcnew String(phonenumb.c_str()), gcnew String(email.c_str()), gcnew String(password.c_str())));
 					
 				}		
@@ -385,27 +399,34 @@ namespace QuickShop {
 		}
 		
 	}
+
+	public: User^ userLogin = nullptr;
 	private: bool LoginLogicAdmin(String^ email, String^ password) {
-		for each (Cstomer ^ user in usersPlatform)
-		{
-			if (user->getUsername() == email && user->getPassword() == password)
-			{
-				if (user->getType() == "administrador") {
-					return true;
-				}
-				else {
-					return false;
+		try {
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[i] != nullptr) {
+					if (localData[i]->username == email && localData[i]->password == password) {
+						if (localData[i]->type == "Administrador") {
+							userLogin->name = localData[i]->name->ToString();
+							userLogin->email = localData[i]->email->ToString();
+							userLogin->admin = true;
+							return true;
+						}
+					}
 				}
 			}
+			return false;
 		}
-		return false;
+		catch (...) {
+			std::cerr << "Excepción desconocida capturada" << std::endl;
+		}
 	}
 	private: bool LoginLogicOperator(String^ email, String^ password) {
 		for each (Cstomer ^ user in usersPlatform)
 		{
 			if (user->getUsername() == email && user->getPassword() == password)
 			{
-				if (user->getType() == "operador") {
+				if (user->getType() == "Operador") {
 					return true;
 				}
 				else {
@@ -415,7 +436,7 @@ namespace QuickShop {
 		}
 		return false;
 	}
-	public: User^ user = nullptr;
+	public: int variableInt = 0;
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ email = this->textBox1->Text;
 		String^ password = this->textBox2->Text;
@@ -423,8 +444,10 @@ namespace QuickShop {
 		if (email != "" || password != "") {
 			if (typeLogIn == 1) {//LOGIN ADMINISTRADOR
 				if (this->LoginLogicAdmin(email, password)) {
+					this->variableInt = 10;
 					MessageBox::Show("Inicio de sesión exitoso", "¡Bienvenido!", MessageBoxButtons::OK, MessageBoxIcon::Information);
-					this->CambiarPanel(gcnew QuickShop::Dashboard);
+					//this->Hide();
+					//this->CambiarPanel(gcnew QuickShop::Dashboard);
 				}
 				else {
 					MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);

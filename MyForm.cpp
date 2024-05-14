@@ -10,12 +10,16 @@ void main(cli::array<String^>^ args) {
 	Application::SetCompatibleTextRenderingDefault(false);
 	QuickShop::MyForm form;
 	QuickShop::Dashboard dashboardForm;
-	dashboardForm.ShowDialog();
+	//dashboardForm.ShowDialog();
 	//Application::Run(% form);
 	//form.ShowDialog();
-	User^ user = form.user;
+	Application::Run(% form);
 
+	int usuario = form.variableInt;
+	User^ user = form.userLogin;
 	if (user != nullptr) {
+		//dashboardForm.ShowDialog();
+		Application::Run(% dashboardForm);
 		MessageBox::Show("Succesfully", "Success", MessageBoxButtons::OK);
 	}
 	else {

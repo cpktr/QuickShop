@@ -51,17 +51,17 @@ Class QuickShop.Dashboard: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
 Class User: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
-    Int32 id : Public
     System.String name : Public
-    System.String phone : Public
     System.String email : Public
-    System.String rol : Public
-    System.String password : Public
+    Boolean operador : Public
+    Boolean admin : Public
+    Boolean user : Public
 Class QuickShop.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
-    User user : Public
+    User userLogin : Public
+    Int32 variableInt : Public
 Class QuickShop.MyUserControl: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

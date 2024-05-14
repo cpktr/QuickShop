@@ -110,15 +110,6 @@ namespace QuickShop {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 
 
-
-
-
-
-
-
-
-
-
 	protected:
 
 	private:
@@ -444,6 +435,8 @@ namespace QuickShop {
 			// 
 			// cmb_type
 			// 
+			this->cmb_type->BackColor = System::Drawing::Color::White;
+			this->cmb_type->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cmb_type->FormattingEnabled = true;
 			this->cmb_type->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Operador", L"Administrador" });
 			this->cmb_type->Location = System::Drawing::Point(158, 4);
@@ -686,7 +679,7 @@ namespace QuickShop {
 		this->txt_name->Clear();
 		this->txt_lastName->Clear();
 		this->txt_user->Clear();
-		this->cmb_type->Text = "";
+		this->cmb_type->SelectedIndex = -1;
 		this->txt_cui->Clear();
 		this->txt_phoneNumber->Clear();
 		this->txt_email->Clear();
@@ -699,7 +692,7 @@ namespace QuickShop {
 			String::IsNullOrEmpty(this->txt_name->Text) ||
 			String::IsNullOrEmpty(this->txt_lastName->Text) ||
 			String::IsNullOrEmpty(this->txt_user->Text) ||
-			String::IsNullOrEmpty(this->cmb_type->Text) ||
+			(this->cmb_type->SelectedIndex == -1) ||
 			String::IsNullOrEmpty(this->txt_cui->Text) ||
 			String::IsNullOrEmpty(this->txt_phoneNumber->Text) ||
 			String::IsNullOrEmpty(this->txt_email->Text) ||

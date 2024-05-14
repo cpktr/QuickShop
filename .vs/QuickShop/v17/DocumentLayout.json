@@ -3,35 +3,36 @@
   "WorkspaceRootPath": "E:\\Proyectos\\Proyecto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Productos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Productos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\UserClients.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:UserClients.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Usuarios.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Usuarios.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\UserClients.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:UserClients.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\User.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:User.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Cstomer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Cstomer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:MyForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\UserClients.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:UserClients.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Productos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Productos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.39.33519\\INCLUDE\\STRING||{3B902123-F8A7-4915-9F01-361F908088D0}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -49,68 +50,84 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Reportes.h",
-              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Reportes.h",
-              "RelativeDocumentMoniker": "Reportes.h",
-              "ToolTip": "E:\\Proyectos\\Proyecto\\Reportes.h",
-              "RelativeToolTip": "Reportes.h",
-              "ViewState": "AQIAAOcAAAAAAAAAAAAAAPgAAAAAAAAA",
+              "DocumentIndex": 5,
+              "Title": "Cstomer.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Cstomer.h",
+              "RelativeDocumentMoniker": "Cstomer.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Cstomer.h",
+              "RelativeToolTip": "Cstomer.h",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACYAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-13T21:17:45.617Z",
+              "WhenOpened": "2024-05-14T00:04:13.853Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Reportes.h [Dise\u00F1o]",
-              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Reportes.h",
-              "RelativeDocumentMoniker": "Reportes.h",
-              "ToolTip": "E:\\Proyectos\\Proyecto\\Reportes.h [Dise\u00F1o]",
-              "RelativeToolTip": "Reportes.h [Dise\u00F1o]",
+              "DocumentIndex": 4,
+              "Title": "User.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\User.h",
+              "RelativeDocumentMoniker": "User.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\User.h",
+              "RelativeToolTip": "User.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-13T21:17:42.814Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2024-05-13T23:56:36.223Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Productos.h [Dise\u00F1o]",
-              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Productos.h",
-              "RelativeDocumentMoniker": "Productos.h",
-              "ToolTip": "E:\\Proyectos\\Proyecto\\Productos.h [Dise\u00F1o]",
-              "RelativeToolTip": "Productos.h [Dise\u00F1o]",
+              "DocumentIndex": 0,
+              "Title": "MyForm.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\MyForm.h",
+              "RelativeDocumentMoniker": "MyForm.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\MyForm.h",
+              "RelativeToolTip": "MyForm.h",
+              "ViewState": "AQIAAKgBAAAAAAAAAAAowMABAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-13T20:51:23.745Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "string",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\string",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\string",
-              "ViewState": "AQIAAFAAAAAAAAAAAAAowGIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-05-13T20:49:22.502Z",
+              "WhenOpened": "2024-05-13T23:49:15.733Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Productos.h",
-              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Productos.h",
-              "RelativeDocumentMoniker": "Productos.h",
-              "ToolTip": "E:\\Proyectos\\Proyecto\\Productos.h",
-              "RelativeToolTip": "Productos.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "Title": "Usuarios.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Usuarios.h",
+              "RelativeDocumentMoniker": "Usuarios.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Usuarios.h",
+              "RelativeToolTip": "Usuarios.h",
+              "ViewState": "AQIAAHoAAAAAAAAAAAAAAIgAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-13T20:45:22.44Z",
+              "WhenOpened": "2024-05-13T20:11:06.473Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
+              "Title": "MyForm.cpp",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\MyForm.cpp",
+              "RelativeDocumentMoniker": "MyForm.cpp",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\MyForm.cpp",
+              "RelativeToolTip": "MyForm.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-13T23:19:54.915Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MyForm.h [Dise\u00F1o]",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\MyForm.h",
+              "RelativeDocumentMoniker": "MyForm.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\MyForm.h [Dise\u00F1o]",
+              "RelativeToolTip": "MyForm.h [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-13T23:49:12.975Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "UserClients.h [Dise\u00F1o]",
               "DocumentMoniker": "E:\\Proyectos\\Proyecto\\UserClients.h",
               "RelativeDocumentMoniker": "UserClients.h",
@@ -122,26 +139,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Usuarios.h",
-              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Usuarios.h",
-              "RelativeDocumentMoniker": "Usuarios.h",
-              "ToolTip": "E:\\Proyectos\\Proyecto\\Usuarios.h",
-              "RelativeToolTip": "Usuarios.h",
-              "ViewState": "AQIAABAAAAAAAAAAAAAAAGMDAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-13T20:11:06.473Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "UserClients.h",
               "DocumentMoniker": "E:\\Proyectos\\Proyecto\\UserClients.h",
               "RelativeDocumentMoniker": "UserClients.h",
               "ToolTip": "E:\\Proyectos\\Proyecto\\UserClients.h",
               "RelativeToolTip": "UserClients.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "ViewState": "AQIAAH0AAAAAAAAAAAAAAJ4AAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-13T20:03:24.716Z",
               "EditorCaption": ""
