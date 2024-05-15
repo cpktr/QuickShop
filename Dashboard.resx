@@ -118,6 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="button_usuarios.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAErSURBVDhPjZNN
+        TgJBEEYnQTAcAleuBHdcQjZ6DhZG49YrSCQYvISewJ+1JOoG8R6iG43avq+7Zmh6BuJLXjLUV9VMDUyW
+        4pzbxSG+4Iep63PsWFsZwk0c4w+u4hsvsGFjAQoavscYfeupOVMh4g4Xh/Dh0pcXTLFpsfImpoeM8lA7
+        p7d97MMIaichKtA6bQV6OCmHNldA7ShESwwUpLcmHnHDZtVTx2cFCVOF83Bd4gH75kSFCubrDvgPb1Ur
+        PGEXa7aBempWS9fwK8QP8QtbNleCbMt6cvxD7KB+EjGz3pXQ8xpa/cxOXtTfU3zini9WQNazHjG0sg8a
+        eOvLzv3iFe7jtnmA16hM3GDdxgMUdMgI83WqUKY3dXk4hrCNA9T78G7q+gzDzgVZ9gfapcgAV+r36QAA
+        AABJRU5ErkJggg==
+</value>
+  </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABDgAAAEKCAYAAAD3muWOAAAABGdBTUEAALGeYUxB9wAAACBjSFJNAACH
@@ -627,18 +639,6 @@
         TkSuQmCC
 </value>
   </data>
-  <data name="button5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAErSURBVDhPjZNN
-        TgJBEEYnQTAcAleuBHdcQjZ6DhZG49YrSCQYvISewJ+1JOoG8R6iG43avq+7Zmh6BuJLXjLUV9VMDUyW
-        4pzbxSG+4Iep63PsWFsZwk0c4w+u4hsvsGFjAQoavscYfeupOVMh4g4Xh/Dh0pcXTLFpsfImpoeM8lA7
-        p7d97MMIaichKtA6bQV6OCmHNldA7ShESwwUpLcmHnHDZtVTx2cFCVOF83Bd4gH75kSFCubrDvgPb1Ur
-        PGEXa7aBempWS9fwK8QP8QtbNleCbMt6cvxD7KB+EjGz3pXQ8xpa/cxOXtTfU3zini9WQNazHjG0sg8a
-        eOvLzv3iFe7jtnmA16hM3GDdxgMUdMgI83WqUKY3dXk4hrCNA9T78G7q+gzDzgVZ9gfapcgAV+r36QAA
-        AABJRU5ErkJggg==
-</value>
-  </data>
   <data name="button6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -674,6 +674,9 @@
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="pictureBox3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="pictureBox3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

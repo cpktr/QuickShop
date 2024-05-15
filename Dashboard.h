@@ -25,6 +25,7 @@ namespace QuickShop {
 	public ref class Dashboard : public System::Windows::Forms::Form
 	{
 	private: User^ userSess;
+	private: System::Windows::Forms::Label^ sessionEmailLabel;
 	public:
 		bool sidebarExpand;
 		Dashboard(void)
@@ -36,8 +37,14 @@ namespace QuickShop {
 		}
 		Dashboard(User^ userSession) {
 			this->userSess = userSession;
-			MessageBox::Show("Hola");
 			InitializeComponent();
+			if (this->userSess != nullptr) {
+				this->sessionEmailLabel->Text = this->userSess->email;
+				if (this->userSess->operador == true) {
+					this->button_usuarios->Visible = false;
+					this->panel_users->Visible = false;
+				}
+			}
 		}
 
 	protected:
@@ -62,15 +69,16 @@ namespace QuickShop {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Panel^ panel5;
 	private: System::Windows::Forms::Button^ button4;
-	private: System::Windows::Forms::Panel^ panel6;
-	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Panel^ panel_users;
+	private: System::Windows::Forms::Button^ button_usuarios;
+
+
 	private: System::Windows::Forms::Panel^ panel7;
 	private: System::Windows::Forms::Button^ button6;
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Panel^ panel_contenedor;
-	private: System::Windows::Forms::Label^ sessionEmailLabel;
 
 	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private: System::Windows::Forms::Panel^ panel8;
@@ -98,11 +106,11 @@ namespace QuickShop {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->sessionEmailLabel = (gcnew System::Windows::Forms::Label());
 			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Dashboard::typeid));
 			this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->sessionEmailLabel = (gcnew System::Windows::Forms::Label());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
@@ -113,8 +121,8 @@ namespace QuickShop {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->panel5 = (gcnew System::Windows::Forms::Panel());
 			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->panel6 = (gcnew System::Windows::Forms::Panel());
-			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->panel_users = (gcnew System::Windows::Forms::Panel());
+			this->button_usuarios = (gcnew System::Windows::Forms::Button());
 			this->panel7 = (gcnew System::Windows::Forms::Panel());
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->panel8 = (gcnew System::Windows::Forms::Panel());
@@ -133,7 +141,7 @@ namespace QuickShop {
 			this->panel4->SuspendLayout();
 			this->panel3->SuspendLayout();
 			this->panel5->SuspendLayout();
-			this->panel6->SuspendLayout();
+			this->panel_users->SuspendLayout();
 			this->panel7->SuspendLayout();
 			this->panel8->SuspendLayout();
 			this->panel9->SuspendLayout();
@@ -150,7 +158,7 @@ namespace QuickShop {
 			this->flowLayoutPanel1->Controls->Add(this->panel4);
 			this->flowLayoutPanel1->Controls->Add(this->panel3);
 			this->flowLayoutPanel1->Controls->Add(this->panel5);
-			this->flowLayoutPanel1->Controls->Add(this->panel6);
+			this->flowLayoutPanel1->Controls->Add(this->panel_users);
 			this->flowLayoutPanel1->Controls->Add(this->panel7);
 			this->flowLayoutPanel1->Controls->Add(this->panel8);
 			this->flowLayoutPanel1->Controls->Add(this->panel9);
@@ -165,6 +173,7 @@ namespace QuickShop {
 			// 
 			// panel1
 			// 
+			this->panel1->Controls->Add(this->sessionEmailLabel);
 			this->panel1->Controls->Add(this->pictureBox1);
 			this->panel1->Controls->Add(this->pictureBox2);
 			this->panel1->Location = System::Drawing::Point(3, 3);
@@ -172,12 +181,24 @@ namespace QuickShop {
 			this->panel1->Size = System::Drawing::Size(219, 55);
 			this->panel1->TabIndex = 0;
 			// 
+			// sessionEmailLabel
+			// 
+			this->sessionEmailLabel->AutoSize = true;
+			this->sessionEmailLabel->BackColor = System::Drawing::Color::Transparent;
+			this->sessionEmailLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
+			this->sessionEmailLabel->ForeColor = System::Drawing::Color::White;
+			this->sessionEmailLabel->Location = System::Drawing::Point(59, 17);
+			this->sessionEmailLabel->Name = L"sessionEmailLabel";
+			this->sessionEmailLabel->Size = System::Drawing::Size(42, 17);
+			this->sessionEmailLabel->TabIndex = 2;
+			this->sessionEmailLabel->Text = L"Email";
+			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(55, 9);
+			this->pictureBox1->Location = System::Drawing::Point(124, 3);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(139, 31);
+			this->pictureBox1->Size = System::Drawing::Size(95, 31);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox1->TabIndex = 1;
 			this->pictureBox1->TabStop = false;
@@ -194,16 +215,6 @@ namespace QuickShop {
 			this->pictureBox2->TabIndex = 0;
 			this->pictureBox2->TabStop = false;
 			this->pictureBox2->Click += gcnew System::EventHandler(this, &Dashboard::menuButton_click);
-			//
-			// sessionEmailLabel
-			// 
-			this->sessionEmailLabel->AutoSize = true;
-			this->sessionEmailLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20));
-			this->sessionEmailLabel-> Location = System::Drawing::Point(55, 9);
-			this->sessionEmailLabel->Name = L"titlePage";
-			this->sessionEmailLabel->Size = System::Drawing::Size(139, 31);
-			this->sessionEmailLabel->TabIndex = 0;
-			this->sessionEmailLabel->Text = L"Email";
 			// 
 			// panel2
 			// 
@@ -275,7 +286,7 @@ namespace QuickShop {
 			this->button2->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
 			this->button2->Size = System::Drawing::Size(241, 54);
 			this->button2->TabIndex = 2;
-			this->button2->Text = L"                         Productos";
+			this->button2->Text = L"                          Catalogo";
 			this->button2->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &Dashboard::button2_Click);
@@ -305,30 +316,30 @@ namespace QuickShop {
 			this->button4->UseVisualStyleBackColor = false;
 			this->button4->Click += gcnew System::EventHandler(this, &Dashboard::button4_Click);
 			// 
-			// panel6
+			// panel_users
 			// 
-			this->panel6->Controls->Add(this->button5);
-			this->panel6->Location = System::Drawing::Point(3, 232);
-			this->panel6->Name = L"panel6";
-			this->panel6->Size = System::Drawing::Size(219, 36);
-			this->panel6->TabIndex = 5;
+			this->panel_users->Controls->Add(this->button_usuarios);
+			this->panel_users->Location = System::Drawing::Point(3, 232);
+			this->panel_users->Name = L"panel_users";
+			this->panel_users->Size = System::Drawing::Size(219, 36);
+			this->panel_users->TabIndex = 5;
 			// 
-			// button5
+			// button_usuarios
 			// 
-			this->button5->BackColor = System::Drawing::Color::Teal;
-			this->button5->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->button5->ForeColor = System::Drawing::Color::White;
-			this->button5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button5.Image")));
-			this->button5->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button5->Location = System::Drawing::Point(-12, -8);
-			this->button5->Name = L"button5";
-			this->button5->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
-			this->button5->Size = System::Drawing::Size(241, 54);
-			this->button5->TabIndex = 2;
-			this->button5->Text = L"                          Usuarios";
-			this->button5->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->button5->UseVisualStyleBackColor = false;
-			this->button5->Click += gcnew System::EventHandler(this, &Dashboard::button5_Click);
+			this->button_usuarios->BackColor = System::Drawing::Color::Teal;
+			this->button_usuarios->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button_usuarios->ForeColor = System::Drawing::Color::White;
+			this->button_usuarios->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button_usuarios.Image")));
+			this->button_usuarios->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->button_usuarios->Location = System::Drawing::Point(-12, -8);
+			this->button_usuarios->Name = L"button_usuarios";
+			this->button_usuarios->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
+			this->button_usuarios->Size = System::Drawing::Size(241, 54);
+			this->button_usuarios->TabIndex = 2;
+			this->button_usuarios->Text = L"                          Usuarios";
+			this->button_usuarios->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->button_usuarios->UseVisualStyleBackColor = false;
+			this->button_usuarios->Click += gcnew System::EventHandler(this, &Dashboard::button5_Click);
 			// 
 			// panel7
 			// 
@@ -452,13 +463,14 @@ namespace QuickShop {
 			this->Text = L"Dashboard";
 			this->flowLayoutPanel1->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
+			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			this->panel2->ResumeLayout(false);
 			this->panel4->ResumeLayout(false);
 			this->panel3->ResumeLayout(false);
 			this->panel5->ResumeLayout(false);
-			this->panel6->ResumeLayout(false);
+			this->panel_users->ResumeLayout(false);
 			this->panel7->ResumeLayout(false);
 			this->panel8->ResumeLayout(false);
 			this->panel9->ResumeLayout(false);
@@ -520,7 +532,7 @@ namespace QuickShop {
 		this->button2->Cursor = Cursors::Hand;
 		this->button3->Cursor = Cursors::Hand;
 		this->button4->Cursor = Cursors::Hand;
-		this->button5->Cursor = Cursors::Hand;
+		this->button_usuarios->Cursor = Cursors::Hand;
 		this->button6->Cursor = Cursors::Hand;
 	}
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {

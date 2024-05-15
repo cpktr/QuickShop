@@ -407,7 +407,7 @@ namespace QuickShop {
 				if (localData[i] != nullptr) {
 					if (localData[i]->username == email && localData[i]->password == password) {
 						if (localData[i]->type == "Administrador") {
-							userLogin = gcnew User(localData[i]->name->ToString(), localData[i]->email->ToString(), true, false, false);
+							userLogin = gcnew User(localData[i]->name->ToString(), localData[i]->email->ToString(), false, true, false);
 							return true;
 						}
 					}
@@ -425,7 +425,7 @@ namespace QuickShop {
 				if (localData[i] != nullptr) {
 					if (localData[i]->username == email && localData[i]->password == password) {
 						if (localData[i]->type == "Operador") {
-							userLogin = gcnew User(localData[i]->name->ToString(), localData[i]->email->ToString(), false, true, false);
+							userLogin = gcnew User(localData[i]->name->ToString(), localData[i]->email->ToString(), true, false, false);
 							return true;
 						}
 					}
@@ -449,16 +449,16 @@ namespace QuickShop {
 						this->Close();
 					}
 					else {
-						MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
+						MessageBox::Show("Nombre de usuario o contraseña incorrectos", "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					}
 				}
 				else if (typeLogIn == 2) {//LOGIN OPERADOR
 					if (this->LoginLogicOperator(email, password)) {
 						MessageBox::Show("Inicio de sesión exitoso", "¡Bienvenido!", MessageBoxButtons::OK, MessageBoxIcon::Information);
-						this->CambiarPanel(gcnew QuickShop::Dashboard);
+						this->Close();
 					}
 					else {
-						MessageBox::Show("Error: Nombre de usuario o contraseña incorrectos" + typeLogIn, "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
+						MessageBox::Show("Nombre de usuario o contraseña incorrectos", "Error de inicio de sesión", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					}
 				}
 				else {
