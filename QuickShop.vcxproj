@@ -132,6 +132,7 @@
     <ClCompile Include="Persona.cpp" />
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="Productos.cpp" />
+    <ClCompile Include="PurchaseProduct.cpp" />
     <ClCompile Include="Reportes.cpp" />
     <ClCompile Include="UserClients.cpp" />
     <ClCompile Include="Usuarios.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Productos.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="PurchaseProduct.h" />
     <ClInclude Include="Reportes.h">
       <FileType>CppForm</FileType>
     </ClInclude>

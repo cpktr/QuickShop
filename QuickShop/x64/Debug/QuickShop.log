@@ -1,10 +1,28 @@
 ﻿  Compras.cpp
+E:\Proyectos\Proyecto\Compras.h(635,32): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Compras.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(637,38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Compras.cpp")
+  
   Dashboard.cpp
+E:\Proyectos\Proyecto\Compras.h(635,32): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(637,38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
   MyForm.cpp
+E:\Proyectos\Proyecto\Compras.h(635,32): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(637,38): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
 E:\Proyectos\Proyecto\MyForm.h(506,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\MyForm.cpp(8,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
+E:\Proyectos\Proyecto\MyForm.cpp(28,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
   Generando código...
 E:\Proyectos\Proyecto\MyForm.h(421,1): warning C4715: 'QuickShop::MyForm::LoginLogicAdmin': no todas las rutas de acceso de control devuelven un valor
 E:\Proyectos\Proyecto\MyForm.h(439,1): warning C4715: 'QuickShop::MyForm::LoginLogicOperator': no todas las rutas de acceso de control devuelven un valor
