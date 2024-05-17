@@ -5,6 +5,7 @@
 #include "Cstomer.h"
 #include "Clients.h"
 #include "Product.h"
+#include "PurchaseProduct.h"
 
 namespace QuickShop {
 
@@ -28,6 +29,7 @@ namespace QuickShop {
 	private: cli::array<Cstomer^>^ localData = gcnew cli::array<Cstomer^>(100);
 	private: cli::array<Clients^>^ localDataClient = gcnew cli::array<Clients^>(100);
 	private: cli::array<Product^>^ localDataProducts = gcnew cli::array<Product^>(100);
+	private: cli::array<PurchaseProduct^>^ localDataPurchases = gcnew cli::array<PurchaseProduct^>(100);
 	public:
 		Reportes(void)
 		{
@@ -172,6 +174,7 @@ namespace QuickShop {
 			this->btn_purchases->TabIndex = 2;
 			this->btn_purchases->Text = L"Compras";
 			this->btn_purchases->UseVisualStyleBackColor = true;
+			this->btn_purchases->Click += gcnew System::EventHandler(this, &Reportes::btn_purchases_Click);
 			// 
 			// btn_products
 			// 
@@ -413,6 +416,67 @@ namespace QuickShop {
 				std::cerr << "Excepción desconocida capturada" << std::endl;
 			}
 		}
+	}
+	private: System::Void btn_purchases_Click(System::Object^ sender, System::EventArgs^ e) {
+			this->dgv_report->Rows->Clear();
+			this->dgv_report->Columns->Clear();
+			this->dgv_report->Columns->Add("id_purchase", "ID");
+			this->dgv_report->Columns->Add("user", "Usuario");
+			this->dgv_report->Columns->Add("products", "Productos");
+			this->dgv_report->Columns->Add("iva", "IVA");
+			this->dgv_report->Columns->Add("subtotal", "Subtotal");
+			this->dgv_report->Columns->Add("discount", "Descuento");
+			this->dgv_report->Columns->Add("total", "Total");
+			ifstream purchases("purchases.csv");
+			if (!purchases.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+
+				while (getline(purchases, line)) {
+					try {
+						PurchaseProduct^ newPurchase = gcnew PurchaseProduct();
+						string id;
+						string user;
+						string productList;
+						string discount;
+						string subtotal;
+						string iva;
+						string total;
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, user, ',');
+						getline(ss, productList, ',');
+						getline(ss, iva, ',');
+						getline(ss, subtotal, ',');
+						getline(ss, discount, ',');
+						getline(ss, total, ',');
+						newPurchase->id_purchase = std::stoi(id);
+						newPurchase->user = gcnew String(user.c_str());
+						newPurchase->productList = gcnew String(productList.c_str());
+						newPurchase->discount = std::stof(discount);
+						newPurchase->subtotal = std::stof(subtotal);
+						newPurchase->iva = std::stof(iva);
+						newPurchase->total = std::stof(total);
+
+
+						localDataPurchases[limit] = newPurchase;
+
+						this->dgv_report->Rows->Add(localDataPurchases[limit]->id_purchase, localDataPurchases[limit]->user, localDataPurchases[limit]->productList, localDataPurchases[limit]->iva, localDataPurchases[limit]->subtotal, localDataPurchases[limit]->discount, localDataPurchases[limit]->total);
+
+						limit++;
+					}
+					catch (const std::exception& e) {
+						std::cerr << "Excepción capturada: " << e.what() << std::endl;
+					}
+					catch (...) {
+						std::cerr << "Excepción desconocida capturada" << std::endl;
+					}
+				}
+			}
 	}
 };
 }

@@ -3,20 +3,36 @@
   "WorkspaceRootPath": "E:\\Proyectos\\Proyecto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Productos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Productos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\PurchaseProduct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:PurchaseProduct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Usuarios.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Usuarios.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,27 +50,65 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Compras.h [Dise\u00F1o]",
-              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Compras.h",
-              "RelativeDocumentMoniker": "Compras.h",
-              "ToolTip": "E:\\Proyectos\\Proyecto\\Compras.h [Dise\u00F1o]*",
-              "RelativeToolTip": "Compras.h [Dise\u00F1o]*",
+              "DocumentIndex": 4,
+              "Title": "Reportes.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Reportes.h",
+              "RelativeDocumentMoniker": "Reportes.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Reportes.h",
+              "RelativeToolTip": "Reportes.h",
+              "ViewState": "AQIAALwBAAAAAAAAAAAAANMBAAAPAQAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-16T04:32:16.886Z",
+              "WhenOpened": "2024-05-17T23:33:03.487Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Reportes.h [Dise\u00F1o]",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Reportes.h",
+              "RelativeDocumentMoniker": "Reportes.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Reportes.h [Dise\u00F1o]",
+              "RelativeToolTip": "Reportes.h [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-17T23:33:00.251Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Compras.h",
+              "Title": "Compras.h [Dise\u00F1o]",
               "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Compras.h",
               "RelativeDocumentMoniker": "Compras.h",
-              "ToolTip": "E:\\Proyectos\\Proyecto\\Compras.h*",
-              "RelativeToolTip": "Compras.h*",
-              "ViewState": "AQIAAD8CAAAAAAAAAAAAAEgCAAACAAAA",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Compras.h [Dise\u00F1o]",
+              "RelativeToolTip": "Compras.h [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-16T04:30:41.446Z",
+              "WhenOpened": "2024-05-17T23:20:56.623Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MyForm.cpp",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\MyForm.cpp",
+              "RelativeDocumentMoniker": "MyForm.cpp",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\MyForm.cpp",
+              "RelativeToolTip": "MyForm.cpp",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAC4AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-17T22:29:20.333Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Usuarios.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Usuarios.h",
+              "RelativeDocumentMoniker": "Usuarios.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Usuarios.h",
+              "RelativeToolTip": "Usuarios.h",
+              "ViewState": "AQIAANMCAAAAAAAAAAAAAOQCAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-17T20:34:54.418Z",
               "EditorCaption": ""
             },
             {
@@ -65,22 +119,36 @@
               "RelativeDocumentMoniker": "Productos.h",
               "ToolTip": "E:\\Proyectos\\Proyecto\\Productos.h",
               "RelativeToolTip": "Productos.h",
-              "ViewState": "AQIAAF8DAAAAAAAAAAAAACwDAAAgAAAA",
+              "ViewState": "AQIAACYDAAAAAAAAAAAAAD0DAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-16T03:54:37.946Z",
+              "WhenOpened": "2024-05-17T20:26:42.395Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "Compras.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Compras.h",
+              "RelativeDocumentMoniker": "Compras.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Compras.h",
+              "RelativeToolTip": "Compras.h",
+              "ViewState": "AQIAALUCAAAAAAAAAAAAAMACAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-16T04:30:41.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "PurchaseProduct.h",
               "DocumentMoniker": "E:\\Proyectos\\Proyecto\\PurchaseProduct.h",
               "RelativeDocumentMoniker": "PurchaseProduct.h",
               "ToolTip": "E:\\Proyectos\\Proyecto\\PurchaseProduct.h",
               "RelativeToolTip": "PurchaseProduct.h",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAACAAAAAMAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAADkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-16T03:31:58.001Z"
+              "WhenOpened": "2024-05-16T03:31:58.001Z",
+              "EditorCaption": ""
             }
           ]
         }

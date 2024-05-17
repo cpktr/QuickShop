@@ -458,6 +458,7 @@ namespace QuickShop {
 			this->AutoScroll = true;
 			this->ClientSize = System::Drawing::Size(916, 462);
 			this->Controls->Add(this->fatherPanelDashboard);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Dashboard";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Dashboard";

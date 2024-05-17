@@ -812,6 +812,7 @@ namespace QuickShop {
 	}
 	private: bool validateExistData() {
 		String^ newId = gcnew String(this->txt_id->Text);
+		String^ newName = gcnew String(this->txt_name->Text);
 		String^ newPrice = gcnew String(this->txt_price->Text);
 		String^ newStock = gcnew String(this->txt_stock->Text);
 
@@ -824,6 +825,10 @@ namespace QuickShop {
 				}
 				if (System::Convert::ToInt32(newStock) < 0) {
 					MessageBox::Show("El stock no puede ser negativo", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false;
+				}
+				if (localData[i]->name == newName && localData[i]->id_product.ToString() != newId) {
+					MessageBox::Show("El producto ya existe", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return false;
 				}
 				if (System::Convert::ToSingle(newPrice) < 0) {
