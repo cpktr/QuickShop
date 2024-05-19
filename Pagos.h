@@ -1,4 +1,11 @@
 #pragma once
+#include <fstream>
+#include <string>
+#include <sstream>
+#include "Clients.h"
+#include "Product.h"
+#include "PurchaseProduct.h"
+#include "Payments.h"
 
 namespace QuickShop {
 
@@ -7,13 +14,20 @@ namespace QuickShop {
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
+	using namespace System::Drawing::Drawing2D;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
+	using namespace System::Runtime::InteropServices;
+	using namespace System::IO;
+	using namespace std;
 
 	/// <summary>
 	/// Resumen de Pagos
 	/// </summary>
 	public ref class Pagos : public System::Windows::Forms::Form
 	{
+	private: cli::array<Payments^>^ cartShopList = gcnew cli::array<Payments^>(100);
+	private: cli::array<Payments^>^ localData = gcnew cli::array<Payments^>(100);
 	public:
 		Pagos(void)
 		{

@@ -758,7 +758,7 @@ namespace QuickShop {
 
 											int quantity = static_cast<int>(quantityUpDown->Value);
 											if (quantity > 0) {
-												MessageBox::Show(productsData[productIndex]->name + "*" + quantity + "|");
+												
 												messageProducts += productsData[productIndex]->name + "*" + quantity + "|";
 												subT1 += productsData[productIndex]->price * quantity;
 												//newProductList[productIndex] = pr;

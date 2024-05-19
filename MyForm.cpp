@@ -43,8 +43,8 @@ void main(cli::array<String^>^ args) {
 
 	QuickShop::MyForm form;
 	QuickShop::Dashboard dashboardForm;
-	//ACTIVARform.ShowDialog();
-	dashboardForm.ShowDialog();
+	form.ShowDialog();
+	//dashboardForm.ShowDialog();
 
 	User^ user = form.userLogin;
 	if (user != nullptr) {
