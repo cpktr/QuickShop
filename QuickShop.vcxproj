@@ -205,6 +205,9 @@
     <EmbeddedResource Include="Usuarios.resx">
       <DependentUpon>Usuarios.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="vistacx.resx">
+      <DependentUpon>vistacx.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
