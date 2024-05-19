@@ -136,6 +136,7 @@
     <ClCompile Include="Reportes.cpp" />
     <ClCompile Include="UserClients.cpp" />
     <ClCompile Include="Usuarios.cpp" />
+    <ClCompile Include="vistacx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clients.h" />
@@ -170,6 +171,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Usuarios.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="vistacx.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
