@@ -1,18 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\",
+  "WorkspaceRootPath": "E:\\Proyectos\\Proyecto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Pagos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Pagos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Pagos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Payments.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Payments.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Payments.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Payments.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,39 +34,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Compras.h",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Compras.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Compras.h",
               "RelativeDocumentMoniker": "Compras.h",
-              "ToolTip": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Compras.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Compras.h",
               "RelativeToolTip": "Compras.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAABAAAA",
+              "ViewState": "AQIAAFoDAAAAAAAAAAAAAHEDAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-19T15:37:56.983Z",
+              "WhenOpened": "2024-05-20T21:52:39.91Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Compras.h [Dise\u00F1o]",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Compras.h",
+              "RelativeDocumentMoniker": "Compras.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Compras.h [Dise\u00F1o]",
+              "RelativeToolTip": "Compras.h [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-20T17:43:59.413Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Pagos.h",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Pagos.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Pagos.h",
               "RelativeDocumentMoniker": "Pagos.h",
-              "ToolTip": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Pagos.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Pagos.h",
               "RelativeToolTip": "Pagos.h",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAAB4AAAAIAAAA",
+              "ViewState": "AQIAAIADAAAAAAAAAAAAAJgDAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-19T15:25:22.954Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Payments.h",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Payments.h",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Payments.h",
               "RelativeDocumentMoniker": "Payments.h",
-              "ToolTip": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Payments.h",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Payments.h",
               "RelativeToolTip": "Payments.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAgAAAA",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAACsAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-19T15:12:56.282Z",
               "EditorCaption": ""
