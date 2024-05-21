@@ -889,44 +889,33 @@ namespace QuickShop {
 		this->cmb_purchase->SelectedIndex = -1;
 		this->cmb_typePayment->SelectedIndex = -1;
 		this->txt_total->Clear();
+		this->txt_direction->Clear();
+		this->txt_phoneNumber->Clear();
+		this->txt_changeBill->Clear();
+		this->txt_cardNumber->Clear();
+		this->txt_cardCVV->Clear();
+		this->txt_cardDate->Clear();
+		
 	}
 	private: String^ CifrarNumero(String^ numero) {
 		int length = numero->Length;
-		if (length <= 4) {
-			// Si la longitud es menor o igual a 4, no se cifra nada
-			return numero;
-		}
+		using namespace System::Runtime::InteropServices;
+		const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(numero)).ToPointer();
+		std::string stdNumero = chars;
+		Marshal::FreeHGlobal(IntPtr((void*)chars));
+		string first;
+		string second;
+		string third;
+		string forth;
+		stringstream ss(stdNumero);
+		getline(ss, first, '-');
+		getline(ss, second, '-');
+		getline(ss, third, '-');
+		getline(ss, forth, '-');
+		String^ message = "####-####-####-" + gcnew String(forth.c_str());
+		
 
-		// Crear un StringBuilder para construir la cadena cifrada
-		System::Text::StringBuilder^ sb = gcnew System::Text::StringBuilder();
-
-		// Contar los dígitos para cifrar correctamente
-		int digitCount = 0;
-		for (int i = 0; i < length; i++) {
-			if (Char::IsDigit(numero[i])) {
-				digitCount++;
-			}
-		}
-
-		// Recorrer la cadena original y cifrar los dígitos, menos los últimos 4
-		int digitsToShow = 4;
-		int digitsToCifrar = digitCount - digitsToShow;
-		for (int i = 0; i < length; i++) {
-			if (Char::IsDigit(numero[i])) {
-				if (digitsToCifrar > 0) {
-					sb->Append('*');
-					digitsToCifrar--;
-				}
-				else {
-					sb->Append(numero[i]);
-				}
-			}
-			else {
-				sb->Append(numero[i]);
-			}
-		}
-
-		return sb->ToString();
+		return message;
 	}
 	private: System::Void savePayment(System::Object^ sender, System::EventArgs^ e) {
 		if (this->editableData) {
@@ -975,6 +964,9 @@ namespace QuickShop {
 							writer->Close();
 							this->getPaymentsHistory();
 							this->clearTxt();
+							this->form_direction->Visible = false;
+							this->form_efectivo->Visible = false;
+							this->form_tarjeta->Visible = false;
 							MessageBox::Show("El pago se realizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 						}
 						catch (const std::exception& e) {
