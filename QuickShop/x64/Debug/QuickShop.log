@@ -1,30 +1,54 @@
 ﻿  Dashboard.cpp
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Pagos.h(933,18): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Pagos.h(939,28): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(689,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(773,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(776,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(777,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(852,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(855,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(856,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+E:\Proyectos\Proyecto\Compras.h(689,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(773,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(776,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(777,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(852,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(855,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(856,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
   MyForm.cpp
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Pagos.h(933,18): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Pagos.h(939,28): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(689,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(773,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(776,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(777,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(852,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(855,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(856,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\MyForm.h(508,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\MyForm.cpp(28,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
+E:\Proyectos\Proyecto\Compras.h(689,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(773,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(776,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(777,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(852,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(855,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(856,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\MyForm.h(508,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\MyForm.cpp(28,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
   Pagos.cpp
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Pagos.h(933,18): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Pagos.h(939,28): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
   Generando código...
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\MyForm.h(423): warning C4715: 'QuickShop::MyForm::LoginLogicAdmin': no todas las rutas de acceso de control devuelven un valor
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\MyForm.h(441): warning C4715: 'QuickShop::MyForm::LoginLogicOperator': no todas las rutas de acceso de control devuelven un valor
+E:\Proyectos\Proyecto\MyForm.h(423,1): warning C4715: 'QuickShop::MyForm::LoginLogicAdmin': no todas las rutas de acceso de control devuelven un valor
+E:\Proyectos\Proyecto\MyForm.h(441,1): warning C4715: 'QuickShop::MyForm::LoginLogicOperator': no todas las rutas de acceso de control devuelven un valor
   Clients.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
-  QuickShop.vcxproj -> C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\x64\Debug\QuickShop.exe
+  QuickShop.vcxproj -> E:\Proyectos\Proyecto\x64\Debug\QuickShop.exe

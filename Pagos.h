@@ -6,6 +6,7 @@
 #include "Product.h"
 #include "PurchaseProduct.h"
 #include "Payments.h"
+#include "Product.h"
 
 namespace QuickShop {
 
@@ -26,6 +27,7 @@ namespace QuickShop {
 	/// </summary>
 	public ref class Pagos : public System::Windows::Forms::Form
 	{
+	private: cli::array<Product^>^ productsData = gcnew cli::array<Product^>(100);
 	private: cli::array<PurchaseProduct^>^ cartShopList = gcnew cli::array<PurchaseProduct^>(100);
 	private: cli::array<Payments^>^ localData = gcnew cli::array<Payments^>(100);
 	private: bool editableData = false;
@@ -124,6 +126,7 @@ namespace QuickShop {
 			//
 			this->getPaymentsHistory();
 			this->setComboBoxPurchases();
+			this->getDataProducts();
 		}
 
 	protected:
@@ -161,7 +164,58 @@ namespace QuickShop {
 		/// Método necesario para admitir el Diseñador. No se puede modificar
 		/// el contenido de este método con el editor de código.
 		/// </summary>
+		void getDataProducts() {
+			ifstream products("product.csv");
+
+			if (!products.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				try {
+					while (getline(products, line)) {
+						Product^ newUser = gcnew Product();
+						string id;
+						string name;
+						string catego;
+						string brand;
+						string descrip;
+						string price;
+						string stock;
+
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, name, ',');
+						getline(ss, catego, ',');
+						getline(ss, brand, ',');
+						getline(ss, descrip, ',');
+						getline(ss, price, ',');
+						getline(ss, stock, ',');
+						newUser->id_product = std::stoi(id);
+						newUser->name = gcnew String(name.c_str());
+						newUser->catego = gcnew String(catego.c_str());
+						newUser->brand = gcnew String(brand.c_str());
+						newUser->descrip = gcnew String(descrip.c_str());
+						newUser->price = std::stof(price);
+						newUser->stock = std::stoi(stock);
+
+
+						productsData[limit] = newUser;
+						limit++;
+					}
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+		}
 		void setComboBoxPurchases() {
+			this->cmb_purchase->Items->Clear();
 			ifstream purchases("purchases.csv");
 			if (!purchases.is_open()) {
 				MessageBox::Show("Error al abrir el archivo");
@@ -918,73 +972,69 @@ namespace QuickShop {
 		return message;
 	}
 	private: System::Void savePayment(System::Object^ sender, System::EventArgs^ e) {
-		if (this->editableData) {
-
-		}
-		else {
-			Payments^ newProduct = gcnew Payments();
-			int indice = -1;
-			for (int i = 0; i < localData->Length; i++) {
-				if (localData[i] == nullptr) {
-					indice = i;
-					break;
-				}
+		Payments^ newProduct = gcnew Payments();
+		int indice = -1;
+		for (int i = 0; i < localData->Length; i++) {
+			if (localData[i] == nullptr) {
+				indice = i;
+				break;
 			}
-			if (indice != -1) {
-				if (CamposNoVacios()) {
-					if (validateExistData()) {
-						try {
-							System::String^ strId = this->txt_id->Text;
-							int id = System::Convert::ToInt32(strId);
-							System::String^ strTotal = this->txt_total->Text;
-							int total = System::Convert::ToSingle(strTotal);
-							newProduct->id_payment = id;
-							newProduct->code_payment = gcnew String(this->txt_code->Text);
-							newProduct->usuario = gcnew String(this->cmb_purchase->Text);
-							newProduct->type_payment = gcnew String(this->cmb_typePayment->Text);
-							newProduct->productos = newProductlist;
-							newProduct->total = total;
-							String^ cardNumber = gcnew String(this->txt_cardNumber->Text);
-							String^ cardNumberCifrado = CifrarNumero(cardNumber);
-							this->txt_cardNumber->Text->Length > 0 ? newProduct->card = cardNumberCifrado : "N/A";
-							this->txt_changeBill->Text->Length > 0 ? newProduct->amountBill = gcnew String(this->txt_changeBill->Text) : "N/A";
-							newProduct->address = gcnew String(this->txt_direction->Text);
-							newProduct->phoneNumb = gcnew String(this->txt_phoneNumber->Text);
-							this->localData[indice] = newProduct;
-							StreamWriter^ writer = gcnew StreamWriter("payments.csv");
-							for (int i = 0; i < localData->Length; i++) {
-								if (localData[i] != nullptr) {
-									String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
-										localData[i]->id_payment, localData[i]->code_payment, localData[i]->usuario,
-										localData[i]->productos, localData[i]->type_payment, localData[i]->total,
-										localData[i]->card, localData[i]->amountBill, localData[i]->address, localData[i]->phoneNumb);
-									writer->WriteLine(message);
-								}
+		}
+		if (indice != -1) {
+			if (CamposNoVacios()) {
+				if (validateExistData()) {
+					try {
+						System::String^ strId = this->txt_id->Text;
+						int id = System::Convert::ToInt32(strId);
+						System::String^ strTotal = this->txt_total->Text;
+						newProduct->id_payment = id;
+						newProduct->code_payment = gcnew String(this->txt_code->Text);
+						newProduct->usuario = gcnew String(this->cmb_purchase->Text);
+						newProduct->type_payment = gcnew String(this->cmb_typePayment->Text);
+						newProduct->productos = newProductlist;
+						newProduct->total = System::Convert::ToSingle(strTotal);
+						String^ cardNumber = gcnew String(this->txt_cardNumber->Text);
+						String^ cardNumberCifrado = CifrarNumero(cardNumber);
+						this->txt_cardNumber->Text->Length > 0 ? newProduct->card = cardNumberCifrado : "N/A";
+						this->txt_changeBill->Text->Length > 0 ? newProduct->amountBill = gcnew String(this->txt_changeBill->Text) : "N/A";
+						newProduct->address = gcnew String(this->txt_direction->Text);
+						newProduct->phoneNumb = gcnew String(this->txt_phoneNumber->Text);
+						this->localData[indice] = newProduct;
+						deleteProducts(newProduct->productos);
+						StreamWriter^ writer = gcnew StreamWriter("payments.csv");
+						for (int i = 0; i < localData->Length; i++) {
+							if (localData[i] != nullptr) {
+								String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
+									localData[i]->id_payment, localData[i]->code_payment, localData[i]->usuario,
+									localData[i]->productos, localData[i]->type_payment, localData[i]->total,
+									localData[i]->card, localData[i]->amountBill, localData[i]->address, localData[i]->phoneNumb);
+								writer->WriteLine(message);
 							}
-							writer->Close();
-							this->getPaymentsHistory();
-							this->clearTxt();
-							this->form_direction->Visible = false;
-							this->form_efectivo->Visible = false;
-							this->form_tarjeta->Visible = false;
-							MessageBox::Show("El pago se realizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 						}
-						catch (const std::exception& e) {
-							std::cerr << "Excepción capturada: " << e.what() << std::endl;
-						}
-						catch (...) {
-							std::cerr << "Excepción desconocida capturada" << std::endl;
-						}
+						writer->Close();
+						this->deletePurchase(gcnew String(this->cmb_purchase->Text));
+						this->getPaymentsHistory();
+						this->clearTxt();
+						this->form_direction->Visible = false;
+						this->form_efectivo->Visible = false;
+						this->form_tarjeta->Visible = false;
+						MessageBox::Show("El pago se realizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 					}
+					catch (const std::exception& e) {
+						std::cerr << "Excepción capturada: " << e.what() << std::endl;
+					}
+					catch (...) {
+						std::cerr << "Excepción desconocida capturada" << std::endl;
+					}
+				}
 
-				}
-				else {
-					MessageBox::Show("Por favor, completa todos los campos antes de agregar un nuevo usuario.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				}
 			}
 			else {
-				MessageBox::Show("No hay espacio disponible para agregar más productos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				MessageBox::Show("Por favor, completa todos los campos antes de agregar un nuevo usuario.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
+		}
+		else {
+			MessageBox::Show("No hay espacio disponible para agregar más productos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
 	private: System::Void changeUser(System::Object^ sender, System::EventArgs^ e) {
@@ -1029,6 +1079,69 @@ namespace QuickShop {
 		catch (...) {
 			std::cerr << "Excepción desconocida capturada" << std::endl;
 		}
+	}
+
+	private: System::Void deletePurchase(String^ email) {
+		cli::array<PurchaseProduct^>^ nuevoCarritList = gcnew cli::array<PurchaseProduct^>(cartShopList->Length);
+		for (int i = 0; i < cartShopList->Length; i++) {
+			if (cartShopList[i] != nullptr) {
+				if (cartShopList[i]->user != email) {
+					nuevoCarritList[i] = cartShopList[i];
+				}
+			}
+		}
+		cartShopList = nuevoCarritList;
+		
+		StreamWriter^ writer = gcnew StreamWriter("purchases.csv");
+		for (int i = 0; i < cartShopList->Length; i++) {
+			if (cartShopList[i] != nullptr) {
+				String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+					cartShopList[i]->id_purchase, cartShopList[i]->user, cartShopList[i]->productList,
+					cartShopList[i]->iva, cartShopList[i]->subtotal, cartShopList[i]->discount,
+					cartShopList[i]->total);
+				writer->WriteLine(message);
+			}
+		}
+		writer->Close();
+		this->setComboBoxPurchases();
+	}
+
+	private: System::Void deleteProducts(String^ productsText) {
+		
+		System::String^ dataProductsCli = Convert::ToString(productsText);
+		string dataProducts;
+		for (int i = 0; i < dataProductsCli->Length; i++) {
+			dataProducts += (char)dataProductsCli[i];
+		}
+		string item;
+		stringstream ss(dataProducts);
+		while (std::getline(ss, item, '|')) {
+			if (!item.empty()) {
+				size_t pos = item.find('*');
+				if (pos != std::string::npos) {
+					std::string productName = item.substr(0, pos);
+					int quantity = std::stoi(item.substr(pos + 1));
+					for (int i = 0; i < productsData->Length; i++) {
+						if (productsData[i] != nullptr) {
+							if (productsData[i]->name == gcnew String(productName.c_str())) {
+								productsData[i]->deleteStock(quantity);
+							}
+						}
+					}
+				}
+			}
+		}
+		StreamWriter^ writer = gcnew StreamWriter("product.csv");
+		for (int i = 0; i < productsData->Length; i++) {
+			if (productsData[i] != nullptr) {
+				String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+					productsData[i]->id_product, productsData[i]->name, productsData[i]->catego,
+					productsData[i]->brand, productsData[i]->descrip, productsData[i]->price,
+					productsData[i]->stock);
+				writer->WriteLine(message);
+			}
+		}
+		writer->Close();
 	}
 };
 }

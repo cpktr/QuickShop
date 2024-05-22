@@ -49,5 +49,9 @@ public:
 		this->stock = stock;
 
 	}
+
+	void deleteStock(int quantity) {
+		this->stock -= quantity;
+	}
 };
 
