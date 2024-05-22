@@ -35,12 +35,14 @@ void main(cli::array<String^>^ args) {
 	std::string purchasesFile = "purchases.csv";
 	std::string clientsFile = "clients.csv";
 	std::string paymentsFile = "payments.csv";
+	std::string inventaryFile = "inventary.csv";
 
 	CheckFileExistsOrCreate(usersFile);
 	CheckFileExistsOrCreate(productFile);
 	CheckFileExistsOrCreate(purchasesFile);
 	CheckFileExistsOrCreate(clientsFile);
 	CheckFileExistsOrCreate(paymentsFile);
+	CheckFileExistsOrCreate(inventaryFile);
 
 	QuickShop::MyForm form;
 	QuickShop::Dashboard dashboardForm;
