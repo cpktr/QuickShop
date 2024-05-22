@@ -6,6 +6,8 @@
 #include "Clients.h"
 #include "Product.h"
 #include "PurchaseProduct.h"
+#include "Payments.h"
+#include "User.h"
 
 namespace QuickShop {
 
@@ -26,10 +28,15 @@ namespace QuickShop {
 	/// </summary>
 	public ref class Reportes : public System::Windows::Forms::Form
 	{
+	private: User^ userSess;
 	private: cli::array<Cstomer^>^ localData = gcnew cli::array<Cstomer^>(100);
 	private: cli::array<Clients^>^ localDataClient = gcnew cli::array<Clients^>(100);
 	private: cli::array<Product^>^ localDataProducts = gcnew cli::array<Product^>(100);
 	private: cli::array<PurchaseProduct^>^ localDataPurchases = gcnew cli::array<PurchaseProduct^>(100);
+	private: cli::array<Payments^>^ localDataPayments = gcnew cli::array<Payments^>(100);
+	private: System::Windows::Forms::Button^ btn_inventary;
+	private: System::Windows::Forms::Button^ btn_users;
+
 	public:
 		Reportes(void)
 		{
@@ -37,6 +44,19 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+		}
+		Reportes(User^ userSession)
+		{
+			this->userSess = userSession;
+			InitializeComponent();
+			if (this->userSess != nullptr) {
+				if (this->userSess->operador == true) {
+					this->btn_inventary->Visible = false;
+					this->btn_users->Visible = false;
+					this->btn_inventary->Name = L"Reportes";
+				}
+			}
+			
 		}
 
 	protected:
@@ -54,8 +74,7 @@ namespace QuickShop {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Panel^ panel_buttons;
 
-	private: System::Windows::Forms::Button^ btn_inventary;
-
+	
 
 
 	private: System::Windows::Forms::Button^ btn_payments;
@@ -66,7 +85,7 @@ namespace QuickShop {
 
 
 	private: System::Windows::Forms::Button^ btn_clients;
-	private: System::Windows::Forms::Button^ btn_users;
+	
 	private: System::Windows::Forms::Panel^ panel_table;
 	private: System::Windows::Forms::DataGridView^ dgv_report;
 
@@ -164,6 +183,7 @@ namespace QuickShop {
 			this->btn_payments->TabIndex = 3;
 			this->btn_payments->Text = L"Pagos";
 			this->btn_payments->UseVisualStyleBackColor = true;
+			this->btn_payments->Click += gcnew System::EventHandler(this, &Reportes::btn_payments_Click);
 			// 
 			// btn_purchases
 			// 
@@ -234,6 +254,7 @@ namespace QuickShop {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgv_report))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
+			
 
 		}
 #pragma endregion
@@ -477,6 +498,79 @@ namespace QuickShop {
 					}
 				}
 			}
+	}
+	private: System::Void btn_payments_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->dgv_report->Rows->Clear();
+		this->dgv_report->Columns->Clear();
+		this->dgv_report->Columns->Add("id_payment", "ID");
+		this->dgv_report->Columns->Add("code", "Código de compra");
+		this->dgv_report->Columns->Add("user", "Usuario");
+		this->dgv_report->Columns->Add("products", "Productos");
+		this->dgv_report->Columns->Add("type_payment", "Tipo de Pago");
+		this->dgv_report->Columns->Add("total", "Total");
+		this->dgv_report->Columns->Add("card", "Tarjeta");
+		this->dgv_report->Columns->Add("amountBill", "Monto de Cambio");
+		this->dgv_report->Columns->Add("address", "Dirección");
+		this->dgv_report->Columns->Add("phone", "Número de contacto");
+		ifstream purchases("payments.csv");
+		if (!purchases.is_open()) {
+			MessageBox::Show("Error al abrir el archivo");
+		}
+		else {
+			string line;
+			int limit = 0;
+
+			while (getline(purchases, line)) {
+				try {
+					Payments^ newPayment = gcnew Payments();
+					string id;
+					string code;
+					string user;
+					string products;
+					string type;
+					string total;
+					string card;
+					string changeBill;
+					string address;
+					string phone;
+
+					stringstream ss(line);
+					getline(ss, id, ',');
+					getline(ss, code, ',');
+					getline(ss, user, ',');
+					getline(ss, products, ',');
+					getline(ss, type, ',');
+					getline(ss, total, ',');
+					getline(ss, card, ',');
+					getline(ss, changeBill, ',');
+					getline(ss, address, ',');
+					getline(ss, phone, ',');
+					newPayment->id_payment = std::stoi(id);
+					newPayment->code_payment = gcnew String(code.c_str());
+					newPayment->usuario = gcnew String(user.c_str());
+					newPayment->productos = gcnew String(products.c_str());
+					newPayment->type_payment = gcnew String(type.c_str());
+					newPayment->total = std::stof(total);
+					newPayment->card = gcnew String(card.c_str());
+					newPayment->amountBill = gcnew String(changeBill.c_str());
+					newPayment->address = gcnew String(address.c_str());
+					newPayment->phoneNumb = gcnew String(phone.c_str());
+
+
+					localDataPayments[limit] = newPayment;
+
+					this->dgv_report->Rows->Add(localDataPayments[limit]->id_payment, localDataPayments[limit]->code_payment, localDataPayments[limit]->usuario, localDataPayments[limit]->productos, localDataPayments[limit]->type_payment, localDataPayments[limit]->total, localDataPayments[limit]->card, localDataPayments[limit]->amountBill, localDataPayments[limit]->address, localDataPayments[limit]->phoneNumb);
+
+					limit++;
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+		}
 	}
 };
 }

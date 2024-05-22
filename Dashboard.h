@@ -540,7 +540,7 @@ namespace QuickShop {
 		this->AbrirPanel(gcnew QuickShop::Pagos);
 	}
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->AbrirPanel(gcnew QuickShop::Reportes);
+		this->AbrirPanel(gcnew QuickShop::Reportes(this->userSess));
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->AbrirPanel(gcnew QuickShop::Usuarios);

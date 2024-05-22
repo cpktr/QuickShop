@@ -3,6 +3,7 @@
 #include <string>
 #include "MyForm.h"
 #include "Dashboard.h"
+#include "Reportes.h"
 
 void CheckFileExistsOrCreate(const std::string& filePath) {
 	std::ifstream file(filePath);
@@ -43,12 +44,13 @@ void main(cli::array<String^>^ args) {
 
 	QuickShop::MyForm form;
 	QuickShop::Dashboard dashboardForm;
-	//form.ShowDialog();
-	dashboardForm.ShowDialog();
+	form.ShowDialog();
+	//dashboardForm.ShowDialog();
 
 	User^ user = form.userLogin;
 	if (user != nullptr) {
 		QuickShop::Dashboard dashboardForm(user);
+		QuickShop::Reportes reportsForm(user);
 		dashboardForm.ShowDialog();
 		//MessageBox::Show("Succesfully", "Success", MessageBoxButtons::OK);
 	}
