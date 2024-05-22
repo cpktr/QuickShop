@@ -10,3 +10,7 @@ C:\Users\50257\Desktop\nuevo proyecto\QuickShop\x64\Debug\QuickShop.UserClients.
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\x64\Debug\QuickShop.Usuarios.resources
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\x64\Debug\QuickShop.vcxproj.GenerateResource.cache
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\x64\Debug\QuickShop.exe
+C:\Users\50257\Desktop\nuevo proyecto\QuickShop\x64\Debug\QuickShop.vistacx.resources
+C:\Users\50257\Desktop\nuevo proyecto\QuickShop\x64\Debug\QuickShop.pagoscx.resources
+C:\Users\50257\Desktop\nuevo proyecto\QuickShop\x64\Debug\QuickShop.listascx.resources
+C:\Users\50257\Desktop\nuevo proyecto\QuickShop\x64\Debug\QuickShop.pagoscx1.resources

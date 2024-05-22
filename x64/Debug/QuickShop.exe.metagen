@@ -1,12 +1,16 @@
   QuickShop.Compras.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Dashboard.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Home.resources - Embedded, ContainedInManifestFile, 
+  QuickShop.listascx.resources - Embedded, ContainedInManifestFile, 
   QuickShop.MyForm.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Pagos.resources - Embedded, ContainedInManifestFile, 
+  QuickShop.pagoscx.resources - Embedded, ContainedInManifestFile, 
+  QuickShop.pagoscx1.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Productos.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Reportes.resources - Embedded, ContainedInManifestFile, 
   QuickShop.UserClients.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Usuarios.resources - Embedded, ContainedInManifestFile, 
+  QuickShop.vistacx.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly QuickShop, Version=0.0.*, Culture=Todos los idiomas (todos los países): 
 	hash=SHA1, flags=PublicKey
@@ -57,13 +61,25 @@ Class QuickShop.Dashboard: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     Boolean sidebarExpand : Public
+Class QuickShop.listascx: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class QuickShop.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     User userLogin : Public
+Class QuickShop.MyForm1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class QuickShop.vistacx: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class QuickShop.MyUserControl: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.UserControl
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class QuickShop.pagoscx1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class QuickShop.PanelAdmin: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form

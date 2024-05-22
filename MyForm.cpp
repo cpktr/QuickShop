@@ -3,6 +3,7 @@
 #include <string>
 #include "MyForm.h"
 #include "Dashboard.h"
+#include "vistacx.h"
 
 void CheckFileExistsOrCreate(const std::string& filePath) {
 	std::ifstream file(filePath);
@@ -43,8 +44,11 @@ void main(cli::array<String^>^ args) {
 
 	QuickShop::MyForm form;
 	QuickShop::Dashboard dashboardForm;
+	QuickShop::vistacx vistascustomer;
 	//ACTIVARform.ShowDialog();
-	dashboardForm.ShowDialog();
+	//dashboardForm.ShowDialog();
+	vistascustomer.ShowDialog();
+
 
 	User^ user = form.userLogin;
 	if (user != nullptr) {
