@@ -1,4 +1,8 @@
 #pragma once
+#include <fstream>
+#include <string>
+#include <sstream>
+#include "Inventario.h"
 
 namespace QuickShop {
 
@@ -7,13 +11,20 @@ namespace QuickShop {
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
+	using namespace System::Drawing::Drawing2D;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
+	using namespace System::Runtime::InteropServices;
+	using namespace System::IO;
+	using namespace std;
 
 	/// <summary>
 	/// Resumen de Inventary
 	/// </summary>
 	public ref class Inventary : public System::Windows::Forms::Form
 	{
+	private: cli::array<Inventario^>^ localData = gcnew cli::array<Inventario^>(100);
+	private: bool editableData = false;
 	public:
 		Inventary(void)
 		{
@@ -21,6 +32,7 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->getDataProducts();
 		}
 
 	protected:
@@ -42,15 +54,18 @@ namespace QuickShop {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ name;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ stock;
 	private: System::Windows::Forms::Panel^ panel3;
-	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ txt_id;
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Panel^ panel5;
-	private: System::Windows::Forms::TextBox^ textBox3;
+	private: System::Windows::Forms::TextBox^ txt_name;
+
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Panel^ panel4;
 
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::NumericUpDown^ numericUpDown1;
+	private: System::Windows::Forms::NumericUpDown^ txt_stock;
+
 	private: System::Windows::Forms::Button^ btn_SaveIventary;
 	private: System::Windows::Forms::Button^ btn_cancelar;
 
@@ -73,42 +88,87 @@ namespace QuickShop {
 		/// Método necesario para admitir el Diseñador. No se puede modificar
 		/// el contenido de este método con el editor de código.
 		/// </summary>
+		void getDataProducts() {
+			this->dgv_inventary->Rows->Clear();
+			ifstream products("inventary.csv");
+
+			if (!products.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				try {
+					while (getline(products, line)) {
+						Inventario^ newUser = gcnew Inventario();
+						string id;
+						string name;
+						string catego;
+						string brand;
+						string descrip;
+						string price;
+						string stock;
+
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, name, ',');
+						getline(ss, stock, ',');
+						newUser->id_product = std::stoi(id);
+						newUser->name = gcnew String(name.c_str());
+						newUser->stock = std::stoi(stock);
+
+
+						localData[limit] = newUser;
+						this->dgv_inventary->Rows->Add(localData[limit]->id_product, localData[limit]->name, localData[limit]->stock);
+						limit++;
+					}
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+		}
 		void InitializeComponent(void)
 		{
 			this->titlePage = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->btn_cancelar = (gcnew System::Windows::Forms::Button());
+			this->btn_SaveIventary = (gcnew System::Windows::Forms::Button());
+			this->panel5 = (gcnew System::Windows::Forms::Panel());
+			this->txt_name = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->panel4 = (gcnew System::Windows::Forms::Panel());
+			this->txt_stock = (gcnew System::Windows::Forms::NumericUpDown());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->panel3 = (gcnew System::Windows::Forms::Panel());
+			this->txt_id = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->dgv_inventary = (gcnew System::Windows::Forms::DataGridView());
 			this->id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->name = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->stock = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->panel3 = (gcnew System::Windows::Forms::Panel());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->panel4 = (gcnew System::Windows::Forms::Panel());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->panel5 = (gcnew System::Windows::Forms::Panel());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->numericUpDown1 = (gcnew System::Windows::Forms::NumericUpDown());
-			this->btn_SaveIventary = (gcnew System::Windows::Forms::Button());
-			this->btn_cancelar = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
+			this->panel5->SuspendLayout();
+			this->panel4->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->txt_stock))->BeginInit();
+			this->panel3->SuspendLayout();
 			this->panel2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgv_inventary))->BeginInit();
-			this->panel3->SuspendLayout();
-			this->panel4->SuspendLayout();
-			this->panel5->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// titlePage
 			// 
 			this->titlePage->AutoSize = true;
 			this->titlePage->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20));
-			this->titlePage->Location = System::Drawing::Point(24, 21);
+			this->titlePage->Location = System::Drawing::Point(9, 9);
+			this->titlePage->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->titlePage->Name = L"titlePage";
-			this->titlePage->Size = System::Drawing::Size(325, 76);
+			this->titlePage->Size = System::Drawing::Size(134, 31);
 			this->titlePage->TabIndex = 0;
 			this->titlePage->Text = L"Inventario";
 			// 
@@ -119,17 +179,134 @@ namespace QuickShop {
 			this->panel1->Controls->Add(this->panel5);
 			this->panel1->Controls->Add(this->panel4);
 			this->panel1->Controls->Add(this->panel3);
-			this->panel1->Location = System::Drawing::Point(32, 112);
+			this->panel1->Location = System::Drawing::Point(12, 47);
+			this->panel1->Margin = System::Windows::Forms::Padding(1);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(712, 928);
+			this->panel1->Size = System::Drawing::Size(267, 389);
 			this->panel1->TabIndex = 1;
+			// 
+			// btn_cancelar
+			// 
+			this->btn_cancelar->BackColor = System::Drawing::Color::Transparent;
+			this->btn_cancelar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_cancelar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_cancelar->ForeColor = System::Drawing::Color::Teal;
+			this->btn_cancelar->Location = System::Drawing::Point(104, 363);
+			this->btn_cancelar->Margin = System::Windows::Forms::Padding(1);
+			this->btn_cancelar->Name = L"btn_cancelar";
+			this->btn_cancelar->Size = System::Drawing::Size(75, 23);
+			this->btn_cancelar->TabIndex = 4;
+			this->btn_cancelar->Text = L"Cancelar";
+			this->btn_cancelar->UseVisualStyleBackColor = false;
+			this->btn_cancelar->Visible = false;
+			this->btn_cancelar->Click += gcnew System::EventHandler(this, &Inventary::btn_cancelar_Click);
+			// 
+			// btn_SaveIventary
+			// 
+			this->btn_SaveIventary->BackColor = System::Drawing::Color::Teal;
+			this->btn_SaveIventary->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_SaveIventary->FlatAppearance->BorderSize = 0;
+			this->btn_SaveIventary->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_SaveIventary->ForeColor = System::Drawing::Color::White;
+			this->btn_SaveIventary->Location = System::Drawing::Point(185, 363);
+			this->btn_SaveIventary->Margin = System::Windows::Forms::Padding(1);
+			this->btn_SaveIventary->Name = L"btn_SaveIventary";
+			this->btn_SaveIventary->Size = System::Drawing::Size(75, 23);
+			this->btn_SaveIventary->TabIndex = 3;
+			this->btn_SaveIventary->Text = L"Guardar";
+			this->btn_SaveIventary->UseVisualStyleBackColor = false;
+			this->btn_SaveIventary->Click += gcnew System::EventHandler(this, &Inventary::btn_SaveIventary_Click);
+			// 
+			// panel5
+			// 
+			this->panel5->Controls->Add(this->txt_name);
+			this->panel5->Controls->Add(this->label3);
+			this->panel5->Location = System::Drawing::Point(3, 36);
+			this->panel5->Margin = System::Windows::Forms::Padding(1);
+			this->panel5->Name = L"panel5";
+			this->panel5->Size = System::Drawing::Size(261, 30);
+			this->panel5->TabIndex = 2;
+			// 
+			// txt_name
+			// 
+			this->txt_name->Location = System::Drawing::Point(158, 4);
+			this->txt_name->Name = L"txt_name";
+			this->txt_name->Size = System::Drawing::Size(100, 20);
+			this->txt_name->TabIndex = 1;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(3, 7);
+			this->label3->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(44, 13);
+			this->label3->TabIndex = 0;
+			this->label3->Text = L"Nombre";
+			// 
+			// panel4
+			// 
+			this->panel4->Controls->Add(this->txt_stock);
+			this->panel4->Controls->Add(this->label2);
+			this->panel4->Location = System::Drawing::Point(3, 68);
+			this->panel4->Margin = System::Windows::Forms::Padding(1);
+			this->panel4->Name = L"panel4";
+			this->panel4->Size = System::Drawing::Size(261, 30);
+			this->panel4->TabIndex = 2;
+			// 
+			// txt_stock
+			// 
+			this->txt_stock->Location = System::Drawing::Point(158, 4);
+			this->txt_stock->Margin = System::Windows::Forms::Padding(1);
+			this->txt_stock->Name = L"txt_stock";
+			this->txt_stock->Size = System::Drawing::Size(98, 20);
+			this->txt_stock->Minimum = 0;
+			this->txt_stock->TabIndex = 1;
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(3, 7);
+			this->label2->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(95, 13);
+			this->label2->TabIndex = 0;
+			this->label2->Text = L"Cantidad de Stock";
+			// 
+			// panel3
+			// 
+			this->panel3->Controls->Add(this->txt_id);
+			this->panel3->Controls->Add(this->label1);
+			this->panel3->Location = System::Drawing::Point(3, 3);
+			this->panel3->Margin = System::Windows::Forms::Padding(1);
+			this->panel3->Name = L"panel3";
+			this->panel3->Size = System::Drawing::Size(261, 30);
+			this->panel3->TabIndex = 0;
+			// 
+			// txt_id
+			// 
+			this->txt_id->Location = System::Drawing::Point(158, 4);
+			this->txt_id->Name = L"txt_id";
+			this->txt_id->Size = System::Drawing::Size(100, 20);
+			this->txt_id->TabIndex = 1;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(3, 7);
+			this->label1->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(40, 13);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Código";
 			// 
 			// panel2
 			// 
 			this->panel2->Controls->Add(this->dgv_inventary);
-			this->panel2->Location = System::Drawing::Point(760, 112);
+			this->panel2->Location = System::Drawing::Point(285, 47);
+			this->panel2->Margin = System::Windows::Forms::Padding(1);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(1037, 928);
+			this->panel2->Size = System::Drawing::Size(389, 389);
 			this->panel2->TabIndex = 2;
 			// 
 			// dgv_inventary
@@ -143,14 +320,17 @@ namespace QuickShop {
 			});
 			this->dgv_inventary->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->dgv_inventary->Location = System::Drawing::Point(0, 0);
+			this->dgv_inventary->Margin = System::Windows::Forms::Padding(1);
 			this->dgv_inventary->Name = L"dgv_inventary";
 			this->dgv_inventary->ReadOnly = true;
 			this->dgv_inventary->RowHeadersVisible = false;
 			this->dgv_inventary->RowHeadersWidth = 102;
 			this->dgv_inventary->RowTemplate->Height = 40;
 			this->dgv_inventary->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dgv_inventary->Size = System::Drawing::Size(1037, 928);
+			this->dgv_inventary->Size = System::Drawing::Size(389, 389);
 			this->dgv_inventary->TabIndex = 0;
+			this->dgv_inventary->DoubleClick += gcnew System::EventHandler(this, &Inventary::editProduct);
+			this->dgv_inventary->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Inventary::deleteRowProduct);
 			// 
 			// id
 			// 
@@ -176,134 +356,202 @@ namespace QuickShop {
 			this->stock->ReadOnly = true;
 			this->stock->Width = 250;
 			// 
-			// panel3
-			// 
-			this->panel3->Controls->Add(this->textBox1);
-			this->panel3->Controls->Add(this->label1);
-			this->panel3->Location = System::Drawing::Point(8, 7);
-			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(696, 72);
-			this->panel3->TabIndex = 0;
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(8, 17);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(105, 32);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Código";
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(421, 10);
-			this->textBox1->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(260, 38);
-			this->textBox1->TabIndex = 1;
-			// 
-			// panel4
-			// 
-			this->panel4->Controls->Add(this->numericUpDown1);
-			this->panel4->Controls->Add(this->label2);
-			this->panel4->Location = System::Drawing::Point(8, 163);
-			this->panel4->Name = L"panel4";
-			this->panel4->Size = System::Drawing::Size(696, 72);
-			this->panel4->TabIndex = 2;
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(8, 17);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(246, 32);
-			this->label2->TabIndex = 0;
-			this->label2->Text = L"Cantidad de Stock";
-			// 
-			// textBox3
-			// 
-			this->textBox3->Location = System::Drawing::Point(421, 10);
-			this->textBox3->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(260, 38);
-			this->textBox3->TabIndex = 1;
-			// 
-			// panel5
-			// 
-			this->panel5->Controls->Add(this->textBox3);
-			this->panel5->Controls->Add(this->label3);
-			this->panel5->Location = System::Drawing::Point(8, 85);
-			this->panel5->Name = L"panel5";
-			this->panel5->Size = System::Drawing::Size(696, 72);
-			this->panel5->TabIndex = 2;
-			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(8, 17);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(114, 32);
-			this->label3->TabIndex = 0;
-			this->label3->Text = L"Nombre";
-			// 
-			// numericUpDown1
-			// 
-			this->numericUpDown1->Location = System::Drawing::Point(421, 10);
-			this->numericUpDown1->Name = L"numericUpDown1";
-			this->numericUpDown1->Size = System::Drawing::Size(260, 38);
-			this->numericUpDown1->TabIndex = 1;
-			// 
-			// btn_SaveIventary
-			// 
-			this->btn_SaveIventary->BackColor = System::Drawing::Color::Teal;
-			this->btn_SaveIventary->FlatAppearance->BorderSize = 0;
-			this->btn_SaveIventary->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btn_SaveIventary->ForeColor = System::Drawing::Color::White;
-			this->btn_SaveIventary->Location = System::Drawing::Point(493, 866);
-			this->btn_SaveIventary->Name = L"btn_SaveIventary";
-			this->btn_SaveIventary->Size = System::Drawing::Size(200, 55);
-			this->btn_SaveIventary->TabIndex = 3;
-			this->btn_SaveIventary->Text = L"Guardar";
-			this->btn_SaveIventary->UseVisualStyleBackColor = false;
-			// 
-			// btn_cancelar
-			// 
-			this->btn_cancelar->BackColor = System::Drawing::Color::Transparent;
-			this->btn_cancelar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btn_cancelar->ForeColor = System::Drawing::Color::Teal;
-			this->btn_cancelar->Location = System::Drawing::Point(277, 866);
-			this->btn_cancelar->Name = L"btn_cancelar";
-			this->btn_cancelar->Size = System::Drawing::Size(200, 55);
-			this->btn_cancelar->TabIndex = 4;
-			this->btn_cancelar->Text = L"Cancelar";
-			this->btn_cancelar->UseVisualStyleBackColor = false;
-			// 
 			// Inventary
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(16, 31);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
-			this->ClientSize = System::Drawing::Size(1851, 1102);
+			this->ClientSize = System::Drawing::Size(694, 461);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->titlePage);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Margin = System::Windows::Forms::Padding(1);
 			this->Name = L"Inventary";
 			this->Text = L"Inventary";
 			this->panel1->ResumeLayout(false);
-			this->panel2->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgv_inventary))->EndInit();
-			this->panel3->ResumeLayout(false);
-			this->panel3->PerformLayout();
-			this->panel4->ResumeLayout(false);
-			this->panel4->PerformLayout();
 			this->panel5->ResumeLayout(false);
 			this->panel5->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
+			this->panel4->ResumeLayout(false);
+			this->panel4->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->txt_stock))->EndInit();
+			this->panel3->ResumeLayout(false);
+			this->panel3->PerformLayout();
+			this->panel2->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgv_inventary))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+		private: bool CamposNoVacios() {
+			return !(String::IsNullOrEmpty(this->txt_id->Text) ||
+				String::IsNullOrEmpty(this->txt_name->Text) ||
+				String::IsNullOrEmpty(this->txt_stock->Text));
+		}
+	private: bool validateExistData() {
+		String^ newId = gcnew String(this->txt_id->Text);
+		String^ newName = gcnew String(this->txt_name->Text);
+		String^ newStock = gcnew String(this->txt_stock->Text);
+
+
+		for (int i = 0; i < localData->Length; i++) {
+			if (localData[i] != nullptr) {
+				if (!editableData && localData[i]->id_product.ToString() == newId) {
+					MessageBox::Show("El ID del producto ya existe en registros anteriores", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false;
+				}
+				if (System::Convert::ToInt32(newStock) < 0) {
+					MessageBox::Show("El stock no puede ser negativo", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false;
+				}
+				if (localData[i]->name == newName && localData[i]->id_product.ToString() != newId) {
+					MessageBox::Show("El producto ya existe", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	private: void clearInputs() {
+		this->txt_id->Clear();
+		this->txt_name->Clear();
+		this->txt_stock->Text = "0";
+	}
+	private: System::Void btn_SaveIventary_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->editableData) {
+			if (validateExistData()) {
+				if (CamposNoVacios()) {
+					DataGridViewRow^ filaSeleccionada = this->dgv_inventary->SelectedRows[0];
+					for (int i = 0; i < localData->Length; i++) {
+						if (localData[i] != nullptr) {
+							if (filaSeleccionada->Cells[0]->Value->ToString() == localData[i]->id_product.ToString()) {
+								Inventario^ newProduct = gcnew Inventario();
+								System::String^ strId = this->txt_id->Text;
+								System::String^ strStock = this->txt_stock->Text;
+								int id = System::Convert::ToInt32(strId);
+								int stock = System::Convert::ToInt32(strStock);
+								newProduct->id_product = id;
+								newProduct->name = gcnew String(this->txt_name->Text);
+								newProduct->stock = stock;
+								this->localData[i] = newProduct;
+								StreamWriter^ writer = gcnew StreamWriter("inventary.csv");
+								for (int i = 0; i < localData->Length; i++) {
+									if (localData[i] != nullptr) {
+										String^ message = String::Format("{0},{1},{2}",
+											localData[i]->id_product, localData[i]->name, localData[i]->stock);
+										writer->WriteLine(message);
+									}
+								}
+								writer->Close();
+								this->clearInputs();
+								this->getDataProducts();
+								this->txt_id->ReadOnly = false;
+								this->editableData = false;
+								this->btn_cancelar->Visible = false;
+								MessageBox::Show("El producto se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+							}
+						}
+					}
+				}
+			}
+		}
+		else {
+			Inventario^ newProduct = gcnew Inventario();
+			int indice = -1;
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[i] == nullptr) {
+					indice = i;
+					break;
+				}
+			}
+			if (indice != -1) {
+				if (CamposNoVacios()) {
+					if (validateExistData()) {
+						try {
+							System::String^ strId = this->txt_id->Text;
+							System::String^ strStock = this->txt_stock->Text;
+							int id = System::Convert::ToInt32(strId);
+							int stock = System::Convert::ToInt32(strStock);
+							newProduct->id_product = id;
+							newProduct->name = gcnew String(this->txt_name->Text);
+							newProduct->stock = stock;
+							this->localData[indice] = newProduct;
+							StreamWriter^ writer = gcnew StreamWriter("inventary.csv");
+							for (int i = 0; i < localData->Length; i++) {
+
+								if (localData[i] != nullptr) {
+									String^ message = String::Format("{0},{1},{2}",
+										localData[i]->id_product, localData[i]->name, localData[i]->stock);
+									writer->WriteLine(message);
+								}
+							}
+
+							writer->Close();
+							this->clearInputs();
+							this->getDataProducts();
+							MessageBox::Show("El producto se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+						}
+						catch (const std::exception& e) {
+							std::cerr << "Excepción capturada: " << e.what() << std::endl;
+						}
+						catch (...) {
+							std::cerr << "Excepción desconocida capturada" << std::endl;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private: System::Void editProduct(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			DataGridViewRow^ filaSeleccionada = this->dgv_inventary->SelectedRows[0];
+			this->txt_id->ReadOnly = true;
+			this->txt_id->Text = Convert::ToString(filaSeleccionada->Cells[0]->Value);
+			this->txt_name->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
+			this->txt_stock->Text = Convert::ToString(filaSeleccionada->Cells[2]->Value);
+			this->editableData = true;
+			this->btn_cancelar->Visible = true;
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Error al obtener un producto : " + ex->Message, "Error", MessageBoxButtons::OK);
+		}
+	}
+	private: System::Void btn_cancelar_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->clearInputs();
+		this->txt_id->ReadOnly = false;
+		this->editableData = false;
+		this->btn_cancelar->Visible = false;
+	}
+	private: System::Void deleteRowProduct(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+		if (e->KeyCode == Keys::Delete) {
+			DataGridViewRow^ filaSeleccionada = this->dgv_inventary->SelectedRows[0];
+			System::Windows::Forms::DialogResult result = MessageBox::Show("¿Estás seguro de querer eliminar estos datos?", "Eliminar Usuario", MessageBoxButtons::OKCancel, MessageBoxIcon::Warning);
+			if (result == System::Windows::Forms::DialogResult::OK) {
+				cli::array<Inventario^>^ nuevoLocalData = gcnew cli::array<Inventario^>(localData->Length);
+				for (int i = 0; i < localData->Length; i++) {
+					if (localData[i] != nullptr) {
+						if (localData[i]->id_product.ToString() != filaSeleccionada->Cells[0]->Value->ToString()) {
+							nuevoLocalData[i] = localData[i];
+						}
+					}
+				}
+				localData = nuevoLocalData;
+				StreamWriter^ writer = gcnew StreamWriter("inventary.csv");
+				for (int i = 0; i < localData->Length; i++) {
+					if (localData[i] != nullptr) {
+						String^ message = String::Format("{0},{1},{2}",
+							localData[i]->id_product, localData[i]->name, localData[i]->stock);
+						writer->WriteLine(message);
+					}
+				}
+				writer->Close();
+				this->getDataProducts();
+				this->clearInputs();
+				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+		}
+	}
+};
 }

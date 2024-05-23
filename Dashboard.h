@@ -9,6 +9,7 @@ using namespace std;
 #include "UserClients.h"
 #include "Compras.h"
 #include "User.h"
+#include "Inventary.h"
 
 namespace QuickShop {
 
@@ -26,6 +27,11 @@ namespace QuickShop {
 	{
 	private: User^ userSess;
 	private: System::Windows::Forms::Label^ sessionEmailLabel;
+	private: System::Windows::Forms::Panel^ panel9;
+	private: System::Windows::Forms::Button^ btn_inventary;
+
+	private: System::Windows::Forms::Panel^ panel6;
+	private: System::Windows::Forms::Button^ button8;
 	public:
 		bool sidebarExpand;
 		Dashboard(void)
@@ -83,8 +89,8 @@ namespace QuickShop {
 	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private: System::Windows::Forms::Panel^ panel8;
 	private: System::Windows::Forms::Button^ button7;
-	private: System::Windows::Forms::Panel^ panel9;
-	private: System::Windows::Forms::Button^ button8;
+
+
 	private: System::Windows::Forms::Panel^ fatherPanelDashboard;
 
 	private: System::ComponentModel::IContainer^ components;
@@ -128,6 +134,8 @@ namespace QuickShop {
 			this->panel8 = (gcnew System::Windows::Forms::Panel());
 			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->panel9 = (gcnew System::Windows::Forms::Panel());
+			this->btn_inventary = (gcnew System::Windows::Forms::Button());
+			this->panel6 = (gcnew System::Windows::Forms::Panel());
 			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->panel_contenedor = (gcnew System::Windows::Forms::Panel());
@@ -145,6 +153,7 @@ namespace QuickShop {
 			this->panel7->SuspendLayout();
 			this->panel8->SuspendLayout();
 			this->panel9->SuspendLayout();
+			this->panel6->SuspendLayout();
 			this->panel_contenedor->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			this->fatherPanelDashboard->SuspendLayout();
@@ -162,6 +171,7 @@ namespace QuickShop {
 			this->flowLayoutPanel1->Controls->Add(this->panel7);
 			this->flowLayoutPanel1->Controls->Add(this->panel8);
 			this->flowLayoutPanel1->Controls->Add(this->panel9);
+			this->flowLayoutPanel1->Controls->Add(this->panel6);
 			this->flowLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Left;
 			this->flowLayoutPanel1->Location = System::Drawing::Point(0, 0);
 			this->flowLayoutPanel1->MaximumSize = System::Drawing::Size(222, 462);
@@ -393,12 +403,38 @@ namespace QuickShop {
 			// 
 			// panel9
 			// 
-			this->panel9->Controls->Add(this->button8);
+			this->panel9->Controls->Add(this->btn_inventary);
 			this->panel9->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->panel9->Location = System::Drawing::Point(3, 358);
 			this->panel9->Name = L"panel9";
 			this->panel9->Size = System::Drawing::Size(219, 36);
 			this->panel9->TabIndex = 8;
+			// 
+			// btn_inventary
+			// 
+			this->btn_inventary->BackColor = System::Drawing::Color::Teal;
+			this->btn_inventary->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_inventary->ForeColor = System::Drawing::Color::White;
+			this->btn_inventary->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btn_inventary.Image")));
+			this->btn_inventary->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btn_inventary->Location = System::Drawing::Point(-12, -8);
+			this->btn_inventary->Name = L"btn_inventary";
+			this->btn_inventary->Padding = System::Windows::Forms::Padding(20, 0, 0, 0);
+			this->btn_inventary->Size = System::Drawing::Size(241, 54);
+			this->btn_inventary->TabIndex = 3;
+			this->btn_inventary->Text = L"                          Inventario";
+			this->btn_inventary->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			this->btn_inventary->UseVisualStyleBackColor = false;
+			this->btn_inventary->Click += gcnew System::EventHandler(this, &Dashboard::btn_inventary_Click);
+			// 
+			// panel6
+			// 
+			this->panel6->Controls->Add(this->button8);
+			this->panel6->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->panel6->Location = System::Drawing::Point(3, 400);
+			this->panel6->Name = L"panel6";
+			this->panel6->Size = System::Drawing::Size(219, 36);
+			this->panel6->TabIndex = 9;
 			// 
 			// button8
 			// 
@@ -475,6 +511,7 @@ namespace QuickShop {
 			this->panel7->ResumeLayout(false);
 			this->panel8->ResumeLayout(false);
 			this->panel9->ResumeLayout(false);
+			this->panel6->ResumeLayout(false);
 			this->panel_contenedor->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			this->fatherPanelDashboard->ResumeLayout(false);
@@ -547,6 +584,9 @@ namespace QuickShop {
 	}
 	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->AbrirPanel(gcnew QuickShop::Compras);
+	}
+	private: System::Void btn_inventary_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->AbrirPanel(gcnew QuickShop::Inventary);
 	}
 	private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();

@@ -1,6 +1,7 @@
   QuickShop.Compras.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Dashboard.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Home.resources - Embedded, ContainedInManifestFile, 
+  QuickShop.Inventary.resources - Embedded, ContainedInManifestFile, 
   QuickShop.MyForm.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Pagos.resources - Embedded, ContainedInManifestFile, 
   QuickShop.Productos.resources - Embedded, ContainedInManifestFile, 
@@ -50,6 +51,9 @@ Class QuickShop.Usuarios: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class QuickShop.UserClients: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class QuickShop.Inventary: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class QuickShop.Dashboard: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit

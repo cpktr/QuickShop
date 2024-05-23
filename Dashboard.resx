@@ -662,6 +662,18 @@
         SUVORK5CYII=
 </value>
   </data>
+  <data name="btn_inventary.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
+        AAABPUlEQVQ4T5WSMUsDQRCFj4CNNpYpgoWlhRYWphAJRkttRMFOq0CKGGyCIiEgorVgoaWFIlraWZr/
+        dX5veRvv3OCRgY/duXkzOzt72X+W5/kGDODcn6oN8aqTxDuswGPhWwdqlqdG8A6OQEnFxC+vXWhanhrB
+        kTkwm3AMSlZhxVqWp2aBeDAxeeYCurtYhnXYgT2oLCCheDaHoNM1G3VzBmuWh4QmvMDYq3iC2EE8fRe2
+        4QI+4A0WVaBldF9NXQVHLj4P+3BtLmEI36DXqE0KhHZs+HEGr3ALn3ADPbiCe0uDuFSAvdpVgQacQhvm
+        HNNAFV8KYhmOCvydwbS9riZtX6vTfzuA0gy8ytd3xfUP6CVOYMvp6RVk+GGI0axRAT2nZrHgUFqAfZiB
+        Xfm6t96/dMjECNRBrVVRd0rBsuwH71FARZ3AwvEAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="button8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO

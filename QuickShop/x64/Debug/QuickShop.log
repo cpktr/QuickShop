@@ -20,6 +20,8 @@ E:\Proyectos\Proyecto\Compras.h(855,42): warning C4244: '=': conversión de 'dou
 E:\Proyectos\Proyecto\Compras.h(856,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
   (compilando archivo de origen "Dashboard.cpp")
   
+  Inventario.cpp
+  Inventary.cpp
   MyForm.cpp
 E:\Proyectos\Proyecto\Compras.h(689,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
   (compilando archivo de origen "MyForm.cpp")
@@ -46,7 +48,6 @@ E:\Proyectos\Proyecto\MyForm.h(508,56): warning C4244: 'argumento': conversión 
   (compilando archivo de origen "MyForm.cpp")
   
 E:\Proyectos\Proyecto\MyForm.cpp(29,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
-  Reportes.cpp
   Generando código...
 E:\Proyectos\Proyecto\MyForm.h(423,1): warning C4715: 'QuickShop::MyForm::LoginLogicAdmin': no todas las rutas de acceso de control devuelven un valor
 E:\Proyectos\Proyecto\MyForm.h(441,1): warning C4715: 'QuickShop::MyForm::LoginLogicOperator': no todas las rutas de acceso de control devuelven un valor
