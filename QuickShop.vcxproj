@@ -120,6 +120,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Catalogo.cpp" />
     <ClCompile Include="Clients.cpp" />
     <ClCompile Include="Compras.cpp" />
     <ClCompile Include="Cstomer.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="Usuarios.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Catalogo.h" />
     <ClInclude Include="Clients.h" />
     <ClInclude Include="Compras.h">
       <FileType>CppForm</FileType>

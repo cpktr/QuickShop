@@ -8,6 +8,7 @@
 #include "PurchaseProduct.h"
 #include "Payments.h"
 #include "User.h"
+#include "Inventario.h"
 
 namespace QuickShop {
 
@@ -34,6 +35,7 @@ namespace QuickShop {
 	private: cli::array<Product^>^ localDataProducts = gcnew cli::array<Product^>(100);
 	private: cli::array<PurchaseProduct^>^ localDataPurchases = gcnew cli::array<PurchaseProduct^>(100);
 	private: cli::array<Payments^>^ localDataPayments = gcnew cli::array<Payments^>(100);
+	private: cli::array<Inventario^>^ localDataInventary = gcnew cli::array<Inventario^>(100);
 	private: System::Windows::Forms::Button^ btn_inventary;
 	private: System::Windows::Forms::Button^ btn_users;
 
@@ -205,6 +207,7 @@ namespace QuickShop {
 			this->btn_products->TabIndex = 1;
 			this->btn_products->Text = L"Catalogo";
 			this->btn_products->UseVisualStyleBackColor = true;
+			this->btn_products->Click += gcnew System::EventHandler(this, &Reportes::btn_products_Click);
 			// 
 			// btn_clients
 			// 
@@ -254,7 +257,6 @@ namespace QuickShop {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgv_report))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
-			
 
 		}
 #pragma endregion
@@ -381,14 +383,10 @@ namespace QuickShop {
 	private: System::Void btn_inventary_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->dgv_report->Rows->Clear();
 		this->dgv_report->Columns->Clear();
-		this->dgv_report->Columns->Add("id_product", "Código");
+		this->dgv_report->Columns->Add("id_inventary", "ID");
 		this->dgv_report->Columns->Add("name", "Nombre");
-		this->dgv_report->Columns->Add("category", "Categoría");
-		this->dgv_report->Columns->Add("brand", "Marca");
-		this->dgv_report->Columns->Add("description", "Descripción");
-		this->dgv_report->Columns->Add("price", "Precio");
 		this->dgv_report->Columns->Add("stock", "Cantidad de Stock");
-		ifstream products("product.csv");
+		ifstream products("inventary.csv");
 
 		if (!products.is_open()) {
 			MessageBox::Show("Error al abrir el archivo");
@@ -398,7 +396,7 @@ namespace QuickShop {
 			int limit = 0;
 			try {
 				while (getline(products, line)) {
-					Product^ newUser = gcnew Product();
+					Inventario^ newUser = gcnew Inventario();
 					string id;
 					string name;
 					string catego;
@@ -411,22 +409,14 @@ namespace QuickShop {
 					stringstream ss(line);
 					getline(ss, id, ',');
 					getline(ss, name, ',');
-					getline(ss, catego, ',');
-					getline(ss, brand, ',');
-					getline(ss, descrip, ',');
-					getline(ss, price, ',');
 					getline(ss, stock, ',');
 					newUser->id_product = std::stoi(id);
 					newUser->name = gcnew String(name.c_str());
-					newUser->catego = gcnew String(catego.c_str());
-					newUser->brand = gcnew String(brand.c_str());
-					newUser->descrip = gcnew String(descrip.c_str());
-					newUser->price = std::stof(price);
 					newUser->stock = std::stoi(stock);
 
 
-					localDataProducts[limit] = newUser;
-					this->dgv_report->Rows->Add(localDataProducts[limit]->id_product, localDataProducts[limit]->name, localDataProducts[limit]->catego, localDataProducts[limit]->brand, localDataProducts[limit]->descrip, localDataProducts[limit]->price, localDataProducts[limit]->stock);
+					localDataInventary[limit] = newUser;
+					this->dgv_report->Rows->Add(localDataInventary[limit]->id_product, localDataInventary[limit]->name, localDataInventary[limit]->stock);
 					limit++;
 				}
 			}
@@ -437,6 +427,7 @@ namespace QuickShop {
 				std::cerr << "Excepción desconocida capturada" << std::endl;
 			}
 		}
+
 	}
 	private: System::Void btn_purchases_Click(System::Object^ sender, System::EventArgs^ e) {
 			this->dgv_report->Rows->Clear();
@@ -569,6 +560,66 @@ namespace QuickShop {
 				catch (...) {
 					std::cerr << "Excepción desconocida capturada" << std::endl;
 				}
+			}
+		}
+	}
+	private: System::Void btn_products_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->dgv_report->Rows->Clear();
+		this->dgv_report->Columns->Clear();
+		this->dgv_report->Columns->Add("id_product", "Código");
+		this->dgv_report->Columns->Add("name", "Nombre");
+		this->dgv_report->Columns->Add("category", "Categoría");
+		this->dgv_report->Columns->Add("brand", "Marca");
+		this->dgv_report->Columns->Add("description", "Descripción");
+		this->dgv_report->Columns->Add("price", "Precio");
+		this->dgv_report->Columns->Add("stock", "Cantidad de Stock");
+		ifstream products("product.csv");
+
+		if (!products.is_open()) {
+			MessageBox::Show("Error al abrir el archivo");
+		}
+		else {
+			string line;
+			int limit = 0;
+			try {
+				while (getline(products, line)) {
+					Product^ newUser = gcnew Product();
+					string id;
+					string name;
+					string catego;
+					string brand;
+					string descrip;
+					string price;
+					string stock;
+
+
+					stringstream ss(line);
+					getline(ss, id, ',');
+					getline(ss, name, ',');
+					getline(ss, catego, ',');
+					getline(ss, brand, ',');
+					getline(ss, descrip, ',');
+					getline(ss, price, ',');
+					getline(ss, stock, ',');
+					newUser->id_product = std::stoi(id);
+					newUser->name = gcnew String(name.c_str());
+					newUser->catego = gcnew String(catego.c_str());
+					newUser->brand = gcnew String(brand.c_str());
+					newUser->descrip = gcnew String(descrip.c_str());
+					newUser->price = std::stof(price);
+					newUser->stock = std::stoi(stock);
+
+
+					localDataProducts[limit] = newUser;
+					this->dgv_report->Rows->Add(localDataProducts[limit]->id_product, localDataProducts[limit]->name, localDataProducts[limit]->catego, localDataProducts[limit]->brand, localDataProducts[limit]->descrip, localDataProducts[limit]->price, localDataProducts[limit]->stock);
+					limit++;
+				}
+			}
+			catch (const std::exception& e) {
+				std::cerr << "Excepción capturada: " << e.what() << std::endl;
+			}
+			catch (...) {
+				std::cerr << "Excepción desconocida capturada" << std::endl;
 			}
 		}
 	}
