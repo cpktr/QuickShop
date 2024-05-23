@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 #include "Product.h"
+#include "Catalogo.h"
+#include "Inventario.h"
 namespace QuickShop {
 
 	using namespace System;
@@ -22,7 +24,11 @@ namespace QuickShop {
 	/// </summary>
 	public ref class Productos : public System::Windows::Forms::Form
 	{
+	private: cli::array<Inventario^>^ localDataIventary = gcnew cli::array<Inventario^>(100);
+	private: cli::array<Catalogo^>^ localDataCatalogo = gcnew cli::array<Catalogo^>(100);
 	private: cli::array<Product^>^ localData = gcnew cli::array<Product^>(100);
+	private: System::Windows::Forms::ComboBox^ cmb_inventary;
+
 	private: bool editableData;
 	
 	public:
@@ -33,6 +39,7 @@ namespace QuickShop {
 			//TODO: agregar código de constructor aquí
 			//
 			this->getDataProducts();
+			this->setComboInventary();
 		}
 
 	protected:
@@ -132,6 +139,50 @@ namespace QuickShop {
 		/// Método necesario para admitir el Diseñador. No se puede modificar
 		/// el contenido de este método con el editor de código.
 		/// </summary>
+		void setComboInventary() {
+			this->cmb_inventary->Items->Clear();
+			ifstream products("inventary.csv");
+
+			if (!products.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				try {
+					while (getline(products, line)) {
+						Inventario^ newUser = gcnew Inventario();
+						string id;
+						string name;
+						string catego;
+						string brand;
+						string descrip;
+						string price;
+						string stock;
+
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, name, ',');
+						getline(ss, stock, ',');
+						newUser->id_product = std::stoi(id);
+						newUser->name = gcnew String(name.c_str());
+						newUser->stock = std::stoi(stock);
+
+
+						localDataIventary[limit] = newUser;
+						this->cmb_inventary->Items->Add(localDataIventary[limit]->name);
+						limit++;
+					}
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+		}
 		void getDataProducts() {
 			this->dataGrid_Products->Rows->Clear();
 			ifstream products("product.csv");
@@ -145,6 +196,7 @@ namespace QuickShop {
 				try {
 					while (getline(products, line)) {
 						Product^ newUser = gcnew Product();
+						Catalogo^ newProduct = gcnew Catalogo();
 						string id;
 						string name;
 						string catego;
@@ -162,17 +214,17 @@ namespace QuickShop {
 						getline(ss, descrip, ',');
 						getline(ss, price, ',');
 						getline(ss, stock, ',');
-						newUser->id_product = std::stoi(id);
-						newUser->name = gcnew String(name.c_str());
-						newUser->catego = gcnew String(catego.c_str());
-						newUser->brand = gcnew String(brand.c_str());
-						newUser->descrip = gcnew String(descrip.c_str());
-						newUser->price = std::stof(price);
-						newUser->stock = std::stoi(stock);
+						newProduct->id_product = std::stoi(id);
+						newProduct->name = gcnew String(name.c_str());
+						newProduct->catego = gcnew String(catego.c_str());
+						newProduct->brand = gcnew String(brand.c_str());
+						newProduct->descrip = gcnew String(descrip.c_str());
+						newProduct->price = std::stof(price);
+						newProduct->stock = std::stoi(stock);
 
 
-						localData[limit] = newUser;
-						this->dataGrid_Products->Rows->Add(localData[limit]->id_product, localData[limit]->name, localData[limit]->catego, localData[limit]->brand, localData[limit]->descrip, localData[limit]->price, localData[limit]->stock);
+						localDataCatalogo[limit] = newProduct;
+						this->dataGrid_Products->Rows->Add(localDataCatalogo[limit]->id_product, localDataCatalogo[limit]->name, localDataCatalogo[limit]->catego, localDataCatalogo[limit]->brand, localDataCatalogo[limit]->descrip, localDataCatalogo[limit]->price, localDataCatalogo[limit]->stock);
 						limit++;
 					}
 				}
@@ -236,6 +288,7 @@ namespace QuickShop {
 			this->txt_name = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->inputContainer = (gcnew System::Windows::Forms::Panel());
+			this->cmb_inventary = (gcnew System::Windows::Forms::ComboBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -264,18 +317,20 @@ namespace QuickShop {
 			// 
 			this->titlePage->AutoSize = true;
 			this->titlePage->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20));
-			this->titlePage->Location = System::Drawing::Point(9, 9);
+			this->titlePage->Location = System::Drawing::Point(24, 21);
+			this->titlePage->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->titlePage->Name = L"titlePage";
-			this->titlePage->Size = System::Drawing::Size(137, 31);
+			this->titlePage->Size = System::Drawing::Size(710, 76);
 			this->titlePage->TabIndex = 0;
-			this->titlePage->Text = L"Productos";
+			this->titlePage->Text = L"Catálago de Productos";
 			// 
 			// panel_table
 			// 
 			this->panel_table->Controls->Add(this->dataGrid_Products);
-			this->panel_table->Location = System::Drawing::Point(285, 47);
+			this->panel_table->Location = System::Drawing::Point(760, 112);
+			this->panel_table->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel_table->Name = L"panel_table";
-			this->panel_table->Size = System::Drawing::Size(389, 389);
+			this->panel_table->Size = System::Drawing::Size(1037, 928);
 			this->panel_table->TabIndex = 1;
 			// 
 			// dataGrid_Products
@@ -289,11 +344,13 @@ namespace QuickShop {
 			});
 			this->dataGrid_Products->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->dataGrid_Products->Location = System::Drawing::Point(0, 0);
+			this->dataGrid_Products->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->dataGrid_Products->Name = L"dataGrid_Products";
 			this->dataGrid_Products->ReadOnly = true;
 			this->dataGrid_Products->RowHeadersVisible = false;
+			this->dataGrid_Products->RowHeadersWidth = 102;
 			this->dataGrid_Products->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dataGrid_Products->Size = System::Drawing::Size(389, 389);
+			this->dataGrid_Products->Size = System::Drawing::Size(1037, 928);
 			this->dataGrid_Products->TabIndex = 0;
 			this->dataGrid_Products->DoubleClick += gcnew System::EventHandler(this, &Productos::EditarProducto);
 			this->dataGrid_Products->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Productos::deleteRowProduct);
@@ -301,44 +358,58 @@ namespace QuickShop {
 			// id
 			// 
 			this->id->HeaderText = L"Código";
+			this->id->MinimumWidth = 12;
 			this->id->Name = L"id";
 			this->id->ReadOnly = true;
+			this->id->Width = 250;
 			// 
 			// name
 			// 
 			this->name->HeaderText = L"Nombre";
+			this->name->MinimumWidth = 12;
 			this->name->Name = L"name";
 			this->name->ReadOnly = true;
+			this->name->Width = 250;
 			// 
 			// category
 			// 
 			this->category->HeaderText = L"Categoría";
+			this->category->MinimumWidth = 12;
 			this->category->Name = L"category";
 			this->category->ReadOnly = true;
+			this->category->Width = 250;
 			// 
 			// brand
 			// 
 			this->brand->HeaderText = L"Marca";
+			this->brand->MinimumWidth = 12;
 			this->brand->Name = L"brand";
 			this->brand->ReadOnly = true;
+			this->brand->Width = 250;
 			// 
 			// description
 			// 
 			this->description->HeaderText = L"Descripción";
+			this->description->MinimumWidth = 12;
 			this->description->Name = L"description";
 			this->description->ReadOnly = true;
+			this->description->Width = 250;
 			// 
 			// price
 			// 
 			this->price->HeaderText = L"Precio";
+			this->price->MinimumWidth = 12;
 			this->price->Name = L"price";
 			this->price->ReadOnly = true;
+			this->price->Width = 250;
 			// 
 			// stock
 			// 
 			this->stock->HeaderText = L"Cantidad de Stock";
+			this->stock->MinimumWidth = 12;
 			this->stock->Name = L"stock";
 			this->stock->ReadOnly = true;
+			this->stock->Width = 250;
 			// 
 			// formContainer
 			// 
@@ -351,9 +422,10 @@ namespace QuickShop {
 			this->formContainer->Controls->Add(this->panel4);
 			this->formContainer->Controls->Add(this->panel2);
 			this->formContainer->Controls->Add(this->inputContainer);
-			this->formContainer->Location = System::Drawing::Point(12, 47);
+			this->formContainer->Location = System::Drawing::Point(32, 112);
+			this->formContainer->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->formContainer->Name = L"formContainer";
-			this->formContainer->Size = System::Drawing::Size(267, 389);
+			this->formContainer->Size = System::Drawing::Size(712, 928);
 			this->formContainer->TabIndex = 2;
 			// 
 			// btn_cancel
@@ -362,9 +434,10 @@ namespace QuickShop {
 			this->btn_cancel->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->btn_cancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btn_cancel->ForeColor = System::Drawing::Color::Teal;
-			this->btn_cancel->Location = System::Drawing::Point(104, 363);
+			this->btn_cancel->Location = System::Drawing::Point(277, 866);
+			this->btn_cancel->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->btn_cancel->Name = L"btn_cancel";
-			this->btn_cancel->Size = System::Drawing::Size(75, 23);
+			this->btn_cancel->Size = System::Drawing::Size(200, 55);
 			this->btn_cancel->TabIndex = 5;
 			this->btn_cancel->Text = L"Cancelar";
 			this->btn_cancel->UseVisualStyleBackColor = false;
@@ -378,9 +451,10 @@ namespace QuickShop {
 			this->btn_saveProduct->FlatAppearance->BorderSize = 0;
 			this->btn_saveProduct->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btn_saveProduct->ForeColor = System::Drawing::Color::White;
-			this->btn_saveProduct->Location = System::Drawing::Point(185, 363);
+			this->btn_saveProduct->Location = System::Drawing::Point(493, 866);
+			this->btn_saveProduct->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->btn_saveProduct->Name = L"btn_saveProduct";
-			this->btn_saveProduct->Size = System::Drawing::Size(75, 23);
+			this->btn_saveProduct->Size = System::Drawing::Size(200, 55);
 			this->btn_saveProduct->TabIndex = 4;
 			this->btn_saveProduct->Text = L"Guardar";
 			this->btn_saveProduct->UseVisualStyleBackColor = false;
@@ -391,49 +465,56 @@ namespace QuickShop {
 			this->panel12->Controls->Add(this->panel13);
 			this->panel12->Controls->Add(this->txt_stock);
 			this->panel12->Controls->Add(this->label13);
-			this->panel12->Location = System::Drawing::Point(3, 201);
+			this->panel12->Location = System::Drawing::Point(8, 479);
+			this->panel12->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel12->Name = L"panel12";
-			this->panel12->Size = System::Drawing::Size(261, 30);
+			this->panel12->Size = System::Drawing::Size(696, 72);
 			this->panel12->TabIndex = 3;
 			// 
 			// panel13
 			// 
 			this->panel13->Controls->Add(this->textBox14);
 			this->panel13->Controls->Add(this->label14);
-			this->panel13->Location = System::Drawing::Point(0, 30);
+			this->panel13->Location = System::Drawing::Point(0, 72);
+			this->panel13->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel13->Name = L"panel13";
-			this->panel13->Size = System::Drawing::Size(261, 30);
+			this->panel13->Size = System::Drawing::Size(696, 72);
 			this->panel13->TabIndex = 2;
 			// 
 			// textBox14
 			// 
-			this->textBox14->Location = System::Drawing::Point(158, 4);
+			this->textBox14->Location = System::Drawing::Point(421, 10);
+			this->textBox14->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->textBox14->Name = L"textBox14";
-			this->textBox14->Size = System::Drawing::Size(100, 20);
+			this->textBox14->Size = System::Drawing::Size(260, 38);
 			this->textBox14->TabIndex = 1;
 			// 
 			// label14
 			// 
 			this->label14->AutoSize = true;
-			this->label14->Location = System::Drawing::Point(3, 7);
+			this->label14->Location = System::Drawing::Point(8, 17);
+			this->label14->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label14->Name = L"label14";
-			this->label14->Size = System::Drawing::Size(40, 13);
+			this->label14->Size = System::Drawing::Size(105, 32);
 			this->label14->TabIndex = 0;
 			this->label14->Text = L"Código";
 			// 
 			// txt_stock
 			// 
-			this->txt_stock->Location = System::Drawing::Point(158, 4);
+			this->txt_stock->Location = System::Drawing::Point(421, 10);
+			this->txt_stock->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->txt_stock->Name = L"txt_stock";
-			this->txt_stock->Size = System::Drawing::Size(100, 20);
+			this->txt_stock->ReadOnly = true;
+			this->txt_stock->Size = System::Drawing::Size(260, 38);
 			this->txt_stock->TabIndex = 1;
 			// 
 			// label13
 			// 
 			this->label13->AutoSize = true;
-			this->label13->Location = System::Drawing::Point(3, 7);
+			this->label13->Location = System::Drawing::Point(8, 17);
+			this->label13->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label13->Name = L"label13";
-			this->label13->Size = System::Drawing::Size(80, 13);
+			this->label13->Size = System::Drawing::Size(207, 32);
 			this->label13->TabIndex = 0;
 			this->label13->Text = L"Cantidad Stock";
 			// 
@@ -442,49 +523,55 @@ namespace QuickShop {
 			this->panel10->Controls->Add(this->panel11);
 			this->panel10->Controls->Add(this->txt_price);
 			this->panel10->Controls->Add(this->label11);
-			this->panel10->Location = System::Drawing::Point(3, 168);
+			this->panel10->Location = System::Drawing::Point(8, 401);
+			this->panel10->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel10->Name = L"panel10";
-			this->panel10->Size = System::Drawing::Size(261, 30);
+			this->panel10->Size = System::Drawing::Size(696, 72);
 			this->panel10->TabIndex = 3;
 			// 
 			// panel11
 			// 
 			this->panel11->Controls->Add(this->textBox12);
 			this->panel11->Controls->Add(this->label12);
-			this->panel11->Location = System::Drawing::Point(0, 30);
+			this->panel11->Location = System::Drawing::Point(0, 72);
+			this->panel11->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel11->Name = L"panel11";
-			this->panel11->Size = System::Drawing::Size(261, 30);
+			this->panel11->Size = System::Drawing::Size(696, 72);
 			this->panel11->TabIndex = 2;
 			// 
 			// textBox12
 			// 
-			this->textBox12->Location = System::Drawing::Point(158, 4);
+			this->textBox12->Location = System::Drawing::Point(421, 10);
+			this->textBox12->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->textBox12->Name = L"textBox12";
-			this->textBox12->Size = System::Drawing::Size(100, 20);
+			this->textBox12->Size = System::Drawing::Size(260, 38);
 			this->textBox12->TabIndex = 1;
 			// 
 			// label12
 			// 
 			this->label12->AutoSize = true;
-			this->label12->Location = System::Drawing::Point(3, 7);
+			this->label12->Location = System::Drawing::Point(8, 17);
+			this->label12->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(40, 13);
+			this->label12->Size = System::Drawing::Size(105, 32);
 			this->label12->TabIndex = 0;
 			this->label12->Text = L"Código";
 			// 
 			// txt_price
 			// 
-			this->txt_price->Location = System::Drawing::Point(158, 4);
+			this->txt_price->Location = System::Drawing::Point(421, 10);
+			this->txt_price->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->txt_price->Name = L"txt_price";
-			this->txt_price->Size = System::Drawing::Size(100, 20);
+			this->txt_price->Size = System::Drawing::Size(260, 38);
 			this->txt_price->TabIndex = 1;
 			// 
 			// label11
 			// 
 			this->label11->AutoSize = true;
-			this->label11->Location = System::Drawing::Point(3, 7);
+			this->label11->Location = System::Drawing::Point(8, 17);
+			this->label11->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(37, 13);
+			this->label11->Size = System::Drawing::Size(95, 32);
 			this->label11->TabIndex = 0;
 			this->label11->Text = L"Precio";
 			// 
@@ -493,49 +580,55 @@ namespace QuickShop {
 			this->panel8->Controls->Add(this->panel9);
 			this->panel8->Controls->Add(this->txt_description);
 			this->panel8->Controls->Add(this->label9);
-			this->panel8->Location = System::Drawing::Point(3, 135);
+			this->panel8->Location = System::Drawing::Point(8, 322);
+			this->panel8->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel8->Name = L"panel8";
-			this->panel8->Size = System::Drawing::Size(261, 30);
+			this->panel8->Size = System::Drawing::Size(696, 72);
 			this->panel8->TabIndex = 3;
 			// 
 			// panel9
 			// 
 			this->panel9->Controls->Add(this->textBox10);
 			this->panel9->Controls->Add(this->label10);
-			this->panel9->Location = System::Drawing::Point(0, 30);
+			this->panel9->Location = System::Drawing::Point(0, 72);
+			this->panel9->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel9->Name = L"panel9";
-			this->panel9->Size = System::Drawing::Size(261, 30);
+			this->panel9->Size = System::Drawing::Size(696, 72);
 			this->panel9->TabIndex = 2;
 			// 
 			// textBox10
 			// 
-			this->textBox10->Location = System::Drawing::Point(158, 4);
+			this->textBox10->Location = System::Drawing::Point(421, 10);
+			this->textBox10->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->textBox10->Name = L"textBox10";
-			this->textBox10->Size = System::Drawing::Size(100, 20);
+			this->textBox10->Size = System::Drawing::Size(260, 38);
 			this->textBox10->TabIndex = 1;
 			// 
 			// label10
 			// 
 			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(3, 7);
+			this->label10->Location = System::Drawing::Point(8, 17);
+			this->label10->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(40, 13);
+			this->label10->Size = System::Drawing::Size(105, 32);
 			this->label10->TabIndex = 0;
 			this->label10->Text = L"Código";
 			// 
 			// txt_description
 			// 
-			this->txt_description->Location = System::Drawing::Point(158, 4);
+			this->txt_description->Location = System::Drawing::Point(421, 10);
+			this->txt_description->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->txt_description->Name = L"txt_description";
-			this->txt_description->Size = System::Drawing::Size(100, 20);
+			this->txt_description->Size = System::Drawing::Size(260, 38);
 			this->txt_description->TabIndex = 1;
 			// 
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(3, 7);
+			this->label9->Location = System::Drawing::Point(8, 17);
+			this->label9->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(63, 13);
+			this->label9->Size = System::Drawing::Size(163, 32);
 			this->label9->TabIndex = 0;
 			this->label9->Text = L"Descripción";
 			// 
@@ -544,49 +637,55 @@ namespace QuickShop {
 			this->panel6->Controls->Add(this->panel7);
 			this->panel6->Controls->Add(this->txt_brand);
 			this->panel6->Controls->Add(this->label7);
-			this->panel6->Location = System::Drawing::Point(3, 102);
+			this->panel6->Location = System::Drawing::Point(8, 243);
+			this->panel6->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel6->Name = L"panel6";
-			this->panel6->Size = System::Drawing::Size(261, 30);
+			this->panel6->Size = System::Drawing::Size(696, 72);
 			this->panel6->TabIndex = 3;
 			// 
 			// panel7
 			// 
 			this->panel7->Controls->Add(this->textBox8);
 			this->panel7->Controls->Add(this->label8);
-			this->panel7->Location = System::Drawing::Point(0, 30);
+			this->panel7->Location = System::Drawing::Point(0, 72);
+			this->panel7->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel7->Name = L"panel7";
-			this->panel7->Size = System::Drawing::Size(261, 30);
+			this->panel7->Size = System::Drawing::Size(696, 72);
 			this->panel7->TabIndex = 2;
 			// 
 			// textBox8
 			// 
-			this->textBox8->Location = System::Drawing::Point(158, 4);
+			this->textBox8->Location = System::Drawing::Point(421, 10);
+			this->textBox8->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->textBox8->Name = L"textBox8";
-			this->textBox8->Size = System::Drawing::Size(100, 20);
+			this->textBox8->Size = System::Drawing::Size(260, 38);
 			this->textBox8->TabIndex = 1;
 			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(3, 7);
+			this->label8->Location = System::Drawing::Point(8, 17);
+			this->label8->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(40, 13);
+			this->label8->Size = System::Drawing::Size(105, 32);
 			this->label8->TabIndex = 0;
 			this->label8->Text = L"Código";
 			// 
 			// txt_brand
 			// 
-			this->txt_brand->Location = System::Drawing::Point(158, 4);
+			this->txt_brand->Location = System::Drawing::Point(421, 10);
+			this->txt_brand->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->txt_brand->Name = L"txt_brand";
-			this->txt_brand->Size = System::Drawing::Size(100, 20);
+			this->txt_brand->Size = System::Drawing::Size(260, 38);
 			this->txt_brand->TabIndex = 1;
 			// 
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(3, 7);
+			this->label7->Location = System::Drawing::Point(8, 17);
+			this->label7->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(37, 13);
+			this->label7->Size = System::Drawing::Size(92, 32);
 			this->label7->TabIndex = 0;
 			this->label7->Text = L"Marca";
 			// 
@@ -595,49 +694,55 @@ namespace QuickShop {
 			this->panel4->Controls->Add(this->panel5);
 			this->panel4->Controls->Add(this->txt_category);
 			this->panel4->Controls->Add(this->label5);
-			this->panel4->Location = System::Drawing::Point(3, 69);
+			this->panel4->Location = System::Drawing::Point(8, 165);
+			this->panel4->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel4->Name = L"panel4";
-			this->panel4->Size = System::Drawing::Size(261, 30);
+			this->panel4->Size = System::Drawing::Size(696, 72);
 			this->panel4->TabIndex = 3;
 			// 
 			// panel5
 			// 
 			this->panel5->Controls->Add(this->textBox6);
 			this->panel5->Controls->Add(this->label6);
-			this->panel5->Location = System::Drawing::Point(0, 30);
+			this->panel5->Location = System::Drawing::Point(0, 72);
+			this->panel5->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel5->Name = L"panel5";
-			this->panel5->Size = System::Drawing::Size(261, 30);
+			this->panel5->Size = System::Drawing::Size(696, 72);
 			this->panel5->TabIndex = 2;
 			// 
 			// textBox6
 			// 
-			this->textBox6->Location = System::Drawing::Point(158, 4);
+			this->textBox6->Location = System::Drawing::Point(421, 10);
+			this->textBox6->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(100, 20);
+			this->textBox6->Size = System::Drawing::Size(260, 38);
 			this->textBox6->TabIndex = 1;
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(3, 7);
+			this->label6->Location = System::Drawing::Point(8, 17);
+			this->label6->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(40, 13);
+			this->label6->Size = System::Drawing::Size(105, 32);
 			this->label6->TabIndex = 0;
 			this->label6->Text = L"Código";
 			// 
 			// txt_category
 			// 
-			this->txt_category->Location = System::Drawing::Point(158, 4);
+			this->txt_category->Location = System::Drawing::Point(421, 10);
+			this->txt_category->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->txt_category->Name = L"txt_category";
-			this->txt_category->Size = System::Drawing::Size(100, 20);
+			this->txt_category->Size = System::Drawing::Size(260, 38);
 			this->txt_category->TabIndex = 1;
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(3, 7);
+			this->label5->Location = System::Drawing::Point(8, 17);
+			this->label5->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(54, 13);
+			this->label5->Size = System::Drawing::Size(138, 32);
 			this->label5->TabIndex = 0;
 			this->label5->Text = L"Categoría";
 			// 
@@ -646,112 +751,139 @@ namespace QuickShop {
 			this->panel2->Controls->Add(this->panel3);
 			this->panel2->Controls->Add(this->txt_name);
 			this->panel2->Controls->Add(this->label3);
-			this->panel2->Location = System::Drawing::Point(3, 36);
+			this->panel2->Location = System::Drawing::Point(8, 86);
+			this->panel2->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(261, 30);
+			this->panel2->Size = System::Drawing::Size(696, 72);
 			this->panel2->TabIndex = 3;
 			// 
 			// panel3
 			// 
 			this->panel3->Controls->Add(this->textBox4);
 			this->panel3->Controls->Add(this->label4);
-			this->panel3->Location = System::Drawing::Point(0, 30);
+			this->panel3->Location = System::Drawing::Point(0, 72);
+			this->panel3->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(261, 30);
+			this->panel3->Size = System::Drawing::Size(696, 72);
 			this->panel3->TabIndex = 2;
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(158, 4);
+			this->textBox4->Location = System::Drawing::Point(421, 10);
+			this->textBox4->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(100, 20);
+			this->textBox4->Size = System::Drawing::Size(260, 38);
 			this->textBox4->TabIndex = 1;
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(3, 7);
+			this->label4->Location = System::Drawing::Point(8, 17);
+			this->label4->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(40, 13);
+			this->label4->Size = System::Drawing::Size(105, 32);
 			this->label4->TabIndex = 0;
 			this->label4->Text = L"Código";
 			// 
 			// txt_name
 			// 
-			this->txt_name->Location = System::Drawing::Point(158, 4);
+			this->txt_name->Location = System::Drawing::Point(421, 10);
+			this->txt_name->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->txt_name->Name = L"txt_name";
-			this->txt_name->Size = System::Drawing::Size(100, 20);
+			this->txt_name->ReadOnly = true;
+			this->txt_name->Size = System::Drawing::Size(260, 38);
 			this->txt_name->TabIndex = 1;
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(3, 7);
+			this->label3->Location = System::Drawing::Point(8, 17);
+			this->label3->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(44, 13);
+			this->label3->Size = System::Drawing::Size(114, 32);
 			this->label3->TabIndex = 0;
 			this->label3->Text = L"Nombre";
 			// 
 			// inputContainer
 			// 
+			this->inputContainer->Controls->Add(this->cmb_inventary);
 			this->inputContainer->Controls->Add(this->panel1);
 			this->inputContainer->Controls->Add(this->txt_id);
 			this->inputContainer->Controls->Add(this->label1);
-			this->inputContainer->Location = System::Drawing::Point(3, 3);
+			this->inputContainer->Location = System::Drawing::Point(8, 7);
+			this->inputContainer->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->inputContainer->Name = L"inputContainer";
-			this->inputContainer->Size = System::Drawing::Size(261, 30);
+			this->inputContainer->Size = System::Drawing::Size(696, 72);
 			this->inputContainer->TabIndex = 0;
+			// 
+			// cmb_inventary
+			// 
+			this->cmb_inventary->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->cmb_inventary->FormattingEnabled = true;
+			this->cmb_inventary->Location = System::Drawing::Point(421, 10);
+			this->cmb_inventary->Name = L"cmb_inventary";
+			this->cmb_inventary->Size = System::Drawing::Size(260, 39);
+			this->cmb_inventary->TabIndex = 3;
+			this->cmb_inventary->SelectedIndexChanged += gcnew System::EventHandler(this, &Productos::seleccionProducto);
 			// 
 			// panel1
 			// 
 			this->panel1->Controls->Add(this->textBox2);
 			this->panel1->Controls->Add(this->label2);
-			this->panel1->Location = System::Drawing::Point(0, 30);
+			this->panel1->Location = System::Drawing::Point(0, 72);
+			this->panel1->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(261, 30);
+			this->panel1->Size = System::Drawing::Size(696, 72);
 			this->panel1->TabIndex = 2;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(158, 4);
+			this->textBox2->Location = System::Drawing::Point(421, 10);
+			this->textBox2->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(100, 20);
+			this->textBox2->Size = System::Drawing::Size(260, 38);
 			this->textBox2->TabIndex = 1;
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(3, 7);
+			this->label2->Location = System::Drawing::Point(8, 17);
+			this->label2->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(40, 13);
+			this->label2->Size = System::Drawing::Size(105, 32);
 			this->label2->TabIndex = 0;
 			this->label2->Text = L"Código";
 			// 
 			// txt_id
 			// 
-			this->txt_id->Location = System::Drawing::Point(158, 4);
+			this->txt_id->Location = System::Drawing::Point(159, 10);
+			this->txt_id->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->txt_id->Name = L"txt_id";
-			this->txt_id->Size = System::Drawing::Size(100, 20);
+			this->txt_id->ReadOnly = true;
+			this->txt_id->Size = System::Drawing::Size(260, 38);
 			this->txt_id->TabIndex = 1;
+			this->txt_id->Visible = false;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(3, 7);
+			this->label1->Location = System::Drawing::Point(8, 17);
+			this->label1->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(40, 13);
+			this->label1->Size = System::Drawing::Size(105, 32);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Código";
 			// 
 			// Productos
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(16, 31);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(694, 462);
+			this->ClientSize = System::Drawing::Size(1851, 1102);
 			this->Controls->Add(this->formContainer);
 			this->Controls->Add(this->panel_table);
 			this->Controls->Add(this->titlePage);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->Name = L"Productos";
 			this->Text = L"Productos";
 			this->panel_table->ResumeLayout(false);
@@ -799,6 +931,7 @@ namespace QuickShop {
 		this->txt_description->Clear();
 		this->txt_price->Clear();
 		this->txt_stock->Clear();
+		this->cmb_inventary->SelectedIndex = -1;
 	}
 
 	private: bool CamposNoVacios(){
@@ -1004,6 +1137,17 @@ namespace QuickShop {
 				this->getDataProducts();
 				this->clearInputs();
 				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+		}
+	}
+	private: System::Void seleccionProducto(System::Object^ sender, System::EventArgs^ e) {
+		for (int i = 0; i < localDataIventary->Length; i++) {
+			if (localDataIventary[i] != nullptr) {
+				if (localDataIventary[i]->name == this->cmb_inventary->Text) {
+					this->txt_name->Text = localDataIventary[i]->name;
+					this->txt_stock->Text = localDataIventary[i]->stock.ToString();
+					this->txt_id->Text = localDataIventary[i]->id_product.ToString();
+				}
 			}
 		}
 	}

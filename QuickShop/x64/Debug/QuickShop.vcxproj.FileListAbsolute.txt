@@ -38,3 +38,4 @@ C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\QuickShop\x64\Debug\QuickS
 C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\QuickShop\x64\Debug\QuickShop.Usuarios.resources
 C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\QuickShop\x64\Debug\QuickShop.vcxproj.GenerateResource.cache
 E:\Proyectos\Proyecto\QuickShop\x64\Debug\QuickShop.Inventary.resources
+C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\QuickShop\x64\Debug\QuickShop.Inventary.resources
