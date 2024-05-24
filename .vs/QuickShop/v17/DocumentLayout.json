@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Productos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Productos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Inventary.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Inventary.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Productos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Productos.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Catalogo.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Catalogo.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Reportes.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Inventary.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Inventary.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Compras.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Inventary.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
@@ -30,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,58 +42,71 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Reportes.h",
+              "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Reportes.h",
+              "RelativeDocumentMoniker": "Reportes.h",
+              "ToolTip": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Reportes.h",
+              "RelativeToolTip": "Reportes.h",
+              "ViewState": "AQIAAFoCAAAAAAAAAAAAwGgCAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-24T18:53:20.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "Reportes.h [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Reportes.h",
+              "RelativeDocumentMoniker": "Reportes.h",
+              "ToolTip": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Reportes.h [Dise\u00F1o]",
+              "RelativeToolTip": "Reportes.h [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-24T18:53:19.281Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Compras.h",
+              "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Compras.h",
+              "RelativeDocumentMoniker": "Compras.h",
+              "ToolTip": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Compras.h",
+              "RelativeToolTip": "Compras.h",
+              "ViewState": "AQIAAM4AAAAAAAAAAAAQwHIAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-24T17:52:12.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Productos.h",
               "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Productos.h",
               "RelativeDocumentMoniker": "Productos.h",
               "ToolTip": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Productos.h",
               "RelativeToolTip": "Productos.h",
-              "ViewState": "AQIAAGoEAAAAAAAAAAAAAHsEAABFAAAA",
+              "ViewState": "AQIAANsAAAAAAAAAAAAAwOwAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-23T13:45:08.634Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Productos.h [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Productos.h",
-              "RelativeDocumentMoniker": "Productos.h",
-              "ToolTip": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Productos.h [Dise\u00F1o]",
-              "RelativeToolTip": "Productos.h [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-23T13:45:01.5Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Catalogo.h",
-              "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Catalogo.h",
-              "RelativeDocumentMoniker": "Catalogo.h",
-              "ToolTip": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Catalogo.h",
-              "RelativeToolTip": "Catalogo.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-23T02:05:56.583Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Inventary.h",
               "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Inventary.h",
               "RelativeDocumentMoniker": "Inventary.h",
               "ToolTip": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Inventary.h",
               "RelativeToolTip": "Inventary.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAABAAAA",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAkwAICAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-23T01:00:48.685Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Inventary.h [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\JavierBarillas\\Desktop\\UMGProyecto\\QuickShop\\Inventary.h",
               "RelativeDocumentMoniker": "Inventary.h",

@@ -4,7 +4,9 @@
 #include <sstream>
 #include "Clients.h"
 #include "Product.h"
+#include "Catalogo.h"
 #include "PurchaseProduct.h"
+#include "Inventario.h"
 namespace QuickShop {
 
 	using namespace System;
@@ -25,8 +27,9 @@ namespace QuickShop {
 	public ref class Compras : public System::Windows::Forms::Form
 	{
 	private: cli::array<Clients^>^ clientsData = gcnew cli::array<Clients^>(100);
-	private: cli::array<Product^>^ productsData = gcnew cli::array<Product^>(100);
+	private: cli::array<Catalogo^>^ productsData = gcnew cli::array<Catalogo^>(100);
 	private: cli::array<PurchaseProduct^>^ localData = gcnew cli::array<PurchaseProduct^>(100);
+	private: cli::array<Inventario^>^ localDataIventary = gcnew cli::array<Inventario^>(100);
 	private: bool editableData = false;
 	private: float aplicableDiscount = 0;
 	private: System::Windows::Forms::Panel^ panel3;
@@ -94,6 +97,7 @@ namespace QuickShop {
 			this->getPurchasesData();
 			this->getClientsData();
 			this->getDataProducts();
+			this->setComboInventary();
 			if (this->clientsData->Length > 0) {
 				for (int i = 0; i < clientsData->Length; i++) {
 					if (clientsData[i] != nullptr) {
@@ -103,7 +107,7 @@ namespace QuickShop {
 			}
 
 			//Agregar los productos al panel
-			this->generateListProduct();
+			this->validateStock();
 
 
 		}
@@ -145,6 +149,48 @@ namespace QuickShop {
 		/// Método necesario para admitir el Diseñador. No se puede modificar
 		/// el contenido de este método con el editor de código.
 		/// </summary>
+		void setComboInventary() {
+			ifstream products("inventary.csv");
+
+			if (!products.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				try {
+					while (getline(products, line)) {
+						Inventario^ newUser = gcnew Inventario();
+						string id;
+						string name;
+						string catego;
+						string brand;
+						string descrip;
+						string price;
+						string stock;
+
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, name, ',');
+						getline(ss, stock, ',');
+						newUser->id_product = std::stoi(id);
+						newUser->name = gcnew String(name.c_str());
+						newUser->stock = std::stoi(stock);
+
+
+						localDataIventary[limit] = newUser;
+						limit++;
+					}
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+		}
 		void getPurchasesData() {
 			this->dgv_compras->Rows->Clear();
 			ifstream purchases("purchases.csv");
@@ -257,7 +303,7 @@ namespace QuickShop {
 				int limit = 0;
 				try {
 					while (getline(products, line)) {
-						Product^ newProduct = gcnew Product();
+						Catalogo^ newProduct = gcnew Catalogo();
 						string id;
 						string name;
 						string catego;
@@ -327,6 +373,40 @@ namespace QuickShop {
 			}
 			catch (...) {
 
+			}
+		}
+		void validateStock() {
+			try {
+				for (int i = 0; i < localDataIventary->Length; i++) {
+					if (localDataIventary[i] != nullptr) {
+						for (int j = 0; j < productsData->Length; j++) {
+							if (productsData[j] != nullptr) {
+								if (localDataIventary[i]->id_product == productsData[j]->id_product) {
+									productsData[j]->stock = localDataIventary[i]->stock;
+								}
+							}
+						}
+					}
+				}
+				StreamWriter^ writer = gcnew StreamWriter("product.csv");
+				for (int i = 0; i < productsData->Length; i++) {
+
+					if (productsData[i] != nullptr) {
+						String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+							productsData[i]->id_product, productsData[i]->name, productsData[i]->catego,
+							productsData[i]->brand, productsData[i]->descrip, productsData[i]->price,
+							productsData[i]->stock);
+						writer->WriteLine(message);
+					}
+				}
+				writer->Close();
+				this->generateListProduct();
+			}
+			catch (const std::exception& e) {
+				std::cerr << "Excepción capturada: " << e.what() << std::endl;
+			}
+			catch (...) {
+				std::cerr << "Excepción desconocida capturada" << std::endl;
 			}
 		}
 		void InitializeComponent(void)

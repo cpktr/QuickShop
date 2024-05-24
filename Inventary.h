@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include "Inventario.h"
+#include "Catalogo.h"
 
 namespace QuickShop {
 
@@ -24,6 +25,7 @@ namespace QuickShop {
 	public ref class Inventary : public System::Windows::Forms::Form
 	{
 	private: cli::array<Inventario^>^ localData = gcnew cli::array<Inventario^>(100);
+	private: cli::array<Catalogo^>^ localDataCatalogo = gcnew cli::array<Catalogo^>(100);
 	private: bool editableData = false;
 	public:
 		Inventary(void)
@@ -33,6 +35,7 @@ namespace QuickShop {
 			//TODO: agregar código de constructor aquí
 			//
 			this->getDataProducts();
+			this->getDataCatalog();
 		}
 
 	protected:
@@ -121,6 +124,56 @@ namespace QuickShop {
 
 						localData[limit] = newUser;
 						this->dgv_inventary->Rows->Add(localData[limit]->id_product, localData[limit]->name, localData[limit]->stock);
+						limit++;
+					}
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+		}
+		void getDataCatalog() {
+			ifstream products("product.csv");
+
+			if (!products.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				try {
+					while (getline(products, line)) {
+						Catalogo^ newProduct = gcnew Catalogo();
+						string id;
+						string name;
+						string catego;
+						string brand;
+						string descrip;
+						string price;
+						string stock;
+
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, name, ',');
+						getline(ss, catego, ',');
+						getline(ss, brand, ',');
+						getline(ss, descrip, ',');
+						getline(ss, price, ',');
+						getline(ss, stock, ',');
+						newProduct->id_product = std::stoi(id);
+						newProduct->name = gcnew String(name.c_str());
+						newProduct->catego = gcnew String(catego.c_str());
+						newProduct->brand = gcnew String(brand.c_str());
+						newProduct->descrip = gcnew String(descrip.c_str());
+						newProduct->price = std::stof(price);
+						newProduct->stock = std::stoi(stock);
+
+
+						localDataCatalogo[limit] = newProduct;
 						limit++;
 					}
 				}
@@ -449,6 +502,29 @@ namespace QuickShop {
 								this->txt_id->ReadOnly = false;
 								this->editableData = false;
 								this->btn_cancelar->Visible = false;
+								for (int i = 0; i < localData->Length; i++) {
+									if (localData[i] != nullptr) {
+										for (int j = 0; j < localDataCatalogo->Length; j++) {
+											if (localDataCatalogo[j] != nullptr) {
+												if (localData[i]->id_product == localDataCatalogo[j]->id_product) {
+													localDataCatalogo[j]->stock = localData[i]->stock;
+												}
+											}
+										}
+									}
+								}
+								StreamWriter^ writerCatalogo = gcnew StreamWriter("product.csv");
+								for (int i = 0; i < localDataCatalogo->Length; i++) {
+
+									if (localDataCatalogo[i] != nullptr) {
+										String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+											localDataCatalogo[i]->id_product, localDataCatalogo[i]->name, localDataCatalogo[i]->catego,
+											localDataCatalogo[i]->brand, localDataCatalogo[i]->descrip, localDataCatalogo[i]->price,
+											localDataCatalogo[i]->stock);
+										writerCatalogo->WriteLine(message);
+									}
+								}
+								writerCatalogo->Close();
 								MessageBox::Show("El producto se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 							}
 						}
@@ -549,6 +625,30 @@ namespace QuickShop {
 				writer->Close();
 				this->getDataProducts();
 				this->clearInputs();
+
+				//Eliminar de catalogo
+				cli::array<Catalogo^>^ nuevoLocalDataCatalogo = gcnew cli::array<Catalogo^>(localDataCatalogo->Length);
+				for (int i = 0; i < localDataCatalogo->Length; i++) {
+					if (localDataCatalogo[i] != nullptr) {
+						if (localDataCatalogo[i]->id_product.ToString() != filaSeleccionada->Cells[0]->Value->ToString()) {
+							nuevoLocalDataCatalogo[i] = localDataCatalogo[i];
+						}
+					}
+				}
+
+				localDataCatalogo = nuevoLocalDataCatalogo;
+				StreamWriter^ writerCatalogo = gcnew StreamWriter("product.csv");
+				for (int i = 0; i < localDataCatalogo->Length; i++) {
+
+					if (localDataCatalogo[i] != nullptr) {
+						String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+							localDataCatalogo[i]->id_product, localDataCatalogo[i]->name, localDataCatalogo[i]->catego,
+							localDataCatalogo[i]->brand, localDataCatalogo[i]->descrip, localDataCatalogo[i]->price,
+							localDataCatalogo[i]->stock);
+						writerCatalogo->WriteLine(message);
+					}
+				}
+				writerCatalogo->Close();
 				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 		}

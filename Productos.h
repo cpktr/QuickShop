@@ -40,6 +40,7 @@ namespace QuickShop {
 			//
 			this->getDataProducts();
 			this->setComboInventary();
+			this->validateStock();
 		}
 
 	protected:
@@ -195,7 +196,6 @@ namespace QuickShop {
 				int limit = 0;
 				try {
 					while (getline(products, line)) {
-						Product^ newUser = gcnew Product();
 						Catalogo^ newProduct = gcnew Catalogo();
 						string id;
 						string name;
@@ -234,6 +234,45 @@ namespace QuickShop {
 				catch (...) {
 					std::cerr << "Excepción desconocida capturada" << std::endl;
 				}
+			}
+		}
+		void validateStock() {
+			try {
+				this->dataGrid_Products->Rows->Clear();
+				for (int i = 0; i < localDataIventary->Length; i++) {
+					if (localDataIventary[i] != nullptr) {
+						for (int j = 0; j < localDataCatalogo->Length; j++) {
+							if (localDataCatalogo[j] != nullptr) {
+								if (localDataIventary[i]->id_product == localDataCatalogo[j]->id_product) {
+									localDataCatalogo[j]->stock = localDataIventary[i]->stock;	
+								}
+							}
+						}
+					}
+				}
+				StreamWriter^ writer = gcnew StreamWriter("product.csv");
+				for (int i = 0; i < localDataCatalogo->Length; i++) {
+
+					if (localDataCatalogo[i] != nullptr) {
+						String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+							localDataCatalogo[i]->id_product, localDataCatalogo[i]->name, localDataCatalogo[i]->catego,
+							localDataCatalogo[i]->brand, localDataCatalogo[i]->descrip, localDataCatalogo[i]->price,
+							localDataCatalogo[i]->stock);
+						writer->WriteLine(message);
+					}
+				}
+				writer->Close();
+				for (int limit = 0; limit < localDataCatalogo->Length; limit++) {
+					if (localDataCatalogo[limit] != nullptr) {
+						this->dataGrid_Products->Rows->Add(localDataCatalogo[limit]->id_product, localDataCatalogo[limit]->name, localDataCatalogo[limit]->catego, localDataCatalogo[limit]->brand, localDataCatalogo[limit]->descrip, localDataCatalogo[limit]->price, localDataCatalogo[limit]->stock);
+					}
+				}
+			}
+			catch (const std::exception& e) {
+				std::cerr << "Excepción capturada: " << e.what() << std::endl;
+			}
+			catch (...) {
+				std::cerr << "Excepción desconocida capturada" << std::endl;
 			}
 		}
 		void InitializeComponent(void)
@@ -950,9 +989,9 @@ namespace QuickShop {
 		String^ newStock = gcnew String(this->txt_stock->Text);
 
 
-		for (int i = 0; i < localData->Length; i++) {
-			if (localData[i] != nullptr) {
-				if (!editableData && localData[i]->id_product.ToString() == newId) {
+		for (int i = 0; i < localDataCatalogo->Length; i++) {
+			if (localDataCatalogo[i] != nullptr) {
+				if (!editableData && localDataCatalogo[i]->id_product.ToString() == newId) {
 					MessageBox::Show("El ID del producto ya existe en registros anteriores", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return false;
 				}
@@ -960,7 +999,7 @@ namespace QuickShop {
 					MessageBox::Show("El stock no puede ser negativo", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return false;
 				}
-				if (localData[i]->name == newName && localData[i]->id_product.ToString() != newId) {
+				if (localDataCatalogo[i]->name == newName && localDataCatalogo[i]->id_product.ToString() != newId) {
 					MessageBox::Show("El producto ya existe", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return false;
 				}
@@ -977,10 +1016,10 @@ namespace QuickShop {
 			if (validateExistData()) {
 				if (CamposNoVacios()) {
 					DataGridViewRow^ filaSeleccionada = this->dataGrid_Products->SelectedRows[0];
-					for (int i = 0; i < localData->Length; i++) {
-						if (localData[i] != nullptr) {
-							if (filaSeleccionada->Cells[0]->Value->ToString() == localData[i]->id_product.ToString()) {
-								Product^ newProduct = gcnew Product();
+					for (int i = 0; i < localDataCatalogo->Length; i++) {
+						if (localDataCatalogo[i] != nullptr) {
+							if (filaSeleccionada->Cells[0]->Value->ToString() == localDataCatalogo[i]->id_product.ToString()) {
+								Catalogo^ newProduct = gcnew Catalogo();
 								System::String^ strId = this->txt_id->Text;
 								System::String^ strStock = this->txt_stock->Text;
 								System::String^ strPrice = this->txt_price->Text;
@@ -994,15 +1033,15 @@ namespace QuickShop {
 								newProduct->descrip = gcnew String(this->txt_description->Text);
 								newProduct->price = price;
 								newProduct->stock = stock;
-								this->localData[i] = newProduct;
+								this->localDataCatalogo[i] = newProduct;
 								StreamWriter^ writer = gcnew StreamWriter("product.csv");
-								for (int i = 0; i < localData->Length; i++) {
+								for (int i = 0; i < localDataCatalogo->Length; i++) {
 
-									if (localData[i] != nullptr) {
+									if (localDataCatalogo[i] != nullptr) {
 										String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
-											localData[i]->id_product, localData[i]->name, localData[i]->catego,
-											localData[i]->brand, localData[i]->descrip, localData[i]->price,
-											localData[i]->stock);
+											localDataCatalogo[i]->id_product, localDataCatalogo[i]->name, localDataCatalogo[i]->catego,
+											localDataCatalogo[i]->brand, localDataCatalogo[i]->descrip, localDataCatalogo[i]->price,
+											localDataCatalogo[i]->stock);
 										writer->WriteLine(message);
 									}
 								}
@@ -1021,10 +1060,10 @@ namespace QuickShop {
 			}
 		}
 		else {
-			Product^ newProduct = gcnew Product();
+			Catalogo^ newProduct = gcnew Catalogo();
 			int indice = -1;
-			for (int i = 0; i < localData->Length; i++) {
-				if (localData[i] == nullptr) {
+			for (int i = 0; i < localDataCatalogo->Length; i++) {
+				if (localDataCatalogo[i] == nullptr) {
 					indice = i;
 					break;
 				}
@@ -1046,16 +1085,16 @@ namespace QuickShop {
 							newProduct->descrip = gcnew String(this->txt_description->Text);
 							newProduct->price = price;
 							newProduct->stock = stock;
-							this->localData[indice] = newProduct;
+							this->localDataCatalogo[indice] = newProduct;
 
 							StreamWriter^ writer = gcnew StreamWriter("product.csv");
-							for (int i = 0; i < localData->Length; i++) {
+							for (int i = 0; i < localDataCatalogo->Length; i++) {
 
-								if (localData[i] != nullptr) {
+								if (localDataCatalogo[i] != nullptr) {
 									String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
-										localData[i]->id_product, localData[i]->name, localData[i]->catego,
-										localData[i]->brand, localData[i]->descrip, localData[i]->price,
-										localData[i]->stock);
+										localDataCatalogo[i]->id_product, localDataCatalogo[i]->name, localDataCatalogo[i]->catego,
+										localDataCatalogo[i]->brand, localDataCatalogo[i]->descrip, localDataCatalogo[i]->price,
+										localDataCatalogo[i]->stock);
 									writer->WriteLine(message);
 								}
 							}
@@ -1087,6 +1126,7 @@ namespace QuickShop {
 			DataGridViewRow^ filaSeleccionada = this->dataGrid_Products->SelectedRows[0];
 			this->txt_id->ReadOnly = true;
 			this->txt_id->Text = Convert::ToString(filaSeleccionada->Cells[0]->Value);
+			this->cmb_inventary->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
 			this->txt_name->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
 			this->txt_brand->Text = Convert::ToString(filaSeleccionada->Cells[2]->Value);
 			this->txt_category->Text = Convert::ToString(filaSeleccionada->Cells[3]->Value);
@@ -1113,23 +1153,23 @@ namespace QuickShop {
 			DataGridViewRow^ filaSeleccionada = this->dataGrid_Products->SelectedRows[0];
 			System::Windows::Forms::DialogResult result = MessageBox::Show("¿Estás seguro de querer eliminar estos datos?", "Eliminar Usuario", MessageBoxButtons::OKCancel, MessageBoxIcon::Warning);
 			if (result == System::Windows::Forms::DialogResult::OK) {
-				cli::array<Product^>^ nuevoLocalData = gcnew cli::array<Product^>(localData->Length);
-				for (int i = 0; i < localData->Length; i++) {
-					if (localData[i] != nullptr) {
-						if (localData[i]->id_product.ToString() != filaSeleccionada->Cells[0]->Value->ToString()) {
-							nuevoLocalData[i] = localData[i];
+				cli::array<Catalogo^>^ nuevoLocalData = gcnew cli::array<Catalogo^>(localDataCatalogo->Length);
+				for (int i = 0; i < localDataCatalogo->Length; i++) {
+					if (localDataCatalogo[i] != nullptr) {
+						if (localDataCatalogo[i]->id_product.ToString() != filaSeleccionada->Cells[0]->Value->ToString()) {
+							nuevoLocalData[i] = localDataCatalogo[i];
 						}
 					}
 				}
-				localData = nuevoLocalData;
+				localDataCatalogo = nuevoLocalData;
 				StreamWriter^ writer = gcnew StreamWriter("product.csv");
-				for (int i = 0; i < localData->Length; i++) {
+				for (int i = 0; i < localDataCatalogo->Length; i++) {
 
-					if (localData[i] != nullptr) {
+					if (localDataCatalogo[i] != nullptr) {
 						String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
-							localData[i]->id_product, localData[i]->name, localData[i]->catego,
-							localData[i]->brand, localData[i]->descrip, localData[i]->price,
-							localData[i]->stock);
+							localDataCatalogo[i]->id_product, localDataCatalogo[i]->name, localDataCatalogo[i]->catego,
+							localDataCatalogo[i]->brand, localDataCatalogo[i]->descrip, localDataCatalogo[i]->price,
+							localDataCatalogo[i]->stock);
 						writer->WriteLine(message);
 					}
 				}
