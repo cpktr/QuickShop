@@ -37,15 +37,6 @@ namespace QuickShop {
 	private: System::Windows::Forms::Label^ label2;
 
 
-
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Panel^ panel8;
 	private: System::Windows::Forms::ComboBox^ cmb_users;
@@ -58,12 +49,6 @@ namespace QuickShop {
 
 	private: System::Windows::Forms::Panel^ panel2;
 	private: System::Windows::Forms::Panel^ panel9;
-
-
-
-
-
-
 	private: System::Windows::Forms::Panel^ panel_discount;
 
 	private: System::Windows::Forms::TextBox^ txt_discount;

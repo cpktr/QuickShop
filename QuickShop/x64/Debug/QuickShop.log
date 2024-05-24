@@ -1,30 +1,72 @@
 ﻿  Dashboard.cpp
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Reportes.h(680,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Reportes.h(689,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(769,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(853,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(856,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(857,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(932,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(935,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(936,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+E:\Proyectos\Proyecto\Reportes.h(680,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Reportes.h(689,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(754,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(838,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(841,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(842,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(917,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(920,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(921,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "Dashboard.cpp")
+  
   MyForm.cpp
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Reportes.h(680,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Reportes.h(689,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(769,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(853,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(856,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(857,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(932,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(935,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Compras.h(936,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\MyForm.h(508,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\MyForm.cpp(29,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
+E:\Proyectos\Proyecto\Reportes.h(680,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Reportes.h(689,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(754,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(838,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(841,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(842,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(917,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(920,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(921,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\MyForm.h(508,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\MyForm.cpp(57,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
   Reportes.cpp
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Reportes.h(680,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\Reportes.h(689,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\Reportes.h(680,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "Reportes.cpp")
+  
+E:\Proyectos\Proyecto\Reportes.h(689,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "Reportes.cpp")
+  
   Generando código...
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\MyForm.h(423): warning C4715: 'QuickShop::MyForm::LoginLogicAdmin': no todas las rutas de acceso de control devuelven un valor
-C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\MyForm.h(441): warning C4715: 'QuickShop::MyForm::LoginLogicOperator': no todas las rutas de acceso de control devuelven un valor
+E:\Proyectos\Proyecto\MyForm.h(423,1): warning C4715: 'QuickShop::MyForm::LoginLogicAdmin': no todas las rutas de acceso de control devuelven un valor
+E:\Proyectos\Proyecto\MyForm.h(441,1): warning C4715: 'QuickShop::MyForm::LoginLogicOperator': no todas las rutas de acceso de control devuelven un valor
   Catalogo.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo
-  QuickShop.vcxproj -> C:\Users\JavierBarillas\Desktop\UMGProyecto\QuickShop\x64\Debug\QuickShop.exe
+  QuickShop.vcxproj -> E:\Proyectos\Proyecto\x64\Debug\QuickShop.exe

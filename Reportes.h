@@ -689,62 +689,70 @@ namespace QuickShop {
 			   std::tm* localTime = std::localtime(&now);
 
 			   std::ostringstream dateTimeStream;
-			   dateTimeStream << std::put_time(localTime, "%d-%m-%Y");
+			   dateTimeStream << std::put_time(localTime, "%d-%m-%Y-%H-%M");
 
 			   return dateTimeStream.str();
 		   }
 	private: System::Void btn_exportar_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
-
 			std::string dateTime = getCurrentDateTime();
 			std::string dateNow = getCurrentDate();
 			String^ dateTimeString = gcnew String(dateTime.c_str());
 			String^ dateString = gcnew String(dateNow.c_str());
-			StreamWriter^ sw = gcnew StreamWriter(nameReportHTML+dateString+".html");
-			sw->WriteLine("<html>");
-			sw->WriteLine("<head>");
-			sw->WriteLine("<title>"+ nameReportHTML+"</title>");
-			sw->WriteLine("<style>");
-			sw->WriteLine("*{ font-family: Arial, sans-serif; }");
-			sw->WriteLine("table { font-family: Arial, sans-serif; border-collapse: collapse; width: 100%; }");
-			sw->WriteLine("th { background: Teal; color: #fff; border-radius: 10px 10px 0 0; }");
-			sw->WriteLine("th, td { text-align: center; padding: 8px; border-left: 1px solid #fff; }");
-			sw->WriteLine("td:nth-child(odd) { background-color: #0080802e; }");
-			sw->WriteLine("td::first-child, th:first-child { border-left: 0; }");
-			sw->WriteLine("</style>");
-			sw->WriteLine("</head>");
-			sw->WriteLine("<body>");
-			sw->WriteLine("<h3>" + titleReport + dateTimeString + "</h3>");
-			if (this->dgv_report->Rows->Count > 0) {
-				sw->WriteLine("<table>");
-				sw->WriteLine("<tr>");
-				for (int i = 0; i < this->dgv_report->Columns->Count; i++) {
-					sw->WriteLine("<th>" + this->dgv_report->Columns[i]->HeaderText + "</th>");
-				}
-				sw->WriteLine("</tr>");
+			SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog();
+			saveFileDialog->Filter = "HTML Files (*.html)|*.html";
+			saveFileDialog->Title = "Guardar reporte como HTML";
+			saveFileDialog->FileName = nameReportHTML + dateString;
+			if(saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				String^ filePath = saveFileDialog->FileName;
 
 
-				for (int i = 0; i < this->dgv_report->Rows->Count; i++) {
+
+				StreamWriter^ sw = gcnew StreamWriter(filePath);
+				sw->WriteLine("<html>");
+				sw->WriteLine("<head>");
+				sw->WriteLine("<title>" + nameReportHTML + "</title>");
+				sw->WriteLine("<style>");
+				sw->WriteLine("*{ font-family: Arial, sans-serif; }");
+				sw->WriteLine("table { font-family: Arial, sans-serif; border-collapse: collapse; width: 100%; }");
+				sw->WriteLine("th { background: Teal; color: #fff; border-radius: 10px 10px 0 0; }");
+				sw->WriteLine("th, td { text-align: center; padding: 8px; border-left: 1px solid #fff; }");
+				sw->WriteLine("td:nth-child(odd) { background-color: #0080802e; }");
+				sw->WriteLine("td::first-child, th:first-child { border-left: 0; }");
+				sw->WriteLine("</style>");
+				sw->WriteLine("</head>");
+				sw->WriteLine("<body>");
+				sw->WriteLine("<h3>" + titleReport + dateTimeString + "</h3>");
+				if (this->dgv_report->Rows->Count > 0) {
+					sw->WriteLine("<table>");
 					sw->WriteLine("<tr>");
-					for (int j = 0; j < this->dgv_report->Columns->Count; j++) {
-						sw->WriteLine("<td>" + this->dgv_report->Rows[i]->Cells[j]->Value->ToString() + "</td>");
+					for (int i = 0; i < this->dgv_report->Columns->Count; i++) {
+						sw->WriteLine("<th>" + this->dgv_report->Columns[i]->HeaderText + "</th>");
 					}
 					sw->WriteLine("</tr>");
+
+
+					for (int i = 0; i < this->dgv_report->Rows->Count; i++) {
+						sw->WriteLine("<tr>");
+						for (int j = 0; j < this->dgv_report->Columns->Count; j++) {
+							sw->WriteLine("<td>" + this->dgv_report->Rows[i]->Cells[j]->Value->ToString() + "</td>");
+						}
+						sw->WriteLine("</tr>");
+					}
+
+					sw->WriteLine("</table>");
 				}
+				else {
+					sw->WriteLine("<br><h4>");
+					sw->WriteLine("No hay datos para mostrar");
+					sw->WriteLine("</h4>");
+				}
+				sw->WriteLine("</body>");
+				sw->WriteLine("</html>");
 
-				sw->WriteLine("</table>");
+				sw->Close();
+				MessageBox::Show("Exportación a HTML completada con éxito", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
-			else {
-				sw->WriteLine("<br><h4>");
-				sw->WriteLine("No hay datos para mostrar");
-				sw->WriteLine("</h4>");
-			}
-			sw->WriteLine("</body>");
-			sw->WriteLine("</html>");
-
-			sw->Close();
-			MessageBox::Show("Exportación a HTML completada con éxito", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
-
 		}
 		catch (Exception^ ex) {
 			MessageBox::Show("Error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);

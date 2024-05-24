@@ -22,6 +22,34 @@ void CheckFileExistsOrCreate(const std::string& filePath) {
 	}
 }
 
+void existUser() {
+	std::ifstream usuaa("users.csv");
+
+	if (!usuaa.is_open()) {
+		MessageBox::Show("Error al abrir el archivo");
+	}
+	else {
+		std::string line;
+		bool isEmpty = true;
+
+		// Check if the file has any content
+		if (getline(usuaa, line) && !line.empty()) {
+			isEmpty = false;
+		}
+		usuaa.close();
+
+		if (isEmpty) {
+			StreamWriter^ writer = gcnew StreamWriter("users.csv");
+			String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
+				"1", "admin", "admin",
+				"quickSadmin", "Administrador", "0000000000000",
+				"00000000", "admin@gmail.com", "Guatemala", "qs123");
+			writer->WriteLine(message);
+			writer->Close();
+		}
+	}
+}
+
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -43,6 +71,8 @@ void main(cli::array<String^>^ args) {
 	CheckFileExistsOrCreate(clientsFile);
 	CheckFileExistsOrCreate(paymentsFile);
 	CheckFileExistsOrCreate(inventaryFile);
+
+	existUser();
 
 	QuickShop::MyForm form;
 	QuickShop::Dashboard dashboardForm;
