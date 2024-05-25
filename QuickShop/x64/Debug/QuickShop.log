@@ -1,71 +1,74 @@
-﻿  Dashboard.cpp
-E:\Proyectos\Proyecto\Pagos.h(421,17): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  (compilando archivo de origen "Dashboard.cpp")
-  
-E:\Proyectos\Proyecto\Reportes.h(714,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  (compilando archivo de origen "Dashboard.cpp")
-  
-E:\Proyectos\Proyecto\Reportes.h(723,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  (compilando archivo de origen "Dashboard.cpp")
-  
-E:\Proyectos\Proyecto\Compras.h(767,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  (compilando archivo de origen "Dashboard.cpp")
-  
-E:\Proyectos\Proyecto\Compras.h(851,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  (compilando archivo de origen "Dashboard.cpp")
-  
-E:\Proyectos\Proyecto\Compras.h(854,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  (compilando archivo de origen "Dashboard.cpp")
-  
-E:\Proyectos\Proyecto\Compras.h(855,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  (compilando archivo de origen "Dashboard.cpp")
-  
-E:\Proyectos\Proyecto\Compras.h(930,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  (compilando archivo de origen "Dashboard.cpp")
-  
-E:\Proyectos\Proyecto\Compras.h(933,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  (compilando archivo de origen "Dashboard.cpp")
-  
-E:\Proyectos\Proyecto\Compras.h(934,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  (compilando archivo de origen "Dashboard.cpp")
-  
-  Inventary.cpp
-  MyForm.cpp
-E:\Proyectos\Proyecto\Pagos.h(421,17): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+﻿  MyForm.cpp
+E:\Proyectos\Proyecto\Productos.h(1169,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\Reportes.h(714,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\Productos.h(1178,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\Reportes.h(723,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\Pagos.h(422,17): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\Compras.h(767,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+E:\Proyectos\Proyecto\Pagos.h(1488,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\Compras.h(851,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+E:\Proyectos\Proyecto\Pagos.h(1497,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\Compras.h(854,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+E:\Proyectos\Proyecto\Reportes.h(773,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\Compras.h(855,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+E:\Proyectos\Proyecto\Reportes.h(782,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\Compras.h(930,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+E:\Proyectos\Proyecto\Usuarios.h(1058,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\Compras.h(933,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+E:\Proyectos\Proyecto\Usuarios.h(1067,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\Compras.h(934,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+E:\Proyectos\Proyecto\UserClients.h(877,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\UserClients.h(886,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(787,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(871,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(874,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(875,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(950,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(953,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(954,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(1081,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Compras.h(1090,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Inventary.h(864,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "MyForm.cpp")
+  
+E:\Proyectos\Proyecto\Inventary.h(873,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
 E:\Proyectos\Proyecto\MyForm.h(508,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
   (compilando archivo de origen "MyForm.cpp")
   
 E:\Proyectos\Proyecto\MyForm.cpp(57,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
-  Generando código...
 E:\Proyectos\Proyecto\MyForm.h(423,1): warning C4715: 'QuickShop::MyForm::LoginLogicAdmin': no todas las rutas de acceso de control devuelven un valor
 E:\Proyectos\Proyecto\MyForm.h(441,1): warning C4715: 'QuickShop::MyForm::LoginLogicOperator': no todas las rutas de acceso de control devuelven un valor
   Catalogo.obj : se encontró un módulo MSIL; vinculación incremental deshabilitada para MSIL; ejecutando vínculo completo

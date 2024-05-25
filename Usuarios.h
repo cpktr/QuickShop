@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <ctime>
+#include <iomanip>
 #include "Cstomer.h"
 
 namespace QuickShop {
@@ -28,6 +30,8 @@ namespace QuickShop {
 	private: System::Windows::Forms::DataGridView^ dgv_table;
 	private: bool editableData;
 	private: System::Windows::Forms::Button^ btn_uploadCSV;
+	private: System::Windows::Forms::Button^ btn_exportarcsv;
+
 	private: cli::array<int^>^ numeros = gcnew cli::array<int^>(10);
 	public:
 		Usuarios(void)
@@ -237,6 +241,7 @@ namespace QuickShop {
 			this->email = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->address = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->btn_uploadCSV = (gcnew System::Windows::Forms::Button());
+			this->btn_exportarcsv = (gcnew System::Windows::Forms::Button());
 			this->formContainer->SuspendLayout();
 			this->panel10->SuspendLayout();
 			this->panel9->SuspendLayout();
@@ -264,6 +269,7 @@ namespace QuickShop {
 			// 
 			// formContainer
 			// 
+			this->formContainer->Controls->Add(this->btn_exportarcsv);
 			this->formContainer->Controls->Add(this->btn_cancel);
 			this->formContainer->Controls->Add(this->btn_saveUser);
 			this->formContainer->Controls->Add(this->panel10);
@@ -664,6 +670,21 @@ namespace QuickShop {
 			this->btn_uploadCSV->UseVisualStyleBackColor = false;
 			this->btn_uploadCSV->Click += gcnew System::EventHandler(this, &Usuarios::btn_uploadCSV_Click);
 			// 
+			// btn_exportarcsv
+			// 
+			this->btn_exportarcsv->BackColor = System::Drawing::Color::Teal;
+			this->btn_exportarcsv->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_exportarcsv->FlatAppearance->BorderSize = 0;
+			this->btn_exportarcsv->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_exportarcsv->ForeColor = System::Drawing::Color::White;
+			this->btn_exportarcsv->Location = System::Drawing::Point(23, 363);
+			this->btn_exportarcsv->Name = L"btn_exportarcsv";
+			this->btn_exportarcsv->Size = System::Drawing::Size(75, 23);
+			this->btn_exportarcsv->TabIndex = 6;
+			this->btn_exportarcsv->Text = L"Descargar";
+			this->btn_exportarcsv->UseVisualStyleBackColor = false;
+			this->btn_exportarcsv->Click += gcnew System::EventHandler(this, &Usuarios::btn_exportarcsv_Click);
+			// 
 			// Usuarios
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1032,5 +1053,63 @@ namespace QuickShop {
 
 			   return resultado;
 		   }
+		   std::string getCurrentDateTime() {
+			   std::time_t now = std::time(nullptr);
+			   std::tm* localTime = std::localtime(&now);
+
+			   std::ostringstream dateTimeStream;
+			   dateTimeStream << std::put_time(localTime, "%d/%m/%Y %H:%M");
+
+			   return dateTimeStream.str();
+		   }
+		   std::string getCurrentDate() {
+			   std::time_t now = std::time(nullptr);
+			   std::tm* localTime = std::localtime(&now);
+
+			   std::ostringstream dateTimeStream;
+			   dateTimeStream << std::put_time(localTime, "%d-%m-%Y-%H-%M");
+
+			   return dateTimeStream.str();
+		   }
+	private: System::Void btn_exportarcsv_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			std::string dateTime = getCurrentDateTime();
+			std::string dateNow = getCurrentDate();
+			String^ dateTimeString = gcnew String(dateTime.c_str());
+			String^ dateString = gcnew String(dateNow.c_str());
+			SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog();
+			saveFileDialog->Filter = "CSV Files (*.csv)|*.csv";
+			saveFileDialog->Title = "Guardar reporte como CSV";
+			saveFileDialog->FileName = "ReporteUsuarios" + dateString;
+			if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				String^ filePath = saveFileDialog->FileName;
+
+				StreamWriter^ sw = gcnew StreamWriter(filePath);
+				for (int i = 0; i < this->dgv_table->Columns->Count; i++) {
+					sw->Write(this->dgv_table->Columns[i]->HeaderText);
+					if (i < this->dgv_table->Columns->Count - 1) {
+						sw->Write(";");
+					}
+				}
+				sw->WriteLine();
+
+				for (int i = 0; i < this->dgv_table->Rows->Count; i++) {
+					for (int j = 0; j < this->dgv_table->Columns->Count; j++) {
+						sw->Write(this->dgv_table->Rows[i]->Cells[j]->Value->ToString());
+						if (j < this->dgv_table->Columns->Count - 1) {
+							sw->Write(";");
+						}
+					}
+					sw->WriteLine();
+				}
+
+				sw->Close();
+				MessageBox::Show("Exportación a CSV completada con éxito", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+	}
 };
 }

@@ -113,6 +113,7 @@ namespace QuickShop {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ phoneNumb;
 	private: System::Windows::Forms::Button^ btn_cancelar;
+	private: System::Windows::Forms::Button^ btn_exportarCSV;
 
 
 
@@ -487,6 +488,7 @@ namespace QuickShop {
 			this->cmb_typePayment = (gcnew System::Windows::Forms::ComboBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->panel6 = (gcnew System::Windows::Forms::Panel());
+			this->btn_exportarCSV = (gcnew System::Windows::Forms::Button());
 			this->btn_cancelar = (gcnew System::Windows::Forms::Button());
 			this->btn_guardar = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
@@ -536,8 +538,8 @@ namespace QuickShop {
 			this->dataGridView1->Location = System::Drawing::Point(0, 0);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
-			this->dataGridView1->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dataGridView1->RowHeadersVisible = false;
+			this->dataGridView1->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dataGridView1->Size = System::Drawing::Size(389, 389);
 			this->dataGridView1->TabIndex = 0;
 			this->dataGridView1->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Pagos::deleteRowProduct);
@@ -906,6 +908,7 @@ namespace QuickShop {
 			// 
 			// panel6
 			// 
+			this->panel6->Controls->Add(this->btn_exportarCSV);
 			this->panel6->Controls->Add(this->btn_cancelar);
 			this->panel6->Controls->Add(this->btn_guardar);
 			this->panel6->Location = System::Drawing::Point(3, 354);
@@ -913,13 +916,28 @@ namespace QuickShop {
 			this->panel6->Size = System::Drawing::Size(261, 30);
 			this->panel6->TabIndex = 3;
 			// 
+			// btn_exportarCSV
+			// 
+			this->btn_exportarCSV->BackColor = System::Drawing::Color::Teal;
+			this->btn_exportarCSV->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_exportarCSV->FlatAppearance->BorderSize = 0;
+			this->btn_exportarCSV->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_exportarCSV->ForeColor = System::Drawing::Color::White;
+			this->btn_exportarCSV->Location = System::Drawing::Point(25, 3);
+			this->btn_exportarCSV->Name = L"btn_exportarCSV";
+			this->btn_exportarCSV->Size = System::Drawing::Size(75, 23);
+			this->btn_exportarCSV->TabIndex = 2;
+			this->btn_exportarCSV->Text = L"Descargar";
+			this->btn_exportarCSV->UseVisualStyleBackColor = false;
+			this->btn_exportarCSV->Click += gcnew System::EventHandler(this, &Pagos::btn_exportarCSV_Click);
+			// 
 			// btn_cancelar
 			// 
 			this->btn_cancelar->BackColor = System::Drawing::Color::Transparent;
 			this->btn_cancelar->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->btn_cancelar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btn_cancelar->ForeColor = System::Drawing::Color::Teal;
-			this->btn_cancelar->Location = System::Drawing::Point(106, 3);
+			this->btn_cancelar->Location = System::Drawing::Point(104, 3);
 			this->btn_cancelar->Name = L"btn_cancelar";
 			this->btn_cancelar->Size = System::Drawing::Size(75, 23);
 			this->btn_cancelar->TabIndex = 1;
@@ -1168,6 +1186,7 @@ namespace QuickShop {
 							MessageBox::Show("No hay stock suficiente");
 						}
 						else {
+							exportarHTML(newProduct);
 							deleteProducts(newProduct->productos);
 							StreamWriter^ writer = gcnew StreamWriter("payments.csv");
 							for (int i = 0; i < localData->Length; i++) {
@@ -1205,6 +1224,111 @@ namespace QuickShop {
 		}
 		else {
 			MessageBox::Show("No hay espacio disponible para agregar más productos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+	}
+	private: System::Void exportarHTML(Payments^ payment) {
+
+		System::String^ dataProductsCli = Convert::ToString(payment->productos);
+		string dataProducts;
+		for (int i = 0; i < dataProductsCli->Length; i++) {
+			dataProducts += (char)dataProductsCli[i];
+		}
+
+		std::string dateTime = getCurrentDateTime();
+		std::string dateNow = getCurrentDate();
+		String^ dateTimeString = gcnew String(dateTime.c_str());
+		String^ dateString = gcnew String(dateNow.c_str());
+		SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog();
+		saveFileDialog->Filter = "HTML Files (*.html)|*.html";
+		saveFileDialog->Title = "Guardar Factura como HTML";
+		saveFileDialog->FileName = "Factura"+ payment->code_payment;
+		if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			String^ filePath = saveFileDialog->FileName;
+			float ivaPrice = 0;
+			float discountPrice = 0;
+			float subTPrice = 0;
+			StreamWriter^ sw = gcnew StreamWriter(filePath);
+			sw->WriteLine("<html>");
+			sw->WriteLine("<head>");
+			sw->WriteLine("<title>" + "Factura" + payment->code_payment + "</title>");
+			sw->WriteLine("<style>");
+			sw->WriteLine("* { font-family: Arial, sans-serif; margin: 0; padding: 0; }");
+			sw->WriteLine("body { margin: 20px; }");
+			sw->WriteLine("table { font-family: Arial, sans-serif; border-collapse: collapse; width: 100%; }");
+			sw->WriteLine("th { border-top: 3px solid Teal; border-bottom: 1px solid Teal; }");
+			sw->WriteLine("th,td {text-align: center;padding: 12px;}");
+			sw->WriteLine("th:last-child, td:last-child{text-align: right;}");
+			sw->WriteLine("tr:nth-child(even) { background-color: #0080802e;}");
+			sw->WriteLine("tr:last-child{border-bottom: 3px solid;}");
+			sw->WriteLine("td::first-child, th:first-child { border-left: 0; }");
+			sw->WriteLine(".header{display: flex; flex-direction: column; align-items: left; margin-bottom: 10px;}");
+			sw->WriteLine(".titleHeader{color: Teal; margin: 10px 0;}");
+			sw->WriteLine(".totalInvoice{display: flex; justify-content: flex-end;}");
+			sw->WriteLine(".totalInvoice>section{display: flex; width: 300px; justify-content: space-between; border-bottom: 3px solid;  padding: 15px 4px; }");
+			sw->WriteLine(".ivaInvoice{display: flex; justify-content: flex-end;}");
+			sw->WriteLine(".ivaInvoice>section{display: flex; width: 300px; justify-content: space-between; border-bottom: 1px solid;  padding: 15px 4px; }");
+			sw->WriteLine(".titleIVA{margin-left: 4px;}");
+			sw->WriteLine(".d-flex{display: flex; column-gap: 30px;}");
+			sw->WriteLine("</style>");
+			sw->WriteLine("</head>");
+			sw->WriteLine("<body>");
+			sw->WriteLine("<div class='header'><h1 class = 'titleHeader'>QuickSop</h1>");
+			sw->WriteLine("<p>" + dateTimeString + "</p>");
+			sw->WriteLine("<div class='d-flex'><p>" + payment->usuario + "</p><p>" + payment->phoneNumb + "</p></div>");
+			sw->WriteLine("<p>"+payment->address+"</p>");
+			sw->WriteLine("<div class='d-flex'><p>" + payment->type_payment + "</p><p>" + payment->card + "</p></div>");
+			sw->WriteLine("<p>Cambio de Q." + payment->amountBill + "</p>");
+			sw->WriteLine("</div>");
+			sw->WriteLine("<div class='bodyInvoice'>");
+			sw->WriteLine("<table>");
+			sw->WriteLine("<tr><th>Producto</th><th>Precio Unitario</th><th>Cantidad</th><th>Precio Total</th></tr>");
+			string item;
+			stringstream ss(dataProducts);
+			while (std::getline(ss, item, '|')) {
+				if (!item.empty()) {
+					
+					size_t pos = item.find('*');
+					if (pos != std::string::npos) {
+						std::string productName = item.substr(0, pos);
+						int quantity = std::stoi(item.substr(pos + 1));
+						for (int i = 0; i < productsData->Length; i++) {
+							if (productsData[i] != nullptr) {
+								if (productsData[i]->name == gcnew String(productName.c_str())) {
+									sw->WriteLine("<tr>");
+									sw->WriteLine("<td>" + productsData[i]->name + "</td>");
+									sw->WriteLine("<td>Q." + productsData[i]->price + "</td>");
+									sw->WriteLine("<td>" + quantity + "</td>");
+									sw->WriteLine("<td>Q." + productsData[i]->price * quantity + "</td>");
+									sw->WriteLine("</tr>");
+								}
+							}
+						}
+
+					}
+					
+				}
+			}
+			for (int i = 0; i < cartShopList->Length; i++) {
+				if (cartShopList[i] != nullptr) {
+					if (cartShopList[i]->user == payment->usuario) {
+						ivaPrice = cartShopList[i]->iva;
+						discountPrice = cartShopList[i]->discount;
+						subTPrice = cartShopList[i]->subtotal;
+					}
+				}
+			}
+			sw->WriteLine("</table>");
+			sw->WriteLine("<div class='ivaInvoice'><section><h4 class='titleIVA'>SubTotal</h4><h4>Q." + Math::Round(subTPrice, 2) + "</h4></section></div>");
+			sw->WriteLine("<div class='ivaInvoice'><section><h4 class='titleIVA'>IVA</h4><h4>Q." + Math::Round(ivaPrice,2) + "</h4></section></div>");
+			sw->WriteLine("<div class='ivaInvoice'><section><h4 class='titleIVA'>Descuento</h4><h4>Q." + Math::Round(((subTPrice + ivaPrice) * (discountPrice / 100)), 2) + "</h4></section></div>");
+			sw->WriteLine("<div class='totalInvoice'><section><h3>Total</h3><h3>Q."+payment->total+"</h3></section></div>");
+			sw->WriteLine("</div>");
+			sw->WriteLine("</body>");
+			sw->WriteLine("</html>");
+
+			sw->Close();
+			MessageBox::Show("Exportación de Factura completada con éxito", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
 		}
 	}
 	private: System::Void changeUser(System::Object^ sender, System::EventArgs^ e) {
@@ -1359,5 +1483,63 @@ namespace QuickShop {
 		}
 	}
 
+		   std::string getCurrentDateTime() {
+			   std::time_t now = std::time(nullptr);
+			   std::tm* localTime = std::localtime(&now);
+
+			   std::ostringstream dateTimeStream;
+			   dateTimeStream << std::put_time(localTime, "%d/%m/%Y %H:%M");
+
+			   return dateTimeStream.str();
+		   }
+		   std::string getCurrentDate() {
+			   std::time_t now = std::time(nullptr);
+			   std::tm* localTime = std::localtime(&now);
+
+			   std::ostringstream dateTimeStream;
+			   dateTimeStream << std::put_time(localTime, "%d-%m-%Y-%H-%M");
+
+			   return dateTimeStream.str();
+		   }
+private: System::Void btn_exportarCSV_Click(System::Object^ sender, System::EventArgs^ e) {
+	try {
+		std::string dateTime = getCurrentDateTime();
+		std::string dateNow = getCurrentDate();
+		String^ dateTimeString = gcnew String(dateTime.c_str());
+		String^ dateString = gcnew String(dateNow.c_str());
+		SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog();
+		saveFileDialog->Filter = "CSV Files (*.csv)|*.csv";
+		saveFileDialog->Title = "Guardar reporte como CSV";
+		saveFileDialog->FileName = "ReportePagos" + dateString;
+		if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			String^ filePath = saveFileDialog->FileName;
+
+			StreamWriter^ sw = gcnew StreamWriter(filePath);
+			for (int i = 0; i < this->dataGridView1->Columns->Count; i++) {
+				sw->Write(this->dataGridView1->Columns[i]->HeaderText);
+				if (i < this->dataGridView1->Columns->Count - 1) {
+					sw->Write(";");
+				}
+			}
+			sw->WriteLine();
+
+			for (int i = 0; i < this->dataGridView1->Rows->Count; i++) {
+				for (int j = 0; j < this->dataGridView1->Columns->Count; j++) {
+					sw->Write(this->dataGridView1->Rows[i]->Cells[j]->Value->ToString());
+					if (j < this->dataGridView1->Columns->Count - 1) {
+						sw->Write(";");
+					}
+				}
+				sw->WriteLine();
+			}
+
+			sw->Close();
+			MessageBox::Show("Exportación a CSV completada con éxito", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		}
+	}
+	catch (Exception^ ex) {
+		MessageBox::Show("Error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+}
 };
 }

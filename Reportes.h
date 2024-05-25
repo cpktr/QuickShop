@@ -43,6 +43,8 @@ namespace QuickShop {
 	private: cli::array<Inventario^>^ localDataIventary = gcnew cli::array<Inventario^>(100);
 	private: System::Windows::Forms::Button^ btn_inventary;
 	private: System::Windows::Forms::Button^ btn_exportar;
+	private: System::Windows::Forms::Button^ btn_exportarCSV;
+	private: System::Windows::Forms::Label^ label2;
 
 	private: System::Windows::Forms::Button^ btn_users;
 
@@ -170,6 +172,8 @@ namespace QuickShop {
 			this->btn_clients = (gcnew System::Windows::Forms::Button());
 			this->panel_table = (gcnew System::Windows::Forms::Panel());
 			this->dgv_report = (gcnew System::Windows::Forms::DataGridView());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->btn_exportarCSV = (gcnew System::Windows::Forms::Button());
 			this->panel_buttons->SuspendLayout();
 			this->panel_table->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgv_report))->BeginInit();
@@ -196,6 +200,7 @@ namespace QuickShop {
 			// 
 			// panel_buttons
 			// 
+			this->panel_buttons->Controls->Add(this->btn_exportarCSV);
 			this->panel_buttons->Controls->Add(this->btn_exportar);
 			this->panel_buttons->Controls->Add(this->btn_users);
 			this->panel_buttons->Controls->Add(this->btn_inventary);
@@ -210,80 +215,102 @@ namespace QuickShop {
 			// 
 			// btn_exportar
 			// 
+			this->btn_exportar->BackColor = System::Drawing::Color::Teal;
 			this->btn_exportar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_exportar->FlatAppearance->BorderSize = 0;
+			this->btn_exportar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_exportar->ForeColor = System::Drawing::Color::White;
 			this->btn_exportar->Location = System::Drawing::Point(588, 4);
 			this->btn_exportar->Name = L"btn_exportar";
 			this->btn_exportar->Size = System::Drawing::Size(75, 23);
 			this->btn_exportar->TabIndex = 6;
-			this->btn_exportar->Text = L"Exportar";
-			this->btn_exportar->UseVisualStyleBackColor = true;
+			this->btn_exportar->Text = L"HTML";
+			this->btn_exportar->UseVisualStyleBackColor = false;
 			this->btn_exportar->Visible = false;
 			this->btn_exportar->Click += gcnew System::EventHandler(this, &Reportes::btn_exportar_Click);
 			// 
 			// btn_users
 			// 
+			this->btn_users->BackColor = System::Drawing::Color::Transparent;
 			this->btn_users->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_users->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_users->ForeColor = System::Drawing::Color::Teal;
 			this->btn_users->Location = System::Drawing::Point(405, 4);
 			this->btn_users->Name = L"btn_users";
 			this->btn_users->Size = System::Drawing::Size(75, 23);
 			this->btn_users->TabIndex = 5;
 			this->btn_users->Text = L"Usuarios";
-			this->btn_users->UseVisualStyleBackColor = true;
+			this->btn_users->UseVisualStyleBackColor = false;
 			this->btn_users->Click += gcnew System::EventHandler(this, &Reportes::showUsersReport);
 			// 
 			// btn_inventary
 			// 
+			this->btn_inventary->BackColor = System::Drawing::Color::Transparent;
 			this->btn_inventary->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_inventary->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_inventary->ForeColor = System::Drawing::Color::Teal;
 			this->btn_inventary->Location = System::Drawing::Point(324, 4);
 			this->btn_inventary->Name = L"btn_inventary";
 			this->btn_inventary->Size = System::Drawing::Size(75, 23);
 			this->btn_inventary->TabIndex = 4;
 			this->btn_inventary->Text = L"Inventario";
-			this->btn_inventary->UseVisualStyleBackColor = true;
+			this->btn_inventary->UseVisualStyleBackColor = false;
 			this->btn_inventary->Click += gcnew System::EventHandler(this, &Reportes::btn_inventary_Click);
 			// 
 			// btn_payments
 			// 
+			this->btn_payments->BackColor = System::Drawing::Color::Transparent;
 			this->btn_payments->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_payments->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_payments->ForeColor = System::Drawing::Color::Teal;
 			this->btn_payments->Location = System::Drawing::Point(243, 4);
 			this->btn_payments->Name = L"btn_payments";
 			this->btn_payments->Size = System::Drawing::Size(75, 23);
 			this->btn_payments->TabIndex = 3;
 			this->btn_payments->Text = L"Pagos";
-			this->btn_payments->UseVisualStyleBackColor = true;
+			this->btn_payments->UseVisualStyleBackColor = false;
 			this->btn_payments->Click += gcnew System::EventHandler(this, &Reportes::btn_payments_Click);
 			// 
 			// btn_purchases
 			// 
+			this->btn_purchases->BackColor = System::Drawing::Color::Transparent;
 			this->btn_purchases->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_purchases->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_purchases->ForeColor = System::Drawing::Color::Teal;
 			this->btn_purchases->Location = System::Drawing::Point(162, 4);
 			this->btn_purchases->Name = L"btn_purchases";
 			this->btn_purchases->Size = System::Drawing::Size(75, 23);
 			this->btn_purchases->TabIndex = 2;
 			this->btn_purchases->Text = L"Compras";
-			this->btn_purchases->UseVisualStyleBackColor = true;
+			this->btn_purchases->UseVisualStyleBackColor = false;
 			this->btn_purchases->Click += gcnew System::EventHandler(this, &Reportes::btn_purchases_Click);
 			// 
 			// btn_products
 			// 
+			this->btn_products->BackColor = System::Drawing::Color::Transparent;
 			this->btn_products->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_products->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_products->ForeColor = System::Drawing::Color::Teal;
 			this->btn_products->Location = System::Drawing::Point(81, 4);
 			this->btn_products->Name = L"btn_products";
 			this->btn_products->Size = System::Drawing::Size(75, 23);
 			this->btn_products->TabIndex = 1;
 			this->btn_products->Text = L"Catalogo";
-			this->btn_products->UseVisualStyleBackColor = true;
+			this->btn_products->UseVisualStyleBackColor = false;
 			this->btn_products->Click += gcnew System::EventHandler(this, &Reportes::btn_products_Click);
 			// 
 			// btn_clients
 			// 
+			this->btn_clients->BackColor = System::Drawing::Color::Transparent;
 			this->btn_clients->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_clients->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_clients->ForeColor = System::Drawing::Color::Teal;
 			this->btn_clients->Location = System::Drawing::Point(0, 4);
 			this->btn_clients->Name = L"btn_clients";
 			this->btn_clients->Size = System::Drawing::Size(75, 23);
 			this->btn_clients->TabIndex = 0;
 			this->btn_clients->Text = L"Clientes";
-			this->btn_clients->UseVisualStyleBackColor = true;
+			this->btn_clients->UseVisualStyleBackColor = false;
 			this->btn_clients->Click += gcnew System::EventHandler(this, &Reportes::btn_clients_Click);
 			// 
 			// panel_table
@@ -308,11 +335,37 @@ namespace QuickShop {
 			this->dgv_report->Size = System::Drawing::Size(666, 322);
 			this->dgv_report->TabIndex = 0;
 			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(535, 53);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(58, 13);
+			this->label2->TabIndex = 4;
+			this->label2->Text = L"Exportar a:";
+			// 
+			// btn_exportarCSV
+			// 
+			this->btn_exportarCSV->BackColor = System::Drawing::Color::Teal;
+			this->btn_exportarCSV->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_exportarCSV->FlatAppearance->BorderSize = 0;
+			this->btn_exportarCSV->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_exportarCSV->ForeColor = System::Drawing::Color::White;
+			this->btn_exportarCSV->Location = System::Drawing::Point(507, 4);
+			this->btn_exportarCSV->Name = L"btn_exportarCSV";
+			this->btn_exportarCSV->Size = System::Drawing::Size(75, 23);
+			this->btn_exportarCSV->TabIndex = 7;
+			this->btn_exportarCSV->Text = L"CSV";
+			this->btn_exportarCSV->UseVisualStyleBackColor = false;
+			this->btn_exportarCSV->Visible = false;
+			this->btn_exportarCSV->Click += gcnew System::EventHandler(this, &Reportes::btn_exportarCSV_Click);
+			// 
 			// Reportes
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(694, 461);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->panel_table);
 			this->Controls->Add(this->panel_buttons);
 			this->Controls->Add(this->label1);
@@ -332,6 +385,7 @@ namespace QuickShop {
 		this->nameReportHTML = "ReporteUsuarios";
 		this->titleReport = "Reporte de Usuarios ";
 		this->btn_exportar->Visible = true;
+		this->btn_exportarCSV->Visible = true;
 		this->dgv_report->Rows->Clear();
 		this->dgv_report->Columns->Clear();
 		this->dgv_report->Columns->Add("id_customer", "ID");
@@ -397,6 +451,7 @@ namespace QuickShop {
 		this->nameReportHTML = "ReporteClientes";
 		this->titleReport = "Reporte de Clientes ";
 		this->btn_exportar->Visible = true;
+		this->btn_exportarCSV->Visible = true;
 		this->dgv_report->Rows->Clear();
 		this->dgv_report->Columns->Clear();
 		this->dgv_report->Columns->Add("code", "ID");
@@ -458,6 +513,7 @@ namespace QuickShop {
 		this->nameReportHTML = "ReporteInventario";
 		this->titleReport = "Reporte de Inventario ";
 		this->btn_exportar->Visible = true;
+		this->btn_exportarCSV->Visible = true;
 		this->dgv_report->Rows->Clear();
 		this->dgv_report->Columns->Clear();
 		this->dgv_report->Columns->Add("id_inventary", "ID");
@@ -510,6 +566,7 @@ namespace QuickShop {
 			this->nameReportHTML = "ReporteCompras";
 			this->titleReport = "Reporte de Compras ";
 			this->btn_exportar->Visible = true;
+			this->btn_exportarCSV->Visible = true;
 			this->dgv_report->Rows->Clear();
 			this->dgv_report->Columns->Clear();
 			this->dgv_report->Columns->Add("id_purchase", "ID");
@@ -574,6 +631,7 @@ namespace QuickShop {
 		this->nameReportHTML = "ReportePagos";
 		this->titleReport = "Reporte de Pagos ";
 		this->btn_exportar->Visible = true;
+		this->btn_exportarCSV->Visible = true;
 		this->dgv_report->Rows->Clear();
 		this->dgv_report->Columns->Clear();
 		this->dgv_report->Columns->Add("id_payment", "ID");
@@ -650,6 +708,7 @@ namespace QuickShop {
 		this->nameReportHTML = "ReporteCatalogo";
 		this->titleReport = "Reporte de Catálogo ";
 		this->btn_exportar->Visible = true;
+		this->btn_exportarCSV->Visible = true;
 		this->dgv_report->Rows->Clear();
 		this->dgv_report->Columns->Clear();
 		this->dgv_report->Columns->Add("id_product", "Código");
@@ -786,6 +845,46 @@ namespace QuickShop {
 
 				sw->Close();
 				MessageBox::Show("Exportación a HTML completada con éxito", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+	}
+	private: System::Void btn_exportarCSV_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			std::string dateTime = getCurrentDateTime();
+			std::string dateNow = getCurrentDate();
+			String^ dateTimeString = gcnew String(dateTime.c_str());
+			String^ dateString = gcnew String(dateNow.c_str());
+			SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog();
+			saveFileDialog->Filter = "CSV Files (*.csv)|*.csv";
+			saveFileDialog->Title = "Guardar reporte como CSV";
+			saveFileDialog->FileName = nameReportHTML + dateString;
+			if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				String^ filePath = saveFileDialog->FileName;
+
+				StreamWriter^ sw = gcnew StreamWriter(filePath);
+				for (int i = 0; i < this->dgv_report->Columns->Count; i++) {
+					sw->Write(this->dgv_report->Columns[i]->HeaderText);
+					if (i < this->dgv_report->Columns->Count - 1) {
+						sw->Write(";");
+					}
+				}
+				sw->WriteLine();
+
+				for (int i = 0; i < this->dgv_report->Rows->Count; i++) {
+					for (int j = 0; j < this->dgv_report->Columns->Count; j++) {
+						sw->Write(this->dgv_report->Rows[i]->Cells[j]->Value->ToString());
+						if (j < this->dgv_report->Columns->Count - 1) {
+							sw->Write(";");
+						}
+					}
+					sw->WriteLine();
+				}
+
+				sw->Close();
+				MessageBox::Show("Exportación a CSV completada con éxito", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 		}
 		catch (Exception^ ex) {
