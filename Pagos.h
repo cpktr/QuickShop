@@ -487,8 +487,8 @@ namespace QuickShop {
 			this->cmb_typePayment = (gcnew System::Windows::Forms::ComboBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->panel6 = (gcnew System::Windows::Forms::Panel());
-			this->btn_guardar = (gcnew System::Windows::Forms::Button());
 			this->btn_cancelar = (gcnew System::Windows::Forms::Button());
+			this->btn_guardar = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->flowLayoutPanel1->SuspendLayout();
@@ -536,9 +536,11 @@ namespace QuickShop {
 			this->dataGridView1->Location = System::Drawing::Point(0, 0);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
+			this->dataGridView1->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dataGridView1->RowHeadersVisible = false;
 			this->dataGridView1->Size = System::Drawing::Size(389, 389);
 			this->dataGridView1->TabIndex = 0;
+			this->dataGridView1->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Pagos::deleteRowProduct);
 			// 
 			// id
 			// 
@@ -911,6 +913,20 @@ namespace QuickShop {
 			this->panel6->Size = System::Drawing::Size(261, 30);
 			this->panel6->TabIndex = 3;
 			// 
+			// btn_cancelar
+			// 
+			this->btn_cancelar->BackColor = System::Drawing::Color::Transparent;
+			this->btn_cancelar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_cancelar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_cancelar->ForeColor = System::Drawing::Color::Teal;
+			this->btn_cancelar->Location = System::Drawing::Point(106, 3);
+			this->btn_cancelar->Name = L"btn_cancelar";
+			this->btn_cancelar->Size = System::Drawing::Size(75, 23);
+			this->btn_cancelar->TabIndex = 1;
+			this->btn_cancelar->Text = L"Cancelar";
+			this->btn_cancelar->UseVisualStyleBackColor = false;
+			this->btn_cancelar->Click += gcnew System::EventHandler(this, &Pagos::btn_cancelar_Click);
+			// 
 			// btn_guardar
 			// 
 			this->btn_guardar->BackColor = System::Drawing::Color::Teal;
@@ -925,20 +941,6 @@ namespace QuickShop {
 			this->btn_guardar->Text = L"Guardar";
 			this->btn_guardar->UseVisualStyleBackColor = false;
 			this->btn_guardar->Click += gcnew System::EventHandler(this, &Pagos::savePayment);
-			// 
-			// btn_cancelar
-			// 
-			this->btn_cancelar->BackColor = System::Drawing::Color::Transparent;
-			this->btn_cancelar->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_cancelar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btn_cancelar->ForeColor = System::Drawing::Color::Teal;
-			this->btn_cancelar->Location = System::Drawing::Point(106, 3);
-			this->btn_cancelar->Name = L"btn_cancelar";
-			this->btn_cancelar->Size = System::Drawing::Size(75, 23);
-			this->btn_cancelar->TabIndex = 1;
-			this->btn_cancelar->Text = L"Cancelar";
-			this->btn_cancelar->UseVisualStyleBackColor = false;
-			this->btn_cancelar->Click += gcnew System::EventHandler(this, &Pagos::btn_cancelar_Click);
 			// 
 			// Pagos
 			// 
@@ -1324,5 +1326,38 @@ namespace QuickShop {
 		this->form_efectivo->Visible = false;
 		this->form_tarjeta->Visible = false;
 	}
+
+	private: System::Void deleteRowProduct(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+		if (e->KeyCode == Keys::Delete) {
+			DataGridViewRow^ filaSeleccionada = this->dataGridView1->SelectedRows[0];
+			System::Windows::Forms::DialogResult result = MessageBox::Show("¿Estás seguro de querer eliminar estos datos?", "Eliminar Usuario", MessageBoxButtons::OKCancel, MessageBoxIcon::Warning);
+			if (result == System::Windows::Forms::DialogResult::OK) {
+				cli::array<Payments^>^ nuevoLocalData = gcnew cli::array<Payments^>(localData->Length);
+				for (int i = 0; i < localData->Length; i++) {
+					if (localData[i] != nullptr) {
+						if (localData[i]->id_payment.ToString() != filaSeleccionada->Cells[0]->Value->ToString()) {
+							nuevoLocalData[i] = localData[i];
+						}
+					}
+				}
+				localData = nuevoLocalData;
+				StreamWriter^ writer = gcnew StreamWriter("payments.csv");
+				for (int i = 0; i < localData->Length; i++) {
+					if (localData[i] != nullptr) {
+						String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
+							localData[i]->id_payment, localData[i]->code_payment, localData[i]->usuario,
+							localData[i]->productos, localData[i]->type_payment, localData[i]->total,
+							localData[i]->card, localData[i]->amountBill, localData[i]->address, localData[i]->phoneNumb);
+						writer->WriteLine(message);
+					}
+				}
+				writer->Close();
+				this->clearTxt();
+				this->getPaymentsHistory();
+				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+		}
+	}
+
 };
 }

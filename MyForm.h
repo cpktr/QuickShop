@@ -408,7 +408,7 @@ namespace QuickShop {
 			for (int i = 0; i < localData->Length; i++) {
 				if (localData[i] != nullptr) {
 					if (localData[i]->username == email && localData[i]->password == password) {
-						if (localData[i]->type == "Administrador") {
+						if (localData[i]->type == "administrador") {
 							userLogin = gcnew User(localData[i]->name->ToString(), localData[i]->email->ToString(), false, true, false);
 							return true;
 						}
@@ -426,7 +426,7 @@ namespace QuickShop {
 			for (int i = 0; i < localData->Length; i++) {
 				if (localData[i] != nullptr) {
 					if (localData[i]->username == email && localData[i]->password == password) {
-						if (localData[i]->type == "Operador") {
+						if (localData[i]->type == "operador") {
 							userLogin = gcnew User(localData[i]->name->ToString(), localData[i]->email->ToString(), true, false, false);
 							return true;
 						}

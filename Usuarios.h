@@ -27,6 +27,7 @@ namespace QuickShop {
 	private: cli::array<Cstomer^>^ localData = gcnew cli::array<Cstomer^>(100);
 	private: System::Windows::Forms::DataGridView^ dgv_table;
 	private: bool editableData;
+	private: System::Windows::Forms::Button^ btn_uploadCSV;
 	private: cli::array<int^>^ numeros = gcnew cli::array<int^>(10);
 	public:
 		Usuarios(void)
@@ -126,7 +127,7 @@ namespace QuickShop {
 		void getUsersdata() {
 			this->dgv_table->Rows->Clear();
 			this->editableData = false;
-
+			this->localData = gcnew cli::array<Cstomer^>(100);
 			ifstream usuaa("users.csv");
 
 			if (!usuaa.is_open()) {
@@ -235,6 +236,7 @@ namespace QuickShop {
 			this->phoneNum = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->email = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->address = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->btn_uploadCSV = (gcnew System::Windows::Forms::Button());
 			this->formContainer->SuspendLayout();
 			this->panel10->SuspendLayout();
 			this->panel9->SuspendLayout();
@@ -449,7 +451,7 @@ namespace QuickShop {
 			this->cmb_type->BackColor = System::Drawing::Color::White;
 			this->cmb_type->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cmb_type->FormattingEnabled = true;
-			this->cmb_type->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Operador", L"Administrador" });
+			this->cmb_type->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"operador", L"administrador" });
 			this->cmb_type->Location = System::Drawing::Point(158, 4);
 			this->cmb_type->Name = L"cmb_type";
 			this->cmb_type->Size = System::Drawing::Size(100, 21);
@@ -647,11 +649,27 @@ namespace QuickShop {
 			this->address->Name = L"address";
 			this->address->ReadOnly = true;
 			// 
+			// btn_uploadCSV
+			// 
+			this->btn_uploadCSV->BackColor = System::Drawing::Color::Teal;
+			this->btn_uploadCSV->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_uploadCSV->FlatAppearance->BorderSize = 0;
+			this->btn_uploadCSV->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_uploadCSV->ForeColor = System::Drawing::Color::White;
+			this->btn_uploadCSV->Location = System::Drawing::Point(599, 17);
+			this->btn_uploadCSV->Name = L"btn_uploadCSV";
+			this->btn_uploadCSV->Size = System::Drawing::Size(75, 23);
+			this->btn_uploadCSV->TabIndex = 5;
+			this->btn_uploadCSV->Text = L"Cargar";
+			this->btn_uploadCSV->UseVisualStyleBackColor = false;
+			this->btn_uploadCSV->Click += gcnew System::EventHandler(this, &Usuarios::btn_uploadCSV_Click);
+			// 
 			// Usuarios
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(694, 462);
+			this->Controls->Add(this->btn_uploadCSV);
 			this->Controls->Add(this->panel_table);
 			this->Controls->Add(this->formContainer);
 			this->Controls->Add(this->titlePage);
@@ -814,6 +832,7 @@ namespace QuickShop {
 			if (indice != -1) {
 				if (CamposNoVacios()) {
 					if (validateExistData()) {
+						this->getUsersdata();
 						newUser->id_customer = gcnew String(this->txt_id->Text);
 						newUser->name = gcnew String(this->txt_name->Text);
 						newUser->lastName = gcnew String(this->txt_lastName->Text);
@@ -830,8 +849,6 @@ namespace QuickShop {
 							localData[indice]->phoneNum, localData[indice]->email, localData[indice]->address);
 						//ofstream myfile;
 						StreamWriter^ writer = gcnew StreamWriter("users.csv");
-						//writer->WriteLine("id_customer,name,lastName,username,type,cui,phoneNum,email,address");
-						//myfile.open("users.csv");
 						for (int i = 0; i < localData->Length; i++) {
 
 								if (localData[i] != nullptr) {
@@ -892,5 +909,128 @@ namespace QuickShop {
 			}
 		}
 	}
+	private: System::Void btn_uploadCSV_Click(System::Object^ sender, System::EventArgs^ e) {
+		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog();
+		openFileDialog->Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+		if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			String^ filePath = openFileDialog->FileName;
+			ReadCSV(filePath);
+		}
+	}
+
+	private: System::Void ReadCSV(String^ filePath) {
+		try {
+			StreamReader^ sr = gcnew StreamReader(filePath);
+			String^ line;
+			bool isFirstLine = true;
+			cli::array<String^>^ headers = nullptr;
+
+			int maxRows = 100;
+			cli::array<cli::array<String^>^>^ csvData = gcnew cli::array<cli::array<String^>^>(maxRows);
+			int rowIndex = 0;
+
+			while ((line = sr->ReadLine()) != nullptr) {
+				cli::array<String^>^ fields = line->Split(',');
+				if (isFirstLine) {
+					headers = fields;
+					isFirstLine = false;
+				}
+				else {
+					csvData[rowIndex] = fields;
+					rowIndex++;
+					if (rowIndex >= maxRows) break;
+				}
+			}
+			sr->Close();
+
+			DisplayData(csvData, headers, rowIndex);
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Error al leer el archivo CSV: " + ex->Message);
+		}
+	}
+
+	private: System::Void DisplayData(cli::array<cli::array<String^>^>^ csvData, cli::array<String^>^ headers, int numRows) {
+		cli::array<Cstomer^>^ newImport = gcnew cli::array<Cstomer^>(100);
+		String^ id_new = gcnew String(this->txt_id->Text);
+		string message;
+		for (int i = 0; i < numRows; i++) {
+			message.clear();
+			Cstomer^ newUser = gcnew Cstomer();
+			cli::array<String^>^ row = csvData[i];
+			for each (String ^ field in row) {
+				for (int i = 0; i < field->Length; i++) {
+					message.push_back(static_cast<char>(field[i]));
+				}
+			}
+			string id;
+			string username;
+			string type;
+			string cui;
+			string name;
+			string lastname;
+			string address;
+			string phonenumb;
+			string email;
+			string password;
+
+			stringstream ss(message);
+			getline(ss, username, ';');
+			getline(ss, password, ';');
+			getline(ss, type, ';');
+			getline(ss, name, ';');
+			getline(ss, lastname, ';');
+			getline(ss, cui, ';');
+			getline(ss, phonenumb, ';');
+			getline(ss, email, ';');
+			getline(ss, address, ';');
+			
+			newUser->id_customer = id_new;
+			newUser->name = gcnew String(name.c_str());
+			newUser->lastName = gcnew String(lastname.c_str());
+			newUser->username = gcnew String(username.c_str());
+			newUser->type = EliminarEspacios(gcnew String(type.c_str()));
+			newUser->cui = gcnew String(cui.c_str());
+			newUser->phoneNum = gcnew String(phonenumb.c_str());
+			newUser->email = gcnew String(email.c_str());
+			newUser->address = gcnew String(address.c_str());
+			newUser->password = gcnew String(password.c_str());
+			id_new = (Convert::ToInt32(id_new) + 1).ToString();
+			newImport[i] = newUser;
+			
+		}
+		cli::array<Cstomer^>^ tempArray = gcnew cli::array<Cstomer^>(localData->Length);
+		Array::Copy(localData, tempArray, localData->Length);
+		Array::Resize(localData, localData->Length + newImport->Length);
+		Array::Copy(tempArray, localData, tempArray->Length);
+		Array::Copy(newImport, 0, localData, tempArray->Length, newImport->Length);
+
+		StreamWriter^ writer = gcnew StreamWriter("users.csv");
+		for (int i = 0; i < localData->Length; i++) {
+
+			if (localData[i] != nullptr) {
+				String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
+					localData[i]->id_customer, localData[i]->name, localData[i]->lastName,
+					localData[i]->username, localData[i]->type, localData[i]->cui,
+					localData[i]->phoneNum, localData[i]->email, localData[i]->address, localData[i]->password);
+				writer->WriteLine(message);
+			}
+
+		}
+		writer->Close();
+		this->clearTxt();
+		this->getUsersdata();
+		
+	}
+
+		   String^ EliminarEspacios(String^ texto) {
+			   // Dividir la cadena en palabras usando los espacios como delimitadores
+			   cli::array<String^>^ palabras = texto->Split(' ');
+
+			   // Concatenar las palabras sin espacios
+			   String^ resultado = String::Join("", palabras);
+
+			   return resultado;
+		   }
 };
 }

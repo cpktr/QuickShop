@@ -97,6 +97,7 @@ namespace QuickShop {
 		/// el contenido de este método con el editor de código.
 		/// </summary>
 		void getDataProducts() {
+			this->warningProducts = 0;
 			this->dgv_inventary->Rows->Clear();
 			ifstream products("inventary.csv");
 

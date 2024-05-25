@@ -64,6 +64,10 @@ E:\Proyectos\Proyecto\MyForm.h(508,56): warning C4244: 'argumento': conversión 
   (compilando archivo de origen "MyForm.cpp")
   
 E:\Proyectos\Proyecto\MyForm.cpp(57,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
+  Pagos.cpp
+E:\Proyectos\Proyecto\Pagos.h(421,17): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "Pagos.cpp")
+  
   Generando código...
 E:\Proyectos\Proyecto\MyForm.h(423,1): warning C4715: 'QuickShop::MyForm::LoginLogicAdmin': no todas las rutas de acceso de control devuelven un valor
 E:\Proyectos\Proyecto\MyForm.h(441,1): warning C4715: 'QuickShop::MyForm::LoginLogicOperator': no todas las rutas de acceso de control devuelven un valor
