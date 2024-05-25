@@ -10,6 +10,7 @@ using namespace std;
 #include "Compras.h"
 #include "User.h"
 #include "Inventary.h"
+#include "Inventary.h"
 
 namespace QuickShop {
 
@@ -18,13 +19,20 @@ namespace QuickShop {
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
+	using namespace System::Drawing::Drawing2D;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
+	using namespace System::Runtime::InteropServices;
+	using namespace System::IO;
+	using namespace std;
 
 	/// <summary>
 	/// Resumen de Dashboard
 	/// </summary>
 	public ref class Dashboard : public System::Windows::Forms::Form
 	{
+	private: cli::array<Inventario^>^ localData = gcnew cli::array<Inventario^>(100);
+	private: int warningProducts = 0;
 	private: User^ userSess;
 	private: System::Windows::Forms::Label^ sessionEmailLabel;
 	private: System::Windows::Forms::Panel^ panel9;
@@ -40,6 +48,7 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->getDataProducts();
 		}
 		Dashboard(User^ userSession) {
 			this->userSess = userSession;
@@ -49,6 +58,9 @@ namespace QuickShop {
 				if (this->userSess->operador == true) {
 					this->button_usuarios->Visible = false;
 					this->panel_users->Visible = false;
+				}
+				else if (this->userSess->admin == true) {
+					this->getDataProducts();
 				}
 			}
 		}
@@ -110,6 +122,58 @@ namespace QuickShop {
 		/// Método necesario para admitir el Diseñador. No se puede modificar
 		/// el contenido de este método con el editor de código.
 		/// </summary>
+		void getDataProducts() {
+			ifstream products("inventary.csv");
+
+			if (!products.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				try {
+					while (getline(products, line)) {
+						Inventario^ newUser = gcnew Inventario();
+						string id;
+						string name;
+						string catego;
+						string brand;
+						string descrip;
+						string price;
+						string stock;
+
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, name, ',');
+						getline(ss, stock, ',');
+						newUser->id_product = std::stoi(id);
+						newUser->name = gcnew String(name.c_str());
+						newUser->stock = std::stoi(stock);
+
+
+						localData[limit] = newUser;limit++;
+					}
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[i] != nullptr) {
+					if (localData[i]->stock < 5) {
+						this->warningProducts++;
+					}
+				}
+			}
+			if (warningProducts > 0) {
+				MessageBox::Show("Hay uno o más productos agotándose", "Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			}
+		}
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());

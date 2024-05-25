@@ -228,6 +228,18 @@ namespace QuickShop {
 					}
 				}
 			}
+
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[0] == nullptr) {
+					this->txt_id->Text = "1";
+				}
+				else {
+					if (localData[i] == nullptr) {
+						this->txt_id->Text = (localData[i - 1]->id_purchase + 1).ToString();
+						break;
+					}
+				}
+			}
 		}
 		void getClientsData() {
 			ifstream usuaa("clients.csv");
@@ -530,6 +542,7 @@ namespace QuickShop {
 			// 
 			this->txt_id->Location = System::Drawing::Point(158, 4);
 			this->txt_id->Name = L"txt_id";
+			this->txt_id->ReadOnly = true;
 			this->txt_id->Size = System::Drawing::Size(100, 20);
 			this->txt_id->TabIndex = 1;
 			// 
@@ -854,9 +867,9 @@ namespace QuickShop {
 										}
 									}
 									writer->Close();
-									this->getPurchasesData();
 									this->clearTxt();
-									this->txt_id->ReadOnly = false;
+									this->getPurchasesData();
+									this->generateListProduct();
 									this->editableData = false;
 									this->btn_cancel->Visible = false;
 									MessageBox::Show("El producto se actualizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -932,8 +945,9 @@ namespace QuickShop {
 								}
 							}
 							writer->Close();
-							this->getPurchasesData();
 							this->clearTxt();
+							this->getPurchasesData();
+							this->generateListProduct();
 							MessageBox::Show("El carrito se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 						}
 						catch (const std::exception& e) {
@@ -962,7 +976,6 @@ namespace QuickShop {
 				}
 			}
 			DataGridViewRow^ filaSeleccionada = this->dgv_compras->SelectedRows[0];
-			this->txt_id->ReadOnly = true;
 			this->txt_id->Text = Convert::ToString(filaSeleccionada->Cells[0]->Value);
 			this->cmb_users->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
 			System::String^ dataProductsCli = Convert::ToString(filaSeleccionada->Cells[2]->Value);
@@ -988,6 +1001,7 @@ namespace QuickShop {
 								String^ nudName = "nud_" + productsData[i]->id_product.ToString();
 								NumericUpDown^ nud = dynamic_cast<NumericUpDown^>(panel_productslist->Controls[nudName]);
 								if (nud != nullptr) {
+									nud->Maximum = 10000000;
 									nud->Value = quantity;
 								}
 								break;
@@ -1004,8 +1018,9 @@ namespace QuickShop {
 	private: System::Void cancelButton(System::Object^ sender, System::EventArgs^ e) {
 		this->clearTxt();
 		this->btn_cancel->Visible = false;
-		this->txt_id->ReadOnly = false;
 		this->editableData = false;
+		this->getPurchasesData();
+		this->generateListProduct();
 	}
 
 	private: System::Void deleteRowPurchase(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
@@ -1034,8 +1049,9 @@ namespace QuickShop {
 					}
 				}
 				writer->Close();
-				this->getPurchasesData();
 				this->clearTxt();
+				this->getPurchasesData();
+				this->generateListProduct();
 				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 		}

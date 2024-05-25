@@ -40,6 +40,7 @@ namespace QuickShop {
 	private: cli::array<PurchaseProduct^>^ localDataPurchases = gcnew cli::array<PurchaseProduct^>(100);
 	private: cli::array<Payments^>^ localDataPayments = gcnew cli::array<Payments^>(100);
 	private: cli::array<Inventario^>^ localDataInventary = gcnew cli::array<Inventario^>(100);
+	private: cli::array<Inventario^>^ localDataIventary = gcnew cli::array<Inventario^>(100);
 	private: System::Windows::Forms::Button^ btn_inventary;
 	private: System::Windows::Forms::Button^ btn_exportar;
 
@@ -52,6 +53,7 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->setComboInventary();
 		}
 		Reportes(User^ userSession)
 		{
@@ -64,6 +66,7 @@ namespace QuickShop {
 					this->btn_inventary->Name = L"Reportes";
 				}
 			}
+			this->setComboInventary();
 			
 		}
 
@@ -110,6 +113,49 @@ namespace QuickShop {
 		/// Método necesario para admitir el Diseñador. No se puede modificar
 		/// el contenido de este método con el editor de código.
 		/// </summary>
+		void setComboInventary() {
+			ifstream products("inventary.csv");
+
+			if (!products.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				try {
+					while (getline(products, line)) {
+						Inventario^ newUser = gcnew Inventario();
+						string id;
+						string name;
+						string catego;
+						string brand;
+						string descrip;
+						string price;
+						string stock;
+
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, name, ',');
+						getline(ss, stock, ',');
+						newUser->id_product = std::stoi(id);
+						newUser->name = gcnew String(name.c_str());
+						newUser->stock = std::stoi(stock);
+
+
+						localDataIventary[limit] = newUser;
+						limit++;
+					}
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+		}
+		
 		void InitializeComponent(void)
 		{
 			this->titlePage = (gcnew System::Windows::Forms::Label());
@@ -133,20 +179,18 @@ namespace QuickShop {
 			// 
 			this->titlePage->AutoSize = true;
 			this->titlePage->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20));
-			this->titlePage->Location = System::Drawing::Point(24, 21);
-			this->titlePage->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
+			this->titlePage->Location = System::Drawing::Point(9, 9);
 			this->titlePage->Name = L"titlePage";
-			this->titlePage->Size = System::Drawing::Size(303, 76);
+			this->titlePage->Size = System::Drawing::Size(125, 31);
 			this->titlePage->TabIndex = 0;
 			this->titlePage->Text = L"Reportes";
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(35, 126);
-			this->label1->Margin = System::Windows::Forms::Padding(8, 0, 8, 0);
+			this->label1->Location = System::Drawing::Point(13, 53);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(262, 32);
+			this->label1->Size = System::Drawing::Size(99, 13);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Generar reporte de:";
 			// 
@@ -159,19 +203,17 @@ namespace QuickShop {
 			this->panel_buttons->Controls->Add(this->btn_purchases);
 			this->panel_buttons->Controls->Add(this->btn_products);
 			this->panel_buttons->Controls->Add(this->btn_clients);
-			this->panel_buttons->Location = System::Drawing::Point(43, 167);
-			this->panel_buttons->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->panel_buttons->Location = System::Drawing::Point(16, 70);
 			this->panel_buttons->Name = L"panel_buttons";
-			this->panel_buttons->Size = System::Drawing::Size(1776, 79);
+			this->panel_buttons->Size = System::Drawing::Size(666, 33);
 			this->panel_buttons->TabIndex = 2;
 			// 
 			// btn_exportar
 			// 
 			this->btn_exportar->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_exportar->Location = System::Drawing::Point(1568, 10);
-			this->btn_exportar->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btn_exportar->Location = System::Drawing::Point(588, 4);
 			this->btn_exportar->Name = L"btn_exportar";
-			this->btn_exportar->Size = System::Drawing::Size(200, 55);
+			this->btn_exportar->Size = System::Drawing::Size(75, 23);
 			this->btn_exportar->TabIndex = 6;
 			this->btn_exportar->Text = L"Exportar";
 			this->btn_exportar->UseVisualStyleBackColor = true;
@@ -181,10 +223,9 @@ namespace QuickShop {
 			// btn_users
 			// 
 			this->btn_users->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_users->Location = System::Drawing::Point(1080, 10);
-			this->btn_users->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btn_users->Location = System::Drawing::Point(405, 4);
 			this->btn_users->Name = L"btn_users";
-			this->btn_users->Size = System::Drawing::Size(200, 55);
+			this->btn_users->Size = System::Drawing::Size(75, 23);
 			this->btn_users->TabIndex = 5;
 			this->btn_users->Text = L"Usuarios";
 			this->btn_users->UseVisualStyleBackColor = true;
@@ -193,10 +234,9 @@ namespace QuickShop {
 			// btn_inventary
 			// 
 			this->btn_inventary->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_inventary->Location = System::Drawing::Point(864, 10);
-			this->btn_inventary->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btn_inventary->Location = System::Drawing::Point(324, 4);
 			this->btn_inventary->Name = L"btn_inventary";
-			this->btn_inventary->Size = System::Drawing::Size(200, 55);
+			this->btn_inventary->Size = System::Drawing::Size(75, 23);
 			this->btn_inventary->TabIndex = 4;
 			this->btn_inventary->Text = L"Inventario";
 			this->btn_inventary->UseVisualStyleBackColor = true;
@@ -205,10 +245,9 @@ namespace QuickShop {
 			// btn_payments
 			// 
 			this->btn_payments->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_payments->Location = System::Drawing::Point(648, 10);
-			this->btn_payments->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btn_payments->Location = System::Drawing::Point(243, 4);
 			this->btn_payments->Name = L"btn_payments";
-			this->btn_payments->Size = System::Drawing::Size(200, 55);
+			this->btn_payments->Size = System::Drawing::Size(75, 23);
 			this->btn_payments->TabIndex = 3;
 			this->btn_payments->Text = L"Pagos";
 			this->btn_payments->UseVisualStyleBackColor = true;
@@ -217,10 +256,9 @@ namespace QuickShop {
 			// btn_purchases
 			// 
 			this->btn_purchases->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_purchases->Location = System::Drawing::Point(432, 10);
-			this->btn_purchases->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btn_purchases->Location = System::Drawing::Point(162, 4);
 			this->btn_purchases->Name = L"btn_purchases";
-			this->btn_purchases->Size = System::Drawing::Size(200, 55);
+			this->btn_purchases->Size = System::Drawing::Size(75, 23);
 			this->btn_purchases->TabIndex = 2;
 			this->btn_purchases->Text = L"Compras";
 			this->btn_purchases->UseVisualStyleBackColor = true;
@@ -229,10 +267,9 @@ namespace QuickShop {
 			// btn_products
 			// 
 			this->btn_products->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_products->Location = System::Drawing::Point(216, 10);
-			this->btn_products->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btn_products->Location = System::Drawing::Point(81, 4);
 			this->btn_products->Name = L"btn_products";
-			this->btn_products->Size = System::Drawing::Size(200, 55);
+			this->btn_products->Size = System::Drawing::Size(75, 23);
 			this->btn_products->TabIndex = 1;
 			this->btn_products->Text = L"Catalogo";
 			this->btn_products->UseVisualStyleBackColor = true;
@@ -241,10 +278,9 @@ namespace QuickShop {
 			// btn_clients
 			// 
 			this->btn_clients->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_clients->Location = System::Drawing::Point(0, 10);
-			this->btn_clients->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->btn_clients->Location = System::Drawing::Point(0, 4);
 			this->btn_clients->Name = L"btn_clients";
-			this->btn_clients->Size = System::Drawing::Size(200, 55);
+			this->btn_clients->Size = System::Drawing::Size(75, 23);
 			this->btn_clients->TabIndex = 0;
 			this->btn_clients->Text = L"Clientes";
 			this->btn_clients->UseVisualStyleBackColor = true;
@@ -253,10 +289,9 @@ namespace QuickShop {
 			// panel_table
 			// 
 			this->panel_table->Controls->Add(this->dgv_report);
-			this->panel_table->Location = System::Drawing::Point(43, 262);
-			this->panel_table->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
+			this->panel_table->Location = System::Drawing::Point(16, 110);
 			this->panel_table->Name = L"panel_table";
-			this->panel_table->Size = System::Drawing::Size(1776, 768);
+			this->panel_table->Size = System::Drawing::Size(666, 322);
 			this->panel_table->TabIndex = 3;
 			// 
 			// dgv_report
@@ -266,24 +301,23 @@ namespace QuickShop {
 			this->dgv_report->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgv_report->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->dgv_report->Location = System::Drawing::Point(0, 0);
-			this->dgv_report->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->dgv_report->Name = L"dgv_report";
 			this->dgv_report->ReadOnly = true;
+			this->dgv_report->RowHeadersVisible = false;
 			this->dgv_report->RowHeadersWidth = 102;
-			this->dgv_report->Size = System::Drawing::Size(1776, 768);
+			this->dgv_report->Size = System::Drawing::Size(666, 322);
 			this->dgv_report->TabIndex = 0;
 			// 
 			// Reportes
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(16, 31);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1851, 1102);
+			this->ClientSize = System::Drawing::Size(694, 461);
 			this->Controls->Add(this->panel_table);
 			this->Controls->Add(this->panel_buttons);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->titlePage);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(8, 7, 8, 7);
 			this->Name = L"Reportes";
 			this->Text = L"Reportes";
 			this->panel_buttons->ResumeLayout(false);

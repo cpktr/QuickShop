@@ -24,8 +24,13 @@ namespace QuickShop {
 	/// </summary>
 	public ref class Inventary : public System::Windows::Forms::Form
 	{
+	private: int warningProducts = 0;
 	private: cli::array<Inventario^>^ localData = gcnew cli::array<Inventario^>(100);
 	private: cli::array<Catalogo^>^ localDataCatalogo = gcnew cli::array<Catalogo^>(100);
+	private: System::Windows::Forms::Panel^ panel_warning;
+
+	private: System::Windows::Forms::Label^ txt_warningStock;
+
 	private: bool editableData = false;
 	public:
 		Inventary(void)
@@ -134,6 +139,35 @@ namespace QuickShop {
 					std::cerr << "Excepción desconocida capturada" << std::endl;
 				}
 			}
+
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[0] == nullptr) {
+					this->txt_id->Text = "1";
+				}
+				else {
+					if (localData[i] == nullptr) {
+						this->txt_id->Text = (localData[i - 1]->id_product + 1).ToString();
+						break;
+					}
+				}
+			}
+
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[i] != nullptr) {
+					if (localData[i]->stock < 5) {
+						this->warningProducts++;
+					}
+				}
+			}
+			if (warningProducts > 0) {
+				this->panel_warning->Visible = true;
+				if (warningProducts == 1) {
+					this->txt_warningStock->Text = "Advertencia: Hay " + warningProducts.ToString() + " producto por agotarse";
+				}
+				else {
+					this->txt_warningStock->Text = "Advertencia: Hay " + warningProducts.ToString() + " productos por agotarse";
+				}
+			}
 		}
 		void getDataCatalog() {
 			ifstream products("product.csv");
@@ -205,6 +239,8 @@ namespace QuickShop {
 			this->id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->name = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->stock = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->panel_warning = (gcnew System::Windows::Forms::Panel());
+			this->txt_warningStock = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->panel5->SuspendLayout();
 			this->panel4->SuspendLayout();
@@ -212,6 +248,7 @@ namespace QuickShop {
 			this->panel3->SuspendLayout();
 			this->panel2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgv_inventary))->BeginInit();
+			this->panel_warning->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// titlePage
@@ -313,7 +350,6 @@ namespace QuickShop {
 			this->txt_stock->Margin = System::Windows::Forms::Padding(1);
 			this->txt_stock->Name = L"txt_stock";
 			this->txt_stock->Size = System::Drawing::Size(98, 20);
-			this->txt_stock->Minimum = 0;
 			this->txt_stock->TabIndex = 1;
 			// 
 			// label2
@@ -340,6 +376,7 @@ namespace QuickShop {
 			// 
 			this->txt_id->Location = System::Drawing::Point(158, 4);
 			this->txt_id->Name = L"txt_id";
+			this->txt_id->ReadOnly = true;
 			this->txt_id->Size = System::Drawing::Size(100, 20);
 			this->txt_id->TabIndex = 1;
 			// 
@@ -409,12 +446,34 @@ namespace QuickShop {
 			this->stock->ReadOnly = true;
 			this->stock->Width = 250;
 			// 
+			// panel_warning
+			// 
+			this->panel_warning->BackColor = System::Drawing::Color::PapayaWhip;
+			this->panel_warning->Controls->Add(this->txt_warningStock);
+			this->panel_warning->Location = System::Drawing::Point(285, 13);
+			this->panel_warning->Name = L"panel_warning";
+			this->panel_warning->Size = System::Drawing::Size(389, 30);
+			this->panel_warning->TabIndex = 3;
+			this->panel_warning->Visible = false;
+			// 
+			// txt_warningStock
+			// 
+			this->txt_warningStock->AutoSize = true;
+			this->txt_warningStock->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->txt_warningStock->ForeColor = System::Drawing::Color::SaddleBrown;
+			this->txt_warningStock->Location = System::Drawing::Point(3, 9);
+			this->txt_warningStock->Name = L"txt_warningStock";
+			this->txt_warningStock->Size = System::Drawing::Size(70, 13);
+			this->txt_warningStock->TabIndex = 0;
+			this->txt_warningStock->Text = L"Advertencia: ";
+			// 
 			// Inventary
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(694, 461);
+			this->Controls->Add(this->panel_warning);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->titlePage);
@@ -432,6 +491,8 @@ namespace QuickShop {
 			this->panel3->PerformLayout();
 			this->panel2->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgv_inventary))->EndInit();
+			this->panel_warning->ResumeLayout(false);
+			this->panel_warning->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -499,7 +560,6 @@ namespace QuickShop {
 								writer->Close();
 								this->clearInputs();
 								this->getDataProducts();
-								this->txt_id->ReadOnly = false;
 								this->editableData = false;
 								this->btn_cancelar->Visible = false;
 								for (int i = 0; i < localData->Length; i++) {
@@ -525,6 +585,10 @@ namespace QuickShop {
 									}
 								}
 								writerCatalogo->Close();
+								this->clearInputs();
+								this->getDataProducts();
+								this->editableData = false;
+								this->btn_cancelar->Visible = false;
 								MessageBox::Show("El producto se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 							}
 						}
@@ -583,7 +647,6 @@ namespace QuickShop {
 	private: System::Void editProduct(System::Object^ sender, System::EventArgs^ e) {
 		try {
 			DataGridViewRow^ filaSeleccionada = this->dgv_inventary->SelectedRows[0];
-			this->txt_id->ReadOnly = true;
 			this->txt_id->Text = Convert::ToString(filaSeleccionada->Cells[0]->Value);
 			this->txt_name->Text = Convert::ToString(filaSeleccionada->Cells[1]->Value);
 			this->txt_stock->Text = Convert::ToString(filaSeleccionada->Cells[2]->Value);
@@ -596,9 +659,9 @@ namespace QuickShop {
 	}
 	private: System::Void btn_cancelar_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->clearInputs();
-		this->txt_id->ReadOnly = false;
 		this->editableData = false;
 		this->btn_cancelar->Visible = false;
+		this->getDataProducts();
 	}
 	private: System::Void deleteRowProduct(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::Delete) {
@@ -623,8 +686,8 @@ namespace QuickShop {
 					}
 				}
 				writer->Close();
-				this->getDataProducts();
 				this->clearInputs();
+				this->getDataProducts();
 
 				//Eliminar de catalogo
 				cli::array<Catalogo^>^ nuevoLocalDataCatalogo = gcnew cli::array<Catalogo^>(localDataCatalogo->Length);

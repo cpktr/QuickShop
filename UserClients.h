@@ -160,6 +160,20 @@ namespace QuickShop {
 					}
 				}
 			}
+
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[0] == nullptr) {
+					this->txt_id->Text = "1";
+				}
+				else {
+					if (localData[i] == nullptr) {
+						this->txt_id->Text = (localData[i - 1]->code+1).ToString();
+						break;
+					}
+				}
+			}
+
+
 		}
 		void InitializeComponent(void)
 		{
@@ -428,6 +442,7 @@ namespace QuickShop {
 			// 
 			this->txt_id->Location = System::Drawing::Point(158, 4);
 			this->txt_id->Name = L"txt_id";
+			this->txt_id->ReadOnly = true;
 			this->txt_id->Size = System::Drawing::Size(100, 20);
 			this->txt_id->TabIndex = 1;
 			// 
@@ -602,11 +617,10 @@ namespace QuickShop {
 
 						}
 						writer->Close();
-						this->getUsersdata();
 						this->clearTxt();
+						this->getUsersdata();
 						this->editableData = false;
 						this->btn_cancel->Visible = false;
-						this->txt_id->ReadOnly = false;
 						MessageBox::Show("El cliente se actualizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 						break;
 					}
@@ -647,8 +661,8 @@ namespace QuickShop {
 
 					}
 					writer->Close();
-					this->getUsersdata();
 					this->clearTxt();
+					this->getUsersdata();
 					MessageBox::Show("El usuario se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				}
 				else {
@@ -662,9 +676,9 @@ namespace QuickShop {
 	}
 	private: System::Void btn_cancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->clearTxt();
-		this->txt_id->ReadOnly = false;
 		this->editableData = false;
 		this->btn_cancel->Visible = false;
+		this->getUsersdata();
 	}
 	private: System::Void EditarCliente(System::Object^ sender, System::EventArgs^ e) {
 		DataGridViewRow^ filaSeleccionada = this->dgv_table->SelectedRows[0];
@@ -683,7 +697,6 @@ namespace QuickShop {
 		}
 		this->editableData = true;
 		this->btn_cancel->Visible = true;
-		this->txt_id->ReadOnly = true;
 	}
 	private: System::Void deleteRowClient(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::Delete) {
@@ -712,8 +725,8 @@ namespace QuickShop {
 
 				}
 				writer->Close();
-				this->getUsersdata();
 				this->clearTxt();
+				this->getUsersdata();
 				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 		}

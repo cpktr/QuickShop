@@ -235,6 +235,7 @@ namespace QuickShop {
 					std::cerr << "Excepción desconocida capturada" << std::endl;
 				}
 			}
+
 		}
 		void validateStock() {
 			try {

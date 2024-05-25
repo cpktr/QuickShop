@@ -2,11 +2,15 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <ctime>
+#include <iomanip>
 #include "Clients.h"
 #include "Product.h"
 #include "PurchaseProduct.h"
 #include "Payments.h"
 #include "Product.h"
+#include "Inventario.h"
+#include "Catalogo.h"
 
 namespace QuickShop {
 
@@ -27,8 +31,9 @@ namespace QuickShop {
 	/// </summary>
 	public ref class Pagos : public System::Windows::Forms::Form
 	{
-	private: cli::array<Product^>^ productsData = gcnew cli::array<Product^>(100);
+	private: cli::array<Inventario^>^ localDataInventary = gcnew cli::array<Inventario^>(100);
 	private: cli::array<PurchaseProduct^>^ cartShopList = gcnew cli::array<PurchaseProduct^>(100);
+	private: cli::array<Catalogo^>^ productsData = gcnew cli::array<Catalogo^>(100);
 	private: cli::array<Payments^>^ localData = gcnew cli::array<Payments^>(100);
 	private: bool editableData = false;
 	private: String^ newProductlist = "";
@@ -107,6 +112,7 @@ namespace QuickShop {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ amountBill;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ address;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ phoneNumb;
+	private: System::Windows::Forms::Button^ btn_cancelar;
 
 
 
@@ -127,6 +133,7 @@ namespace QuickShop {
 			this->getPaymentsHistory();
 			this->setComboBoxPurchases();
 			this->getDataProducts();
+			this->getDataCatalog();
 		}
 
 	protected:
@@ -165,6 +172,48 @@ namespace QuickShop {
 		/// el contenido de este método con el editor de código.
 		/// </summary>
 		void getDataProducts() {
+			ifstream products("inventary.csv");
+
+			if (!products.is_open()) {
+				MessageBox::Show("Error al abrir el archivo");
+			}
+			else {
+				string line;
+				int limit = 0;
+				try {
+					while (getline(products, line)) {
+						Inventario^ newUser = gcnew Inventario();
+						string id;
+						string name;
+						string catego;
+						string brand;
+						string descrip;
+						string price;
+						string stock;
+
+
+						stringstream ss(line);
+						getline(ss, id, ',');
+						getline(ss, name, ',');
+						getline(ss, stock, ',');
+						newUser->id_product = std::stoi(id);
+						newUser->name = gcnew String(name.c_str());
+						newUser->stock = std::stoi(stock);
+
+
+						localDataInventary[limit] = newUser;
+						limit++;
+					}
+				}
+				catch (const std::exception& e) {
+					std::cerr << "Excepción capturada: " << e.what() << std::endl;
+				}
+				catch (...) {
+					std::cerr << "Excepción desconocida capturada" << std::endl;
+				}
+			}
+		}
+		void getDataCatalog() {
 			ifstream products("product.csv");
 
 			if (!products.is_open()) {
@@ -175,7 +224,7 @@ namespace QuickShop {
 				int limit = 0;
 				try {
 					while (getline(products, line)) {
-						Product^ newUser = gcnew Product();
+						Catalogo^ newProduct = gcnew Catalogo();
 						string id;
 						string name;
 						string catego;
@@ -193,16 +242,16 @@ namespace QuickShop {
 						getline(ss, descrip, ',');
 						getline(ss, price, ',');
 						getline(ss, stock, ',');
-						newUser->id_product = std::stoi(id);
-						newUser->name = gcnew String(name.c_str());
-						newUser->catego = gcnew String(catego.c_str());
-						newUser->brand = gcnew String(brand.c_str());
-						newUser->descrip = gcnew String(descrip.c_str());
-						newUser->price = std::stof(price);
-						newUser->stock = std::stoi(stock);
+						newProduct->id_product = std::stoi(id);
+						newProduct->name = gcnew String(name.c_str());
+						newProduct->catego = gcnew String(catego.c_str());
+						newProduct->brand = gcnew String(brand.c_str());
+						newProduct->descrip = gcnew String(descrip.c_str());
+						newProduct->price = std::stof(price);
+						newProduct->stock = std::stoi(stock);
 
 
-						productsData[limit] = newUser;
+						productsData[limit] = newProduct;
 						limit++;
 					}
 				}
@@ -212,6 +261,39 @@ namespace QuickShop {
 				catch (...) {
 					std::cerr << "Excepción desconocida capturada" << std::endl;
 				}
+			}
+		}
+		void validateStock() {
+			try {
+				for (int i = 0; i < localDataInventary->Length; i++) {
+					if (localDataInventary[i] != nullptr) {
+						for (int j = 0; j < productsData->Length; j++) {
+							if (productsData[j] != nullptr) {
+								if (localDataInventary[i]->id_product == productsData[j]->id_product) {
+									productsData[j]->stock = localDataInventary[i]->stock;
+								}
+							}
+						}
+					}
+				}
+				StreamWriter^ writer = gcnew StreamWriter("product.csv");
+				for (int i = 0; i < productsData->Length; i++) {
+
+					if (productsData[i] != nullptr) {
+						String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+							productsData[i]->id_product, productsData[i]->name, productsData[i]->catego,
+							productsData[i]->brand, productsData[i]->descrip, productsData[i]->price,
+							productsData[i]->stock);
+						writer->WriteLine(message);
+					}
+				}
+				writer->Close();
+			}
+			catch (const std::exception& e) {
+				std::cerr << "Excepción capturada: " << e.what() << std::endl;
+			}
+			catch (...) {
+				std::cerr << "Excepción desconocida capturada" << std::endl;
 			}
 		}
 		void setComboBoxPurchases() {
@@ -326,12 +408,52 @@ namespace QuickShop {
 					}
 				}
 			}
+
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[0] == nullptr) {
+					this->txt_id->Text = "1";
+				}
+				else {
+					if (localData[i] == nullptr) {
+						this->txt_id->Text = (localData[i - 1]->id_payment + 1).ToString();
+
+						time_t now = time(0);
+						tm* ltm = localtime(&now);
+
+						int month = ltm->tm_mon;
+						char* monthAbbreviations[] = { "EN", "FE", "MZ", "AB", "MY", "JN", "JL", "AG", "SP", "OC", "NV", "DC" };
+						std::string monthAbbr = monthAbbreviations[month];
+						int day = ltm->tm_mday;
+						int year = 1900 + ltm->tm_year;
+						std::ostringstream oss;
+						oss << monthAbbr<< std::setw(2) << std::setfill('0')<< year;
+						
+						this->txt_code->Text = this->txt_id->Text+(gcnew String(oss.str().c_str()));
+						break;
+					}
+				}
+			}
+
+
+
+			
+
 		}
 		void InitializeComponent(void)
 		{
 			this->titlePage = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->code = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->user = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->products = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->type = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->total = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->cardNum = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->amountBill = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->address = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->phoneNumb = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			this->panel7 = (gcnew System::Windows::Forms::Panel());
 			this->txt_id = (gcnew System::Windows::Forms::TextBox());
@@ -366,16 +488,7 @@ namespace QuickShop {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->panel6 = (gcnew System::Windows::Forms::Panel());
 			this->btn_guardar = (gcnew System::Windows::Forms::Button());
-			this->id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->code = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->user = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->products = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->type = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->total = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->cardNum = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->amountBill = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->address = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->phoneNumb = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->btn_cancelar = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->flowLayoutPanel1->SuspendLayout();
@@ -427,6 +540,66 @@ namespace QuickShop {
 			this->dataGridView1->Size = System::Drawing::Size(389, 389);
 			this->dataGridView1->TabIndex = 0;
 			// 
+			// id
+			// 
+			this->id->HeaderText = L"ID";
+			this->id->Name = L"id";
+			this->id->ReadOnly = true;
+			// 
+			// code
+			// 
+			this->code->HeaderText = L"Código de compra";
+			this->code->Name = L"code";
+			this->code->ReadOnly = true;
+			// 
+			// user
+			// 
+			this->user->HeaderText = L"Usuario";
+			this->user->Name = L"user";
+			this->user->ReadOnly = true;
+			// 
+			// products
+			// 
+			this->products->HeaderText = L"Productos";
+			this->products->Name = L"products";
+			this->products->ReadOnly = true;
+			// 
+			// type
+			// 
+			this->type->HeaderText = L"Tipo de Pago";
+			this->type->Name = L"type";
+			this->type->ReadOnly = true;
+			// 
+			// total
+			// 
+			this->total->HeaderText = L"Total";
+			this->total->Name = L"total";
+			this->total->ReadOnly = true;
+			// 
+			// cardNum
+			// 
+			this->cardNum->HeaderText = L"Tarjeta";
+			this->cardNum->Name = L"cardNum";
+			this->cardNum->ReadOnly = true;
+			// 
+			// amountBill
+			// 
+			this->amountBill->HeaderText = L"Monto de Cambio";
+			this->amountBill->Name = L"amountBill";
+			this->amountBill->ReadOnly = true;
+			// 
+			// address
+			// 
+			this->address->HeaderText = L"Dirección";
+			this->address->Name = L"address";
+			this->address->ReadOnly = true;
+			// 
+			// phoneNumb
+			// 
+			this->phoneNumb->HeaderText = L"Número de contacto";
+			this->phoneNumb->Name = L"phoneNumb";
+			this->phoneNumb->ReadOnly = true;
+			// 
 			// flowLayoutPanel1
 			// 
 			this->flowLayoutPanel1->Controls->Add(this->panel7);
@@ -453,6 +626,7 @@ namespace QuickShop {
 			// 
 			this->txt_id->Location = System::Drawing::Point(158, 4);
 			this->txt_id->Name = L"txt_id";
+			this->txt_id->ReadOnly = true;
 			this->txt_id->Size = System::Drawing::Size(100, 20);
 			this->txt_id->TabIndex = 1;
 			// 
@@ -730,6 +904,7 @@ namespace QuickShop {
 			// 
 			// panel6
 			// 
+			this->panel6->Controls->Add(this->btn_cancelar);
 			this->panel6->Controls->Add(this->btn_guardar);
 			this->panel6->Location = System::Drawing::Point(3, 354);
 			this->panel6->Name = L"panel6";
@@ -751,65 +926,19 @@ namespace QuickShop {
 			this->btn_guardar->UseVisualStyleBackColor = false;
 			this->btn_guardar->Click += gcnew System::EventHandler(this, &Pagos::savePayment);
 			// 
-			// id
+			// btn_cancelar
 			// 
-			this->id->HeaderText = L"ID";
-			this->id->Name = L"id";
-			this->id->ReadOnly = true;
-			// 
-			// code
-			// 
-			this->code->HeaderText = L"Código de compra";
-			this->code->Name = L"code";
-			this->code->ReadOnly = true;
-			// 
-			// user
-			// 
-			this->user->HeaderText = L"Usuario";
-			this->user->Name = L"user";
-			this->user->ReadOnly = true;
-			// 
-			// products
-			// 
-			this->products->HeaderText = L"Productos";
-			this->products->Name = L"products";
-			this->products->ReadOnly = true;
-			// 
-			// type
-			// 
-			this->type->HeaderText = L"Tipo de Pago";
-			this->type->Name = L"type";
-			this->type->ReadOnly = true;
-			// 
-			// total
-			// 
-			this->total->HeaderText = L"Total";
-			this->total->Name = L"total";
-			this->total->ReadOnly = true;
-			// 
-			// cardNum
-			// 
-			this->cardNum->HeaderText = L"Tarjeta";
-			this->cardNum->Name = L"cardNum";
-			this->cardNum->ReadOnly = true;
-			// 
-			// amountBill
-			// 
-			this->amountBill->HeaderText = L"Monto de Cambio";
-			this->amountBill->Name = L"amountBill";
-			this->amountBill->ReadOnly = true;
-			// 
-			// address
-			// 
-			this->address->HeaderText = L"Dirección";
-			this->address->Name = L"address";
-			this->address->ReadOnly = true;
-			// 
-			// phoneNumb
-			// 
-			this->phoneNumb->HeaderText = L"Número de contacto";
-			this->phoneNumb->Name = L"phoneNumb";
-			this->phoneNumb->ReadOnly = true;
+			this->btn_cancelar->BackColor = System::Drawing::Color::Transparent;
+			this->btn_cancelar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_cancelar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_cancelar->ForeColor = System::Drawing::Color::Teal;
+			this->btn_cancelar->Location = System::Drawing::Point(106, 3);
+			this->btn_cancelar->Name = L"btn_cancelar";
+			this->btn_cancelar->Size = System::Drawing::Size(75, 23);
+			this->btn_cancelar->TabIndex = 1;
+			this->btn_cancelar->Text = L"Cancelar";
+			this->btn_cancelar->UseVisualStyleBackColor = false;
+			this->btn_cancelar->Click += gcnew System::EventHandler(this, &Pagos::btn_cancelar_Click);
 			// 
 			// Pagos
 			// 
@@ -984,6 +1113,7 @@ namespace QuickShop {
 			if (CamposNoVacios()) {
 				if (validateExistData()) {
 					try {
+						bool existStock = true;
 						System::String^ strId = this->txt_id->Text;
 						int id = System::Convert::ToInt32(strId);
 						System::String^ strTotal = this->txt_total->Text;
@@ -1000,25 +1130,63 @@ namespace QuickShop {
 						newProduct->address = gcnew String(this->txt_direction->Text);
 						newProduct->phoneNumb = gcnew String(this->txt_phoneNumber->Text);
 						this->localData[indice] = newProduct;
-						deleteProducts(newProduct->productos);
-						StreamWriter^ writer = gcnew StreamWriter("payments.csv");
-						for (int i = 0; i < localData->Length; i++) {
-							if (localData[i] != nullptr) {
-								String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
-									localData[i]->id_payment, localData[i]->code_payment, localData[i]->usuario,
-									localData[i]->productos, localData[i]->type_payment, localData[i]->total,
-									localData[i]->card, localData[i]->amountBill, localData[i]->address, localData[i]->phoneNumb);
-								writer->WriteLine(message);
+
+						//Validar Stock
+						System::String^ dataProductsCli = Convert::ToString(newProduct->productos);
+						string dataProducts;
+						for (int i = 0; i < dataProductsCli->Length; i++) {
+							dataProducts += (char)dataProductsCli[i];
+						}
+						string item;
+						stringstream ss(dataProducts);
+						while (std::getline(ss, item, '|')) {
+							if (!item.empty()) {
+								size_t pos = item.find('*');
+								if (pos != std::string::npos) {
+									std::string productName = item.substr(0, pos);
+									int quantity = std::stoi(item.substr(pos + 1));
+									for (int i = 0; i < localDataInventary->Length; i++) {
+										if (localDataInventary[i] != nullptr) {
+											if (localDataInventary[i]->name == gcnew String(productName.c_str())) {
+												if (localDataInventary[i]->stock < quantity) {
+													existStock = false;
+													break;
+												}
+											}
+										}
+									}
+									if (!existStock) {
+										break;
+									}
+								}
 							}
 						}
-						writer->Close();
-						this->deletePurchase(gcnew String(this->cmb_purchase->Text));
-						this->getPaymentsHistory();
-						this->clearTxt();
-						this->form_direction->Visible = false;
-						this->form_efectivo->Visible = false;
-						this->form_tarjeta->Visible = false;
-						MessageBox::Show("El pago se realizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+						if (!existStock) {
+							MessageBox::Show("No hay stock suficiente");
+						}
+						else {
+							deleteProducts(newProduct->productos);
+							StreamWriter^ writer = gcnew StreamWriter("payments.csv");
+							for (int i = 0; i < localData->Length; i++) {
+								if (localData[i] != nullptr) {
+									String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
+										localData[i]->id_payment, localData[i]->code_payment, localData[i]->usuario,
+										localData[i]->productos, localData[i]->type_payment, localData[i]->total,
+										localData[i]->card, localData[i]->amountBill, localData[i]->address, localData[i]->phoneNumb);
+									writer->WriteLine(message);
+								}
+							}
+							writer->Close();
+							this->deletePurchase(gcnew String(this->cmb_purchase->Text));
+							this->getPaymentsHistory();
+							this->clearTxt();
+							this->form_direction->Visible = false;
+							this->form_efectivo->Visible = false;
+							this->form_tarjeta->Visible = false;
+							MessageBox::Show("El pago se realizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+						}
+				
 					}
 					catch (const std::exception& e) {
 						std::cerr << "Excepción capturada: " << e.what() << std::endl;
@@ -1121,27 +1289,40 @@ namespace QuickShop {
 				if (pos != std::string::npos) {
 					std::string productName = item.substr(0, pos);
 					int quantity = std::stoi(item.substr(pos + 1));
-					for (int i = 0; i < productsData->Length; i++) {
-						if (productsData[i] != nullptr) {
-							if (productsData[i]->name == gcnew String(productName.c_str())) {
-								productsData[i]->deleteStock(quantity);
+					for (int i = 0; i < localDataInventary->Length; i++) {
+						if (localDataInventary[i] != nullptr) {
+							if (localDataInventary[i]->name == gcnew String(productName.c_str())) {
+								localDataInventary[i]->deleteStock(quantity);
 							}
 						}
 					}
 				}
 			}
 		}
-		StreamWriter^ writer = gcnew StreamWriter("product.csv");
-		for (int i = 0; i < productsData->Length; i++) {
-			if (productsData[i] != nullptr) {
-				String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
-					productsData[i]->id_product, productsData[i]->name, productsData[i]->catego,
-					productsData[i]->brand, productsData[i]->descrip, productsData[i]->price,
-					productsData[i]->stock);
+		StreamWriter^ writer = gcnew StreamWriter("inventary.csv");
+		for (int i = 0; i < localDataInventary->Length; i++) {
+			if (localDataInventary[i] != nullptr) {
+				String^ message = String::Format("{0},{1},{2}",
+					localDataInventary[i]->id_product, localDataInventary[i]->name, localDataInventary[i]->stock);
 				writer->WriteLine(message);
 			}
 		}
 		writer->Close();
+		this->validateStock();
+	}
+	private: System::Void btn_cancelar_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->cmb_purchase->SelectedIndex = -1;
+		this->cmb_typePayment->SelectedIndex = -1;
+		this->txt_total->Clear();
+		this->txt_direction->Clear();
+		this->txt_phoneNumber->Clear();
+		this->txt_changeBill->Clear();
+		this->txt_cardNumber->Clear();
+		this->txt_cardCVV->Clear();
+		this->txt_cardDate->Clear();
+		this->form_direction->Visible = false;
+		this->form_efectivo->Visible = false;
+		this->form_tarjeta->Visible = false;
 	}
 };
 }

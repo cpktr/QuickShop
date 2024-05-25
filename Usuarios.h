@@ -175,6 +175,17 @@ namespace QuickShop {
 					limit++;
 				}
 			}
+			for (int i = 0; i < localData->Length; i++) {
+				if (localData[0] == nullptr) {
+					this->txt_id->Text = "1";
+				}
+				else {
+					if (localData[i] == nullptr) {
+						this->txt_id->Text = (Convert::ToInt32(localData[i - 1]->id_customer) + 1).ToString();
+						break;
+					}
+				}
+			}
 
 		}
 		void InitializeComponent(void)
@@ -541,6 +552,7 @@ namespace QuickShop {
 			// 
 			this->txt_id->Location = System::Drawing::Point(158, 4);
 			this->txt_id->Name = L"txt_id";
+			this->txt_id->ReadOnly = true;
 			this->txt_id->Size = System::Drawing::Size(100, 20);
 			this->txt_id->TabIndex = 1;
 			// 
@@ -718,13 +730,12 @@ namespace QuickShop {
 			}
 			this->editableData = true;
 			this->btn_cancel->Visible = true;
-			this->txt_id->ReadOnly = true;
 	}
 	private: System::Void btn_cancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->clearTxt();
 		this->editableData = false;
 		this->btn_cancel->Visible = false;
-		this->txt_id->ReadOnly = false;
+		this->getUsersdata();
 	}
 
 	private: bool validateExistData() {
@@ -781,11 +792,10 @@ namespace QuickShop {
 								}
 						}
 						writer->Close();
-						this->getUsersdata();
 						this->clearTxt();
+						this->getUsersdata();
 						this->editableData = false;
 						this->btn_cancel->Visible = false;
-						this->txt_id->ReadOnly = false;
 						MessageBox::Show("El usuario se actualizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 						break;
 					}
@@ -834,8 +844,8 @@ namespace QuickShop {
 
 						}
 						writer->Close();
-						this->getUsersdata();
 						this->clearTxt();
+						this->getUsersdata();
 						MessageBox::Show("El usuario se agregó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 					}
 
@@ -876,8 +886,8 @@ namespace QuickShop {
 					}
 				}
 				writer->Close();
-				this->getUsersdata();
 				this->clearTxt();
+				this->getUsersdata();
 				MessageBox::Show("Registro eliminado correctamente", "Completado", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 		}
