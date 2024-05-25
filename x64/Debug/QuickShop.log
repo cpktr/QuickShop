@@ -1,12 +1,4 @@
-﻿  Dashboard.cpp
-C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(725,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(809,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(812,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(813,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(888,37): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(891,42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(892,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  MyForm.cpp
+﻿  MyForm.cpp
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(725,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(809,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(812,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
@@ -16,8 +8,8 @@ C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(891,42): warning C4244
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\Compras.h(892,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\MyForm.h(508,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\MyForm.cpp(29,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
-  Productos.cpp
   listascx.cpp
+  vistacx.cpp
   Generando código...
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\MyForm.h(423): warning C4715: 'QuickShop::MyForm::LoginLogicAdmin': no todas las rutas de acceso de control devuelven un valor
 C:\Users\50257\Desktop\nuevo proyecto\QuickShop\MyForm.h(441): warning C4715: 'QuickShop::MyForm::LoginLogicOperator': no todas las rutas de acceso de control devuelven un valor

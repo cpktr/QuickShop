@@ -1,5 +1,7 @@
 #pragma once
 #include "pagoscx.h"
+#include "listascx.h"
+
 
 
 namespace QuickShop {
@@ -240,7 +242,9 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void panel_cont_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 }
 private: System::Void btnlistado_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->AbrirPanel(gcnew QuickShop::listascx);
 }
+	   // para ponerle el panel o el traslado al boton 
 private: System::Void btncarrito_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
