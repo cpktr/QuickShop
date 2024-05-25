@@ -48,11 +48,12 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
-			this->getDataProducts();
+			
 		}
 		Dashboard(User^ userSession) {
-			this->userSess = userSession;
 			InitializeComponent();
+
+			this->userSess = userSession;
 			if (this->userSess != nullptr) {
 				this->sessionEmailLabel->Text = this->userSess->email;
 				if (this->userSess->operador == true) {

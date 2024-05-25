@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Dashboard.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:MyForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|E:\\Proyectos\\Proyecto\\Inventary.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{73C7142B-DDE9-4D11-BDEB-49B2D6986C33}|QuickShop.vcxproj|solutionrelative:Inventary.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,32 +38,45 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MyForm.cpp",
+              "DocumentMoniker": "E:\\Proyectos\\Proyecto\\MyForm.cpp",
+              "RelativeDocumentMoniker": "MyForm.cpp",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\MyForm.cpp",
+              "RelativeToolTip": "MyForm.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-25T00:22:15.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Dashboard.h",
               "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Dashboard.h",
               "RelativeDocumentMoniker": "Dashboard.h",
-              "ToolTip": "E:\\Proyectos\\Proyecto\\Dashboard.h*",
-              "RelativeToolTip": "Dashboard.h*",
-              "ViewState": "AQIAAJ0AAAAAAAAAAAAowKMAAAAwAAAA",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Dashboard.h",
+              "RelativeToolTip": "Dashboard.h",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAAAEMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-25T00:11:25.399Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Dashboard.h [Dise\u00F1o]",
               "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Dashboard.h",
               "RelativeDocumentMoniker": "Dashboard.h",
-              "ToolTip": "E:\\Proyectos\\Proyecto\\Dashboard.h [Dise\u00F1o]*",
-              "RelativeToolTip": "Dashboard.h [Dise\u00F1o]*",
+              "ToolTip": "E:\\Proyectos\\Proyecto\\Dashboard.h [Dise\u00F1o]",
+              "RelativeToolTip": "Dashboard.h [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-25T00:11:23.834Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Inventary.h",
               "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Inventary.h",
               "RelativeDocumentMoniker": "Inventary.h",
@@ -72,7 +89,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Inventary.h [Dise\u00F1o]",
               "DocumentMoniker": "E:\\Proyectos\\Proyecto\\Inventary.h",
               "RelativeDocumentMoniker": "Inventary.h",
