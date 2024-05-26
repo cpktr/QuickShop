@@ -39,7 +39,7 @@ void existUser() {
 			StreamWriter^ writer = gcnew StreamWriter("users.csv");
 			String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
 				"1", "admin", "admin",
-				"quickSadmin", "Administrador", "0000000000000",
+				"quickSadmin", "administrador", "0000000000000",
 				"00000000", "admin@gmail.com", "Guatemala", "qs123");
 			writer->WriteLine(message);
 			writer->Close();

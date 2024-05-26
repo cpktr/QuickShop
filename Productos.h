@@ -31,6 +31,8 @@ namespace QuickShop {
 	private: cli::array<Product^>^ localData = gcnew cli::array<Product^>(100);
 	private: System::Windows::Forms::ComboBox^ cmb_inventary;
 	private: System::Windows::Forms::Button^ btn_exportarCSV;
+	private: System::Windows::Forms::Button^ btn_uploadCSV;
+
 
 	private: bool editableData;
 	
@@ -190,7 +192,7 @@ namespace QuickShop {
 		void getDataProducts() {
 			this->dataGrid_Products->Rows->Clear();
 			ifstream products("product.csv");
-
+			localDataCatalogo = gcnew cli::array<Catalogo^>(100);
 			if (!products.is_open()) {
 				MessageBox::Show("Error al abrir el archivo");
 			}
@@ -338,6 +340,7 @@ namespace QuickShop {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->txt_id = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->btn_uploadCSV = (gcnew System::Windows::Forms::Button());
 			this->panel_table->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGrid_Products))->BeginInit();
 			this->formContainer->SuspendLayout();
@@ -887,11 +890,27 @@ namespace QuickShop {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Producto";
 			// 
+			// btn_uploadCSV
+			// 
+			this->btn_uploadCSV->BackColor = System::Drawing::Color::Teal;
+			this->btn_uploadCSV->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_uploadCSV->FlatAppearance->BorderSize = 0;
+			this->btn_uploadCSV->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_uploadCSV->ForeColor = System::Drawing::Color::White;
+			this->btn_uploadCSV->Location = System::Drawing::Point(599, 17);
+			this->btn_uploadCSV->Name = L"btn_uploadCSV";
+			this->btn_uploadCSV->Size = System::Drawing::Size(75, 23);
+			this->btn_uploadCSV->TabIndex = 7;
+			this->btn_uploadCSV->Text = L"Cargar";
+			this->btn_uploadCSV->UseVisualStyleBackColor = false;
+			this->btn_uploadCSV->Click += gcnew System::EventHandler(this, &Productos::btn_uploadCSV_Click);
+			// 
 			// Productos
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(694, 461);
+			this->Controls->Add(this->btn_uploadCSV);
 			this->Controls->Add(this->formContainer);
 			this->Controls->Add(this->panel_table);
 			this->Controls->Add(this->titlePage);
@@ -1222,5 +1241,118 @@ private: System::Void btn_exportarCSV_Click(System::Object^ sender, System::Even
 		MessageBox::Show("Error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
+	private: System::Void btn_uploadCSV_Click(System::Object^ sender, System::EventArgs^ e) {
+		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog();
+		openFileDialog->Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+		if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			String^ filePath = openFileDialog->FileName;
+			ReadCSV(filePath);
+		}
+	}
+
+	private: System::Void ReadCSV(String^ filePath) {
+		try {
+			StreamReader^ sr = gcnew StreamReader(filePath);
+			String^ line;
+			bool isFirstLine = true;
+			cli::array<String^>^ headers = nullptr;
+
+			int maxRows = 100;
+			cli::array<cli::array<String^>^>^ csvData = gcnew cli::array<cli::array<String^>^>(maxRows);
+			int rowIndex = 0;
+
+			while ((line = sr->ReadLine()) != nullptr) {
+				cli::array<String^>^ fields = line->Split(',');
+				if (isFirstLine) {
+					headers = fields;
+					isFirstLine = false;
+				}
+				else {
+					csvData[rowIndex] = fields;
+					rowIndex++;
+					if (rowIndex >= maxRows) break;
+				}
+			}
+			sr->Close();
+
+			DisplayData(csvData, headers, rowIndex);
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Error al leer el archivo CSV: " + ex->Message);
+		}
+	}
+
+	private: System::Void DisplayData(cli::array<cli::array<String^>^>^ csvData, cli::array<String^>^ headers, int numRows) {
+		try {
+			cli::array<Catalogo^>^ newImport = gcnew cli::array<Catalogo^>(100);
+			String^ id_new = gcnew String(this->txt_id->Text);
+			string message;
+			for (int i = 0; i < numRows; i++) {
+				message.clear();
+				Catalogo^ newUser = gcnew Catalogo();
+				cli::array<String^>^ row = csvData[i];
+				for each (String ^ field in row) {
+					for (int i = 0; i < field->Length; i++) {
+						message.push_back(static_cast<char>(field[i]));
+					}
+				}
+
+				stringstream ss(message);
+				string id;
+				string name;
+				string catego;
+				string brand;
+				string descrip;
+				string price;
+				string stock;
+
+				getline(ss, id, ';');
+				getline(ss, name, ';');
+				getline(ss, catego, ';');
+				getline(ss, brand, ';');
+				getline(ss, descrip, ';');
+				getline(ss, price, ';');
+				getline(ss, stock, ';');
+				newUser->id_product = std::stoi(id);
+				newUser->name = gcnew String(name.c_str());
+				newUser->catego = gcnew String(catego.c_str());
+				newUser->brand = gcnew String(brand.c_str());
+				newUser->descrip = gcnew String(descrip.c_str());
+				newUser->price = std::stof(price);
+				newUser->stock = std::stoi(stock);
+
+				newImport[i] = newUser;
+
+			}
+			cli::array<Catalogo^>^ tempArray = gcnew cli::array<Catalogo^>(localDataCatalogo->Length);
+			Array::Copy(localDataCatalogo, tempArray, localDataCatalogo->Length);
+			Array::Resize(localDataCatalogo, localDataCatalogo->Length + newImport->Length);
+			Array::Copy(tempArray, localDataCatalogo, tempArray->Length);
+			Array::Copy(newImport, 0, localDataCatalogo, tempArray->Length, newImport->Length);
+
+
+			StreamWriter^ writer = gcnew StreamWriter("product.csv");
+			for (int i = 0; i < localDataCatalogo->Length; i++) {
+
+				if (localDataCatalogo[i] != nullptr) {
+					String^ message = String::Format("{0},{1},{2},{3},{4},{5},{6}",
+						localDataCatalogo[i]->id_product, localDataCatalogo[i]->name, localDataCatalogo[i]->catego,
+						localDataCatalogo[i]->brand, localDataCatalogo[i]->descrip, localDataCatalogo[i]->price,
+						localDataCatalogo[i]->stock);
+					writer->WriteLine(message);
+				}
+			}
+
+			writer->Close();
+			this->clearInputs();
+			this->getDataProducts();
+		}
+		catch (const std::exception& e) {
+			std::cerr << "Excepción capturada: " << e.what() << std::endl;
+		}
+		catch (...) {
+			std::cerr << "Excepción desconocida capturada" << std::endl;
+		}
+	}
 };
 }
