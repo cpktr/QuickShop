@@ -11,7 +11,6 @@ void CheckFileExistsOrCreate(const std::string& filePath) {
 		file.close();
 	}
 	else {
-		// El archivo no existe, se intenta crear
 		std::ofstream createFile(filePath);
 		if (createFile.is_open()) {
 			createFile.close();
@@ -31,8 +30,6 @@ void existUser() {
 	else {
 		std::string line;
 		bool isEmpty = true;
-
-		// Check if the file has any content
 		if (getline(usuaa, line) && !line.empty()) {
 			isEmpty = false;
 		}
@@ -83,9 +80,5 @@ void main(cli::array<String^>^ args) {
 		QuickShop::Dashboard dashboardForm(user);
 		QuickShop::Reportes reportsForm(user);
 		dashboardForm.ShowDialog();
-		//MessageBox::Show("Succesfully", "Success", MessageBoxButtons::OK);
-	}
-	else {
-		//MessageBox::Show("Error", "Error", MessageBoxButtons::OK);
 	}
 }

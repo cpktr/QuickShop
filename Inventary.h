@@ -231,6 +231,7 @@ namespace QuickShop {
 		{
 			this->titlePage = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->btn_exportarCSV = (gcnew System::Windows::Forms::Button());
 			this->btn_cancelar = (gcnew System::Windows::Forms::Button());
 			this->btn_SaveIventary = (gcnew System::Windows::Forms::Button());
 			this->panel5 = (gcnew System::Windows::Forms::Panel());
@@ -250,7 +251,6 @@ namespace QuickShop {
 			this->panel_warning = (gcnew System::Windows::Forms::Panel());
 			this->txt_warningStock = (gcnew System::Windows::Forms::Label());
 			this->btn_uploadCSV = (gcnew System::Windows::Forms::Button());
-			this->btn_exportarCSV = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
 			this->panel5->SuspendLayout();
 			this->panel4->SuspendLayout();
@@ -285,6 +285,22 @@ namespace QuickShop {
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(267, 389);
 			this->panel1->TabIndex = 1;
+			// 
+			// btn_exportarCSV
+			// 
+			this->btn_exportarCSV->BackColor = System::Drawing::Color::Teal;
+			this->btn_exportarCSV->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_exportarCSV->FlatAppearance->BorderSize = 0;
+			this->btn_exportarCSV->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btn_exportarCSV->ForeColor = System::Drawing::Color::White;
+			this->btn_exportarCSV->Location = System::Drawing::Point(31, 363);
+			this->btn_exportarCSV->Margin = System::Windows::Forms::Padding(1);
+			this->btn_exportarCSV->Name = L"btn_exportarCSV";
+			this->btn_exportarCSV->Size = System::Drawing::Size(75, 23);
+			this->btn_exportarCSV->TabIndex = 5;
+			this->btn_exportarCSV->Text = L"Descargar";
+			this->btn_exportarCSV->UseVisualStyleBackColor = false;
+			this->btn_exportarCSV->Click += gcnew System::EventHandler(this, &Inventary::btn_exportarCSV_Click);
 			// 
 			// btn_cancelar
 			// 
@@ -387,7 +403,6 @@ namespace QuickShop {
 			// 
 			this->txt_id->Location = System::Drawing::Point(158, 4);
 			this->txt_id->Name = L"txt_id";
-			this->txt_id->ReadOnly = true;
 			this->txt_id->Size = System::Drawing::Size(100, 20);
 			this->txt_id->TabIndex = 1;
 			// 
@@ -493,22 +508,6 @@ namespace QuickShop {
 			this->btn_uploadCSV->Text = L"Cargar";
 			this->btn_uploadCSV->UseVisualStyleBackColor = false;
 			this->btn_uploadCSV->Click += gcnew System::EventHandler(this, &Inventary::btn_uploadCSV_Click);
-			// 
-			// btn_exportarCSV
-			// 
-			this->btn_exportarCSV->BackColor = System::Drawing::Color::Teal;
-			this->btn_exportarCSV->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->btn_exportarCSV->FlatAppearance->BorderSize = 0;
-			this->btn_exportarCSV->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btn_exportarCSV->ForeColor = System::Drawing::Color::White;
-			this->btn_exportarCSV->Location = System::Drawing::Point(31, 363);
-			this->btn_exportarCSV->Margin = System::Windows::Forms::Padding(1);
-			this->btn_exportarCSV->Name = L"btn_exportarCSV";
-			this->btn_exportarCSV->Size = System::Drawing::Size(75, 23);
-			this->btn_exportarCSV->TabIndex = 5;
-			this->btn_exportarCSV->Text = L"Descargar";
-			this->btn_exportarCSV->UseVisualStyleBackColor = false;
-			this->btn_exportarCSV->Click += gcnew System::EventHandler(this, &Inventary::btn_exportarCSV_Click);
 			// 
 			// Inventary
 			// 

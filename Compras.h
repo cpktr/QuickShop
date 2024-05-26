@@ -47,7 +47,7 @@ namespace QuickShop {
 	private: System::Windows::Forms::Button^ btn_cancel;
 	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
 	private: System::Windows::Forms::Panel^ panel7;
-	private: System::Windows::Forms::Panel^ panel_productslist;
+
 
 	private: System::Windows::Forms::Panel^ panel2;
 	private: System::Windows::Forms::Panel^ panel9;
@@ -64,6 +64,9 @@ namespace QuickShop {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ discount;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ total;
 	private: System::Windows::Forms::Button^ btn_exportarCSV;
+	private: System::Windows::Forms::Panel^ panel_productslist;
+
+
 
 
 
@@ -363,7 +366,7 @@ namespace QuickShop {
 					quantityUpDown->Minimum = 0;
 					quantityUpDown->Maximum = productsData[i]->stock;
 					quantityUpDown->Value = 0;
-					quantityUpDown->Size = System::Drawing::Size(100, 20);
+					quantityUpDown->Size = System::Drawing::Size(80, 20);
 					quantityUpDown->Location = System::Drawing::Point(158, yOffset);
 					quantityUpDown->Name = "nud_" + productsData[i]->id_product.ToString();
 					panel_productslist->Controls->Add(quantityUpDown);
@@ -439,8 +442,8 @@ namespace QuickShop {
 			this->txt_discount = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->panel9 = (gcnew System::Windows::Forms::Panel());
-			this->tooltip_discount = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->btn_exportarCSV = (gcnew System::Windows::Forms::Button());
+			this->tooltip_discount = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgv_compras))->BeginInit();
 			this->panel3->SuspendLayout();
@@ -546,7 +549,6 @@ namespace QuickShop {
 			// 
 			this->txt_id->Location = System::Drawing::Point(158, 4);
 			this->txt_id->Name = L"txt_id";
-			this->txt_id->ReadOnly = true;
 			this->txt_id->Size = System::Drawing::Size(100, 20);
 			this->txt_id->TabIndex = 1;
 			// 
@@ -648,6 +650,7 @@ namespace QuickShop {
 			// 
 			// panel_productslist
 			// 
+			this->panel_productslist->AutoScroll = true;
 			this->panel_productslist->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->panel_productslist->Location = System::Drawing::Point(0, 38);
 			this->panel_productslist->Name = L"panel_productslist";
