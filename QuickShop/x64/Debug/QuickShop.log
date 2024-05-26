@@ -1,8 +1,8 @@
 ﻿  Dashboard.cpp
-E:\Proyectos\Proyecto\Productos.h(1188,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\Productos.h(1202,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "Dashboard.cpp")
   
-E:\Proyectos\Proyecto\Productos.h(1197,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\Productos.h(1211,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "Dashboard.cpp")
   
 E:\Proyectos\Proyecto\Pagos.h(422,17): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -26,10 +26,10 @@ E:\Proyectos\Proyecto\Usuarios.h(1057,33): warning C4996: 'localtime': This func
 E:\Proyectos\Proyecto\Usuarios.h(1066,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "Dashboard.cpp")
   
-E:\Proyectos\Proyecto\UserClients.h(876,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\UserClients.h(888,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "Dashboard.cpp")
   
-E:\Proyectos\Proyecto\UserClients.h(885,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\UserClients.h(897,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "Dashboard.cpp")
   
 E:\Proyectos\Proyecto\Compras.h(790,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
@@ -66,10 +66,10 @@ E:\Proyectos\Proyecto\Inventary.h(872,33): warning C4996: 'localtime': This func
   (compilando archivo de origen "Dashboard.cpp")
   
   MyForm.cpp
-E:\Proyectos\Proyecto\Productos.h(1188,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\Productos.h(1202,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\Productos.h(1197,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\Productos.h(1211,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
 E:\Proyectos\Proyecto\Pagos.h(422,17): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -93,10 +93,10 @@ E:\Proyectos\Proyecto\Usuarios.h(1057,33): warning C4996: 'localtime': This func
 E:\Proyectos\Proyecto\Usuarios.h(1066,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\UserClients.h(876,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\UserClients.h(888,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\UserClients.h(885,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Proyectos\Proyecto\UserClients.h(897,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (compilando archivo de origen "MyForm.cpp")
   
 E:\Proyectos\Proyecto\Compras.h(790,41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
@@ -135,13 +135,13 @@ E:\Proyectos\Proyecto\Inventary.h(872,33): warning C4996: 'localtime': This func
 E:\Proyectos\Proyecto\MyForm.h(508,56): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
   (compilando archivo de origen "MyForm.cpp")
   
-E:\Proyectos\Proyecto\MyForm.cpp(54,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
-  Productos.cpp
-E:\Proyectos\Proyecto\Productos.h(1188,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  (compilando archivo de origen "Productos.cpp")
+E:\Proyectos\Proyecto\MyForm.cpp(55,38): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(Platform::Array<Platform::String^>^ argv)'
+  UserClients.cpp
+E:\Proyectos\Proyecto\UserClients.h(888,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "UserClients.cpp")
   
-E:\Proyectos\Proyecto\Productos.h(1197,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  (compilando archivo de origen "Productos.cpp")
+E:\Proyectos\Proyecto\UserClients.h(897,33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  (compilando archivo de origen "UserClients.cpp")
   
   Generando código...
 E:\Proyectos\Proyecto\MyForm.h(423,1): warning C4715: 'QuickShop::MyForm::LoginLogicAdmin': no todas las rutas de acceso de control devuelven un valor

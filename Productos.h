@@ -7,6 +7,7 @@
 #include "Product.h"
 #include "Catalogo.h"
 #include "Inventario.h"
+#include "User.h"
 namespace QuickShop {
 
 	using namespace System;
@@ -32,6 +33,7 @@ namespace QuickShop {
 	private: System::Windows::Forms::ComboBox^ cmb_inventary;
 	private: System::Windows::Forms::Button^ btn_exportarCSV;
 	private: System::Windows::Forms::Button^ btn_uploadCSV;
+	private: User^ userSess;
 
 
 	private: bool editableData;
@@ -43,6 +45,18 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->getDataProducts();
+			this->setComboInventary();
+			this->validateStock();
+		}
+		Productos(User^ userSession)
+		{
+			InitializeComponent();
+			if (this->userSess != nullptr) {
+				if (this->userSess->operador == true) {
+					this->btn_uploadCSV->Visible = false;
+				}
+			}
 			this->getDataProducts();
 			this->setComboInventary();
 			this->validateStock();

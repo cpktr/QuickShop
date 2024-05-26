@@ -4,6 +4,7 @@
 #include "MyForm.h"
 #include "Dashboard.h"
 #include "Reportes.h"
+#include "Productos.h"
 
 void CheckFileExistsOrCreate(const std::string& filePath) {
 	std::ifstream file(filePath);
@@ -79,6 +80,7 @@ void main(cli::array<String^>^ args) {
 	if (user != nullptr) {
 		QuickShop::Dashboard dashboardForm(user);
 		QuickShop::Reportes reportsForm(user);
+		QuickShop::Productos productsForm(user);
 		dashboardForm.ShowDialog();
 	}
 }

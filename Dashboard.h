@@ -603,10 +603,10 @@ namespace QuickShop {
 		this->AbrirPanel(gcnew QuickShop::Home);
 	}
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->AbrirPanel(gcnew QuickShop::UserClients);
+		this->AbrirPanel(gcnew QuickShop::UserClients(this->userSess));
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->AbrirPanel(gcnew QuickShop::Productos);
+		this->AbrirPanel(gcnew QuickShop::Productos(this->userSess));
 	}
 	private: System::Void flowLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 	}

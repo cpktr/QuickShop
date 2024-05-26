@@ -5,6 +5,7 @@
 #include <ctime>
 #include <iomanip>
 #include "Clients.h"
+#include "User.h"
 
 namespace QuickShop {
 
@@ -28,7 +29,7 @@ namespace QuickShop {
 	private: cli::array<Clients^>^ localData = gcnew cli::array<Clients^>(100);
 	private: System::Windows::Forms::Button^ btn_uploadCSV;
 	private: System::Windows::Forms::Button^ btn_exportarCSV;
-
+	private: User^ userSess;
 	private: bool editableData;
 	public:
 		UserClients(void)
@@ -37,6 +38,17 @@ namespace QuickShop {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->getUsersdata();
+		}
+		UserClients(User^ userSession)
+		{
+			InitializeComponent();
+			if (this->userSess != nullptr) {
+				MessageBox::Show(this->userSess->operador.ToString());
+				if (this->userSess->operador == true) {
+					this->btn_uploadCSV->Visible = false;
+				}
+			}
 			this->getUsersdata();
 		}
 
